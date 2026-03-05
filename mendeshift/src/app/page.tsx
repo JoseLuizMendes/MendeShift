@@ -1,9 +1,9 @@
-import { ColophonSection } from "@/components/colophon-section";
-import { HeroSection } from "@/components/hero-section";
-import { PrinciplesSection } from "@/components/principles-section";
-import { SideNav } from "@/components/side-nav";
-import { SignalsSection } from "@/components/signals-section";
-import { WorkSection } from "@/components/work-section";
+import { ColophonSection } from "@/_components/colophon-section";
+import { HeroSection } from "@/_components/hero-section";
+import { PrinciplesSection } from "@/_components/principles-section";
+import { SideNav } from "@/_components/side-nav";
+import { SignalsSection } from "@/_components/signals-section";
+import { WorkSection } from "@/_components/work-section";
 
 export default function Home() {
   return (

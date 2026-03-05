@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Bebas_Neue, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 
-import { SmoothScroll } from "@/components/smooth-scroll";
+import { SmoothScroll } from "@/_components/smooth-scroll";
 import "./globals.css";
 
 const primarySans = IBM_Plex_Sans({

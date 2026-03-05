@@ -5,17 +5,17 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { AnimatedNoise } from "@/components/animated-noise";
-import { BitmapChevron } from "@/components/bitmap-chevron";
+import { AnimatedNoise } from "@/_components/animated-noise";
+import { BitmapChevron } from "@/_components/bitmap-chevron";
 import {
   SplitFlapAudioProvider,
   SplitFlapMuteToggle,
   SplitFlapText,
-} from "@/components/split-flap-text";
-import { ScrambleTextOnHover } from "@/components/scramble-text";
-import { ActionLink } from "@/components/ui/action-link";
-import { Card } from "@/components/ui/card";
-import { Container } from "@/components/ui/container";
+} from "@/_components/split-flap-text";
+import { ScrambleTextOnHover } from "@/_components/scramble-text";
+import { ActionLink } from "@/_components/ui/action-link";
+import { Card } from "@/_components/ui/card";
+import { Container } from "@/_components/ui/container";
 
 gsap.registerPlugin(ScrollTrigger);
 
