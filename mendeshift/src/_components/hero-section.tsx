@@ -80,7 +80,7 @@ export function HeroSection() {
             <div className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
               <ActionLink href="#work">
                 <ScrambleTextOnHover text="Ver experimentos" as="span" duration={0.55} />
-                <BitmapChevron className="transition-transform duration-400 ease-emphasis group-hover:rotate-45" />
+                <BitmapChevron className="transition-transform duration-400 hover:rotate-45 hover:duration-1000 ease-emphasis" />
               </ActionLink>
               <ActionLink href="#signals" variant="ghost">
                 Últimos sinais
