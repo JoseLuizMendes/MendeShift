@@ -109,9 +109,11 @@ export function PrinciplesSection() {
               </span>
               <h3 className="font-display text-5xl leading-none tracking-tight md:text-7xl lg:text-8xl">
                 <span className="text-foreground">
-                  {principle.title.split(" ").slice(0, -1).join(" ")} 
+                  {principle.title.split(" ").slice(0, -1).join(" ")}
                 </span>
-                <HighlightText>{principle.title.split(" ").slice(-1).join(" ")}</HighlightText>
+                <HighlightText className="ml-[0.30em]">
+                  {principle.title.split(" ").slice(-1).join(" ")}
+                </HighlightText>
               </h3>
               <p className="mt-6 max-w-md font-mono text-sm leading-relaxed text-muted-foreground">
                 {principle.description}
