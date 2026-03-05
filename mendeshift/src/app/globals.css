@@ -1,0 +1,139 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  /* Core surfaces */
+  --background: #fbfbfc;
+  --foreground: #0b0c0f;
+  --card: #ffffff;
+
+  /* Text */
+  --muted: #f2f3f5;
+  --muted-foreground: #5a606b;
+
+  /* UI primitives */
+  --border: color-mix(in oklab, var(--foreground) 12%, transparent);
+  --ring: color-mix(in oklab, var(--foreground) 32%, transparent);
+  --radius: 14px;
+
+  /* Brand */
+  --accent: #ff4d4f;
+  --accent-foreground: #0b0c0f;
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasis: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-fast: 150ms;
+  --motion-base: 220ms;
+  --motion-slow: 420ms;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
+
+  --radius-lg: var(--radius);
+  --ease-standard: var(--ease-standard);
+  --ease-emphasis: var(--ease-emphasis);
+  --motion-fast: var(--motion-fast);
+  --motion-base: var(--motion-base);
+  --motion-slow: var(--motion-slow);
+}
+
+/* Preferência do sistema (fallback). */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0b0c0f;
+    --foreground: #f4f6f8;
+    --card: color-mix(in oklab, var(--background) 92%, white);
+    --muted: color-mix(in oklab, var(--background) 88%, white);
+    --muted-foreground: color-mix(in oklab, var(--foreground) 62%, transparent);
+    --border: color-mix(in oklab, var(--foreground) 14%, transparent);
+    --ring: color-mix(in oklab, var(--foreground) 34%, transparent);
+    --accent-foreground: #0b0c0f;
+  }
+}
+
+/* Dark mode por classe (para layout consistente). */
+.dark {
+  --background: #0b0c0f;
+  --foreground: #f4f6f8;
+  --card: color-mix(in oklab, var(--background) 92%, white);
+  --muted: color-mix(in oklab, var(--background) 88%, white);
+  --muted-foreground: color-mix(in oklab, var(--foreground) 62%, transparent);
+  --border: color-mix(in oklab, var(--foreground) 14%, transparent);
+  --ring: color-mix(in oklab, var(--foreground) 34%, transparent);
+  --accent-foreground: #0b0c0f;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 35%, transparent);
+  color: var(--foreground);
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  background-image:
+    radial-gradient(900px circle at 12% 10%, color-mix(in oklab, var(--accent) 12%, transparent), transparent 55%),
+    radial-gradient(700px circle at 82% 26%, color-mix(in oklab, var(--foreground) 10%, transparent), transparent 60%),
+    radial-gradient(900px circle at 60% 90%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      color-mix(in oklab, var(--foreground) 6%, transparent) 0px,
+      transparent 1px,
+      transparent 3px
+    );
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes signals-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.signals-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: signals-marquee 28s linear infinite;
+  will-change: transform;
+}
+
+.signals-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signals-marquee-track {
+    animation: none;
+  }
+}
