@@ -5,9 +5,9 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { Card } from "@/components/ui/card";
-import { Container } from "@/components/ui/container";
-import { Eyebrow, Section, SectionLead, SectionTitle } from "@/components/ui/section";
+import { Card } from "@/_components/ui/card";
+import { Container } from "@/_components/ui/container";
+import { Eyebrow, Section, SectionLead, SectionTitle } from "@/_components/ui/section";
 
 gsap.registerPlugin(ScrollTrigger);
 
