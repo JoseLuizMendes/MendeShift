@@ -13,40 +13,28 @@ gsap.registerPlugin(ScrollTrigger);
 
 const experiments = [
   {
-    k: "Arquitetura",
-    t: "Sistema de seções",
-    d: "Container, grid e espaçamento com ritmo claro.",
+    k: "Full Stack",
+    t: "Wedding Platform",
+    d: "Plataforma completa construída para o próprio casamento. RSVP, pagamentos via Mercado Pago, galeria colaborativa, webhooks e testes E2E. Next.js 15 + PostgreSQL.",
     span: "md:col-span-2 md:row-span-2",
   },
   {
-    k: "Tokens",
-    t: "Paleta editorial",
-    d: "Background, card, border, muted e acento como contrato visual.",
-    span: "md:col-span-1 md:row-span-1",
-  },
-  {
-    k: "Motion",
-    t: "Estados úteis",
-    d: "Hover/focus com transições curtas e previsíveis.",
-    span: "md:col-span-1 md:row-span-2",
-  },
-  {
-    k: "Texto",
-    t: "Hierarquia forte",
-    d: "Display para título, mono para metadados, corpo para leitura.",
-    span: "md:col-span-1 md:row-span-1",
-  },
-  {
-    k: "Componentes",
-    t: "Superfícies finas",
-    d: "Cards com borda e contraste, sem excesso de decoração.",
+    k: "Product",
+    t: "Barber SaaS",
+    d: "Sistema de agendamento multi-tenant com autenticação, containerização Docker e deploy em produção. Next.js + Prisma + PostgreSQL.",
     span: "md:col-span-2 md:row-span-1",
   },
   {
-    k: "Qualidade",
-    t: "Acabamento",
-    d: "Divisórias, seleção e microdetalhes coerentes.",
-    span: "md:col-span-1 md:row-span-1",
+    k: "Gov Tech",
+    t: "SIARHES",
+    d: "Mapeamento técnico do sistema de RH do Governo do ES. Roadmap estratégico para migração adotado por outros estados do Brasil.",
+    span: "md:col-span-2 md:row-span-1",
+  },
+  {
+    k: "Backend",
+    t: "REST API",
+    d: "API em Java/Spring Boot com arquitetura em camadas, autenticação JWT, consultas otimizadas e containerização com Docker.",
+    span: "md:col-span-4 md:row-span-1",
   },
 ];
 
@@ -104,12 +92,12 @@ export function WorkSection() {
       <Container className="md:px-30">
         <div ref={headerRef} className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <Eyebrow>02 / Experimentos</Eyebrow>
+            <Eyebrow>02 / Projetos</Eyebrow>
             <SectionTitle>Selected Work</SectionTitle>
           </div>
           <SectionLead className="mt-0 max-w-sm text-left md:text-right">
-            Estudos aplicados em interface design, motion sutil e consistência
-            de sistema.
+            Produtos construídos de ponta a ponta — arquitetura, desenvolvimento
+            e entrega com qualidade de produção.
           </SectionLead>
         </div>
 
