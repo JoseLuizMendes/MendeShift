@@ -101,8 +101,14 @@ export function ColophonSection() {
               Contato
             </h4>
             <div className="flex flex-col gap-3">
-              <ActionLink href="mailto:hello@mendeshift.studio" className="w-fit px-4 py-2 text-[10px]">
+              <ActionLink href="mailto:josemendess004@gmail.com" className="w-fit px-4 py-2 text-[10px]">
                 Email
+              </ActionLink>
+              <ActionLink href="https://github.com/JoseLuizMendes" className="w-fit px-4 py-2 text-[10px]" variant="ghost">
+                GitHub
+              </ActionLink>
+              <ActionLink href="https://www.linkedin.com/in/josé-luiz-dos-santos-azeredo-mendes/" className="w-fit px-4 py-2 text-[10px]" variant="ghost">
+                LinkedIn
               </ActionLink>
             </div>
           </div>
