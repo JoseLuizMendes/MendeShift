@@ -59,7 +59,7 @@ export function HeroSection() {
         <div ref={contentRef} className="space-y-10">
           <div className="min-w-0">
             <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-              v0.2 / build editorial
+              Product Engineer / Vitória, ES
             </p>
 
             <SplitFlapAudioProvider>
@@ -71,20 +71,22 @@ export function HeroSection() {
               <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
                 <div className="min-w-0">
                   <h2 className="font-display text-2xl tracking-wide text-muted-foreground/70 md:text-4xl">
-                    Estudos de Interface em Ambientes Controlados
+                    Engenharia de produto.
+                    Do banco de dados à interface do usuário.
                   </h2>
                   <p className="mt-8 max-w-2xl font-mono text-sm leading-relaxed text-muted-foreground">
-                    A gente projeta sistemas que se comportam bem sob pressão:
-                    tokens, componentes e hierarquia visual com clareza.
+                    A gente constrói produtos completos — da modelagem da
+                    arquitetura até a experiência final do usuário — com foco
+                    em impacto real e entrega com excelência.
                   </p>
 
                   <div className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
                     <ActionLink href="#work" className="group">
-                      <ScrambleTextOnHover text="Ver experimentos" as="span" duration={0.55} />
+                      <ScrambleTextOnHover text="Ver projetos" as="span" duration={0.55} />
                       <BitmapChevron className="transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
                     </ActionLink>
-                    <ActionLink href="#signals" variant="ghost">
-                      Últimos sinais
+                    <ActionLink href="#about" variant="ghost">
+                      Sobre o MendeShift
                     </ActionLink>
                   </div>
                 </div>
@@ -99,8 +101,8 @@ export function HeroSection() {
                       </p>
 
                       <p className="mt-5 font-mono text-xs leading-relaxed text-muted-foreground">
-                        Interfaces premium não nascem de efeito; nascem de
-                        decisões pequenas repetidas com consistência.
+                        Entender a dor do cliente antes de abrir o editor.
+                        Produto sem clareza de propósito é complexidade sem valor.
                       </p>
                     </div>
 
@@ -112,7 +114,8 @@ export function HeroSection() {
                       </p>
 
                       <p className="mt-5 font-mono text-xs leading-relaxed text-muted-foreground">
-                        Entrega: análise → design system → implementação.
+                        Levantamento → arquitetura → implementação → qualidade.
+                        Sem atalhos. Sem dívida técnica invisível.
                       </p>
                     </div>
                   </Card>
