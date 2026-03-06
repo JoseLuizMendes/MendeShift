@@ -146,18 +146,37 @@ function SplitFlapChar({
   const displayChar = CHARSET.includes(char) ? char : " ";
   const isSpace = char === " ";
   const [currentChar, setCurrentChar] = useState(displayChar);
+  const [isSettled, setIsSettled] = useState(true);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
     if (isSpace) return;
 
     let flipIndex = 0;
     const settleThreshold = 8 + index * 2;
 
-    const timeout = setTimeout(() => {
-      const interval = setInterval(() => {
+    timeoutRef.current = setTimeout(() => {
+      setIsSettled(false);
+      setCurrentChar(CHARSET[Math.floor(Math.random() * CHARSET.length)]);
+
+      intervalRef.current = setInterval(() => {
         if (flipIndex >= settleThreshold) {
-          clearInterval(interval);
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+          }
           setCurrentChar(displayChar);
+          setIsSettled(true);
           playClick?.();
           return;
         }
@@ -166,12 +185,17 @@ function SplitFlapChar({
         if (flipIndex % 2 === 0) playClick?.();
         flipIndex += 1;
       }, speed);
-
-      return () => clearInterval(interval);
     }, index * 120);
 
     return () => {
-      clearTimeout(timeout);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
     };
   }, [displayChar, index, isSpace, animationKey, speed, playClick]);
 
@@ -189,15 +213,35 @@ function SplitFlapChar({
         fontSize: "clamp(4rem, 15vw, 14rem)",
         width: "0.65em",
         height: "1.05em",
-        backgroundColor: "hsl(0 0% 0%)",
+        backgroundColor: isSettled
+          ? "color-mix(in oklab, var(--foreground) 10%, var(--background))"
+          : "color-mix(in oklab, var(--accent) 18%, var(--background))",
       }}
     >
       <div className="pointer-events-none absolute inset-x-0 top-1/2 z-10 h-px bg-black/20" />
       <div className="absolute inset-x-0 top-0 bottom-1/2 flex items-end justify-center overflow-hidden">
-        <span className="translate-y-[0.52em] leading-none text-foreground">{currentChar}</span>
+        <span
+          className="translate-y-[0.52em] leading-none"
+          style={{
+            color: isSettled
+              ? "var(--accent)"
+              : "color-mix(in oklab, var(--accent) 75%, var(--foreground))",
+          }}
+        >
+          {currentChar}
+        </span>
       </div>
       <div className="absolute inset-x-0 top-1/2 bottom-0 flex items-start justify-center overflow-hidden">
-        <span className="-translate-y-[0.52em] leading-none text-foreground">{currentChar}</span>
+        <span
+          className="-translate-y-[0.52em] leading-none"
+          style={{
+            color: isSettled
+              ? "var(--accent)"
+              : "color-mix(in oklab, var(--accent) 75%, var(--foreground))",
+          }}
+        >
+          {currentChar}
+        </span>
       </div>
     </motion.div>
   );
