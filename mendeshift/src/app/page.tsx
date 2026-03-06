@@ -1,3 +1,4 @@
+import { AboutSection } from "@/_components/about-section";
 import { ColophonSection } from "@/_components/colophon-section";
 import { HeroSection } from "@/_components/hero-section";
 import { PrinciplesSection } from "@/_components/principles-section";
@@ -12,6 +13,7 @@ export default function Home() {
       <div className="noise-overlay" aria-hidden="true" />
       <main className="app-shell relative min-h-screen">
         <HeroSection />
+        <AboutSection />
         <SignalsSection />
         <WorkSection />
         <PrinciplesSection />
