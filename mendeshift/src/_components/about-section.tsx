@@ -11,23 +11,6 @@ import { Eyebrow, Section, SectionTitle } from "@/_components/ui/section";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const timeline = [
-  {
-    period: "Out/2024 — Presente",
-    role: "Analista de TI",
-    company: "PRODEST",
-    detail:
-      "Instituto de Tecnologia do Governo do ES. Sistemas críticos de estado, SonarQube Grade A em 3 sistemas, roadmap estratégico do Novo SIARHES — projeto adotado por outros estados do Brasil.",
-  },
-  {
-    period: "2024 — Presente",
-    role: "Ciência da Computação",
-    company: "FAESA",
-    detail:
-      "Formação em engenharia de software, arquitetura de sistemas e fundamentos de ciência da computação.",
-  },
-];
-
 const stats = [
   { value: "Grade A", label: "SonarQube — 3 sistemas críticos" },
   { value: "17°", label: "No Brasil — Colégio Sagrado Coração de Maria" },
@@ -121,47 +104,12 @@ export function AboutSection() {
                 cada projeto é executado até hoje.
               </p>
               <p className="font-mono text-sm leading-relaxed text-muted-foreground">
-                Atualmente atua no PRODEST — Instituto de Tecnologia do Governo
-                do ES — onde liderou o mapeamento técnico do SIARHES, entregou
-                Nota A em todas as métricas do SonarQube e elaborou o roadmap
-                estratégico para migração adotado por outros estados do Brasil.
-              </p>
-              <p className="font-mono text-sm leading-relaxed text-muted-foreground">
                 Interesses em neurociência, música e finanças criam uma leitura
                 analítica diferente dos problemas. Quando tecnologia encontra
                 clareza de propósito, os resultados mudam de escala.
               </p>
             </div>
 
-            {/* Timeline */}
-            <div className="space-y-4">
-              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                Trajetória
-              </p>
-              {timeline.map((item) => (
-                <Card
-                  key={item.company}
-                  className="border-border/40 bg-card/60 p-6"
-                >
-                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                    <div>
-                      <span className="font-display text-xl tracking-tight">
-                        {item.role}
-                      </span>
-                      <span className="ml-2 font-mono text-xs text-accent">
-                        · {item.company}
-                      </span>
-                    </div>
-                    <time className="shrink-0 font-mono text-[10px] text-muted-foreground/60">
-                      {item.period}
-                    </time>
-                  </div>
-                  <p className="mt-3 font-mono text-xs leading-relaxed text-muted-foreground">
-                    {item.detail}
-                  </p>
-                </Card>
-              ))}
-            </div>
           </div>
 
           {/* Right — photo + quote */}
