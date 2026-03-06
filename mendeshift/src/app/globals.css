@@ -96,9 +96,9 @@ body {
   z-index: 0;
   opacity: 0.35;
   background-image:
-    radial-gradient(900px circle at 12% 10%, color-mix(in oklab, var(--accent) 12%, transparent), transparent 55%),
+    /*radial-gradient(900px circle at 12% 10%, color-mix(in oklab, var(--accent) 12%, transparent), transparent 55%),
     radial-gradient(700px circle at 82% 26%, color-mix(in oklab, var(--foreground) 10%, transparent), transparent 60%),
-    radial-gradient(900px circle at 60% 90%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 62%),
+    radial-gradient(900px circle at 60% 90%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 62%),*/
     repeating-linear-gradient(
       0deg,
       color-mix(in oklab, var(--foreground) 6%, transparent) 0px,
