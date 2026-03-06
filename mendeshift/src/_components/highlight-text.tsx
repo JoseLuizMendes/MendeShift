@@ -73,7 +73,7 @@ export function HighlightText({
           transform: "scaleX(0)",
         }}
       />
-      <span className="relative z-10 text-background">{children}</span>
+      <span className="relative z-10 text-[#0E0E12]">{children}</span>
     </span>
   );
 }
