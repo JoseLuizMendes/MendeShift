@@ -56,52 +56,69 @@ export function HeroSection() {
       </div>
 
       <Container className="md:pr-20">
-        <div ref={contentRef} className="flex items-end justify-between gap-8">
-          <div className="flex-1">
+        <div ref={contentRef} className="space-y-10">
+          <div className="min-w-0">
             <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
               v0.2 / build editorial
             </p>
 
             <SplitFlapAudioProvider>
               <div className="mt-4">
-                <SplitFlapText text="MendeShift" speed={55} />
+                <SplitFlapText text="MendeShift" speed={80} />
               </div>
               <SplitFlapMuteToggle className="mt-4" />
+
+              <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
+                <div className="min-w-0">
+                  <h2 className="font-display text-2xl tracking-wide text-muted-foreground/70 md:text-4xl">
+                    Estudos de Interface em Ambientes Controlados
+                  </h2>
+                  <p className="mt-8 max-w-2xl font-mono text-sm leading-relaxed text-muted-foreground">
+                    A gente projeta sistemas que se comportam bem sob pressão:
+                    tokens, componentes e hierarquia visual com clareza.
+                  </p>
+
+                  <div className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+                    <ActionLink href="#work" className="group">
+                      <ScrambleTextOnHover text="Ver experimentos" as="span" duration={0.55} />
+                      <BitmapChevron className="transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
+                    </ActionLink>
+                    <ActionLink href="#signals" variant="ghost">
+                      Últimos sinais
+                    </ActionLink>
+                  </div>
+                </div>
+
+                <div className="w-full lg:max-w-sm lg:justify-self-start lg:-ml-59 xl:-ml-59">
+                  <Card className="relative overflow-hidden border-border/40 bg-card/60 backdrop-blur-sm">
+                    <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border/40 to-transparent" />
+
+                    <div className="p-8">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                        foco
+                      </p>
+
+                      <p className="mt-5 font-mono text-xs leading-relaxed text-muted-foreground">
+                        Interfaces premium não nascem de efeito; nascem de
+                        decisões pequenas repetidas com consistência.
+                      </p>
+                    </div>
+
+                    <div className="h-px w-full bg-linear-to-r from-transparent via-border/40 to-transparent" />
+
+                    <div className="p-8">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                        entrega
+                      </p>
+
+                      <p className="mt-5 font-mono text-xs leading-relaxed text-muted-foreground">
+                        Entrega: análise → design system → implementação.
+                      </p>
+                    </div>
+                  </Card>
+                </div>
+              </div>
             </SplitFlapAudioProvider>
-
-            <h2 className="mt-3 font-display text-2xl tracking-wide text-muted-foreground/70 md:text-4xl">
-              Estudos de Interface em Ambientes Controlados
-            </h2>
-            <p className="mt-8 max-w-2xl font-mono text-sm leading-relaxed text-muted-foreground">
-              A gente projeta sistemas que se comportam bem sob pressão: tokens,
-              componentes e hierarquia visual com clareza.
-            </p>
-
-            <div className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-              <ActionLink href="#work">
-                <ScrambleTextOnHover text="Ver experimentos" as="span" duration={0.55} />
-                <BitmapChevron className="transition-transform duration-400 hover:rotate-45 hover:duration-1000 ease-emphasis" />
-              </ActionLink>
-              <ActionLink href="#signals" variant="ghost">
-                Últimos sinais
-              </ActionLink>
-            </div>
-          </div>
-
-          <div className="hidden w-full max-w-sm md:block">
-            <Card className="overflow-hidden border-border/40 bg-card/60 p-8 backdrop-blur-sm">
-              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                foco
-              </p>
-              <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground">
-                Interfaces premium não nascem de efeito; nascem de decisões
-                pequenas repetidas com consistência.
-              </p>
-              <div className="mt-6 h-px w-full bg-linear-to-r from-transparent via-border/40 to-transparent" />
-              <p className="mt-6 font-mono text-xs leading-relaxed text-muted-foreground">
-                Entrega: análise → design system → implementação.
-              </p>
-            </Card>
           </div>
         </div>
       </Container>
