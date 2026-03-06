@@ -25,16 +25,10 @@ const experiments = [
     span: "md:col-span-2 md:row-span-1",
   },
   {
-    k: "Gov Tech",
-    t: "SIARHES",
-    d: "Mapeamento técnico do sistema de RH do Governo do ES. Roadmap estratégico para migração adotado por outros estados do Brasil.",
-    span: "md:col-span-2 md:row-span-1",
-  },
-  {
     k: "Backend",
     t: "REST API",
     d: "API em Java/Spring Boot com arquitetura em camadas, autenticação JWT, consultas otimizadas e containerização com Docker.",
-    span: "md:col-span-4 md:row-span-1",
+    span: "md:col-span-2 md:row-span-1",
   },
 ];
 
