@@ -14,30 +14,30 @@ gsap.registerPlugin(ScrollTrigger);
 const principles = [
   {
     number: "01",
-    title: "Interface Minimalism",
+    title: "End-to-End Ownership",
     description:
-      "Reduzir até restar apenas o essencial. Cada elemento precisa justificar presença.",
+      "Do banco à interface, responsabilidade total pelo produto. Nenhuma camada é problema de outro.",
     align: "left",
   },
   {
     number: "02",
-    title: "Systems over Screens",
+    title: "Engineering for Impact",
     description:
-      "Projetar comportamento antes de layout. Escala vem de regras, não de improviso.",
+      "Código sem impacto é exercício. Cada solução precisa resolver uma dor real do produto.",
     align: "right",
   },
   {
     number: "03",
-    title: "Controlled Tension",
+    title: "Quality as Discipline",
     description:
-      "Equilíbrio entre contenção e expressão, com contraste e ritmo visual.",
+      "Nota A no SonarQube não é acidente. É cultura aplicada commit a commit, sem exceções.",
     align: "left",
   },
   {
     number: "04",
-    title: "Signal Clarity",
+    title: "Learn in Context",
     description:
-      "Comunicação direta em cada interação: menos ruído, mais intenção.",
+      "Aprendizado acelera com propósito real. O mercado não espera condições ideais.",
     align: "right",
   },
 ] as const;
