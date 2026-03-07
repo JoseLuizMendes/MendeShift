@@ -12,30 +12,30 @@ import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const signals = [
+const services = [
   {
     no: "No. 01",
-    date: "2026.03.05",
-    title: "Signal Field",
-    desc: "Novo padrão para superfícies editoriais em dark mode.",
+    category: "Web",
+    title: "Aplicações Web Fullstack",
+    desc: "Next.js, React, Node.js e PostgreSQL. Do banco de dados à interface, com arquitetura pensada para escalar.",
   },
   {
     no: "No. 02",
-    date: "2026.03.03",
-    title: "Silent Agent",
-    desc: "Camada de consistência para componentes e micro-estados.",
+    category: "Backend",
+    title: "APIs & Integrações",
+    desc: "REST APIs com autenticação JWT, webhooks, pagamentos e integrações com serviços externos.",
   },
   {
     no: "No. 03",
-    date: "2026.03.01",
-    title: "Noir Grid",
-    desc: "Sistema tipográfico para leitura e escaneabilidade.",
+    category: "Qualidade",
+    title: "Testes & Qualidade",
+    desc: "Testes unitários, E2E com Playwright e métricas verificáveis. SonarQube Grade A em projetos críticos.",
   },
   {
     no: "No. 04",
-    date: "2026.02.27",
-    title: "Lattice",
-    desc: "Estrutura modular para seções adaptáveis.",
+    category: "Infra",
+    title: "Containers & Deploy",
+    desc: "Docker, Docker Compose e deploy em produção. CI/CD com Azure DevOps e boas práticas de entrega.",
   },
 ];
 
@@ -124,7 +124,7 @@ export function SignalsSection() {
   }, []);
 
   return (
-    <Section id="signals" className="relative" ref={sectionRef}>
+    <Section id="services" className="relative" ref={sectionRef}>
       <Container className="md:px-30">
         <div
           ref={cursorRef}
@@ -137,11 +137,10 @@ export function SignalsSection() {
         />
 
         <div ref={headerRef} className="mb-12">
-          <Eyebrow>01 / Sinais</Eyebrow>
-          <SectionTitle>O que está no radar</SectionTitle>
+          <Eyebrow>01 / Serviços</Eyebrow>
+          <SectionTitle>O que construo</SectionTitle>
           <SectionLead>
-            Notas curtas sobre decisões de interface que melhoram qualidade
-            percebida e manutenção.
+            Especialidades e áreas de atuação — do backend à interface.
           </SectionLead>
         </div>
 
@@ -149,7 +148,7 @@ export function SignalsSection() {
           <div ref={cardsRef} className="signals-marquee-track">
             {[0, 1].map((copy) => (
               <div key={copy} className="flex shrink-0 gap-6 pr-6">
-                {signals.map((item, index) => (
+                {services.map((item, index) => (
                   <article
                     key={`${item.no}-${copy}-${index}`}
                     className="group relative w-80 shrink-0 transition-transform duration-500 ease-emphasis hover:-translate-y-2"
@@ -161,9 +160,9 @@ export function SignalsSection() {
                         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                           {item.no}
                         </span>
-                        <time className="font-mono text-[10px] text-muted-foreground/60">
-                          {item.date}
-                        </time>
+                        <span className="font-mono text-[10px] text-muted-foreground/60">
+                          {item.category}
+                        </span>
                       </div>
 
                       <h3 className="font-display text-4xl tracking-tight transition-colors duration-300 group-hover:text-accent">
