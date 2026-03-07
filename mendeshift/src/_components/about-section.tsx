@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { ActionLink } from "@/_components/ui/action-link";
 import { Card } from "@/_components/ui/card";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, Section, SectionTitle } from "@/_components/ui/section";
@@ -110,6 +111,12 @@ export function AboutSection() {
               </p>
             </div>
 
+            <div>
+              <ActionLink href="/experience" variant="ghost" className="px-0 text-accent hover:text-accent/80">
+                Ver trajetória profissional e acadêmica
+              </ActionLink>
+            </div>
+
           </div>
 
           {/* Right — photo + quote */}
@@ -126,7 +133,7 @@ export function AboutSection() {
                 className="object-cover grayscale"
               />
             */}
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm border border-border/40 bg-card/60">
+              <div className="relative aspect-3/4 w-full overflow-hidden rounded-sm border border-border/40 bg-card/60">
               <div className="flex h-full items-center justify-center">
                 <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/30">
                   foto
