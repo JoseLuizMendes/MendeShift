@@ -24,9 +24,9 @@ const display = Bebas_Neue({
 });
 
 export const metadata: Metadata = {
-  title: "MendeShift",
+  title: "José Luiz Mendes — Product Engineer",
   description:
-    "Estudos de interface e sistemas de produto — precisão, ritmo e clareza.",
+    "Product Engineer em Vitória, ES. Construo aplicações web fullstack, APIs e sistemas orientados a produto — do modelo de dados à experiência do usuário final.",
 };
 
 export default function RootLayout({
