@@ -49,6 +49,7 @@ export function WorkSection() {
           opacity: 1,
           duration: 1,
           ease: "power3.out",
+          immediateRender: false,
           scrollTrigger: {
             trigger: headerRef.current,
             start: "top 90%",
@@ -68,6 +69,7 @@ export function WorkSection() {
             duration: 0.8,
             stagger: 0.1,
             ease: "power3.out",
+            immediateRender: false,
             scrollTrigger: {
               trigger: gridRef.current,
               start: "top 90%",
