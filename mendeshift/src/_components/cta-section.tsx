@@ -41,7 +41,6 @@ export function CtaSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const chatRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -91,21 +90,7 @@ export function CtaSection() {
         });
       }
 
-      if (cardsRef.current) {
-        const cards = cardsRef.current.querySelectorAll(".quick-card");
-        gsap.from(cards, {
-          y: 30,
-          opacity: 0,
-          duration: 0.7,
-          stagger: 0.08,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: cardsRef.current,
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      }
+
     }, sectionRef);
 
     return () => ctx.revert();
@@ -298,15 +283,12 @@ export function CtaSection() {
                 <p className="mb-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
                   Perguntas Rápidas
                 </p>
-                <div
-                  ref={cardsRef}
-                  className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-2"
-                >
+                <div className="grid grid-cols-2 gap-3">
                   {quickPrompts.map((item) => (
                     <button
                       key={item.label}
                       onClick={() => handleQuickPrompt(item.prompt)}
-                      className="quick-card group rounded-xl border border-border/50 bg-card/50 px-4 py-3 text-left font-mono text-xs transition-all hover:border-accent/50 hover:bg-card"
+                      className="quick-card group rounded-xl border border-border bg-card px-4 py-4 text-left font-mono text-xs transition-all hover:border-accent/50 hover:bg-accent/5"
                     >
                       <span className="text-foreground group-hover:text-accent">
                         {item.label}
