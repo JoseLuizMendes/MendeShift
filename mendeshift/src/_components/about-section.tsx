@@ -82,7 +82,7 @@ export function AboutSection() {
     <Section id="about" className="relative" ref={sectionRef}>
       <Container className="md:px-30">
         <div ref={headerRef} className="mb-16">
-          <Eyebrow>00 / Perfil</Eyebrow>
+          <Eyebrow>04 / Perfil</Eyebrow>
           <SectionTitle>O engenheiro por trás do código</SectionTitle>
         </div>
 
@@ -94,20 +94,21 @@ export function AboutSection() {
           <div className="space-y-12">
             <div className="space-y-5">
               <p className="font-mono text-sm leading-relaxed text-muted-foreground">
-                MendeShift não é apenas um portfólio — é a prova de que
-                engenharia de produto começa muito antes de abrir o editor.
-                Começa em entender o problema, modelar a solução e carregar
-                a responsabilidade do resultado de ponta a ponta.
+                Sou José Luiz Mendes — o engenheiro por trás do MendeShift.
+                Trabalho no PRODEST, o instituto de tecnologia do Governo do
+                Espírito Santo, desenvolvendo e mantendo sistemas que atendem
+                milhares de servidores públicos.
               </p>
               <p className="font-mono text-sm leading-relaxed text-muted-foreground">
-                José Luiz foi 1° lugar no Espírito Santo e 17° no Brasil pelo
-                Colégio Sagrado Coração de Maria. Essa disciplina define como
-                cada projeto é executado até hoje.
+                Fui 1° lugar no Espírito Santo e 17° no Brasil pelo Colégio
+                Sagrado Coração de Maria. Essa disciplina define como executo
+                projetos até hoje — sem atalhos, sem dívida técnica invisível.
               </p>
               <p className="font-mono text-sm leading-relaxed text-muted-foreground">
-                Interesses em neurociência, música e finanças criam uma leitura
-                analítica diferente dos problemas. Quando tecnologia encontra
-                clareza de propósito, os resultados mudam de escala.
+                Interesses em neurociência, música e finanças constroem uma
+                leitura analítica diferente dos problemas. Quando clareza de
+                propósito encontra engenharia bem feita, os resultados mudam
+                de escala.
               </p>
             </div>
 
