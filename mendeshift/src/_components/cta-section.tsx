@@ -13,6 +13,7 @@ import { Card } from "@/_components/ui/card";
 import { Eyebrow, Section } from "@/_components/ui/section";
 
 gsap.registerPlugin(ScrollTrigger);
+type ContactKey = "email" | "github" | "linkedin" | "whatsapp";
 
 interface Message {
   id: string;
