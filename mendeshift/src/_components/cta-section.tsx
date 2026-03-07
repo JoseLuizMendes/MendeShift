@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,11 +12,26 @@ import { Container } from "@/_components/ui/container";
 import { Eyebrow, Section } from "@/_components/ui/section";
 
 gsap.registerPlugin(ScrollTrigger);
+type ContactKey = "email" | "github" | "linkedin" | "whatsapp";
 
 export function CtaSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const actionsRef = useRef<HTMLDivElement>(null);
+  const [scrambleTokens, setScrambleTokens] = useState<Record<ContactKey, number>>({
+    email: 0,
+    github: 0,
+    linkedin: 0,
+    whatsapp: 0,
+  });
+
+  const triggerScramble = (key: ContactKey) => {
+    setScrambleTokens((current) => ({
+      ...current,
+      [key]: current[key] + 1,
+    }));
+  };
+  
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -80,21 +95,36 @@ export function CtaSection() {
 
           <div ref={actionsRef} className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <ActionLink
-              href="mailto:josemendess004@gmail.com"
-              className="group"
+              href="https://wa.me/5527996300333"
+              className="group w-fit px-4 py-2 text-[10px] hover:text-accent"
+              variant="ghost"
+              onMouseEnter={() => triggerScramble("whatsapp")}
+              onFocus={() => triggerScramble("whatsapp")}
             >
               <ScrambleTextOnHover
-                text="josemendess004@gmail.com"
+                text="WhatsApp"
                 as="span"
-                duration={0.7}
+                duration={0.55}
+                className="text-[10px] transition-colors duration-300 group-hover:text-accent"
+                triggerToken={scrambleTokens.whatsapp}
               />
-              <BitmapChevron className="transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
+              <BitmapChevron className="w-3 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-500" />
             </ActionLink>
             <ActionLink
               href="https://www.linkedin.com/in/josé-luiz-dos-santos-azeredo-mendes/"
               variant="ghost"
+              onMouseEnter={() => triggerScramble("linkedin")}
+              onFocus={() => triggerScramble("linkedin")}
+              className="group w-fit px-4 py-2 text-[10px] hover:text-accent"
             >
-              LinkedIn ↗
+              <ScrambleTextOnHover
+                text="LinkedIn"
+                as="span"
+                duration={0.55}
+                className="text-[10px] transition-colors duration-300 group-hover:text-accent"
+                triggerToken={scrambleTokens.linkedin}
+              />
+              <BitmapChevron className="w-3 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-500" />
             </ActionLink>
           </div>
         </div>
