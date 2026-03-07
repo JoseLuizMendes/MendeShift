@@ -9,6 +9,7 @@ interface ScrambleTextOnHoverProps {
   duration?: number;
   as?: "span" | "button" | "div";
   onClick?: () => void;
+  triggerToken?: number;
 }
 
 const GLYPHS = "!@#$%^&*()_+-=<>?/\\[]{}Xx";
@@ -54,12 +55,14 @@ export function ScrambleTextOnHover({
   duration = 0.4,
   as: Component = "span",
   onClick,
+  triggerToken,
 }: ScrambleTextOnHoverProps) {
   const [displayText, setDisplayText] = useState(text);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
   const isAnimating = useRef(false);
+  const previousTriggerRef = useRef(triggerToken);
 
-  const handleMouseEnter = useCallback(() => {
+  const startScramble = useCallback(() => {
     if (isAnimating.current) return;
     isAnimating.current = true;
 
@@ -75,6 +78,24 @@ export function ScrambleTextOnHover({
       isAnimating.current = false;
     });
   }, [text, duration]);
+
+  const handleMouseEnter = useCallback(() => {
+    startScramble();
+  }, [startScramble]);
+
+  useEffect(() => {
+    if (triggerToken === undefined) return;
+
+    if (previousTriggerRef.current === undefined) {
+      previousTriggerRef.current = triggerToken;
+      return;
+    }
+
+    if (triggerToken !== previousTriggerRef.current) {
+      previousTriggerRef.current = triggerToken;
+      startScramble();
+    }
+  }, [startScramble, triggerToken]);
 
   useEffect(() => {
     return () => {
