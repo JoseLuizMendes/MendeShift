@@ -11,7 +11,6 @@ import { Container } from "@/_components/ui/container";
 import {
   Eyebrow,
   Section,
-  SectionLead,
   SectionTitle,
 } from "@/_components/ui/section";
 import { BitmapChevron } from "./bitmap-chevron";
