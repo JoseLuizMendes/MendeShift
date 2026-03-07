@@ -5,32 +5,13 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { Card } from "@/_components/ui/card";
+import { BitmapChevron } from "@/_components/bitmap-chevron";
+import { ScrambleTextOnHover } from "@/_components/scramble-text";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, Section, SectionLead, SectionTitle } from "@/_components/ui/section";
+import { projects } from "@/lib/projects";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const experiments = [
-  {
-    k: "Full Stack",
-    t: "Wedding Platform",
-    d: "Plataforma completa construída para o próprio casamento. RSVP, pagamentos via Mercado Pago, galeria colaborativa, webhooks e testes E2E. Next.js 15 + PostgreSQL.",
-    span: "md:col-span-2 md:row-span-2",
-  },
-  {
-    k: "Product",
-    t: "Barber SaaS",
-    d: "Sistema de agendamento multi-tenant com autenticação, containerização Docker e deploy em produção. Next.js + Prisma + PostgreSQL.",
-    span: "md:col-span-2 md:row-span-1",
-  },
-  {
-    k: "Backend",
-    t: "REST API",
-    d: "API em Java/Spring Boot com arquitetura em camadas, autenticação JWT, consultas otimizadas e containerização com Docker.",
-    span: "md:col-span-2 md:row-span-1",
-  },
-];
 
 export function WorkSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -101,32 +82,57 @@ export function WorkSection() {
           ref={gridRef}
           className="grid grid-cols-1 gap-4 md:grid-cols-4 md:auto-rows-[190px] md:gap-6"
         >
-          {experiments.map((item, idx) => (
-            <Card
-              key={item.t}
-              className={`group border-border/40 bg-card/70 p-6 transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/60 ${item.span}`}
+          {projects.map((item, idx) => (
+            <article
+              key={item.slug}
+              className={`group relative overflow-hidden border border-border/40 rounded-lg bg-card/70 p-6 transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/60 ${item.gridSpan}`}
             >
               <div className="absolute inset-0 bg-accent/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
               <div className="relative flex h-full flex-col justify-between">
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                    {item.k}
+                    {item.category}
                   </p>
                   <h3 className="mt-3 font-display text-3xl tracking-tight md:text-4xl">
-                    {item.t}
+                    {item.title}
                   </h3>
                 </div>
                 <div>
                   <p className="max-w-[34ch] font-mono text-xs leading-relaxed text-muted-foreground">
-                    {item.d}
+                    {item.shortDesc}
                   </p>
-                  <span className="mt-5 block font-mono text-[10px] text-muted-foreground/50">
-                    {String(idx + 1).padStart(2, "0")}
-                  </span>
+
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {item.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-full border border-border/30 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-muted-foreground/60"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 flex items-center justify-between">
+                    <span className="font-mono text-[10px] text-muted-foreground/50">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <a
+                      href={`/projetos/${item.slug}`}
+                      className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition-colors duration-300 group-hover:text-accent"
+                    >
+                      <ScrambleTextOnHover
+                        text="Ver case study"
+                        as="span"
+                        duration={0.45}
+                      />
+                      <BitmapChevron className="w-3 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
+                    </a>
+                  </div>
                 </div>
               </div>
-            </Card>
+            </article>
           ))}
         </div>
       </Container>
