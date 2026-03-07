@@ -71,13 +71,13 @@ export function HeroSection() {
               <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
                 <div className="min-w-0">
                   <h2 className="font-display text-2xl tracking-wide text-muted-foreground/70 md:text-4xl">
-                    Engenharia de produto.
-                    Do banco de dados à interface do usuário.
+                    Construo produtos completos — do modelo de dados à
+                    experiência do usuário final.
                   </h2>
                   <p className="mt-8 max-w-2xl font-mono text-sm leading-relaxed text-muted-foreground">
-                    A gente constrói produtos completos — da modelagem da
-                    arquitetura até a experiência final do usuário — com foco
-                    em impacto real e entrega com excelência.
+                    Aplicações web robustas, interfaces modernas e arquitetura
+                    orientada a produto. Do levantamento de requisitos ao
+                    deploy em produção — com responsabilidade end-to-end.
                   </p>
 
                   <div className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
