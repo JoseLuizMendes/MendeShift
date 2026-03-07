@@ -24,6 +24,9 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     const update = () => ScrollTrigger.update();
     lenis.on("scroll", update);
 
+    const onRefresh = () => lenis.resize();
+    ScrollTrigger.addEventListener("refresh", onRefresh);
+
     const raf = (time: number) => {
       lenis.raf(time * 1000);
     };
@@ -31,8 +34,12 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
+    // Garantir que os triggers calculem posições depois do Lenis entrar em ação.
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+
     return () => {
       lenis.off("scroll", update);
+      ScrollTrigger.removeEventListener("refresh", onRefresh);
       gsap.ticker.remove(raf);
       lenis.destroy();
     };
