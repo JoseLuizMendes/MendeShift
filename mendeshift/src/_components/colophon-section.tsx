@@ -99,12 +99,8 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
     >
       <Container className="md:px-30">
         <div ref={headerRef} className="mb-12">
-          <Eyebrow>04 / Colophon</Eyebrow>
-          <SectionTitle>Contato e créditos</SectionTitle>
-          <SectionLead>
-            Design system orientado a tokens, implementação em Next.js e
-            composição de componentes estilo Shadcn.
-          </SectionLead>
+          <Eyebrow>06 / Colophon</Eyebrow>
+          <SectionTitle>Créditos</SectionTitle>
         </div>
 
         <div
