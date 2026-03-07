@@ -34,8 +34,6 @@ export function CtaSection() {
           },
         });
       }
-
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -45,8 +43,7 @@ export function CtaSection() {
     <Section
       id="contact"
       ref={sectionRef}
-      className="relative border-t border-border/20"
-    >
+      className="relative border-t border-border/20">
       <Container className="md:px-30">
         <div className="flex flex-col gap-12 lg:gap-16">
           {/* Header */}

@@ -2,6 +2,7 @@
 
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { Linkedin, MessageCircle } from "lucide-react";
 
 import { BitmapChevron } from "@/_components/bitmap-chevron";
 import { ScrambleTextOnHover } from "@/_components/scramble-text";
@@ -16,11 +17,38 @@ interface Message {
 }
 
 const quickPrompts = [
-  { label: "Disponibilidade", prompt: "Qual sua disponibilidade atual?" },
-  { label: "Stack", prompt: "Quais tecnologias você domina?" },
-  { label: "Orçamento", prompt: "Como funciona seu processo de orçamento?" },
-  { label: "Prazo", prompt: "Qual o prazo médio para um projeto?" },
+  {
+    label: "Disponibilidade",
+    prompt:
+      "Qual sua disponibilidade atual para iniciar um projeto e qual a sua carga horária semanal?",
+  },
+  {
+    label: "Stack",
+    prompt:
+      "Quais tecnologias, frameworks e ferramentas você domina e utiliza com mais frequência nos projetos?",
+  },
+  {
+    label: "Orçamento",
+    prompt:
+      "Como funciona seu modelo de orçamento, formas de cobrança e como você costuma estruturar propostas?",
+  },
+  {
+    label: "Prazo",
+    prompt:
+      "Qual é o prazo médio para entregar diferentes tipos de projetos, como landing pages ou aplicações completas?",
+  },
 ];
+
+const quickAnswersByLabel: Record<string, string> = {
+  Disponibilidade:
+    "Atualmente estou disponível para novos projetos. Consigo começar imediatamente ou alinhar uma data que faça sentido para o escopo e sua urgência.",
+  Stack:
+    "Trabalho principalmente com React, Next.js, TypeScript, Node.js e tecnologias modernas de frontend. Também tenho experiência com design systems, animações e arquitetura voltada a produto.",
+  Orçamento:
+    "O orçamento é definido a partir da complexidade e do escopo. Normalmente trabalho com valores fechados por projeto ou hourly rate em casos específicos, sempre com transparência no que está incluído.",
+  Prazo:
+    "Landing pages costumam levar de 1 a 2 semanas; produtos mais complexos, entre 4 e 8 semanas. O foco é sempre equilibrar velocidade com qualidade e manutenção a longo prazo.",
+};
 
 const initialMessages: Message[] = [
   {
@@ -39,6 +67,20 @@ export function ContactChat() {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [openQuestion, setOpenQuestion] = useState<string | null>(
+    quickPrompts[0]?.label ?? null,
+  );
+  const [scrambleTokens, setScrambleTokens] = useState({
+    whatsapp: 0,
+    linkedin: 0,
+  });
+
+  const triggerScramble = (key: "whatsapp" | "linkedin") => {
+    setScrambleTokens((current) => ({
+      ...current,
+      [key]: current[key] + 1,
+    }));
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -136,15 +178,11 @@ export function ContactChat() {
     }
   };
 
-  const handleQuickPrompt = (prompt: string) => {
-    handleSendMessage(prompt);
-  };
-
   return (
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_320px] lg:gap-10">
+    <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,22rem)] lg:items-start lg:gap-8">
       {/* Chatbot Principal - Left Side */}
       <div ref={chatRef}>
-        <Card className="flex h-[500px] flex-col overflow-hidden lg:h-[560px]">
+        <Card className="flex h-125 flex-col overflow-hidden lg:h-152.5">
           {/* Chat Header */}
           <div className="flex items-center gap-3 border-b border-border/50 px-5 py-4">
             <div className="relative">
@@ -209,7 +247,7 @@ export function ContactChat() {
               onKeyDown={handleKeyDown}
               placeholder="Digite sua mensagem..."
               rows={1}
-              className="max-h-32 min-h-[44px] flex-1 resize-none rounded-xl border border-border/50 bg-muted/50 px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+              className="max-h-32 min-h-11 flex-1 resize-none rounded-xl border border-border/50 bg-muted/50 px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
             />
             <button
               type="submit"
@@ -234,62 +272,110 @@ export function ContactChat() {
         </Card>
       </div>
 
-      {/* Supplementary Content - Right Side */}
-      <div className="flex flex-col gap-6">
+      {/* Coluna lateral: Perguntas rápidas + Contato direto */}
+      <div className="flex w-full flex-col gap-8 lg:justify-self-end">
         {/* Quick Actions */}
-        <div>
-          <p className="mb-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+        <section className="flex flex-col gap-4">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
             Perguntas Rápidas
           </p>
-          <div className="grid grid-cols-2 gap-3">
-            {quickPrompts.map((item) => (
-              <button
-                key={item.label}
-                type="button"
-                onClick={() => handleQuickPrompt(item.prompt)}
-                style={{ opacity: 1 }}
-                className="rounded-xl border border-border bg-card px-4 py-4 text-left font-mono text-xs text-foreground transition-all hover:border-accent/50 hover:bg-accent/5 hover:text-accent"
-              >
-                {item.label}
-              </button>
-            ))}
+          <div className="space-y-3">
+            {quickPrompts.map((item) => {
+              const isOpen = openQuestion === item.label;
+              const answer = quickAnswersByLabel[item.label];
+
+              return (
+                <div
+                  key={item.label}
+                  className="overflow-hidden rounded-2xl border border-border/60 bg-card/40"
+                >
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setOpenQuestion(isOpen ? null : item.label)
+                    }
+                    className="flex w-full items-center justify-between px-4 py-3 text-left"
+                  >
+                    <span className="font-mono text-xs text-foreground">
+                      {item.label}
+                    </span>
+                    <span
+                      className={`text-xs text-muted-foreground transition-transform duration-300 ${
+                        isOpen ? "rotate-90" : ""
+                      }`}
+                    >
+                      ▶
+                    </span>
+                  </button>
+
+                  {isOpen && (
+                    <div className="space-y-3 border-t border-border/60 px-4 py-3">
+                      <p className="font-mono text-[11px] leading-relaxed text-muted-foreground">
+                        {item.prompt}
+                      </p>
+                      {answer && (
+                        <p className="font-mono text-xs leading-relaxed text-foreground">
+                          {answer}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
-        </div>
+        </section>
 
         {/* Contact Links */}
-        <div className="mt-auto">
-          <p className="mb-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+        <section className="flex w-full max-w-sm flex-col gap-4 self-start rounded-[28px] border border-border/60 bg-card/60 p-4 sm:p-5">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
             Contato Direto
           </p>
-          <div className="flex flex-col gap-3">
-            <ActionLink
-              href="mailto:josemendess004@gmail.com"
-              className="group w-full justify-start"
-            >
-              <ScrambleTextOnHover
-                text="josemendess004@gmail.com"
-                as="span"
-                duration={0.7}
-              />
-              <BitmapChevron className="ml-auto transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
-            </ActionLink>
+          <div className="flex flex-col gap-2.5">
             <ActionLink
               href="https://wa.me/5521964868505"
-              className="group w-full justify-start"
+              variant="ghost"
+              className="group h-14 w-full justify-between rounded-full border border-border/60 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-foreground transition-all duration-300 hover:border-accent/70 hover:bg-accent/5 hover:text-accent"
+              onMouseEnter={() => triggerScramble("whatsapp")}
+              onFocus={() => triggerScramble("whatsapp")}
             >
-              <ScrambleTextOnHover text="WhatsApp" as="span" duration={0.7} />
-              <BitmapChevron className="ml-auto transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
+              <span className="flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-card/80 text-muted-foreground transition-colors duration-300 group-hover:border-accent/70 group-hover:text-accent">
+                  <MessageCircle className="h-4 w-4" />
+                </span>
+                <ScrambleTextOnHover
+                  text="WhatsApp"
+                  as="span"
+                  duration={0.7}
+                  className="text-[11px] transition-colors duration-300"
+                  triggerToken={scrambleTokens.whatsapp}
+                />
+              </span>
+              <BitmapChevron className="w-4 h-5 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
             </ActionLink>
             <ActionLink
               href="https://www.linkedin.com/in/josé-luiz-dos-santos-azeredo-mendes/"
               variant="ghost"
-              className="justify-start"
+              className="group h-14 w-full justify-between rounded-full border border-border/60 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-foreground transition-all duration-300 hover:border-accent/70 hover:bg-accent/5 hover:text-accent"
+              onMouseEnter={() => triggerScramble("linkedin")}
+              onFocus={() => triggerScramble("linkedin")}
             >
-              LinkedIn
-              <span className="ml-1">↗</span>
+              <span className="flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-card/80 text-muted-foreground transition-colors duration-300 group-hover:border-accent/70 group-hover:text-accent">
+                  <Linkedin className="h-4 w-4" />
+                </span>
+                <ScrambleTextOnHover
+                  text="LinkedIn"
+                  as="span"
+                  duration={0.7}
+                  className="text-[11px] transition-colors duration-300"
+                  triggerToken={scrambleTokens.linkedin}
+                />
+              </span>
+              <BitmapChevron className="w-4 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
             </ActionLink>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );
