@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
+import { cn } from "@/lib/utils";
+
 interface ScrambleTextOnHoverProps {
   text: string;
   className?: string;
@@ -61,6 +63,7 @@ export function ScrambleTextOnHover({
   const tweenRef = useRef<gsap.core.Tween | null>(null);
   const isAnimating = useRef(false);
   const previousTriggerRef = useRef(triggerToken);
+  const isControlledByParent = triggerToken !== undefined;
 
   const startScramble = useCallback(() => {
     if (isAnimating.current) return;
@@ -104,7 +107,11 @@ export function ScrambleTextOnHover({
   }, []);
 
   return (
-    <Component className={className} onMouseEnter={handleMouseEnter} onClick={onClick}>
+    <Component
+      className={cn(className, isControlledByParent && "pointer-events-none")}
+      onMouseEnter={isControlledByParent ? undefined : handleMouseEnter}
+      onClick={onClick}
+    >
       {displayText}
     </Component>
   );
