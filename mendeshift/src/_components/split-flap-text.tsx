@@ -200,7 +200,7 @@ function SplitFlapChar({
   }, [displayChar, index, isSpace, animationKey, speed, playClick]);
 
   if (isSpace) {
-    return <div style={{ width: "0.3em", fontSize: "clamp(4rem, 15vw, 14rem)" }} />;
+    return <div style={{ width: "0.3em", fontSize: "clamp(2.2rem, 12vw, 14rem)" }} />;
   }
 
   return (
@@ -210,7 +210,7 @@ function SplitFlapChar({
       transition={{ delay: 0.1 * index, duration: 0.3, ease: "easeOut" }}
       className="relative flex items-center justify-center overflow-hidden font-display"
       style={{
-        fontSize: "clamp(4rem, 15vw, 14rem)",
+        fontSize: "clamp(2.2rem, 12vw, 14rem)",
         width: "0.65em",
         height: "1.05em",
         backgroundColor: isSettled

@@ -81,17 +81,17 @@ export function AboutSection() {
   return (
     <Section id="about" className="relative" ref={sectionRef}>
       <Container className="md:px-30">
-        <div ref={headerRef} className="mb-16">
+        <div ref={headerRef} className="mb-12 md:mb-16">
           <Eyebrow>04 / Perfil</Eyebrow>
           <SectionTitle>O engenheiro por trás do código</SectionTitle>
         </div>
 
         <div
           ref={contentRef}
-          className="grid gap-12 lg:grid-cols-[1fr_300px] lg:items-start"
+          className="grid gap-10 md:gap-12 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start"
         >
           {/* Left — story + timeline */}
-          <div className="space-y-12">
+          <div className="space-y-10 md:space-y-12">
             <div className="space-y-5">
               <p className="font-mono text-sm leading-relaxed text-muted-foreground">
                 Sou José Luiz Mendes — o engenheiro por trás do MendeShift.
@@ -121,7 +121,7 @@ export function AboutSection() {
           </div>
 
           {/* Right — photo + quote */}
-          <div className="flex flex-col gap-6">
+          <div className="mx-auto flex w-full max-w-md flex-col gap-6 lg:mx-0 lg:max-w-none">
             {/*
               TODO: adicionar sua foto.
               Coloque o arquivo em /public/foto-jose.jpg e substitua o placeholder abaixo:
@@ -142,7 +142,7 @@ export function AboutSection() {
               </div>
             </div>
 
-            <Card className="border-border/40 bg-card/60 p-6">
+            <Card className="border-border/40 bg-card/60 p-5 sm:p-6">
               <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                 motivação
               </p>
@@ -158,14 +158,14 @@ export function AboutSection() {
         {/* Stats */}
         <div
           ref={statsRef}
-          className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-3"
+          className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3"
         >
           {stats.map((stat) => (
             <Card
               key={stat.value}
-              className="border-border/40 bg-card/60 p-6 text-center"
+              className="border-border/40 bg-card/60 p-5 text-center sm:p-6"
             >
-              <p className="font-display text-4xl tracking-tight text-accent">
+              <p className="font-display text-3xl tracking-tight text-accent sm:text-4xl">
                 {stat.value}
               </p>
               <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">

@@ -88,10 +88,10 @@ export function ExperienceSection() {
 
         {/* Role header */}
         <div ref={roleRef}>
-          <Card className="mb-10 border-border/40 bg-card/60 p-8">
+          <Card className="mb-10 border-border/40 bg-card/60 p-6 md:p-8">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
               <div>
-                <h3 className="font-display text-3xl tracking-tight">
+                <h3 className="font-display text-2xl tracking-tight sm:text-3xl">
                   {currentRole.title}
                 </h3>
                 <p className="mt-1 font-mono text-sm text-accent">
@@ -113,14 +113,14 @@ export function ExperienceSection() {
           {experienceAchievements.map((item) => (
             <Card
               key={item.label}
-              className="group border-border/40 bg-card/60 p-6 transition-all duration-500 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:border-accent/50"
+              className="group border-border/40 bg-card/60 p-5 transition-all duration-500 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:border-accent/50 sm:p-6"
             >
               <div className="absolute inset-0 bg-accent/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               <div className="relative">
                 <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                   {item.label}
                 </p>
-                <h4 className="mt-3 font-display text-2xl tracking-tight">
+                <h4 className="mt-3 font-display text-xl tracking-tight sm:text-2xl">
                   {item.title}
                 </h4>
                 <div className="mb-4 mt-3 h-px w-8 bg-accent/60 transition-all duration-500 group-hover:w-full" />
@@ -140,13 +140,13 @@ export function ExperienceSection() {
         <div className="mt-18 md:mt-24">
           <div className="grid gap-4">
             {educationEntries.map((entry) => (
-              <Card key={entry.title} className="border-border/40 bg-card/60 p-6">
+              <Card key={entry.title} className="border-border/40 bg-card/60 p-5 sm:p-6">
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                       {entry.label}
                     </p>
-                    <h4 className="mt-2 font-display text-2xl tracking-tight">
+                    <h4 className="mt-2 font-display text-xl tracking-tight sm:text-2xl">
                       {entry.title}
                     </h4>
                     <span className="font-mono text-xs text-accent">· {entry.institution}</span>

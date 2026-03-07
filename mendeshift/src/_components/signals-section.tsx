@@ -129,7 +129,7 @@ export function SignalsSection() {
         <div
           ref={cursorRef}
           className={cn(
-            "pointer-events-none absolute left-0 top-0 z-50 -translate-x-1/2 -translate-y-1/2",
+            "pointer-events-none absolute left-0 top-0 z-50 hidden -translate-x-1/2 -translate-y-1/2 md:block",
             "h-12 w-12 rounded-full border-2 border-accent bg-accent",
             "transition-opacity duration-300",
             isHovering ? "opacity-100" : "opacity-0",
@@ -144,19 +144,19 @@ export function SignalsSection() {
           </SectionLead>
         </div>
 
-        <div className="relative overflow-hidden pb-6">
+        <div className="relative overflow-hidden pb-4 sm:pb-6">
           <div ref={cardsRef} className="signals-marquee-track">
             {[0, 1].map((copy) => (
-              <div key={copy} className="flex shrink-0 gap-6 pr-6">
+              <div key={copy} className="flex shrink-0 gap-4 pr-4 sm:gap-6 sm:pr-6">
                 {services.map((item, index) => (
                   <article
                     key={`${item.no}-${copy}-${index}`}
-                    className="group relative w-80 shrink-0 transition-transform duration-500 ease-emphasis hover:-translate-y-2"
+                    className="group relative w-72 shrink-0 transition-transform duration-500 ease-emphasis hover:-translate-y-2 sm:w-80"
                   >
-                    <Card className="border-border/50 bg-card/80 p-8">
+                    <Card className="border-border/50 bg-card/80 p-6 sm:p-8">
                       <div className="absolute -top-px left-0 right-0 h-px bg-linear-to-r from-transparent via-border/40 to-transparent" />
 
-                      <div className="mb-8 flex items-baseline justify-between">
+                      <div className="mb-6 flex items-baseline justify-between sm:mb-8">
                         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                           {item.no}
                         </span>
@@ -165,7 +165,7 @@ export function SignalsSection() {
                         </span>
                       </div>
 
-                      <h3 className="font-display text-4xl tracking-tight transition-colors duration-300 group-hover:text-accent">
+                      <h3 className="font-display text-3xl tracking-tight transition-colors duration-300 group-hover:text-accent sm:text-4xl">
                         {item.title}
                       </h3>
                       <div className="mb-6 mt-4 h-px w-12 bg-accent/70 transition-all duration-500 group-hover:w-full" />

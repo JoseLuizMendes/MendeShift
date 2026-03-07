@@ -89,25 +89,25 @@ export function PrinciplesSection() {
   return (
     <Section id="principles" className="relative" ref={sectionRef}>
       <Container className="md:px-30">
-        <div ref={headerRef} className="mb-20">
+        <div ref={headerRef} className="mb-14 md:mb-20">
           <Eyebrow>03 / Princípios</Eyebrow>
           <SectionTitle>Como a gente trabalha</SectionTitle>
         </div>
 
-        <div ref={listRef} className="space-y-24 md:space-y-28">
+        <div ref={listRef} className="space-y-16 sm:space-y-20 md:space-y-24 lg:space-y-28">
           {principles.map((principle) => (
             <article
               key={principle.number}
               className={`flex flex-col ${
                 principle.align === "right"
-                  ? "items-end text-right"
+                  ? "items-start text-left md:items-end md:text-right"
                   : "items-start text-left"
               }`}
             >
               <span className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                 {principle.number}
               </span>
-              <h3 className="font-display text-5xl leading-none tracking-tight md:text-7xl lg:text-8xl">
+              <h3 className="font-display text-3xl leading-none tracking-tight sm:text-5xl md:text-7xl lg:text-8xl">
                 <span className="text-foreground">
                   {principle.title.split(" ").slice(0, -1).join(" ")}
                 </span>
@@ -118,7 +118,7 @@ export function PrinciplesSection() {
               <p className="mt-6 max-w-md font-mono text-sm leading-relaxed text-muted-foreground">
                 {principle.description}
               </p>
-              <div className="mt-8 h-px w-24 bg-border md:w-48" />
+              <div className="mt-8 h-px w-20 bg-border sm:w-24 md:w-48" />
             </article>
           ))}
         </div>

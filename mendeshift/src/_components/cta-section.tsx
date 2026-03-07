@@ -49,9 +49,9 @@ export function CtaSection() {
           {/* Header */}
           <div ref={headlineRef}>
             <Eyebrow>05 / Contato</Eyebrow>
-            <h2 className="mt-4 font-display text-5xl tracking-tight md:text-7xl lg:text-8xl">
+            <h2 className="mt-4 font-display text-4xl tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
               Vamos construir
-              <br />
+              <br className="hidden sm:block" />
               algo juntos.
             </h2>
             <p className="mt-8 max-w-lg font-mono text-sm leading-relaxed text-muted-foreground">

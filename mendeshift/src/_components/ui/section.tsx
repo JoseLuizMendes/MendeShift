@@ -9,7 +9,7 @@ export const Section = React.forwardRef<
   return (
     <section
       ref={ref}
-      className={cn("py-20 md:py-28", className)}
+      className={cn("py-16 md:py-24 xl:py-28", className)}
       {...props}
     />
   );
@@ -39,7 +39,7 @@ export function SectionTitle({
   return (
     <h2
       className={cn(
-        "mt-4 font-display text-5xl tracking-tight md:text-7xl",
+        "mt-4 font-display text-4xl tracking-tight sm:text-5xl md:text-6xl lg:text-7xl",
         className,
       )}
       {...props}

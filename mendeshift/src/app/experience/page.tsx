@@ -29,9 +29,11 @@ export default function ExperiencePage() {
                 </SectionLead>
               </div>
 
-              <div className="flex flex-wrap gap-3">
-                <ActionLink href="/#work">Ver projetos</ActionLink>
-                <ActionLink href="/" variant="ghost">
+              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
+                <ActionLink href="/#work" className="w-full justify-center sm:w-auto">
+                  Ver projetos
+                </ActionLink>
+                <ActionLink href="/" variant="ghost" className="w-full justify-center sm:w-auto">
                   Voltar para home
                 </ActionLink>
               </div>

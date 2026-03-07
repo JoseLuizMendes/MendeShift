@@ -179,12 +179,12 @@ export function ContactChat() {
   };
 
   return (
-    <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,22rem)] lg:items-start lg:gap-8">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,22rem)] lg:items-start lg:gap-8">
       {/* Chatbot Principal - Left Side */}
       <div ref={chatRef}>
-        <Card className="flex h-125 flex-col overflow-hidden lg:h-152.5">
+        <Card className="flex h-[28rem] flex-col overflow-hidden sm:h-125 lg:h-152.5">
           {/* Chat Header */}
-          <div className="flex items-center gap-3 border-b border-border/50 px-5 py-4">
+          <div className="flex items-center gap-3 border-b border-border/50 px-4 py-4 sm:px-5">
             <div className="relative">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 font-mono text-sm text-accent">
                 JL
@@ -202,7 +202,7 @@ export function ContactChat() {
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto px-5 py-4">
+          <div className="flex-1 overflow-y-auto px-4 py-4 sm:px-5">
             <div className="flex flex-col gap-4">
               {messages.map((message) => (
                 <div
@@ -212,7 +212,7 @@ export function ContactChat() {
                   }`}
                 >
                   <div
-                    className={`max-w-[85%] rounded-2xl px-4 py-3 font-mono text-sm leading-relaxed ${
+                    className={`max-w-[90%] rounded-2xl px-4 py-3 font-mono text-sm leading-relaxed sm:max-w-[85%] ${
                       message.role === "user"
                         ? "bg-accent text-accent-foreground"
                         : "bg-muted text-foreground"
@@ -238,7 +238,7 @@ export function ContactChat() {
           {/* Input Area */}
           <form
             onSubmit={handleSubmit}
-            className="flex items-end gap-3 border-t border-border/50 px-5 py-4"
+            className="flex items-end gap-3 border-t border-border/50 px-4 py-4 sm:px-5"
           >
             <textarea
               ref={inputRef}
@@ -273,7 +273,7 @@ export function ContactChat() {
       </div>
 
       {/* Coluna lateral: Perguntas rápidas + Contato direto */}
-      <div className="flex w-full flex-col gap-8 lg:justify-self-end">
+      <div className="flex w-full flex-col gap-6 sm:gap-8 lg:justify-self-end">
         {/* Quick Actions */}
         <section className="flex flex-col gap-4">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
@@ -327,7 +327,7 @@ export function ContactChat() {
         </section>
 
         {/* Contact Links */}
-        <section className="flex w-full max-w-sm flex-col gap-4 self-start rounded-[28px] border border-border/60 bg-card/60 p-4 sm:p-5">
+        <section className="flex w-full max-w-none flex-col gap-4 self-start rounded-[28px] border border-border/60 bg-card/60 p-4 sm:max-w-sm sm:p-5">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
             Contato Direto
           </p>

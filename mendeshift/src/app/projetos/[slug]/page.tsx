@@ -57,16 +57,18 @@ export default async function ProjectPage({ params }: Props) {
                 )}
               </div>
 
-              <div className="flex flex-wrap gap-3">
-                <ActionLink href="/#work">← Ver todos os projetos</ActionLink>
-                <ActionLink href="/" variant="ghost">
+              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
+                <ActionLink href="/#work" className="w-full justify-center sm:w-auto">
+                  ← Ver todos os projetos
+                </ActionLink>
+                <ActionLink href="/" variant="ghost" className="w-full justify-center sm:w-auto">
                   Home
                 </ActionLink>
               </div>
             </div>
 
             {/* Tech stack */}
-            <div className="pb-10 flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 pb-8 md:pb-10">
               {project.tech.map((t) => (
                 <span
                   key={t}
@@ -94,7 +96,7 @@ export default async function ProjectPage({ params }: Props) {
             </div>
 
             {/* Solution — full width */}
-            <Card className="mt-6 border-border/40 bg-card/60 p-8">
+            <Card className="mt-6 border-border/40 bg-card/60 p-6 md:p-8">
               <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                 Solução
               </p>
@@ -148,7 +150,7 @@ export default async function ProjectPage({ params }: Props) {
             </div>
 
             {/* Outcome */}
-            <Card className="mt-12 border-accent/30 bg-card/60 p-8">
+            <Card className="mt-12 border-accent/30 bg-card/60 p-6 md:p-8">
               <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
                 Resultado
               </p>

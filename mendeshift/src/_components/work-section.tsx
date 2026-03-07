@@ -67,12 +67,12 @@ export function WorkSection() {
   return (
     <Section id="work" className="relative" ref={sectionRef}>
       <Container className="md:px-30">
-        <div ref={headerRef} className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div ref={headerRef} className="mb-10 flex flex-col gap-4 sm:gap-6 md:mb-12 md:flex-row md:items-end md:justify-between">
           <div>
             <Eyebrow>02 / Projetos</Eyebrow>
             <SectionTitle>Selected Work</SectionTitle>
           </div>
-          <SectionLead className="mt-0 max-w-sm text-left md:text-right">
+          <SectionLead className="mt-0 max-w-md text-left md:text-right">
             Produtos construídos de ponta a ponta — arquitetura, desenvolvimento
             e entrega com qualidade de produção.
           </SectionLead>
@@ -80,12 +80,12 @@ export function WorkSection() {
 
         <div
           ref={gridRef}
-          className="grid grid-cols-1 gap-4 md:grid-cols-4 md:auto-rows-[190px] md:gap-6"
+          className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-4 md:auto-rows-[190px] md:gap-6"
         >
           {projects.map((item, idx) => (
             <article
               key={item.slug}
-              className={`group relative overflow-hidden border border-border/40 rounded-lg bg-card/70 p-6 transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/60 ${item.gridSpan}`}
+              className={`group relative overflow-hidden rounded-lg border border-border/40 bg-card/70 p-5 transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/60 sm:p-6 ${item.gridSpan}`}
             >
               <div className="absolute inset-0 bg-accent/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
@@ -94,7 +94,7 @@ export function WorkSection() {
                   <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                     {item.category}
                   </p>
-                  <h3 className="mt-3 font-display text-3xl tracking-tight md:text-4xl">
+                  <h3 className="mt-3 font-display text-2xl tracking-tight sm:text-3xl md:text-4xl">
                     {item.title}
                   </h3>
                 </div>

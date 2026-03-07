@@ -46,7 +46,7 @@ export function HeroSection() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative min-h-screen overflow-hidden pb-24 pt-24 md:pb-28 md:pt-28"
+      className="relative min-h-screen overflow-hidden pb-16 pt-18 sm:pb-20 sm:pt-24 md:pb-28 md:pt-28"
     >
       <AnimatedNoise opacity={0.03} />
 
@@ -55,8 +55,8 @@ export function HeroSection() {
         <div className="absolute left-0 top-0 h-full w-px bg-linear-to-b from-transparent via-border/40 to-transparent md:left-16" />
       </div>
 
-      <Container className="md:pr-20">
-        <div ref={contentRef} className="space-y-10">
+      <Container className="md:pr-16 lg:pr-20">
+        <div ref={contentRef} className="space-y-8 sm:space-y-10">
           <div className="min-w-0">
             <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
               Product Engineer / Vitória, ES
@@ -70,32 +70,32 @@ export function HeroSection() {
 
               <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
                 <div className="min-w-0">
-                  <h2 className="font-display text-2xl tracking-wide text-muted-foreground/70 md:text-4xl">
+                  <h2 className="font-display text-xl tracking-wide text-muted-foreground/70 sm:text-2xl md:text-4xl">
                     Construo produtos completos — do modelo de dados à
                     experiência do usuário final.
                   </h2>
-                  <p className="mt-8 max-w-2xl font-mono text-sm leading-relaxed text-muted-foreground">
+                  <p className="mt-6 max-w-2xl font-mono text-sm leading-relaxed text-muted-foreground sm:mt-8">
                     Aplicações web robustas, interfaces modernas e arquitetura
                     orientada a produto. Do levantamento de requisitos ao
                     deploy em produção — com responsabilidade end-to-end.
                   </p>
 
-                  <div className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-                    <ActionLink href="#work" className="group">
+                  <div className="mt-8 flex flex-col items-stretch gap-4 sm:mt-10 sm:flex-row sm:items-center">
+                    <ActionLink href="#work" className="group w-full justify-center sm:w-auto">
                       <ScrambleTextOnHover text="Ver projetos" as="span" duration={0.55} />
                       <BitmapChevron className="transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
                     </ActionLink> 
-                    <ActionLink href="#about" variant="ghost">
+                    <ActionLink href="#about" variant="ghost" className="w-full justify-center sm:w-auto">
                       Sobre o MendeShift
                     </ActionLink>
                   </div>
                 </div>
 
-                <div className="w-full lg:max-w-sm lg:justify-self-start lg:-ml-59 xl:-ml-59">
+                <div className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-sm lg:justify-self-start lg:-ml-16 xl:-ml-24">
                   <Card className="relative overflow-hidden border-border/40 bg-card/60 backdrop-blur-sm">
                     <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border/40 to-transparent" />
 
-                    <div className="p-8">
+                    <div className="p-6 sm:p-8">
                       <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                         foco
                       </p>
@@ -108,7 +108,7 @@ export function HeroSection() {
 
                     <div className="h-px w-full bg-linear-to-r from-transparent via-border/40 to-transparent" />
 
-                    <div className="p-8">
+                    <div className="p-6 sm:p-8">
                       <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                         entrega
                       </p>
