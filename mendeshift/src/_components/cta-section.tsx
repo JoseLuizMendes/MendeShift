@@ -183,9 +183,9 @@ export function CtaSection() {
           </div>
 
           {/* Main Layout: Chatbot + Supplementary */}
-          <div className="flex flex-col gap-8 lg:flex-row lg:gap-10">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_320px] lg:gap-10">
             {/* Chatbot Principal - Left Side */}
-            <div ref={chatRef} className="flex-1 lg:max-w-[60%]">
+            <div ref={chatRef}>
               <Card className="flex h-[500px] flex-col overflow-hidden lg:h-[560px]">
                 {/* Chat Header */}
                 <div className="flex items-center gap-3 border-b border-border/50 px-5 py-4">
@@ -277,7 +277,7 @@ export function CtaSection() {
             </div>
 
             {/* Supplementary Content - Right Side */}
-            <div className="flex flex-col gap-6 lg:flex-1">
+            <div className="flex flex-col gap-6">
               {/* Quick Actions */}
               <div>
                 <p className="mb-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
@@ -287,12 +287,12 @@ export function CtaSection() {
                   {quickPrompts.map((item) => (
                     <button
                       key={item.label}
+                      type="button"
                       onClick={() => handleQuickPrompt(item.prompt)}
-                      className="quick-card group rounded-xl border border-border bg-card px-4 py-4 text-left font-mono text-xs transition-all hover:border-accent/50 hover:bg-accent/5"
+                      style={{ opacity: 1 }}
+                      className="rounded-xl border border-border bg-card px-4 py-4 text-left font-mono text-xs text-foreground transition-all hover:border-accent/50 hover:bg-accent/5 hover:text-accent"
                     >
-                      <span className="text-foreground group-hover:text-accent">
-                        {item.label}
-                      </span>
+                      {item.label}
                     </button>
                   ))}
                 </div>
