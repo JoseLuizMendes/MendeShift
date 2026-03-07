@@ -84,7 +84,7 @@ export function HeroSection() {
                     <ActionLink href="#work" className="group">
                       <ScrambleTextOnHover text="Ver projetos" as="span" duration={0.55} />
                       <BitmapChevron className="transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
-                    </ActionLink>
+                    </ActionLink> 
                     <ActionLink href="#about" variant="ghost">
                       Sobre o MendeShift
                     </ActionLink>
