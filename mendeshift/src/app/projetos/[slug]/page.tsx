@@ -58,7 +58,7 @@ export default async function ProjectPage({ params }: Props) {
               </div>
 
               <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
-                <ActionLink href="/#work" className="w-full justify-center sm:w-auto">
+                <ActionLink href="/projetos" className="w-full justify-center sm:w-auto">
                   ← Ver todos os projetos
                 </ActionLink>
                 <ActionLink href="/" variant="ghost" className="w-full justify-center sm:w-auto">
@@ -161,7 +161,7 @@ export default async function ProjectPage({ params }: Props) {
 
             {/* Navigation */}
             <div className="mt-16 flex flex-col gap-4 border-t border-border/20 pt-10 sm:flex-row sm:items-center sm:justify-between">
-              <ActionLink href="/#work" variant="ghost">
+              <ActionLink href="/projetos" variant="ghost">
                 ← Voltar para projetos
               </ActionLink>
               {nextProject && (

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 import gsap from "gsap";
@@ -72,15 +73,24 @@ export function WorkSection() {
             <Eyebrow>02 / Projetos</Eyebrow>
             <SectionTitle>Selected Work</SectionTitle>
           </div>
-          <SectionLead className="mt-0 max-w-md text-left md:text-right">
-            Produtos construídos de ponta a ponta — arquitetura, desenvolvimento
-            e entrega com qualidade de produção.
-          </SectionLead>
+          <div className="max-w-md md:text-right">
+            <SectionLead className="mt-0 text-left md:text-right">
+              Produtos construídos de ponta a ponta — arquitetura, desenvolvimento
+              e entrega com qualidade de produção.
+            </SectionLead>
+            <Link
+              href="/projetos"
+              className="mt-4 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-accent transition-colors duration-300 hover:text-accent/75"
+            >
+              Explorar arquivo completo
+              <BitmapChevron className="w-3 rotate-90" />
+            </Link>
+          </div>
         </div>
 
         <div
           ref={gridRef}
-          className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-4 md:auto-rows-[190px] md:gap-6"
+          className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-4 md:auto-rows-[220px] md:gap-6"
         >
           {projects.map((item, idx) => (
             <article
@@ -89,7 +99,7 @@ export function WorkSection() {
             >
               <div className="absolute inset-0 bg-accent/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-              <div className="relative flex h-full flex-col justify-between">
+              <div className="relative flex h-full flex-col justify-between gap-5">
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                     {item.category}
@@ -98,6 +108,27 @@ export function WorkSection() {
                     {item.title}
                   </h3>
                 </div>
+
+                <div
+                  className={`relative min-h-36 flex-1 overflow-hidden rounded-sm border border-border/30 bg-linear-to-br ${item.accentGradient}`}
+                >
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,color-mix(in_oklab,var(--foreground)_12%,transparent),transparent_60%)]" />
+                  <div className="absolute inset-x-4 top-4 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">
+                    <span>{item.placeholderLabel}</span>
+                    <span>{String(idx + 1).padStart(2, "0")}</span>
+                  </div>
+                  <div className="absolute inset-x-4 bottom-4">
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="h-10 rounded-[10px] border border-border/30 bg-background/25" />
+                      <div className="h-10 rounded-[10px] border border-border/20 bg-background/15" />
+                      <div className="h-10 rounded-[10px] border border-border/20 bg-background/10" />
+                    </div>
+                    <p className="mt-3 max-w-[28ch] font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/80">
+                      {item.placeholderCaption}
+                    </p>
+                  </div>
+                </div>
+
                 <div>
                   <p className="max-w-[34ch] font-mono text-xs leading-relaxed text-muted-foreground">
                     {item.shortDesc}
@@ -116,9 +147,9 @@ export function WorkSection() {
 
                   <div className="mt-5 flex items-center justify-between">
                     <span className="font-mono text-[10px] text-muted-foreground/50">
-                      {String(idx + 1).padStart(2, "0")}
+                      {item.metric ?? String(idx + 1).padStart(2, "0")}
                     </span>
-                    <a
+                    <Link
                       href={`/projetos/${item.slug}`}
                       className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition-colors duration-300 group-hover:text-accent"
                     >
@@ -128,7 +159,7 @@ export function WorkSection() {
                         duration={0.45}
                       />
                       <BitmapChevron className="w-3 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

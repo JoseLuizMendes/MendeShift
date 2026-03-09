@@ -17,6 +17,8 @@ const principles = [
     title: "End-to-End Ownership",
     description:
       "Do banco à interface, responsabilidade total pelo produto. Nenhuma camada é problema de outro.",
+    signal: "Produto inteiro no radar, sem repasse silencioso de responsabilidade.",
+    tags: ["arquitetura", "backend", "frontend", "deploy"],
     align: "left",
   },
   {
@@ -24,6 +26,8 @@ const principles = [
     title: "Engineering for Impact",
     description:
       "Código sem impacto é exercício. Cada solução precisa resolver uma dor real do produto.",
+    signal: "Decisão técnica só se sustenta quando encurta risco ou aumenta resultado.",
+    tags: ["resultado", "clareza", "produto", "decisão"],
     align: "right",
   },
   {
@@ -31,6 +35,8 @@ const principles = [
     title: "Quality as Discipline",
     description:
       "Nota A no SonarQube não é acidente. É cultura aplicada commit a commit, sem exceções.",
+    signal: "Qualidade entra no fluxo, não como revisão tardia ou esforço de última hora.",
+    tags: ["testes", "review", "sonarqube", "consistência"],
     align: "left",
   },
   {
@@ -38,6 +44,8 @@ const principles = [
     title: "Learn in Context",
     description:
       "Aprendizado acelera com propósito real. O mercado não espera condições ideais.",
+    signal: "Aprender em produção gera repertório mais rápido do que estudo isolado.",
+    tags: ["contexto", "execução", "aprendizado", "adaptação"],
     align: "right",
   },
 ] as const;
@@ -94,31 +102,57 @@ export function PrinciplesSection() {
           <SectionTitle>Como a gente trabalha</SectionTitle>
         </div>
 
-        <div ref={listRef} className="space-y-16 sm:space-y-20 md:space-y-24 lg:space-y-28">
+        <div ref={listRef} className="space-y-10 sm:space-y-12 md:space-y-14">
           {principles.map((principle) => (
             <article
               key={principle.number}
-              className={`flex flex-col ${
+              className={`rounded-(--radius) border border-border/30 bg-card/30 px-5 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10 ${
                 principle.align === "right"
-                  ? "items-start text-left md:items-end md:text-right"
-                  : "items-start text-left"
+                  ? "text-left md:text-right"
+                  : "text-left"
               }`}
             >
-              <span className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                {principle.number}
-              </span>
-              <h3 className="font-display text-3xl leading-none tracking-tight sm:text-5xl md:text-7xl lg:text-8xl">
-                <span className="text-foreground">
-                  {principle.title.split(" ").slice(0, -1).join(" ")}
-                </span>
-                <HighlightText className="ml-[0.30em]">
-                  {principle.title.split(" ").slice(-1).join(" ")}
-                </HighlightText>
-              </h3>
-              <p className="mt-6 max-w-md font-mono text-sm leading-relaxed text-muted-foreground">
-                {principle.description}
-              </p>
-              <div className="mt-8 h-px w-20 bg-border sm:w-24 md:w-48" />
+              <div
+                className={`grid gap-8 md:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.8fr)] md:items-end ${
+                  principle.align === "right" ? "md:[&>div:first-child]:order-2 md:[&>div:last-child]:order-1" : ""
+                }`}
+              >
+                <div>
+                  <span className="mb-4 block font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                    {principle.number}
+                  </span>
+                  <h3 className="font-display text-3xl leading-none tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+                    <span className="text-foreground">
+                      {principle.title.split(" ").slice(0, -1).join(" ")}
+                    </span>
+                    <HighlightText className="ml-[0.30em]">
+                      {principle.title.split(" ").slice(-1).join(" ")}
+                    </HighlightText>
+                  </h3>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {principle.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-border/35 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground/80"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="rounded-[calc(var(--radius)-4px)] border border-border/25 bg-background/25 p-5">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+                    Faixa operacional
+                  </p>
+                  <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground">
+                    {principle.description}
+                  </p>
+                  <p className="mt-4 border-t border-border/20 pt-4 font-mono text-xs leading-relaxed text-foreground/75">
+                    {principle.signal}
+                  </p>
+                </div>
+              </div>
             </article>
           ))}
         </div>

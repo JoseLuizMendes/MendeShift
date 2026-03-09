@@ -151,9 +151,9 @@ export function SignalsSection() {
                 {services.map((item, index) => (
                   <article
                     key={`${item.no}-${copy}-${index}`}
-                    className="group relative w-72 shrink-0 transition-transform duration-500 ease-emphasis hover:-translate-y-2 sm:w-80"
+                    className="group relative flex w-72 shrink-0 transition-transform duration-500 ease-emphasis hover:-translate-y-2 sm:w-80"
                   >
-                    <Card className="border-border/50 bg-card/80 p-6 sm:p-8">
+                    <Card className="flex h-full min-h-69 flex-1 flex-col border-border/50 bg-card/80 p-6 sm:min-h-75 sm:p-8">
                       <div className="absolute -top-px left-0 right-0 h-px bg-linear-to-r from-transparent via-border/40 to-transparent" />
 
                       <div className="mb-6 flex items-baseline justify-between sm:mb-8">
@@ -165,13 +165,15 @@ export function SignalsSection() {
                         </span>
                       </div>
 
-                      <h3 className="font-display text-3xl tracking-tight transition-colors duration-300 group-hover:text-accent sm:text-4xl">
-                        {item.title}
-                      </h3>
-                      <div className="mb-6 mt-4 h-px w-12 bg-accent/70 transition-all duration-500 group-hover:w-full" />
-                      <p className="font-mono text-xs leading-relaxed text-muted-foreground">
-                        {item.desc}
-                      </p>
+                      <div className="flex flex-1 flex-col">
+                        <h3 className="font-display text-3xl tracking-tight transition-colors duration-300 group-hover:text-accent sm:text-4xl">
+                          {item.title}
+                        </h3>
+                        <div className="mb-6 mt-4 h-px w-12 bg-accent/70 transition-all duration-500 group-hover:w-full" />
+                        <p className="font-mono text-xs leading-relaxed text-muted-foreground">
+                          {item.desc}
+                        </p>
+                      </div>
                     </Card>
                   </article>
                 ))}

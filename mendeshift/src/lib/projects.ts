@@ -6,6 +6,9 @@ export type Project = {
   tech: string[];
   metric?: string;
   gridSpan: string;
+  placeholderLabel: string;
+  placeholderCaption: string;
+  accentGradient: string;
   context: string;
   problem: string;
   constraints: string;
@@ -25,6 +28,9 @@ export const projects: Project[] = [
     tech: ["Next.js 15", "PostgreSQL", "Mercado Pago", "Playwright"],
     metric: "Entregue em produção — 07/09",
     gridSpan: "md:col-span-2 md:row-span-2",
+    placeholderLabel: "EVENT STACK",
+    placeholderCaption: "Fluxos críticos, pagamentos e colaboração em tempo real.",
+    accentGradient: "from-accent/18 via-accent/8 to-transparent",
     context:
       "Precisava gerenciar um casamento com ~200 convidados: confirmações de presença, controle de pagamentos e uma galeria de fotos colaborativa. Nenhuma ferramenta de mercado atendia aos requisitos de personalização e integração com gateway de pagamento brasileiro.",
     problem:
@@ -57,6 +63,9 @@ export const projects: Project[] = [
     tech: ["Next.js", "Prisma", "PostgreSQL", "Docker"],
     metric: "Multi-tenant em produção",
     gridSpan: "md:col-span-2 md:row-span-1",
+    placeholderLabel: "OPS GRID",
+    placeholderCaption: "Agenda, serviços e isolamento de dados por tenant.",
+    accentGradient: "from-sky-400/14 via-cyan-400/8 to-transparent",
     context:
       "Barbearias locais gerenciam agendamentos via WhatsApp e cadernos, perdendo controle e eficiência. Identifiquei a oportunidade de construir um SaaS leve, funcional e deployável em VPS de baixo custo.",
     problem:
@@ -87,6 +96,9 @@ export const projects: Project[] = [
     tech: ["Java", "Spring Boot", "JWT", "Docker"],
     metric: "Arquitetura em camadas",
     gridSpan: "md:col-span-2 md:row-span-1",
+    placeholderLabel: "SERVICE CORE",
+    placeholderCaption: "Segurança stateless, camadas claras e deploy enxuto.",
+    accentGradient: "from-amber-300/18 via-accent/8 to-transparent",
     context:
       "Projeto de estudo aprofundado em arquitetura de APIs Java — tecnologia dominante nos sistemas governamentais onde atuo. Objetivo: consolidar padrões de produção com Spring Boot.",
     problem:

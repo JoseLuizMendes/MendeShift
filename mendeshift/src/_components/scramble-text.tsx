@@ -61,6 +61,7 @@ export function ScrambleTextOnHover({
 }: ScrambleTextOnHoverProps) {
   const [displayText, setDisplayText] = useState(text);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
+  const frameRef = useRef<number | null>(null);
   const isAnimating = useRef(false);
   const previousTriggerRef = useRef(triggerToken);
   const isControlledByParent = triggerToken !== undefined;
@@ -96,12 +97,17 @@ export function ScrambleTextOnHover({
 
     if (triggerToken !== previousTriggerRef.current) {
       previousTriggerRef.current = triggerToken;
-      startScramble();
+      frameRef.current = window.requestAnimationFrame(() => {
+        startScramble();
+      });
     }
   }, [startScramble, triggerToken]);
 
   useEffect(() => {
     return () => {
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
       tweenRef.current?.kill();
     };
   }, []);

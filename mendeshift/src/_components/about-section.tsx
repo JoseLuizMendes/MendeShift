@@ -12,10 +12,43 @@ import { Eyebrow, Section, SectionTitle } from "@/_components/ui/section";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const stats = [
-  { value: "Grade A", label: "SonarQube — 3 sistemas críticos" },
-  { value: "17°", label: "No Brasil — Colégio Sagrado Coração de Maria" },
-  { value: "07/09", label: "Casamento — projeto entregue" },
+const operatingSignals = [
+  {
+    title: "Produção como referência",
+    description:
+      "Trabalho diário com sistemas públicos e fluxo real de manutenção, evolução e incidentes evitáveis.",
+  },
+  {
+    title: "Arquitetura sem excesso",
+    description:
+      "Prefiro decisões que simplificam operação, dão legibilidade ao código e mantêm margem de escala.",
+  },
+  {
+    title: "Aprendizado orientado a entrega",
+    description:
+      "Projetos pessoais entram em produção porque servem como laboratório real de produto, qualidade e deploy.",
+  },
+];
+
+const profileCards = [
+  {
+    eyebrow: "Atuação",
+    title: "Sistemas críticos com impacto público",
+    description:
+      "No PRODEST, atuo em produtos usados por milhares de servidores. Isso molda minhas decisões para estabilidade, clareza e manutenção contínua.",
+  },
+  {
+    eyebrow: "Método",
+    title: "Execução disciplinada, sem teatro técnico",
+    description:
+      "Boa engenharia, para mim, é alinhar contexto, modelagem, testes e entrega. A solução precisa funcionar sob pressão, não só parecer bonita no repositório.",
+  },
+  {
+    eyebrow: "Direção",
+    title: "Construir software com propósito nítido",
+    description:
+      "Meu interesse está em produtos que resolvem dores reais. Quando o problema é claro, consigo ir do desenho ao deploy com muito menos ruído.",
+  },
 ];
 
 export function AboutSection() {
@@ -118,6 +151,54 @@ export function AboutSection() {
               </ActionLink>
             </div>
 
+            <div className="relative overflow-hidden rounded-(--radius) border border-border/35 bg-card/45 p-6 sm:p-7 md:p-8">
+              <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-accent/60 to-transparent" />
+              <div className="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_220px] lg:items-start">
+                <div className="space-y-5">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+                    Base operacional
+                  </p>
+                  {operatingSignals.map((signal) => (
+                    <div key={signal.title} className="grid gap-3 border-l border-accent/35 pl-4 sm:pl-5">
+                      <p className="font-display text-2xl tracking-tight text-foreground sm:text-3xl">
+                        {signal.title}
+                      </p>
+                      <p className="font-mono text-xs leading-relaxed text-muted-foreground">
+                        {signal.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="grid gap-3">
+                  <div className="rounded-[calc(var(--radius)-6px)] border border-border/25 bg-background/30 p-4">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                      Ambiente
+                    </p>
+                    <p className="mt-3 font-display text-2xl tracking-tight text-accent">
+                      PRODEST
+                    </p>
+                  </div>
+                  <div className="rounded-[calc(var(--radius)-6px)] border border-border/25 bg-background/25 p-4">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                      Foco
+                    </p>
+                    <p className="mt-3 font-display text-2xl tracking-tight text-foreground">
+                      Produto + Qualidade
+                    </p>
+                  </div>
+                  <div className="rounded-[calc(var(--radius)-6px)] border border-border/25 bg-linear-to-br from-accent/12 via-transparent to-transparent p-4">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                      Direção
+                    </p>
+                    <p className="mt-3 font-display text-2xl tracking-tight text-foreground">
+                      Entregar com contexto
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           {/* Right — photo + quote */}
@@ -134,11 +215,22 @@ export function AboutSection() {
                 className="object-cover grayscale"
               />
             */}
-              <div className="relative aspect-3/4 w-full overflow-hidden rounded-sm border border-border/40 bg-card/60">
-              <div className="flex h-full items-center justify-center">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/30">
-                  foto
-                </p>
+              <div className="relative aspect-3/4 w-full overflow-hidden rounded-sm border border-border/40 bg-linear-to-br from-card via-card/85 to-background">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,color-mix(in_oklab,var(--accent)_10%,transparent),transparent_58%)]" />
+              <div className="flex h-full flex-col justify-between p-6">
+                <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/40">
+                  <span>placeholder</span>
+                  <span>perfil</span>
+                </div>
+                <div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="h-24 rounded-[14px] border border-border/25 bg-background/20" />
+                    <div className="h-24 rounded-[14px] border border-border/20 bg-background/10" />
+                  </div>
+                  <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground/60">
+                    Espaço reservado para retrato editorial em alto contraste.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -155,21 +247,23 @@ export function AboutSection() {
           </div>
         </div>
 
-        {/* Stats */}
         <div
           ref={statsRef}
           className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3"
         >
-          {stats.map((stat) => (
+          {profileCards.map((card) => (
             <Card
-              key={stat.value}
-              className="border-border/40 bg-card/60 p-5 text-center sm:p-6"
+              key={card.title}
+              className="border-border/40 bg-card/60 p-5 sm:p-6"
             >
-              <p className="font-display text-3xl tracking-tight text-accent sm:text-4xl">
-                {stat.value}
+              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+                {card.eyebrow}
               </p>
-              <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                {stat.label}
+              <p className="mt-4 font-display text-2xl leading-tight tracking-tight text-foreground sm:text-3xl">
+                {card.title}
+              </p>
+              <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground">
+                {card.description}
               </p>
             </Card>
           ))}
