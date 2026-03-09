@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -22,6 +22,7 @@ gsap.registerPlugin(ScrollTrigger);
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const [scrambleToken, setScrambleToken] = useState(0);
 
   useEffect(() => {
     if (!sectionRef.current || !contentRef.current) return;
@@ -41,6 +42,10 @@ export function HeroSection() {
 
     return () => ctx.revert();
   }, []);
+
+  const triggerScramble = () => {
+    setScrambleToken((current) => current + 1);
+  };
 
   return (
     <section
@@ -70,31 +75,44 @@ export function HeroSection() {
 
               <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
                 <div className="min-w-0">
-                  <h2 className="font-display text-xl tracking-wide text-muted-foreground/70 sm:text-2xl md:text-4xl">
+                  <h2 className="font-display text-xl pr-12 tracking-wide text-muted-foreground/70 sm:text-2xl md:text-4xl">
                     Construo produtos completos — do modelo de dados à
                     experiência do usuário final.
                   </h2>
-                  <p className="mt-6 max-w-2xl font-mono text-sm leading-relaxed text-muted-foreground sm:mt-8">
+                  <p className="mt-6 max-w-2xl pr-12 font-mono text-sm leading-relaxed text-muted-foreground sm:mt-8">
                     Aplicações web robustas, interfaces modernas e arquitetura
-                    orientada a produto. Do levantamento de requisitos ao
-                    deploy em produção — com responsabilidade end-to-end.
+                    orientada a produto. Do levantamento de requisitos ao deploy
+                    em produção — com responsabilidade end-to-end.
                   </p>
 
                   <div className="mt-8 flex flex-col items-stretch gap-4 sm:mt-10 sm:flex-row sm:items-center">
-                    <ActionLink href="#work" className="group w-full justify-center sm:w-auto">
-                      <ScrambleTextOnHover text="Ver projetos" as="span" duration={0.55} />
+                    <ActionLink
+                      href="#work"
+                      className="group w-full justify-center sm:w-auto"
+                      onMouseEnter={triggerScramble}
+                      onFocus={triggerScramble}
+                    >
+                      <ScrambleTextOnHover
+                        text="Ver projetos"
+                        as="span"
+                        duration={0.55}
+                        className="text-[10px] transition-colors duration-300"
+                        triggerToken={scrambleToken}
+                      />
                       <BitmapChevron className="transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
-                    </ActionLink> 
-                    <ActionLink href="#about" variant="ghost" className="w-full justify-center sm:w-auto">
+                    </ActionLink>
+                    <ActionLink
+                      href="#about"
+                      variant="ghost"
+                      className="w-full justify-center sm:w-auto"
+                    >
                       Sobre o MendeShift
                     </ActionLink>
                   </div>
                 </div>
 
-                <div className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-sm lg:justify-self-start lg:-ml-16 xl:-ml-24">
-                  <Card className="relative overflow-hidden border-border/40 bg-card/60 backdrop-blur-sm">
-                    <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border/40 to-transparent" />
-
+                <div className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-sm lg:justify-self-start lg:-ml-16 xl:-ml-8">
+                  <Card className="relative overflow-hidden  border-border/40 bg-card/60 backdrop-blur-sm">
                     <div className="p-6 sm:p-8">
                       <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                         foco
@@ -102,7 +120,8 @@ export function HeroSection() {
 
                       <p className="mt-5 font-mono text-xs leading-relaxed text-muted-foreground">
                         Entender a dor do cliente antes de abrir o editor.
-                        Produto sem clareza de propósito é complexidade sem valor.
+                        Produto sem clareza de propósito é complexidade sem
+                        valor.
                       </p>
                     </div>
 

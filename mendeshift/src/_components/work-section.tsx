@@ -97,7 +97,7 @@ export function WorkSection() {
               key={item.slug}
               className={`group relative overflow-hidden rounded-lg border border-border/40 bg-card/70 p-5 transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/60 sm:p-6 ${item.gridSpan}`}
             >
-              <div className="absolute inset-0 bg-accent/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              
 
               <div className="relative flex h-full flex-col justify-between gap-5">
                 <div>
@@ -110,19 +110,14 @@ export function WorkSection() {
                 </div>
 
                 <div
-                  className={`relative min-h-36 flex-1 overflow-hidden rounded-sm border border-border/30 bg-linear-to-br ${item.accentGradient}`}
+                  className={`relative min-h-36 flex-1 overflow-hidden rounded-sm border border-border/30`}
                 >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,color-mix(in_oklab,var(--foreground)_12%,transparent),transparent_60%)]" />
+                  
                   <div className="absolute inset-x-4 top-4 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">
                     <span>{item.placeholderLabel}</span>
                     <span>{String(idx + 1).padStart(2, "0")}</span>
                   </div>
                   <div className="absolute inset-x-4 bottom-4">
-                    <div className="grid grid-cols-3 gap-2">
-                      <div className="h-10 rounded-[10px] border border-border/30 bg-background/25" />
-                      <div className="h-10 rounded-[10px] border border-border/20 bg-background/15" />
-                      <div className="h-10 rounded-[10px] border border-border/20 bg-background/10" />
-                    </div>
                     <p className="mt-3 max-w-[28ch] font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/80">
                       {item.placeholderCaption}
                     </p>

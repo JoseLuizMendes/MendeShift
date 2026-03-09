@@ -171,7 +171,7 @@ export function AboutSection() {
                 </div>
 
                 <div className="grid gap-3">
-                  <div className="rounded-[calc(var(--radius)-6px)] border border-border/25 bg-background/30 p-4">
+                  <div className="rounded-md border border-border/25 bg-background/30 p-4">
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                       Ambiente
                     </p>
@@ -179,7 +179,7 @@ export function AboutSection() {
                       PRODEST
                     </p>
                   </div>
-                  <div className="rounded-[calc(var(--radius)-6px)] border border-border/25 bg-background/25 p-4">
+                  <div className="rounded-md border border-border/25 bg-background/25 p-4">
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                       Foco
                     </p>
@@ -187,7 +187,7 @@ export function AboutSection() {
                       Produto + Qualidade
                     </p>
                   </div>
-                  <div className="rounded-[calc(var(--radius)-6px)] border border-border/25 bg-linear-to-br from-accent/12 via-transparent to-transparent p-4">
+                  <div className="border border-border/25 rounded-md p-4">
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                       Direção
                     </p>
@@ -215,8 +215,7 @@ export function AboutSection() {
                 className="object-cover grayscale"
               />
             */}
-              <div className="relative aspect-3/4 w-full overflow-hidden rounded-sm border border-border/40 bg-linear-to-br from-card via-card/85 to-background">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,color-mix(in_oklab,var(--accent)_10%,transparent),transparent_58%)]" />
+              <div className="relative aspect-3/4 w-full overflow-hidden rounded-sm border border-border/40 bg-linear-to-br from-card via-card/85 to-background">              
               <div className="flex h-full flex-col justify-between p-6">
                 <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/40">
                   <span>placeholder</span>
