@@ -108,7 +108,7 @@ export function PrinciplesSection() {
               key={principle.number}
               className={`rounded-(--radius) border border-border/30 bg-card/30 px-5 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10 ${
                 principle.align === "right"
-                  ? "text-left md:text-right"
+                  ? "text-right"
                   : "text-left"
               }`}
             >
@@ -129,7 +129,11 @@ export function PrinciplesSection() {
                       {principle.title.split(" ").slice(-1).join(" ")}
                     </HighlightText>
                   </h3>
-                  <div className="mt-6 flex flex-wrap gap-2">
+                  <div
+                    className={`mt-6 flex flex-wrap gap-2 ${
+                      principle.align === "right" ? "justify-end" : "justify-start"
+                    }`}
+                  >
                     {principle.tags.map((tag) => (
                       <span
                         key={tag}
