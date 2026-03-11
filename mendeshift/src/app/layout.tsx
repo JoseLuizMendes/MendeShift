@@ -24,6 +24,7 @@ const display = Bebas_Neue({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mendeshift.vercel.app"),
   title: "José Luiz Mendes — Product Engineer",
   description:
     "Product Engineer em Vitória, ES. Construo aplicações web fullstack, APIs e sistemas orientados a produto — do modelo de dados à experiência do usuário final.",
