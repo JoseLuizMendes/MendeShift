@@ -1,3 +1,8 @@
+export type TechStackEntry = {
+  category: string;
+  items: string[];
+};
+
 export type ExperienceAchievement = {
   label: string;
   title: string;
@@ -28,28 +33,28 @@ export const currentRole: ExperienceRole = {
 
 export const experienceAchievements: ExperienceAchievement[] = [
   {
-    label: "SIARHES",
-    title: "Roadmap estratégico adotado por outros estados",
+    label: "SIARHES — Destaque",
+    title: "Roadmap estratégico adotado por outros estados brasileiros",
     detail:
-      "Liderou o mapeamento completo dos sistemas integrados ao SIARHES — Sistema de RH do Governo do ES. Conduziu entrevistas com responsáveis pelo desenvolvimento, consolidou dados e elaborou o roadmap para migração ao Novo SIARHES. O projeto foi levado para estudo e implementação em Santa Catarina.",
+      "Liderou o mapeamento completo dos sistemas integrados ao SIARHES — Sistema de Administração de Recursos Humanos do Governo do ES, que gerencia a folha de pagamento e o RH de todo o funcionalismo público estadual. Conduziu entrevistas com as equipes responsáveis pelo desenvolvimento, consolidou dados críticos de integração e elaborou o roadmap completo para migração ao Novo SIARHES. O projeto foi reconhecido como referência e levado para estudo e implementação em Santa Catarina.",
   },
   {
     label: "Qualidade",
     title: "SonarQube Grade A em 3 sistemas críticos",
     detail:
-      "Assumiu a responsabilidade pelo Portal do Servidor, Sistema de Seleção e Sistema CHE. Implementou melhorias que elevaram todas as métricas de qualidade para Nota A em cada categoria avaliada pelo SonarQube.",
+      "Assumiu a responsabilidade pelo Portal do Servidor, Sistema de Seleção e Sistema CHE. Implementou melhorias sistemáticas de qualidade que elevaram todas as métricas para Nota A em cada categoria avaliada pelo SonarQube — incluindo bugs, vulnerabilidades, code smells e cobertura.",
   },
   {
     label: "Desenvolvimento",
     title: "Sistemas em C# (.NET / ASP.NET)",
     detail:
-      "Desenvolvimento e manutenção de sistemas governamentais em C# com .NET e ASP.NET — correção de bugs, novas funcionalidades e criação de APIs para integração entre sistemas.",
+      "Desenvolvimento e manutenção de sistemas governamentais em C# com .NET e ASP.NET — correção de bugs, novas funcionalidades e criação de APIs para integração entre sistemas internos do Governo do Estado.",
   },
   {
     label: "DevOps",
     title: "Azure DevOps & Git",
     detail:
-      "Gestão de versionamento e ciclo de vida de aplicações com Azure DevOps e Git. Uso de repositórios, pipelines e boas práticas de integração contínua.",
+      "Gestão de versionamento e ciclo de vida de aplicações com Azure DevOps e Git. Uso de repositórios, pipelines CI/CD e boas práticas de integração contínua em projetos com múltiplas equipes.",
   },
 ];
 
@@ -59,5 +64,28 @@ export const educationEntries: EducationEntry[] = [
     title: "Ciência da Computação",
     institution: "FAESA",
     period: "2024 — Presente",
+  },
+];
+
+export const techStack: TechStackEntry[] = [
+  {
+    category: "Backend",
+    items: ["C#", ".NET / ASP.NET", "Java", "Spring Boot", "Node.js"],
+  },
+  {
+    category: "Frontend",
+    items: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+  },
+  {
+    category: "Banco de Dados",
+    items: ["PostgreSQL", "SQL Server", "SQL Developer"],
+  },
+  {
+    category: "DevOps & Infra",
+    items: ["Azure DevOps", "Git", "Docker", "CI/CD Pipelines"],
+  },
+  {
+    category: "Qualidade & Processos",
+    items: ["SonarQube", "Playwright", "UML", "Testes Unitários"],
   },
 ];
