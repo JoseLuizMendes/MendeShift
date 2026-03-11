@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 import { ActionLink } from "@/_components/ui/action-link";
 import { Card } from "@/_components/ui/card";
@@ -171,7 +172,7 @@ export function AboutSection() {
                 </div>
 
                 <div className="grid gap-3">
-                  <div className="rounded-md border border-border/25 bg-background/30 p-4">
+                  <div className="rounded-[calc(var(--radius)-6px)] border border-border/25 bg-background/30 p-4">
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                       Ambiente
                     </p>
@@ -179,7 +180,7 @@ export function AboutSection() {
                       PRODEST
                     </p>
                   </div>
-                  <div className="rounded-md border border-border/25 bg-background/25 p-4">
+                  <div className="rounded-[calc(var(--radius)-6px)] border border-border/25 bg-background/25 p-4">
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                       Foco
                     </p>
@@ -187,7 +188,7 @@ export function AboutSection() {
                       Produto + Qualidade
                     </p>
                   </div>
-                  <div className="border border-border/25 rounded-md p-4">
+                  <div className="rounded-[calc(var(--radius)-6px)] border border-border/25 bg-linear-to-br from-accent/12 via-transparent to-transparent p-4">
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                       Direção
                     </p>
@@ -203,34 +204,16 @@ export function AboutSection() {
 
           {/* Right — photo + quote */}
           <div className="mx-auto flex w-full max-w-md flex-col gap-6 lg:mx-0 lg:max-w-none">
-            {/*
-              TODO: adicionar sua foto.
-              Coloque o arquivo em /public/foto-jose.jpg e substitua o placeholder abaixo:
-
-              import Image from "next/image";
+            <div className="relative aspect-3/4 w-full overflow-hidden rounded-sm border border-border/40">
               <Image
-                src="/foto-jose.jpg"
-                alt="José Luiz Mendes"
+                src="/Card_Profissional.png"
+                alt="José Luiz Mendes — Product Engineer"
                 fill
-                className="object-cover grayscale"
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 300px"
+                priority
               />
-            */}
-              <div className="relative aspect-3/4 w-full overflow-hidden rounded-sm border border-border/40 bg-linear-to-br from-card via-card/85 to-background">              
-              <div className="flex h-full flex-col justify-between p-6">
-                <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/40">
-                  <span>placeholder</span>
-                  <span>perfil</span>
-                </div>
-                <div>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="h-24 rounded-[14px] border border-border/25 bg-background/20" />
-                    <div className="h-24 rounded-[14px] border border-border/20 bg-background/10" />
-                  </div>
-                  <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground/60">
-                    Espaço reservado para retrato editorial em alto contraste.
-                  </p>
-                </div>
-              </div>
+              <div className="absolute inset-0 bg-linear-to-t from-background/60 via-transparent to-transparent" />
             </div>
 
             <Card className="border-border/40 bg-card/60 p-5 sm:p-6">
