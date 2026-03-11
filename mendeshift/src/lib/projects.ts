@@ -32,27 +32,27 @@ export const projects: Project[] = [
     placeholderCaption: "Fluxos críticos, pagamentos e colaboração em tempo real.",
     accentGradient: "from-accent/18 via-accent/8 to-transparent",
     context:
-      "Precisava gerenciar um casamento com ~200 convidados: confirmações de presença, controle de pagamentos e uma galeria de fotos colaborativa. Nenhuma ferramenta de mercado atendia aos requisitos de personalização e integração com gateway de pagamento brasileiro.",
+      "Precisava gerenciar um casamento com ~200 convidados: confirmações de presença, controle de pagamentos e uma galeria de fotos colaborativa. Nenhuma ferramenta de mercado atendia aos requisitos de personalização e integração com gateway de pagamento brasileiro. O projeto nasceu como necessidade pessoal e virou o laboratório mais intenso de engenharia que tive.",
     problem:
-      "Construir do zero uma plataforma confiável para um evento com data fixa e zero tolerância a falhas — sem possibilidade de rollback no dia do evento.",
+      "Construir do zero uma plataforma confiável para um evento com data fixa e zero tolerância a falhas — sem possibilidade de rollback no dia do evento. Qualquer bug em produção impactaria convidados reais e o evento em si.",
     constraints:
-      "Prazo fixo (data do casamento), zero budget para infraestrutura cara, confiabilidade total exigida. Convidados sem conta precisavam confirmar presença e fazer upload de fotos.",
+      "Prazo fixo (data do casamento em 07/09), zero budget para infraestrutura cara, confiabilidade total exigida. Convidados sem conta precisavam confirmar presença e fazer upload de fotos. A plataforma precisava funcionar em dispositivos variados, de smartphones antigos a desktops.",
     solution:
-      "Next.js 15 App Router com Server Components, PostgreSQL via Supabase com Row Level Security, integração com Mercado Pago para pagamentos e PIX, e Playwright para testes E2E cobrindo os fluxos críticos.",
+      "Next.js 15 App Router com Server Components para SSR otimizado, PostgreSQL via Supabase com Row Level Security para isolar dados por convidado, integração com Mercado Pago (cartão + PIX) para pagamentos, e Playwright para testes E2E cobrindo os fluxos críticos de RSVP e checkout.",
     engineeringDecisions: [
-      "Next.js App Router — SSR e API routes no mesmo projeto, reduz complexidade de deploy",
-      "Supabase como BaaS — PostgreSQL com RLS elimina necessidade de backend separado",
-      "Mercado Pago em vez de Stripe — cobertura de cartões nacionais e PIX",
-      "Tokens temporários por QR Code — permite upload de fotos por convidados sem conta",
-      "Playwright para E2E — cobre o fluxo crítico de confirmação de presença antes do evento",
+      "Next.js App Router — SSR e API routes no mesmo projeto, reduz complexidade de deploy e mantém SEO",
+      "Supabase como BaaS — PostgreSQL com RLS elimina necessidade de backend separado, com real-time para galeria",
+      "Mercado Pago em vez de Stripe — cobertura completa de cartões nacionais, boleto e PIX instantâneo",
+      "Tokens temporários por QR Code — permite upload de fotos por convidados sem conta, com expiração de 24h",
+      "Playwright para E2E — cobre o fluxo crítico de confirmação de presença antes do evento, rodando em CI",
     ],
     challenges: [
-      "Idempotência em webhooks do Mercado Pago — implementei deduplicação por evento ID no banco",
-      "Upload colaborativo sem autenticação — resolvi com tokens temporários de 24h gerados por QR Code",
-      "Zero downtime durante o evento — deploy antecipado com feature flags e rollback testado",
+      "Idempotência em webhooks do Mercado Pago — implementei deduplicação por evento ID no banco, evitando cobranças duplicadas",
+      "Upload colaborativo sem autenticação — resolvi com tokens temporários de 24h gerados por QR Code impresso nos convites",
+      "Zero downtime durante o evento — deploy antecipado com feature flags, rollback testado e monitoramento ativo",
     ],
     outcome:
-      "Plataforma funcionou sem incidentes. 100% das confirmações processadas. Webhooks de pagamento confiáveis. O projeto mais completo do portfólio — produto real, entregue em produção, usado por pessoas reais.",
+      "Plataforma funcionou sem incidentes durante todo o evento. 100% das confirmações processadas, pagamentos via PIX e cartão sem falhas. Galeria colaborativa com uploads de dezenas de convidados. O projeto mais completo do portfólio — produto real, entregue em produção, usado por pessoas reais.",
   },
   {
     slug: "barber-saas",
@@ -67,25 +67,26 @@ export const projects: Project[] = [
     placeholderCaption: "Agenda, serviços e isolamento de dados por tenant.",
     accentGradient: "from-sky-400/14 via-cyan-400/8 to-transparent",
     context:
-      "Barbearias locais gerenciam agendamentos via WhatsApp e cadernos, perdendo controle e eficiência. Identifiquei a oportunidade de construir um SaaS leve, funcional e deployável em VPS de baixo custo.",
+      "Barbearias locais gerenciam agendamentos via WhatsApp e cadernos, perdendo controle, horários e eficiência. Após conversar com donos de barbearias na região, identifiquei a oportunidade de construir um SaaS leve, funcional e deployável em VPS de baixo custo — sem a complexidade de plataformas enterprise.",
     problem:
-      "Criar uma solução multi-tenant com isolamento real de dados entre barbearias, autenticação segura e interface simples o suficiente para donos sem experiência técnica.",
+      "Criar uma solução multi-tenant com isolamento real de dados entre barbearias, autenticação segura e interface simples o suficiente para donos sem experiência técnica. O sistema precisava funcionar bem em celulares baratos, que é o device principal dos barbeiros.",
     constraints:
-      "Deploy em VPS de baixo custo (sem Kubernetes), interface funcional em mobile, sem dependência de serviços pagos além do hosting.",
+      "Deploy em VPS de baixo custo (sem Kubernetes), interface funcional em mobile-first, sem dependência de serviços pagos além do hosting. O onboarding de novos tenants precisava ser autoatendimento.",
     solution:
-      "Next.js com Prisma ORM e PostgreSQL, autenticação via NextAuth com credentials provider, isolamento de dados por tenantId em todas as queries, Docker Compose para paridade entre dev e produção.",
+      "Next.js com Prisma ORM e PostgreSQL, autenticação via NextAuth com credentials provider, isolamento de dados por tenantId em todas as queries, Docker Compose para paridade entre dev e produção. Interface mobile-first com fluxo de agendamento em 3 taps.",
     engineeringDecisions: [
-      "Row-level isolation em vez de schema-per-tenant — mais simples para o escopo atual",
-      "Prisma ORM — type-safety nas queries e migrations versionadas",
-      "Docker Compose — paridade entre ambiente de desenvolvimento e produção",
-      "NextAuth com credentials provider — sem dependência de OAuth externo",
+      "Row-level isolation em vez de schema-per-tenant — mais simples para o escopo atual e escala previsível",
+      "Prisma ORM — type-safety nas queries, migrations versionadas e introspecção do schema",
+      "Docker Compose — paridade total entre ambiente de desenvolvimento e produção",
+      "NextAuth com credentials provider — sem dependência de OAuth externo, adequado para público sem Google/GitHub",
     ],
     challenges: [
-      "Garantir isolamento completo entre tenants — auditei todas as queries do Prisma para confirmar filtro de tenantId",
+      "Garantir isolamento completo entre tenants — auditei todas as queries do Prisma para confirmar filtro consistente de tenantId",
       "Deploy em VPS sem Docker Hub — build local de imagens e transferência via SSH com SCP",
+      "Interface para público não-técnico — ciclos de feedback com barbeiros reais para simplificar o fluxo",
     ],
     outcome:
-      "Sistema funcional em produção. Demonstra capacidade de pensar e executar um produto completo — do modelo de dados ao deploy — com decisões de arquitetura justificadas.",
+      "Sistema funcional em produção com múltiplos tenants. Demonstra capacidade de pensar e executar um produto completo — do modelo de dados ao deploy — com decisões de arquitetura justificadas e validadas com usuários reais.",
   },
   {
     slug: "spring-rest-api",
@@ -100,25 +101,26 @@ export const projects: Project[] = [
     placeholderCaption: "Segurança stateless, camadas claras e deploy enxuto.",
     accentGradient: "from-amber-300/18 via-accent/8 to-transparent",
     context:
-      "Projeto de estudo aprofundado em arquitetura de APIs Java — tecnologia dominante nos sistemas governamentais onde atuo. Objetivo: consolidar padrões de produção com Spring Boot.",
+      "Projeto de estudo aprofundado em arquitetura de APIs Java — tecnologia dominante nos sistemas governamentais onde atuo no PRODEST. Objetivo: consolidar padrões de produção com Spring Boot e aplicar os mesmos princípios de arquitetura que uso em C#/.NET no dia a dia.",
     problem:
-      "Construir uma API com padrões reais de produção: autenticação stateless, separação clara de responsabilidades, containerização e código testável por design.",
+      "Construir uma API com padrões reais de produção: autenticação stateless, separação clara de responsabilidades, containerização e código testável por design. O resultado deveria ser referência pessoal para futuros projetos backend.",
     constraints:
-      "API deve ser stateless (JWT sem sessão server-side), containerização completa sem dependências de sistema operacional, código estruturado para testabilidade.",
+      "API deve ser stateless (JWT sem sessão server-side), containerização completa sem dependências de sistema operacional, código estruturado para testabilidade. Documentação Swagger/OpenAPI obrigatória.",
     solution:
-      "Arquitetura em camadas (Controller → Service → Repository), Spring Security com JWT para autenticação stateless, Hibernate para ORM e Docker multi-stage build para imagem de produção.",
+      "Arquitetura em camadas (Controller → Service → Repository), Spring Security com JWT para autenticação stateless, Hibernate para ORM, Docker multi-stage build para imagem de produção e Swagger para documentação interativa.",
     engineeringDecisions: [
       "Arquitetura em camadas — separação clara de responsabilidades e testabilidade por design",
       "JWT stateless — sem store de sessão, escala horizontalmente sem coordenação",
       "Spring Security — autenticação battle-tested em vez de implementação manual",
-      "Docker multi-stage build — imagem de produção leve sem ferramentas de build",
+      "Docker multi-stage build — imagem de produção leve (~80MB) sem ferramentas de build",
+      "Swagger/OpenAPI — documentação interativa gerada automaticamente a partir das annotations",
     ],
     challenges: [
-      "Configurar Spring Security para proteger endpoints autenticados sem bloquear rotas públicas",
-      "Gerenciar expiração e renovação de tokens JWT de forma segura e previsível",
+      "Configurar Spring Security para proteger endpoints autenticados sem bloquear rotas públicas — resolvi com SecurityFilterChain customizado",
+      "Gerenciar expiração e renovação de tokens JWT de forma segura e previsível — implementei refresh token rotation",
     ],
     outcome:
-      "API funcional com documentação. Consolidou conhecimento em arquitetura de sistemas Java — lógica diretamente aplicável ao trabalho com sistemas governamentais em C#/.NET.",
+      "API funcional com documentação Swagger completa. Consolidou conhecimento em arquitetura de sistemas Java — lógica de camadas, DI e segurança diretamente aplicável ao trabalho diário com sistemas governamentais em C#/.NET no PRODEST.",
   },
 ];
 
