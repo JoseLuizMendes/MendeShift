@@ -27,6 +27,30 @@ export const metadata: Metadata = {
   title: "José Luiz Mendes — Product Engineer",
   description:
     "Product Engineer em Vitória, ES. Construo aplicações web fullstack, APIs e sistemas orientados a produto — do modelo de dados à experiência do usuário final.",
+  openGraph: {
+    title: "José Luiz Mendes — Product Engineer",
+    description:
+      "Product Engineer em Vitória, ES. Aplicações web fullstack, APIs e sistemas orientados a produto — do modelo de dados à experiência do usuário final.",
+    url: "https://mendeshift.vercel.app",
+    siteName: "MendeShift",
+    locale: "pt_BR",
+    type: "website",
+    images: [
+      {
+        url: "/Card_Profissional.png",
+        width: 1200,
+        height: 630,
+        alt: "José Luiz Mendes — Product Engineer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "José Luiz Mendes — Product Engineer",
+    description:
+      "Product Engineer em Vitória, ES. Aplicações web fullstack, APIs e sistemas orientados a produto.",
+    images: ["/Card_Profissional.png"],
+  },
 };
 
 export default function RootLayout({
