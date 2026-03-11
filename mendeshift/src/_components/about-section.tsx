@@ -172,7 +172,7 @@ export function AboutSection() {
                 </div>
 
                 <div className="grid gap-3">
-                  <div className="rounded-[calc(var(--radius)-6px)] border border-border/25 bg-background/30 p-4">
+                  <div className="rounded-md border border-border/25 bg-background/30 p-4">
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                       Ambiente
                     </p>
@@ -180,7 +180,7 @@ export function AboutSection() {
                       PRODEST
                     </p>
                   </div>
-                  <div className="rounded-[calc(var(--radius)-6px)] border border-border/25 bg-background/25 p-4">
+                  <div className="rounded-md border border-border/25 bg-background/25 p-4">
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                       Foco
                     </p>
@@ -188,7 +188,7 @@ export function AboutSection() {
                       Produto + Qualidade
                     </p>
                   </div>
-                  <div className="rounded-[calc(var(--radius)-6px)] border border-border/25 bg-linear-to-br from-accent/12 via-transparent to-transparent p-4">
+                  <div className="rounded-md border border-border/25 p-4">
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                       Direção
                     </p>
@@ -209,7 +209,7 @@ export function AboutSection() {
                 src="/Card_Profissional.png"
                 alt="José Luiz Mendes — Product Engineer"
                 fill
-                className="object-cover"
+                className="object-cover object-[center_20%]"
                 sizes="(max-width: 768px) 100vw, 300px"
                 priority
               />
