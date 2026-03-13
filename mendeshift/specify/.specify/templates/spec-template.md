@@ -95,6 +95,19 @@
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
+### Narrative & Positioning Requirements *(mandatory)*
+
+- **NR-001**: The feature MUST state target audience and positioning intent.
+- **NR-002**: The feature MUST include explicit proof-of-execution points
+  (context, problem, solution, impact) when presenting project work.
+- **NR-003**: The feature MUST define a clear primary CTA and expected user action path.
+
+### Design System Requirements *(mandatory for UI work)*
+
+- **DR-001**: UI changes MUST map typography, spacing, color, and motion choices to existing tokens.
+- **DR-002**: New components MUST be reusable and MUST avoid duplicating existing patterns.
+- **DR-003**: Motion usage MUST have functional intent and MUST NOT reduce readability.
+
 ### Key Entities *(include if feature involves data)*
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]

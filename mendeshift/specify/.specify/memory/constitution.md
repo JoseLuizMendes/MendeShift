@@ -1,50 +1,98 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: template -> 1.0.0
+- Modified principles:
+	- Principle 1 -> I. Portfolio Como Produto Estrategico
+	- Principle 2 -> II. Narrativa Com Prova de Execucao
+	- Principle 3 -> III. Design System Original e Consistente
+	- Principle 4 -> IV. Motion Com Proposito e Controle
+	- Principle 5 -> V. Entrega Incremental com Qualidade Mensuravel
+
+- Added sections:
+	- Padroes Operacionais
+	- Workflow e Quality Gates
+- Removed sections:
+	- Nenhuma
+- Templates requiring updates:
+	- updated: specify/.specify/templates/plan-template.md
+	- updated: specify/.specify/templates/spec-template.md
+	- updated: specify/.specify/templates/tasks-template.md
+	- pending: specify/.specify/templates/commands/*.md (diretorio nao encontrado)
+- Deferred TODOs:
+	- Nenhum
+-->
+
+# MendeShift Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Portfolio Como Produto Estrategico
+Toda decisao de produto, conteudo e engenharia MUST reforcar um posicionamento
+profissional claro. O portfolio MUST funcionar como ativo de carreira e conversao,
+nao como galeria de projetos sem contexto.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Narrativa Com Prova de Execucao
+Cada secao principal MUST responder quem construi, qual problema foi resolvido,
+como a solucao foi executada e qual impacto foi gerado. Projetos MUST ser descritos
+como mini case studies com Contexto, Problema, Solucao, Stack e Impacto.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Design System Original e Consistente
+A interface MUST seguir um sistema de design reutilizavel com tokens de tipografia,
+espacamento, cor e motion. O projeto MUST evitar copia literal de referencias e
+MUST produzir composicoes originais, consistentes e responsivas.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Motion Com Proposito e Controle
+Animacoes MUST comunicar hierarquia, estado ou feedback. Motion decorativo sem
+funcao MUST NOT ser introduzido. Efeitos MUST preservar legibilidade, desempenho e
+controle de intensidade em diferentes dispositivos.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Entrega Incremental com Qualidade Mensuravel
+Cada incremento MUST ser validavel de forma independente, com criterios objetivos
+de sucesso. Toda mudanca MUST incluir verificacoes de regressao visual/funcional,
+clareza de copy e aderencia ao sistema de design.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Padroes Operacionais
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- Stack principal MUST permanecer alinhada com Next.js, React e TypeScript.
+- Componentes de UI MUST ser orientados a reutilizacao e composicao, evitando
+	duplicacao estrutural.
+- Cada nova secao de pagina MUST explicitar CTA e intencao de conversao.
+- Conteudo MUST priorizar clareza, profundidade e autoridade tecnica; descricoes
+	superficiais SHOULD ser recusadas em revisao.
+- Acessibilidade basica MUST ser preservada: ordem semantica, contraste, foco e
+	textos alternativos em imagens.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Workflow e Quality Gates
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+1. Descoberta: definir posicionamento, audiencia e objetivo da iteracao.
+2. Arquitetura de conteudo: validar hierarquia Hero -> About -> Projects -> Proof -> Contact.
+3. Design e implementacao: aplicar tokens, padroes de componente e motion com proposito.
+4. Validacao: revisar narrativa, consistencia visual, performance e responsividade.
+5. Publicacao: somente apos todos os gates obrigatorios estarem conformes.
+
+Gates obrigatorios para aprovar uma entrega:
+
+- Gate de Narrativa: proposta de valor e prova de execucao estao explicitas.
+- Gate de Sistema: tipografia, espacamento, cor e motion seguem tokens oficiais.
+- Gate de Conversao: CTA principal e trilha de acao estao claros.
+- Gate de Qualidade: sem regressao visual critica em desktop e mobile.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Esta constituicao prevalece sobre preferencias locais de implementacao em conflitos
+de direcao de produto, design e qualidade.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Mudancas na constituicao MUST seguir este fluxo:
+
+1. Proposta escrita com motivacao, impacto e secoes alteradas.
+2. Classificacao de versao semantica:
+	 - MAJOR: remocao ou redefinicao incompativel de principios.
+	 - MINOR: adicao de principio, gate ou secao normativa.
+	 - PATCH: clarificacao editorial sem mudanca de comportamento.
+3. Atualizacao sincronizada de templates afetados e registro no Sync Impact Report.
+4. Aprovacao final por revisao humana antes de uso em novas especificacoes.
+
+Toda revisao de `plan.md`, `spec.md` e `tasks.md` MUST declarar conformidade com
+os principios desta constituicao.
+
+**Version**: 1.0.0 | **Ratified**: 2026-03-12 | **Last Amended**: 2026-03-12

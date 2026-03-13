@@ -31,7 +31,11 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- Narrative Gate: Value proposition, audience, and proof of execution are explicit.
+- System Gate: Typography, spacing, color, and motion decisions map to design tokens.
+- Conversion Gate: Primary CTA and user action path are defined.
+- Quality Gate: Desktop/mobile behavior, accessibility basics, and visual consistency are verified.
+- Incremental Gate: MVP slice remains independently testable and releasable.
 
 ## Project Structure
 

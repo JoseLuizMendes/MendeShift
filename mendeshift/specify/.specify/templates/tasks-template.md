@@ -150,11 +150,14 @@ Examples of foundational tasks (adjust based on your project):
 
 **Purpose**: Improvements that affect multiple user stories
 
+- [ ] TXXX [P] Narrative and CTA review for positioning consistency
+- [ ] TXXX [P] Design token compliance pass (typography/spacing/color/motion)
 - [ ] TXXX [P] Documentation updates in docs/
 - [ ] TXXX Code cleanup and refactoring
 - [ ] TXXX Performance optimization across all stories
 - [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
 - [ ] TXXX Security hardening
+- [ ] TXXX Accessibility verification (contrast, focus, semantics, alt text)
 - [ ] TXXX Run quickstart.md validation
 
 ---
@@ -249,3 +252,4 @@ With multiple developers:
 - Commit after each task or logical group
 - Stop at any checkpoint to validate story independently
 - Avoid: vague tasks, same file conflicts, cross-story dependencies that break independence
+- Before closing a feature, confirm Narrative, System, Conversion, and Quality gates from plan.md
