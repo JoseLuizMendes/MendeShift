@@ -110,35 +110,6 @@ export function HeroSection() {
                     </ActionLink>
                   </div>
                 </div>
-
-                <div className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-sm lg:justify-self-start lg:-ml-16 xl:-ml-8">
-                  <Card className="relative overflow-hidden  border-border/40 bg-card/60 backdrop-blur-sm">
-                    <div className="p-6 sm:p-8">
-                      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                        foco
-                      </p>
-
-                      <p className="mt-5 font-mono text-xs leading-relaxed text-muted-foreground">
-                        Entender a dor do cliente antes de abrir o editor.
-                        Produto sem clareza de propósito é complexidade sem
-                        valor.
-                      </p>
-                    </div>
-
-                    <div className="h-px w-full bg-linear-to-r from-transparent via-border/40 to-transparent" />
-
-                    <div className="p-6 sm:p-8">
-                      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                        entrega
-                      </p>
-
-                      <p className="mt-5 font-mono text-xs leading-relaxed text-muted-foreground">
-                        Levantamento → arquitetura → implementação → qualidade.
-                        Sem atalhos. Sem dívida técnica invisível.
-                      </p>
-                    </div>
-                  </Card>
-                </div>
               </div>
             </SplitFlapAudioProvider>
           </div>
