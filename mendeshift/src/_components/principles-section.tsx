@@ -106,55 +106,29 @@ export function PrinciplesSection() {
           {principles.map((principle) => (
             <article
               key={principle.number}
-              className={`rounded-(--radius) border border-border/30 bg-card/30 px-5 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10 ${
+              className={`flex px-5 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10 ${
                 principle.align === "right"
-                  ? "text-right"
-                  : "text-left"
+                  ? "justify-end text-right"
+                  : "justify-start text-left"
               }`}
             >
-              <div
-                className={`grid gap-8 md:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.8fr)] md:items-end ${
-                  principle.align === "right" ? "md:[&>div:first-child]:order-2 md:[&>div:last-child]:order-1" : ""
-                }`}
-              >
-                <div>
-                  <span className="mb-4 block font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                    {principle.number}
+              <div className="max-w-3xl">
+                <span className="mb-4 block font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                  {principle.number}
+                </span>
+                <h3 className="font-display text-3xl leading-none tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+                  <span className="text-foreground">
+                    {principle.title.split(" ").slice(0, -1).join(" ")}
                   </span>
-                  <h3 className="font-display text-3xl leading-none tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-                    <span className="text-foreground">
-                      {principle.title.split(" ").slice(0, -1).join(" ")}
-                    </span>
-                    <HighlightText className="ml-[0.30em]">
-                      {principle.title.split(" ").slice(-1).join(" ")}
-                    </HighlightText>
-                  </h3>
-                  <div
-                    className={`mt-6 flex flex-wrap gap-2 ${
-                      principle.align === "right" ? "justify-end" : "justify-start"
-                    }`}
-                  >
-                    {principle.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-border/35 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground/80"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="rounded-[calc(var(--radius)-4px)] border border-border/25 bg-background/25 p-5">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-                    Faixa operacional
-                  </p>
-                  <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground">
-                    {principle.description}
-                  </p>
-                  <p className="mt-4 border-t border-border/20 pt-4 font-mono text-xs leading-relaxed text-foreground/75">
-                    {principle.signal}
-                  </p>
+                  <HighlightText className="ml-[0.30em]">
+                    {principle.title.split(" ").slice(-1).join(" ")}
+                  </HighlightText>
+                </h3>
+                <div
+                  className={`mt-6 flex flex-wrap gap-2 ${
+                    principle.align === "right" ? "justify-end" : "justify-start"
+                  }`}
+                >
                 </div>
               </div>
             </article>
