@@ -10,13 +10,19 @@ export type Project = {
   placeholderCaption: string;
   accentGradient: string;
   /**
-   * Caminho relativo a /public para o screenshot do projeto.
+   * Caminho relativo a /public para o screenshot/foto do projeto.
    * Ex: "/projects/wedding-platform.webp"
-   * Recomendação: 1200×675px, salvo como .webp.
    * Quando presente, substitui o gradiente no preview do card.
    * Quando ausente, usa accentGradient como fallback.
    */
   previewImage?: string;
+  /**
+   * Ponto focal da imagem (CSS object-position).
+   * Controla qual parte da foto fica visível quando o container corta.
+   * Ex: "center", "50% 70%", "top", "bottom", "30% 60%"
+   * Padrão: "center"
+   */
+  previewImageFocus?: string;
   context: string;
   problem: string;
   constraints: string;
@@ -40,6 +46,7 @@ export const projects: Project[] = [
     placeholderCaption: "Fluxos críticos, pagamentos e colaboração em tempo real.",
     accentGradient: "bg-linear-to-br from-accent/10 to-transparent",
     previewImage: "/projects/wedding-platform.webp",
+    previewImageFocus: "45% 40%",
     context:
       "Precisava gerenciar um casamento com ~200 convidados: confirmações de presença, controle de pagamentos e uma galeria de fotos colaborativa. Nenhuma ferramenta de mercado atendia aos requisitos de personalização e integração com gateway de pagamento brasileiro. O projeto nasceu como necessidade pessoal e virou o laboratório mais intenso de engenharia que tive.",
     problem:
@@ -76,6 +83,7 @@ export const projects: Project[] = [
     placeholderCaption: "Agenda, serviços e isolamento de dados por tenant.",
     accentGradient: "bg-linear-to-tl from-foreground/8 to-transparent",
     previewImage: "/projects/barber-saas.webp",
+    previewImageFocus: "10% 7%",
     context:
       "Barbearias locais gerenciam agendamentos via WhatsApp e cadernos, perdendo controle, horários e eficiência. Após conversar com donos de barbearias na região, identifiquei a oportunidade de construir um SaaS leve, funcional e deployável em VPS de baixo custo — sem a complexidade de plataformas enterprise.",
     problem:

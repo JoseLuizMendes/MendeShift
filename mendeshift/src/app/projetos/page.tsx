@@ -112,7 +112,8 @@ function ProjectArchiveCard({
               alt=""
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-top grayscale brightness-[0.32]"
+              className="object-cover grayscale brightness-[0.32]"
+              style={{ objectPosition: project.previewImageFocus ?? "top" }}
               aria-hidden="true"
             />
           )}
@@ -131,13 +132,6 @@ function ProjectArchiveCard({
 
           {/* Conteúdo — wireframe blocks + caption */}
           <div className="absolute inset-x-5 bottom-5">
-            <div className="grid grid-cols-[1.2fr_0.8fr] gap-3">
-              <div className="h-24 rounded-2xl border border-border/30 bg-background/20" />
-              <div className="grid gap-3">
-                <div className="h-10 rounded-xl border border-border/25 bg-background/12" />
-                <div className="h-10 rounded-xl border border-border/25 bg-background/18" />
-              </div>
-            </div>
             <p className="mt-4 max-w-[28ch] font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/85">
               {project.placeholderCaption}
             </p>
