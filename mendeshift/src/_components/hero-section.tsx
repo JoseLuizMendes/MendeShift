@@ -60,7 +60,7 @@ export function HeroSection() {
         <div className="absolute left-0 top-0 h-full w-px bg-linear-to-b from-transparent via-border/40 to-transparent md:left-16" />
       </div>
 
-      <Container className="md:pr-16 lg:pr-20">
+      <Container className="md:px-20">
         <div ref={contentRef} className="space-y-8 sm:space-y-10">
           <div className="min-w-0">
             <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
@@ -75,11 +75,11 @@ export function HeroSection() {
 
               <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
                 <div className="min-w-0">
-                  <h2 className="font-display text-xl pr-12 tracking-wide text-muted-foreground/70 sm:text-2xl md:text-4xl">
+                  <h2 className="font-display text-xl tracking-wide text-muted-foreground/70 sm:text-2xl md:text-4xl">
                     Construo produtos completos — do modelo de dados à
                     experiência do usuário final.
                   </h2>
-                  <p className="mt-6 max-w-2xl pr-12 font-mono text-sm leading-relaxed text-muted-foreground sm:mt-8">
+                  <p className="mt-6 max-w-2xl font-mono text-sm leading-relaxed text-muted-foreground sm:mt-8">
                     Aplicações web robustas, interfaces modernas e arquitetura
                     orientada a produto. Do levantamento de requisitos ao deploy
                     em produção — com responsabilidade end-to-end.

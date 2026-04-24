@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 import gsap from "gsap";
@@ -109,14 +110,32 @@ export function WorkSection() {
                   </h3>
                 </div>
 
+                {/* Preview — imagem real ou fallback */}
                 <div
-                  className={`relative min-h-36 flex-1 overflow-hidden rounded-sm border border-border/30`}
+                  className={`relative min-h-36 flex-1 overflow-hidden rounded-sm border border-border/30 ${!item.previewImage ? item.accentGradient : "bg-card/30"}`}
                 >
-                  
+                  {/* Screenshot do projeto */}
+                  {item.previewImage && (
+                    <Image
+                      src={item.previewImage}
+                      alt=""
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover object-top grayscale brightness-[0.28]"
+                      aria-hidden="true"
+                    />
+                  )}
+
+                  {/* Overlay escurecendo para baixo */}
+                  <div className="absolute inset-0 bg-linear-to-b from-background/20 via-background/45 to-background/85" />
+
+                  {/* Label + índice */}
                   <div className="absolute inset-x-4 top-4 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">
                     <span>{item.placeholderLabel}</span>
                     <span>{String(idx + 1).padStart(2, "0")}</span>
                   </div>
+
+                  {/* Caption */}
                   <div className="absolute inset-x-4 bottom-4">
                     <p className="mt-3 max-w-[28ch] font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/80">
                       {item.placeholderCaption}

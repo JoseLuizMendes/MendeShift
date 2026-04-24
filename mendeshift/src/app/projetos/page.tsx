@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 import { BitmapChevron } from "@/_components/bitmap-chevron";
 import { ColophonSection } from "@/_components/colophon-section";
@@ -100,15 +101,35 @@ function ProjectArchiveCard({
   return (
     <article className="group">
       <Card className="overflow-hidden border-border/35 bg-card/75 p-5 transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/55 sm:p-6">
+        {/* Preview — imagem real ou fallback gradient */}
         <div
-          className={`relative min-h-57.5 overflow-hidden rounded-[calc(var(--radius)-4px)] border border-border/25 bg-linear-to-br ${project.accentGradient}`}
+          className={`relative min-h-57.5 overflow-hidden rounded-[calc(var(--radius)-4px)] border border-border/25 ${!project.previewImage ? project.accentGradient : "bg-card/30"}`}
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,color-mix(in_oklab,var(--foreground)_12%,transparent),transparent_58%)]" />
+          {/* Camada 1 — screenshot do projeto (grayscale + escurecido) */}
+          {project.previewImage && (
+            <Image
+              src={project.previewImage}
+              alt=""
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-top grayscale brightness-[0.32]"
+              aria-hidden="true"
+            />
+          )}
+
+          {/* Camada 2 — overlay escurecendo de cima para baixo */}
+          <div className="absolute inset-0 bg-linear-to-b from-background/25 via-background/50 to-background/88" />
+
+          {/* Camada 3 — vinheta radial no canto superior esquerdo */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,color-mix(in_oklab,var(--foreground)_10%,transparent),transparent_55%)]" />
+
+          {/* Conteúdo — label + índice */}
           <div className="absolute inset-x-5 top-5 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">
             <span>{project.placeholderLabel}</span>
             <span>{String(index + 1).padStart(2, "0")}</span>
           </div>
 
+          {/* Conteúdo — wireframe blocks + caption */}
           <div className="absolute inset-x-5 bottom-5">
             <div className="grid grid-cols-[1.2fr_0.8fr] gap-3">
               <div className="h-24 rounded-2xl border border-border/30 bg-background/20" />

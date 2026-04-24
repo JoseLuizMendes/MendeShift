@@ -9,6 +9,14 @@ export type Project = {
   placeholderLabel: string;
   placeholderCaption: string;
   accentGradient: string;
+  /**
+   * Caminho relativo a /public para o screenshot do projeto.
+   * Ex: "/projects/wedding-platform.webp"
+   * Recomendação: 1200×675px, salvo como .webp.
+   * Quando presente, substitui o gradiente no preview do card.
+   * Quando ausente, usa accentGradient como fallback.
+   */
+  previewImage?: string;
   context: string;
   problem: string;
   constraints: string;
@@ -30,7 +38,8 @@ export const projects: Project[] = [
     gridSpan: "md:col-span-2 md:row-span-2",
     placeholderLabel: "EVENT STACK",
     placeholderCaption: "Fluxos críticos, pagamentos e colaboração em tempo real.",
-    accentGradient: "from-accent/18 via-accent/8 to-transparent",
+    accentGradient: "bg-linear-to-br from-accent/10 to-transparent",
+    previewImage: "/projects/wedding-platform.webp",
     context:
       "Precisava gerenciar um casamento com ~200 convidados: confirmações de presença, controle de pagamentos e uma galeria de fotos colaborativa. Nenhuma ferramenta de mercado atendia aos requisitos de personalização e integração com gateway de pagamento brasileiro. O projeto nasceu como necessidade pessoal e virou o laboratório mais intenso de engenharia que tive.",
     problem:
@@ -65,7 +74,8 @@ export const projects: Project[] = [
     gridSpan: "md:col-span-2 md:row-span-1",
     placeholderLabel: "OPS GRID",
     placeholderCaption: "Agenda, serviços e isolamento de dados por tenant.",
-    accentGradient: "from-sky-400/14 via-cyan-400/8 to-transparent",
+    accentGradient: "bg-linear-to-tl from-foreground/8 to-transparent",
+    previewImage: "/projects/barber-saas.webp",
     context:
       "Barbearias locais gerenciam agendamentos via WhatsApp e cadernos, perdendo controle, horários e eficiência. Após conversar com donos de barbearias na região, identifiquei a oportunidade de construir um SaaS leve, funcional e deployável em VPS de baixo custo — sem a complexidade de plataformas enterprise.",
     problem:
@@ -99,7 +109,8 @@ export const projects: Project[] = [
     gridSpan: "md:col-span-2 md:row-span-1",
     placeholderLabel: "SERVICE CORE",
     placeholderCaption: "Segurança stateless, camadas claras e deploy enxuto.",
-    accentGradient: "from-amber-300/18 via-accent/8 to-transparent",
+    accentGradient: "bg-linear-to-b from-muted-foreground/12 to-transparent",
+    previewImage: "/projects/spring-rest-api.webp",
     context:
       "Projeto de estudo aprofundado em arquitetura de APIs Java — tecnologia dominante nos sistemas governamentais onde atuo no PRODEST. Objetivo: consolidar padrões de produção com Spring Boot e aplicar os mesmos princípios de arquitetura que uso em C#/.NET no dia a dia.",
     problem:
