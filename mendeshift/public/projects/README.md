@@ -8,7 +8,8 @@ Coloque aqui os screenshots dos projetos. Um arquivo por projeto.
 |---------------------------|-----------------|
 | wedding-platform.webp     | Wedding Platform |
 | barber-saas.webp          | Barber SaaS      |
-| spring-rest-api.webp      | REST API         |
+| agendamento-api.webp      | Agendamento API  |
+| belessence.webp           | Belessence       |
 
 ## Especificações recomendadas
 
