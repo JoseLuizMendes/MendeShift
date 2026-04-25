@@ -45,8 +45,8 @@ export const projects: Project[] = [
     placeholderLabel: "EVENT STACK",
     placeholderCaption: "Fluxos críticos, pagamentos e galeria colaborativa.",
     accentGradient: "bg-linear-to-br from-accent/10 to-transparent",
-    previewImage: "/projects/wedding-plataform.webp",
-    previewImageFocus: "50% 30%",
+    previewImage: "/projects/wedding-platform.webp",
+    previewImageFocus: "center 70%",
     context:
       "Precisava gerenciar um casamento com ~200 convidados: confirmações de presença, pagamentos e uma galeria de fotos colaborativa aberta a todos os convidados. Nenhuma ferramenta de mercado combinava personalização completa com integração nativa a gateway de pagamento brasileiro. O projeto nasceu como necessidade pessoal e virou o laboratório mais intenso de engenharia que tive.",
     problem:

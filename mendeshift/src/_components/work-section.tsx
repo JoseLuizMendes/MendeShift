@@ -15,6 +15,10 @@ import { projects } from "@/lib/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Apenas os 2 primeiros projetos na home
+const featuredProjects = projects.slice(0, 2);
+const remainingCount = projects.length - featuredProjects.length;
+
 export function WorkSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -41,7 +45,7 @@ export function WorkSection() {
         },
       );
 
-      const cards = gridRef.current?.querySelectorAll("article");
+      const cards = gridRef.current?.querySelectorAll("article, a[data-cta]");
       if (cards?.length) {
         gsap.fromTo(
           cards,
@@ -69,7 +73,7 @@ export function WorkSection() {
   return (
     <Section id="work" className="relative" ref={sectionRef}>
       <Container className="md:px-30">
-        <div ref={headerRef} className="mb-10 flex flex-col gap-4 sm:gap-6 md:mb-12 md:flex-row md:items-end md:justify-between">
+        <div ref={headerRef} className="mb-6 flex flex-col gap-4 sm:gap-6 md:mb-10 md:flex-row md:items-end md:justify-between">
           <div>
             <Eyebrow>02 / Projetos</Eyebrow>
             <SectionTitle>Selected Work</SectionTitle>
@@ -93,15 +97,14 @@ export function WorkSection() {
           ref={gridRef}
           className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-4 md:auto-rows-[220px] md:gap-6"
         >
-          {projects.map((item, idx) => (
+          {featuredProjects.map((item, idx) => (
             <article
               key={item.slug}
-              className={`group relative overflow-hidden rounded-lg border border-border/40 bg-card/70 p-5 transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/60 sm:p-6 ${item.gridSpan}`}
+              className={`group relative overflow-hidden rounded-lg border border-border/40 bg-card/70 p-0 transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/60 md:col-span-2 md:row-span-2`}
             >
-              
-
-              <div className="relative flex h-full flex-col justify-between gap-5">
-                <div>
+              <div className="flex h-full flex-col">
+                {/* Cabeçalho com padding */}
+                <div className="px-5 pb-0 pt-5 sm:px-6 sm:pt-6">
                   <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                     {item.category}
                   </p>
@@ -110,24 +113,23 @@ export function WorkSection() {
                   </h3>
                 </div>
 
-                {/* Preview — imagem real ou fallback */}
+                {/* Preview — imagem sem padding lateral, expande para preencher */}
                 <div
-                  className={`relative min-h-36 flex-1 overflow-hidden rounded-sm border border-border/30 ${!item.previewImage ? item.accentGradient : "bg-card/30"}`}
+                  className={`relative mx-5 my-4 min-h-36 flex-1 overflow-hidden rounded-sm border border-border/30 sm:mx-6 ${!item.previewImage ? item.accentGradient : "bg-card/30"}`}
                 >
-                  {/* Screenshot do projeto */}
                   {item.previewImage && (
                     <Image
                       src={item.previewImage}
                       alt=""
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover grayscale brightness-[0.28]"
                       style={{ objectPosition: item.previewImageFocus ?? "center" }}
                       aria-hidden="true"
                     />
                   )}
 
-                  {/* Overlay escurecendo para baixo */}
+                  {/* Overlay */}
                   <div className="absolute inset-0 bg-linear-to-b from-background/20 via-background/45 to-background/85" />
 
                   {/* Label + índice */}
@@ -138,13 +140,14 @@ export function WorkSection() {
 
                   {/* Caption */}
                   <div className="absolute inset-x-4 bottom-4">
-                    <p className="mt-3 max-w-[28ch] font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/80">
+                    <p className="max-w-[28ch] font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/80">
                       {item.placeholderCaption}
                     </p>
                   </div>
                 </div>
 
-                <div>
+                {/* Rodapé com padding */}
+                <div className="px-5 pb-5 sm:px-6 sm:pb-6">
                   <p className="max-w-[34ch] font-mono text-xs leading-relaxed text-muted-foreground">
                     {item.shortDesc}
                   </p>
@@ -180,6 +183,21 @@ export function WorkSection() {
               </div>
             </article>
           ))}
+
+          {/* CTA — arquivo completo */}
+          <Link
+            href="/projetos"
+            data-cta="true"
+            className="group relative flex flex-col items-center justify-center gap-4 overflow-hidden rounded-lg border border-border/25 border-dashed bg-card/30 p-5 text-center transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/40 hover:bg-card/50 sm:p-6 md:col-span-4 md:row-span-1"
+          >
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/60">
+              +{remainingCount} projetos no arquivo
+            </p>
+            <span className="font-display text-3xl tracking-tight text-foreground/70 transition-colors duration-300 group-hover:text-foreground sm:text-4xl">
+              Ver arquivo completo
+            </span>
+            <BitmapChevron className="w-3 rotate-90 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-100" />
+          </Link>
         </div>
       </Container>
     </Section>
