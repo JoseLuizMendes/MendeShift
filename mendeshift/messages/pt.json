@@ -1,0 +1,212 @@
+{
+  "meta": {
+    "home_title": "José Luiz Mendes — Engenheiro de Produto",
+    "home_desc": "Engenheiro de Produto em Vitória, ES. Construo aplicações web fullstack, APIs e sistemas orientados a produto — do modelo de dados à experiência do usuário final.",
+    "og_desc": "Engenheiro de Produto em Vitória, ES. Aplicações web fullstack, APIs e sistemas orientados a produto — do modelo de dados à experiência do usuário final.",
+    "twitter_desc": "Engenheiro de Produto em Vitória, ES. Aplicações web fullstack, APIs e sistemas orientados a produto.",
+    "projects_title": "Projetos | José Luiz Mendes",
+    "projects_desc": "Arquivo de projetos com foco em arquitetura, execução e entrega em produção.",
+    "experience_title": "Experiência | MendeShift",
+    "experience_desc": "Trajetória profissional e acadêmica de José Luiz Mendes em engenharia de software, sistemas públicos e qualidade de entrega."
+  },
+  "nav": {
+    "home": "Início",
+    "services": "Serviços",
+    "projects": "Projetos",
+    "principles": "Princípios",
+    "profile": "Perfil",
+    "contact": "Contato"
+  },
+  "hero": {
+    "tagline": "Engenheiro de Produto / Vitória, ES",
+    "headline": "Construo produtos completos — do modelo de dados à experiência do usuário final.",
+    "sub": "Aplicações web robustas, interfaces modernas e arquitetura orientada a produto. Do levantamento de requisitos ao deploy em produção — com ownership end-to-end.",
+    "cta_primary": "Ver projetos",
+    "cta_secondary": "Sobre o MendeShift"
+  },
+  "services": {
+    "eyebrow": "01 / Serviços",
+    "title": "O que construo",
+    "lead": "Especialidades e áreas de atuação — do backend à interface.",
+    "items": [
+      { "no": "No. 01", "category": "Web", "title": "Aplicações Web Fullstack", "desc": "Next.js, React, Node.js e PostgreSQL. Do banco de dados à interface, com arquitetura construída para escalar." },
+      { "no": "No. 02", "category": "Backend", "title": "APIs & Integrações", "desc": "APIs REST com autenticação JWT, webhooks, pagamentos e integrações com serviços externos." },
+      { "no": "No. 03", "category": "Qualidade", "title": "Testes & Qualidade", "desc": "Testes unitários, E2E com Playwright e métricas verificáveis. SonarQube Grau A em projetos críticos." },
+      { "no": "No. 04", "category": "Infra", "title": "Containers & Deploy", "desc": "Docker, Docker Compose e deploy em produção. CI/CD com Azure DevOps e boas práticas de entrega." }
+    ]
+  },
+  "work": {
+    "eyebrow": "02 / Projetos",
+    "title": "Trabalhos Selecionados",
+    "lead": "Produtos construídos end-to-end — arquitetura, desenvolvimento e entrega com qualidade de produção.",
+    "view_case": "Ver case study",
+    "explore": "Explorar arquivo completo",
+    "more": "+{count} projetos no arquivo"
+  },
+  "principles": {
+    "eyebrow": "03 / Princípios",
+    "title": "Como trabalho",
+    "items": [
+      {
+        "number": "01",
+        "title": "Ownership End-to-End",
+        "description": "Do banco de dados à interface, responsabilidade total pelo produto. Nenhuma camada é problema de outra pessoa.",
+        "signal": "Produto inteiro no radar, sem transferência silenciosa de responsabilidade.",
+        "tags": "arquitetura · backend · frontend · deploy"
+      },
+      {
+        "number": "02",
+        "title": "Engenharia com Impacto",
+        "description": "Código sem impacto é exercício. Toda solução precisa resolver uma dor real do produto.",
+        "signal": "Uma decisão técnica só se sustenta quando reduz risco ou aumenta resultado.",
+        "tags": "resultado · clareza · produto · decisão"
+      },
+      {
+        "number": "03",
+        "title": "Qualidade como Disciplina",
+        "description": "Grau A no SonarQube não é acidente. É cultura aplicada commit a commit, sem exceções.",
+        "signal": "Qualidade entra no fluxo — não como revisão tardia ou esforço de última hora.",
+        "tags": "testes · revisão · sonarqube · consistência"
+      },
+      {
+        "number": "04",
+        "title": "Aprender no Contexto",
+        "description": "O aprendizado acelera com propósito real. O mercado não espera condições ideais.",
+        "signal": "Aprender em produção constrói repertório mais rápido do que estudo isolado.",
+        "tags": "contexto · execução · aprendizado · adaptação"
+      }
+    ]
+  },
+  "about": {
+    "eyebrow": "04 / Perfil",
+    "title": "Engenheiro de produto, pensamento transversal",
+    "p1": "Construo produtos digitais do zero até a produção — arquitetura, desenvolvimento e entrega numa só responsabilidade. Sem intermediários, sem perda de contexto: cada decisão técnica parte de entender o problema real do cliente.",
+    "p2": "Neurociência, música e finanças não são hobbies separados da engenharia — são lentes que mudam como processo um problema. Esse pensamento transversal aparece na modelagem de dados, na legibilidade do código e em como comunico soluções.",
+    "p3": "Trabalho sem atalhos porque o custo da dívida técnica aparece sempre — na manutenção, no crescimento, na próxima feature. Quando o problema está bem definido, o ritmo de entrega muda de escala.",
+    "cta": "Ver trajetória profissional e acadêmica",
+    "operating_base": "Base operacional",
+    "profile_label": "Perfil",
+    "profile_value": "Full Stack",
+    "mode_label": "Modo",
+    "mode_value": "Freelance",
+    "focus_label": "Foco",
+    "focus_value": "Produto + Qualidade",
+    "motivation_label": "motivação",
+    "motivation_text": "Quando decidi me casar, ainda não dominava programação. Usei o casamento como combustível para aprender. O resultado se tornou o projeto mais completo do portfólio.",
+    "signals": [
+      {
+        "title": "Entrega end-to-end",
+        "description": "Do briefing ao deploy: arquitetura, desenvolvimento e operação numa só responsabilidade. Sem camadas intermediárias, sem perda de contexto."
+      },
+      {
+        "title": "Pensamento transversal",
+        "description": "Interesses em neurociência, música e finanças constroem uma leitura analítica diferente. Problemas complexos pedem perspectivas que extrapolam o código."
+      },
+      {
+        "title": "Sem atalhos, sem surpresa",
+        "description": "Cada decisão é justificada e comunicada. Nada de dívida técnica escondida — o que funciona em desenvolvimento funciona igual em produção."
+      }
+    ],
+    "profile_cards": [
+      {
+        "eyebrow": "Como trabalho",
+        "title": "Produto de ponta a ponta, sem intermediários",
+        "description": "Arquitetura, desenvolvimento e entrega numa só responsabilidade. O cliente fala direto com quem toma as decisões técnicas — e sabe o porquê de cada uma."
+      },
+      {
+        "eyebrow": "Método",
+        "title": "Execução disciplinada, sem teatro técnico",
+        "description": "Boa engenharia é alinhar contexto, modelagem, testes e entrega. A solução precisa funcionar sob pressão, não só parecer bonita no repositório."
+      },
+      {
+        "eyebrow": "O que me diferencia",
+        "title": "Visão analítica além do código",
+        "description": "Neurociência, música e finanças constroem uma leitura transversal dos problemas. Isso aparece em como modelo dados, comunico decisões e priorizo o que importa."
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "05 / Contato",
+    "headline_1": "Vamos construir",
+    "headline_2": "algo juntos.",
+    "availability": "Disponível para projetos freelance e oportunidades em empresas de tecnologia. Use o chat abaixo ou entre em contato diretamente.",
+    "quick_label": "Perguntas Rápidas",
+    "direct_label": "Contato Direto",
+    "placeholder": "Digite sua mensagem...",
+    "virtual_assistant": "Assistente Virtual",
+    "online": "Online agora",
+    "initial_message": "Olá! Sou o assistente virtual do José. Como posso ajudá-lo hoje?",
+    "fallback_response": "Obrigado pela mensagem! Para uma resposta mais detalhada, entre em contato em josemendess004@gmail.com ou pelo LinkedIn.",
+    "quick_prompts": [
+      {
+        "label": "Disponibilidade",
+        "prompt": "Qual é a sua disponibilidade atual para iniciar um projeto e qual é a sua capacidade semanal?",
+        "answer": "Estou disponível para novos projetos. Posso começar imediatamente ou alinhar uma data que faça sentido para o escopo e a sua urgência."
+      },
+      {
+        "label": "Stack",
+        "prompt": "Quais tecnologias, frameworks e ferramentas você domina e usa com mais frequência em projetos?",
+        "answer": "Trabalho principalmente com React, Next.js, TypeScript, Node.js e tecnologias modernas de frontend. Também tenho experiência com design systems, animações e arquitetura orientada a produto."
+      },
+      {
+        "label": "Orçamento",
+        "prompt": "Como funciona o seu modelo de precificação, quais são as opções de cobrança e como você normalmente estrutura as propostas?",
+        "answer": "O preço é definido com base na complexidade e no escopo. Normalmente trabalho com taxas fixas por projeto ou por hora em casos específicos, sempre com total transparência sobre o que está incluído."
+      },
+      {
+        "label": "Prazo",
+        "prompt": "Qual é o prazo médio de entrega para diferentes tipos de projetos, como landing pages ou aplicações completas?",
+        "answer": "Landing pages geralmente levam 1 a 2 semanas; produtos mais complexos, entre 4 e 8 semanas. O foco é sempre equilibrar velocidade com qualidade e manutenibilidade a longo prazo."
+      }
+    ]
+  },
+  "colophon": {
+    "eyebrow": "06 / Colofão",
+    "title": "Créditos",
+    "lead": "Sistema visual, stack e decisões fundamentais por trás da interface. No mobile, o layout prioriza blocos curtos e ações diretas.",
+    "build_notes": "Notas de Build",
+    "build_text": "Um colofão mais editorial, com blocos agrupados por função. Reduz a altura no mobile e melhora a escaneabilidade sem perder densidade.",
+    "groups_count": "05 grupos",
+    "system_count": "01 sistema",
+    "contact_label": "Contato",
+    "contact_text": "Canais diretos para conversa, propostas ou acompanhamento de projetos.",
+    "copyright": "© {year} MendeShift. Todos os direitos reservados.",
+    "back_to_top": "Voltar ao topo",
+    "year_label": "Ano"
+  },
+  "projects_page": {
+    "eyebrow": "Arquivo / Projetos",
+    "title": "Projetos em fluxo contínuo",
+    "lead": "Uma leitura mais editorial do portfólio: duas colunas em ritmos opostos, com contexto visual antes de entrar em cada case study.",
+    "back": "← Voltar para home",
+    "open_case": "Abrir case"
+  },
+  "experience_page": {
+    "eyebrow": "Experiência / Profundidade",
+    "title": "Trajetória profissional e acadêmica",
+    "lead": "O histórico fica aqui como camada de profundidade. A home continua vendendo execução, qualidade de produto e capacidade de entrega.",
+    "view_projects": "Ver projetos",
+    "back": "Voltar para home"
+  },
+  "experience_section": {
+    "eyebrow_experience": "01 / Experiência",
+    "title_experience": "Trabalho profissional",
+    "lead_experience": "Engenharia de software em produção, em projetos estratégicos para o Governo do Estado do Espírito Santo.",
+    "eyebrow_stack": "02 / Stack Tecnológico",
+    "title_stack": "Tecnologias e ferramentas",
+    "eyebrow_education": "03 / Formação"
+  },
+  "project_detail": {
+    "all_projects": "← Todos os projetos",
+    "home": "Início",
+    "context": "Contexto",
+    "problem": "Problema",
+    "constraints": "Restrições",
+    "solution": "Solução",
+    "engineering": "Decisões de Engenharia",
+    "challenges": "Desafios",
+    "outcome": "Resultado",
+    "back": "← Voltar para projetos",
+    "next": "Próximo: {title} →"
+  }
+}
