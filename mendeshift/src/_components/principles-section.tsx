@@ -18,6 +18,7 @@ type PrincipleItem = {
   description: string;
   signal: string;
   tags: string;
+  align?: string;
 };
 
 export function PrinciplesSection() {
