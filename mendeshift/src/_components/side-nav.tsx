@@ -1,19 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "@/i18n/context";
 
 import { cn } from "@/lib/utils";
 
-const navItems = [
-  { id: "hero", label: "Início" },
-  { id: "services", label: "Serviços" },
-  { id: "work", label: "Projetos" },
-  { id: "principles", label: "Princípios" },
-  { id: "about", label: "Perfil" },
-  { id: "contact", label: "Contato" },
-];
-
 export function SideNav() {
+  const t = useTranslations("nav");
+
+  const navItems = [
+    { id: "hero", label: t("home") },
+    { id: "services", label: t("services") },
+    { id: "work", label: t("projects") },
+    { id: "principles", label: t("principles") },
+    { id: "about", label: t("profile") },
+    { id: "contact", label: t("contact") },
+  ];
+
   const [activeSection, setActiveSection] = useState("hero");
 
   useEffect(() => {
@@ -34,6 +37,7 @@ export function SideNav() {
     }
 
     return () => observer.disconnect();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const scrollToSection = (id: string) => {

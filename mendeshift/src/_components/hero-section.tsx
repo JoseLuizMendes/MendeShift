@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "@/i18n/context";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,12 +15,12 @@ import {
 } from "@/_components/split-flap-text";
 import { ScrambleTextOnHover } from "@/_components/scramble-text";
 import { ActionLink } from "@/_components/ui/action-link";
-import { Card } from "@/_components/ui/card";
 import { Container } from "@/_components/ui/container";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function HeroSection() {
+  const t = useTranslations("hero");
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [scrambleToken, setScrambleToken] = useState(0);
@@ -64,7 +65,7 @@ export function HeroSection() {
         <div ref={contentRef} className="space-y-8 sm:space-y-10">
           <div className="min-w-0">
             <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-              Product Engineer / Vitória, ES
+              {t("tagline")}
             </p>
 
             <SplitFlapAudioProvider>
@@ -76,13 +77,10 @@ export function HeroSection() {
               <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
                 <div className="min-w-0">
                   <h2 className="font-display text-xl tracking-wide text-muted-foreground/70 sm:text-2xl md:text-4xl">
-                    Construo produtos completos — do modelo de dados à
-                    experiência do usuário final.
+                    {t("headline")}
                   </h2>
                   <p className="mt-6 max-w-2xl font-mono text-sm leading-relaxed text-muted-foreground sm:mt-8">
-                    Aplicações web robustas, interfaces modernas e arquitetura
-                    orientada a produto. Do levantamento de requisitos ao deploy
-                    em produção — com responsabilidade end-to-end.
+                    {t("sub")}
                   </p>
 
                   <div className="mt-8 flex flex-col items-stretch gap-4 sm:mt-10 sm:flex-row sm:items-center">
@@ -93,7 +91,7 @@ export function HeroSection() {
                       onFocus={triggerScramble}
                     >
                       <ScrambleTextOnHover
-                        text="Ver projetos"
+                        text={t("cta_primary")}
                         as="span"
                         duration={0.55}
                         className="text-[10px] transition-colors duration-300"
@@ -106,7 +104,7 @@ export function HeroSection() {
                       variant="ghost"
                       className="w-full justify-center sm:w-auto"
                     >
-                      Sobre o MendeShift
+                      {t("cta_secondary")}
                     </ActionLink>
                   </div>
                 </div>

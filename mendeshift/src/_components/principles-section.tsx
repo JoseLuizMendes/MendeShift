@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTranslations } from "@/i18n/context";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,46 +12,17 @@ import { Eyebrow, Section, SectionTitle } from "@/_components/ui/section";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const principles = [
-  {
-    number: "01",
-    title: "End-to-End Ownership",
-    description:
-      "Do banco à interface, responsabilidade total pelo produto. Nenhuma camada é problema de outro.",
-    signal: "Produto inteiro no radar, sem repasse silencioso de responsabilidade.",
-    tags: ["arquitetura", "backend", "frontend", "deploy"],
-    align: "left",
-  },
-  {
-    number: "02",
-    title: "Engineering for Impact",
-    description:
-      "Código sem impacto é exercício. Cada solução precisa resolver uma dor real do produto.",
-    signal: "Decisão técnica só se sustenta quando encurta risco ou aumenta resultado.",
-    tags: ["resultado", "clareza", "produto", "decisão"],
-    align: "right",
-  },
-  {
-    number: "03",
-    title: "Quality as Discipline",
-    description:
-      "Nota A no SonarQube não é acidente. É cultura aplicada commit a commit, sem exceções.",
-    signal: "Qualidade entra no fluxo, não como revisão tardia ou esforço de última hora.",
-    tags: ["testes", "review", "sonarqube", "consistência"],
-    align: "left",
-  },
-  {
-    number: "04",
-    title: "Learn in Context",
-    description:
-      "Aprendizado acelera com propósito real. O mercado não espera condições ideais.",
-    signal: "Aprender em produção gera repertório mais rápido do que estudo isolado.",
-    tags: ["contexto", "execução", "aprendizado", "adaptação"],
-    align: "right",
-  },
-] as const;
+type PrincipleItem = {
+  number: string;
+  title: string;
+  description: string;
+  signal: string;
+  tags: string;
+};
 
 export function PrinciplesSection() {
+  const t = useTranslations("principles");
+  const principles = t.raw("items") as PrincipleItem[];
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -76,7 +48,7 @@ export function PrinciplesSection() {
 
       const articles = list.querySelectorAll("article");
       articles.forEach((article, index) => {
-        const fromX = principles[index].align === "right" ? 80 : -80;
+        const fromX = index % 2 === 1 ? 80 : -80;
         gsap.from(article, {
           x: fromX,
           opacity: 0,
@@ -98,16 +70,16 @@ export function PrinciplesSection() {
     <Section id="principles" className="relative" ref={sectionRef}>
       <Container className="md:px-30">
         <div ref={headerRef} className="mb-14 md:mb-20">
-          <Eyebrow>03 / Princípios</Eyebrow>
-          <SectionTitle>Como a gente trabalha</SectionTitle>
+          <Eyebrow>{t("eyebrow")}</Eyebrow>
+          <SectionTitle>{t("title")}</SectionTitle>
         </div>
 
         <div ref={listRef} className="space-y-10 sm:space-y-12 md:space-y-14">
-          {principles.map((principle) => (
+          {principles.map((principle, idx) => (
             <article
               key={principle.number}
               className={`flex px-5 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10 ${
-                principle.align === "right"
+                idx % 2 === 1
                   ? "justify-end text-right"
                   : "justify-start text-left"
               }`}

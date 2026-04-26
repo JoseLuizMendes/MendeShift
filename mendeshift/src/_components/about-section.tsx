@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTranslations } from "@/i18n/context";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,46 +14,13 @@ import { Eyebrow, Section, SectionTitle } from "@/_components/ui/section";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const operatingSignals = [
-  {
-    title: "Produção como referência",
-    description:
-      "Trabalho diário com sistemas públicos e fluxo real de manutenção, evolução e incidentes evitáveis.",
-  },
-  {
-    title: "Arquitetura sem excesso",
-    description:
-      "Prefiro decisões que simplificam operação, dão legibilidade ao código e mantêm margem de escala.",
-  },
-  {
-    title: "Aprendizado orientado a entrega",
-    description:
-      "Projetos pessoais entram em produção porque servem como laboratório real de produto, qualidade e deploy.",
-  },
-];
-
-const profileCards = [
-  {
-    eyebrow: "Atuação",
-    title: "Sistemas críticos com impacto público",
-    description:
-      "No PRODEST, atuo em produtos usados por milhares de servidores. Isso molda minhas decisões para estabilidade, clareza e manutenção contínua.",
-  },
-  {
-    eyebrow: "Método",
-    title: "Execução disciplinada, sem teatro técnico",
-    description:
-      "Boa engenharia, para mim, é alinhar contexto, modelagem, testes e entrega. A solução precisa funcionar sob pressão, não só parecer bonita no repositório.",
-  },
-  {
-    eyebrow: "Direção",
-    title: "Construir software com propósito nítido",
-    description:
-      "Meu interesse está em produtos que resolvem dores reais. Quando o problema é claro, consigo ir do desenho ao deploy com muito menos ruído.",
-  },
-];
+type SignalItem = { title: string; description: string };
+type ProfileCard = { eyebrow: string; title: string; description: string };
 
 export function AboutSection() {
+  const t = useTranslations("about");
+  const operatingSignals = t.raw("signals") as SignalItem[];
+  const profileCards = t.raw("profile_cards") as ProfileCard[];
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -116,8 +84,8 @@ export function AboutSection() {
     <Section id="about" className="relative" ref={sectionRef}>
       <Container className="md:px-30">
         <div ref={headerRef} className="mb-12 md:mb-16">
-          <Eyebrow>04 / Perfil</Eyebrow>
-          <SectionTitle>O engenheiro por trás do código</SectionTitle>
+          <Eyebrow>{t("eyebrow")}</Eyebrow>
+          <SectionTitle>{t("title")}</SectionTitle>
         </div>
 
         <div
@@ -128,27 +96,19 @@ export function AboutSection() {
           <div className="space-y-10 md:space-y-12">
             <div className="space-y-5">
               <p className="font-mono text-sm leading-relaxed text-muted-foreground">
-                Sou José Luiz Mendes — o engenheiro por trás do MendeShift.
-                Trabalho no PRODEST, o instituto de tecnologia do Governo do
-                Espírito Santo, desenvolvendo e mantendo sistemas que atendem
-                milhares de servidores públicos.
+                {t("p1")}
               </p>
               <p className="font-mono text-sm leading-relaxed text-muted-foreground">
-                Fui 1° lugar no Espírito Santo e 17° no Brasil pelo Colégio
-                Sagrado Coração de Maria. Essa disciplina define como executo
-                projetos até hoje — sem atalhos, sem dívida técnica invisível.
+                {t("p2")}
               </p>
               <p className="font-mono text-sm leading-relaxed text-muted-foreground">
-                Interesses em neurociência, música e finanças constroem uma
-                leitura analítica diferente dos problemas. Quando clareza de
-                propósito encontra engenharia bem feita, os resultados mudam
-                de escala.
+                {t("p3")}
               </p>
             </div>
 
             <div>
               <ActionLink href="/experience" variant="ghost" className="px-0 text-accent hover:text-accent/80">
-                Ver trajetória profissional e acadêmica
+                {t("cta")}
               </ActionLink>
             </div>
 
@@ -157,7 +117,7 @@ export function AboutSection() {
               <div className="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_220px] lg:items-start">
                 <div className="space-y-5">
                   <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-                    Base operacional
+                    {t("operating_base")}
                   </p>
                   {operatingSignals.map((signal) => (
                     <div key={signal.title} className="grid gap-3 border-l border-accent/35 pl-4 sm:pl-5">
@@ -174,26 +134,26 @@ export function AboutSection() {
                 <div className="grid gap-3">
                   <div className="rounded-md border border-border/25 bg-background/30 p-4">
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                      Ambiente
+                      {t("profile_label")}
                     </p>
                     <p className="mt-3 font-display text-2xl tracking-tight text-accent">
-                      PRODEST
+                      {t("profile_value")}
                     </p>
                   </div>
                   <div className="rounded-md border border-border/25 bg-background/25 p-4">
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                      Foco
+                      {t("mode_label")}
                     </p>
                     <p className="mt-3 font-display text-2xl tracking-tight text-foreground">
-                      Produto + Qualidade
+                      {t("mode_value")}
                     </p>
                   </div>
                   <div className="rounded-md border border-border/25 p-4">
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                      Direção
+                      {t("focus_label")}
                     </p>
                     <p className="mt-3 font-display text-2xl tracking-tight text-foreground">
-                      Entregar com contexto
+                      {t("focus_value")}
                     </p>
                   </div>
                 </div>
@@ -218,12 +178,10 @@ export function AboutSection() {
 
             <Card className="border-border/40 bg-card/60 p-5 sm:p-6">
               <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                motivação
+                {t("motivation_label")}
               </p>
               <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground">
-                Quando decidi me casar, ainda não dominava programação.
-                Usei o casamento como combustível para aprender.
-                O resultado virou o projeto mais completo do portfólio.
+                {t("motivation_text")}
               </p>
             </Card>
           </div>

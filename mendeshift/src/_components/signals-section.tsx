@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "@/i18n/context";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,34 +13,17 @@ import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const services = [
-  {
-    no: "No. 01",
-    category: "Web",
-    title: "Aplicações Web Fullstack",
-    desc: "Next.js, React, Node.js e PostgreSQL. Do banco de dados à interface, com arquitetura pensada para escalar.",
-  },
-  {
-    no: "No. 02",
-    category: "Backend",
-    title: "APIs & Integrações",
-    desc: "REST APIs com autenticação JWT, webhooks, pagamentos e integrações com serviços externos.",
-  },
-  {
-    no: "No. 03",
-    category: "Qualidade",
-    title: "Testes & Qualidade",
-    desc: "Testes unitários, E2E com Playwright e métricas verificáveis. SonarQube Grade A em projetos críticos.",
-  },
-  {
-    no: "No. 04",
-    category: "Infra",
-    title: "Containers & Deploy",
-    desc: "Docker, Docker Compose e deploy em produção. CI/CD com Azure DevOps e boas práticas de entrega.",
-  },
-];
+type ServiceItem = {
+  no: string;
+  category: string;
+  title: string;
+  desc: string;
+};
 
 export function SignalsSection() {
+  const t = useTranslations("services");
+  const services = t.raw("items") as ServiceItem[];
+
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -137,11 +121,9 @@ export function SignalsSection() {
         />
 
         <div ref={headerRef} className="mb-12">
-          <Eyebrow>01 / Serviços</Eyebrow>
-          <SectionTitle>O que construo</SectionTitle>
-          <SectionLead>
-            Especialidades e áreas de atuação — do backend à interface.
-          </SectionLead>
+          <Eyebrow>{t("eyebrow")}</Eyebrow>
+          <SectionTitle>{t("title")}</SectionTitle>
+          <SectionLead>{t("lead")}</SectionLead>
         </div>
 
         <div className="relative overflow-hidden pb-4 sm:pb-6">

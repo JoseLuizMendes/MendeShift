@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "@/i18n/context";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -31,16 +32,12 @@ const metaGroups = [
     items: ["Next.js", "Tailwind CSS", "TypeScript"],
   },
   {
-    title: "Tipografia",
+    title: "Typography",
     items: ["Bebas Neue", "IBM Plex Sans", "IBM Plex Mono"],
   },
   {
-    title: "Modo",
+    title: "Mode",
     items: ["Dark-first", "Token-driven"],
-  },
-  {
-    title: "Ano",
-    items: [String(new Date().getFullYear()), "Ongoing"],
   },
 ] as const;
 
@@ -63,6 +60,7 @@ const contactLinks = [
 ] as const;
 
 export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
+  const t = useTranslations("colophon");
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -144,12 +142,11 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
           className="mb-10 grid gap-6 md:mb-12 lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] lg:items-end lg:gap-10"
         >
           <div>
-            <Eyebrow>06 / Colophon</Eyebrow>
-            <SectionTitle>Créditos</SectionTitle>
+            <Eyebrow>{t("eyebrow")}</Eyebrow>
+            <SectionTitle>{t("title")}</SectionTitle>
           </div>
           <SectionLead className="mt-0 max-w-2xl text-left lg:justify-self-end lg:text-right">
-            Sistema visual, stack e decisões-base que sustentam a interface.
-            No mobile, a leitura agora prioriza blocos curtos e ações diretas.
+            {t("lead")}
           </SectionLead>
         </div>
 
@@ -161,17 +158,16 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
             <div className="flex flex-col gap-6 border-b border-border/30 pb-6 md:flex-row md:items-start md:justify-between">
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-                  Build Notes
+                  {t("build_notes")}
                 </p>
                 <p className="mt-3 max-w-lg font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                  Um colophon mais editorial, com blocos agrupados por função.
-                  Isso reduz altura no mobile e melhora escaneabilidade sem perder densidade.
+                  {t("build_text")}
                 </p>
               </div>
               <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground md:text-right">
-                05 grupos
+                {t("groups_count")}
                 <br />
-                01 sistema
+                {t("system_count")}
               </p>
             </div>
 
@@ -179,6 +175,10 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
               {metaGroups.map((group) => (
                 <MetaColumn key={group.title} title={group.title} items={[...group.items]} />
               ))}
+              <MetaColumn
+                title={t("year_label")}
+                items={[String(new Date().getFullYear()), "Ongoing"]}
+              />
             </div>
           </Card>
 
@@ -186,10 +186,10 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
             <div className="flex h-full flex-col">
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-                  Contato
+                  {t("contact_label")}
                 </p>
                 <p className="mt-3 font-mono text-xs leading-relaxed text-muted-foreground">
-                  Canais diretos para conversa, proposta ou continuidade de projeto.
+                  {t("contact_text")}
                 </p>
               </div>
 
@@ -224,10 +224,10 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
         >
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-              © {new Date().getFullYear()} MendeShift. All rights reserved.
+              {t("copyright", { year: new Date().getFullYear() })}
             </p>
             <ActionLink href={topHref} variant="ghost" className="self-start md:self-auto">
-              Voltar ao topo
+              {t("back_to_top")}
             </ActionLink>
           </div>
         </Card>

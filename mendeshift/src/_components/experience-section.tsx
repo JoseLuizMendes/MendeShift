@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTranslations } from "@/i18n/context";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,11 +10,17 @@ import { Card } from "@/_components/ui/card";
 import { Container } from "@/_components/ui/container";
 import { Separator } from "@/_components/ui/separator";
 import { Eyebrow, Section, SectionLead, SectionTitle } from "@/_components/ui/section";
-import { currentRole, educationEntries, experienceAchievements, techStack } from "@/lib/experience";
+import type { ExperienceData } from "@/lib/experience";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function ExperienceSection() {
+export function ExperienceSection({
+  currentRole,
+  experienceAchievements,
+  techStack,
+  educationEntries,
+}: ExperienceData) {
+  const t = useTranslations("experience_section");
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const roleRef = useRef<HTMLDivElement>(null);
@@ -78,12 +85,9 @@ export function ExperienceSection() {
     <Section id="experience" className="relative" ref={sectionRef}>
       <Container className="md:px-30">
         <div ref={headerRef} className="mb-12">
-          <Eyebrow>01 / Experiência</Eyebrow>
-          <SectionTitle>Trabalho profissional</SectionTitle>
-          <SectionLead>
-            Engenharia de software em produção, em projetos estratégicos do
-            Governo do Estado do Espírito Santo.
-          </SectionLead>
+          <Eyebrow>{t("eyebrow_experience")}</Eyebrow>
+          <SectionTitle>{t("title_experience")}</SectionTitle>
+          <SectionLead>{t("lead_experience")}</SectionLead>
         </div>
 
         {/* Role header */}
@@ -142,9 +146,9 @@ export function ExperienceSection() {
 
         {/* Tech Stack */}
         <div className="mt-18 md:mt-24">
-          <Eyebrow>02 / Tech Stack</Eyebrow>
+          <Eyebrow>{t("eyebrow_stack")}</Eyebrow>
           <h3 className="mt-4 font-display text-2xl tracking-tight sm:text-3xl">
-            Tecnologias e ferramentas
+            {t("title_stack")}
           </h3>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {techStack.map((entry) => (
@@ -169,7 +173,8 @@ export function ExperienceSection() {
 
         {/* Education */}
         <div className="mt-18 md:mt-24">
-          <div className="grid gap-4">
+          <Eyebrow>{t("eyebrow_education")}</Eyebrow>
+          <div className="mt-8 grid gap-4">
             {educationEntries.map((entry) => (
               <Card key={entry.title} className="border-border/40 bg-card/60 p-5 sm:p-6">
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
@@ -186,6 +191,11 @@ export function ExperienceSection() {
                     {entry.period}
                   </time>
                 </div>
+                {entry.detail && (
+                  <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground">
+                    {entry.detail}
+                  </p>
+                )}
               </Card>
             ))}
           </div>

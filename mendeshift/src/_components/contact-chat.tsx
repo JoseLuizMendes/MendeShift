@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "@/i18n/context";
 import gsap from "gsap";
 import { Linkedin, MessageCircle } from "lucide-react";
 
@@ -16,50 +17,17 @@ interface Message {
   timestamp: Date;
 }
 
-const quickPrompts = [
-  {
-    label: "Disponibilidade",
-    prompt:
-      "Qual sua disponibilidade atual para iniciar um projeto e qual a sua carga horária semanal?",
-  },
-  {
-    label: "Stack",
-    prompt:
-      "Quais tecnologias, frameworks e ferramentas você domina e utiliza com mais frequência nos projetos?",
-  },
-  {
-    label: "Orçamento",
-    prompt:
-      "Como funciona seu modelo de orçamento, formas de cobrança e como você costuma estruturar propostas?",
-  },
-  {
-    label: "Prazo",
-    prompt:
-      "Qual é o prazo médio para entregar diferentes tipos de projetos, como landing pages ou aplicações completas?",
-  },
-];
-
-const quickAnswersByLabel: Record<string, string> = {
-  Disponibilidade:
-    "Atualmente estou disponível para novos projetos. Consigo começar imediatamente ou alinhar uma data que faça sentido para o escopo e sua urgência.",
-  Stack:
-    "Trabalho principalmente com React, Next.js, TypeScript, Node.js e tecnologias modernas de frontend. Também tenho experiência com design systems, animações e arquitetura voltada a produto.",
-  Orçamento:
-    "O orçamento é definido a partir da complexidade e do escopo. Normalmente trabalho com valores fechados por projeto ou hourly rate em casos específicos, sempre com transparência no que está incluído.",
-  Prazo:
-    "Landing pages costumam levar de 1 a 2 semanas; produtos mais complexos, entre 4 e 8 semanas. O foco é sempre equilibrar velocidade com qualidade e manutenção a longo prazo.",
-};
-
-const initialMessages: Message[] = [
-  {
-    id: "1",
-    role: "assistant",
-    content: "Olá! Sou o assistente virtual do José. Como posso ajudar você hoje?",
-    timestamp: new Date(),
-  },
-];
+type QuickPrompt = { label: string; prompt: string; answer: string };
 
 export function ContactChat() {
+  const t = useTranslations("contact");
+  const quickPrompts = t.raw("quick_prompts") as QuickPrompt[];
+
+  const initialMessages: Message[] = useMemo(
+    () => [{ id: "1", role: "assistant", content: t("initial_message"), timestamp: new Date() }],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
   const chatRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -67,9 +35,7 @@ export function ContactChat() {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [openQuestion, setOpenQuestion] = useState<string | null>(
-    quickPrompts[0]?.label ?? null,
-  );
+  const [openQuestion, setOpenQuestion] = useState<string | null>(null);
   const [scrambleTokens, setScrambleTokens] = useState({
     whatsapp: 0,
     linkedin: 0,
@@ -116,22 +82,12 @@ export function ContactChat() {
     setIsTyping(true);
 
     setTimeout(() => {
-      const responses: Record<string, string> = {
-        disponibilidade:
-          "Atualmente estou disponível para novos projetos! Posso começar imediatamente ou agendar para uma data que funcione melhor para você.",
-        stack: "Trabalho principalmente com React, Next.js, TypeScript, Node.js e diversas tecnologias de frontend moderno. Também tenho experiência com design systems e animações.",
-        orçamento:
-          "O orçamento é calculado com base na complexidade e escopo do projeto. Geralmente trabalho com valores fixos por projeto ou hourly rate. Me conta mais sobre sua ideia!",
-        prazo: "O prazo varia de acordo com o projeto. Landing pages levam de 1-2 semanas, aplicações mais complexas de 4-8 semanas. Sempre priorizo qualidade sobre velocidade.",
-      };
-
       const lowerMessage = userMessage.toLowerCase();
-      let response =
-        "Obrigado pela mensagem! Para uma resposta mais detalhada, entre em contato diretamente pelo email josemendess004@gmail.com ou LinkedIn.";
+      let response = t("fallback_response");
 
-      for (const [key, value] of Object.entries(responses)) {
-        if (lowerMessage.includes(key)) {
-          response = value;
+      for (const qp of quickPrompts) {
+        if (lowerMessage.includes(qp.label.toLowerCase())) {
+          response = qp.answer;
           break;
         }
       }
@@ -193,10 +149,10 @@ export function ContactChat() {
             </div>
             <div>
               <p className="font-mono text-sm font-medium text-foreground">
-                Assistente Virtual
+                {t("virtual_assistant")}
               </p>
               <p className="font-mono text-xs text-muted-foreground">
-                Online agora
+                {t("online")}
               </p>
             </div>
           </div>
@@ -245,7 +201,7 @@ export function ContactChat() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Digite sua mensagem..."
+              placeholder={t("placeholder")}
               rows={1}
               className="max-h-32 min-h-11 flex-1 resize-none rounded-xl border border-border/50 bg-muted/50 px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
             />
@@ -277,12 +233,11 @@ export function ContactChat() {
         {/* Quick Actions */}
         <section className="flex flex-col gap-4">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            Perguntas Rápidas
+            {t("quick_label")}
           </p>
           <div className="space-y-3">
             {quickPrompts.map((item) => {
               const isOpen = openQuestion === item.label;
-              const answer = quickAnswersByLabel[item.label];
 
               return (
                 <div
@@ -313,9 +268,9 @@ export function ContactChat() {
                       <p className="font-mono text-[11px] leading-relaxed text-muted-foreground">
                         {item.prompt}
                       </p>
-                      {answer && (
+                      {item.answer && (
                         <p className="font-mono text-xs leading-relaxed text-foreground">
-                          {answer}
+                          {item.answer}
                         </p>
                       )}
                     </div>
@@ -329,7 +284,7 @@ export function ContactChat() {
         {/* Contact Links */}
         <section className="flex w-full max-w-none flex-col gap-4 self-start rounded-[28px] border border-border/60 bg-card/60 p-4 sm:max-w-sm sm:p-5">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            Contato Direto
+            {t("direct_label")}
           </p>
           <div className="flex flex-col gap-2.5">
             <ActionLink

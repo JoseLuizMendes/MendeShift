@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { useTranslations } from "@/i18n/context";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,15 +12,20 @@ import { BitmapChevron } from "@/_components/bitmap-chevron";
 import { ScrambleTextOnHover } from "@/_components/scramble-text";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, Section, SectionLead, SectionTitle } from "@/_components/ui/section";
-import { projects } from "@/lib/projects";
+import type { Project } from "@/lib/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Apenas os 2 primeiros projetos na home
-const featuredProjects = projects.slice(0, 2);
-const remainingCount = projects.length - featuredProjects.length;
+type Props = {
+  projects: Omit<Project, "pt">[];
+};
 
-export function WorkSection() {
+export function WorkSection({ projects }: Props) {
+  const t = useTranslations("work");
+
+  const featuredProjects = projects.slice(0, 2);
+  const remainingCount = projects.length - featuredProjects.length;
+
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -45,7 +51,7 @@ export function WorkSection() {
         },
       );
 
-      const cards = gridRef.current?.querySelectorAll("article, a[data-cta]");
+      const cards = gridRef.current?.querySelectorAll("article");
       if (cards?.length) {
         gsap.fromTo(
           cards,
@@ -73,37 +79,24 @@ export function WorkSection() {
   return (
     <Section id="work" className="relative" ref={sectionRef}>
       <Container className="md:px-30">
-        <div ref={headerRef} className="mb-6 flex flex-col gap-4 sm:gap-6 md:mb-10 md:flex-row md:items-end md:justify-between">
+        <div ref={headerRef} className="mb-6 flex flex-col gap-4 md:mb-10">
           <div>
-            <Eyebrow>02 / Projetos</Eyebrow>
-            <SectionTitle>Selected Work</SectionTitle>
+            <Eyebrow>{t("eyebrow")}</Eyebrow>
+            <SectionTitle>{t("title")}</SectionTitle>
           </div>
-          <div className="max-w-md md:text-right">
-            <SectionLead className="mt-0 text-left md:text-right">
-              Produtos construídos de ponta a ponta — arquitetura, desenvolvimento
-              e entrega com qualidade de produção.
-            </SectionLead>
-            <Link
-              href="/projetos"
-              className="mt-4 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-accent transition-colors duration-300 hover:text-accent/75"
-            >
-              Explorar arquivo completo
-              <BitmapChevron className="w-3 rotate-90" />
-            </Link>
-          </div>
+          <SectionLead className="mt-0">{t("lead")}</SectionLead>
         </div>
 
         <div
           ref={gridRef}
-          className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-4 md:auto-rows-[220px] md:gap-6"
+          className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 md:gap-6"
         >
           {featuredProjects.map((item, idx) => (
             <article
               key={item.slug}
-              className={`group relative overflow-hidden rounded-lg border border-border/40 bg-card/70 p-0 transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/60 md:col-span-2 md:row-span-2`}
+              className="group relative overflow-hidden rounded-lg border border-border/40 bg-card/70 p-0 transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/60"
             >
-              <div className="flex h-full flex-col">
-                {/* Cabeçalho com padding */}
+              <div className="flex flex-col">
                 <div className="px-5 pb-0 pt-5 sm:px-6 sm:pt-6">
                   <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                     {item.category}
@@ -113,9 +106,8 @@ export function WorkSection() {
                   </h3>
                 </div>
 
-                {/* Preview — imagem sem padding lateral, expande para preencher */}
                 <div
-                  className={`relative mx-5 my-4 min-h-36 flex-1 overflow-hidden rounded-sm border border-border/30 sm:mx-6 ${!item.previewImage ? item.accentGradient : "bg-card/30"}`}
+                  className={`relative mx-5 mt-4 h-44 md:h-56 overflow-hidden rounded-sm border border-border/30 sm:mx-6 ${!item.previewImage ? item.accentGradient : "bg-card/30"}`}
                 >
                   {item.previewImage && (
                     <Image
@@ -128,17 +120,11 @@ export function WorkSection() {
                       aria-hidden="true"
                     />
                   )}
-
-                  {/* Overlay */}
                   <div className="absolute inset-0 bg-linear-to-b from-background/20 via-background/45 to-background/85" />
-
-                  {/* Label + índice */}
                   <div className="absolute inset-x-4 top-4 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">
                     <span>{item.placeholderLabel}</span>
                     <span>{String(idx + 1).padStart(2, "0")}</span>
                   </div>
-
-                  {/* Caption */}
                   <div className="absolute inset-x-4 bottom-4">
                     <p className="max-w-[28ch] font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/80">
                       {item.placeholderCaption}
@@ -146,23 +132,20 @@ export function WorkSection() {
                   </div>
                 </div>
 
-                {/* Rodapé com padding */}
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6">
-                  <p className="max-w-[34ch] font-mono text-xs leading-relaxed text-muted-foreground">
+                <div className="px-5 pb-5 pt-4 sm:px-6 sm:pb-6">
+                  <p className="w-full font-mono text-xs leading-relaxed text-muted-foreground">
                     {item.shortDesc}
                   </p>
-
                   <div className="mt-4 flex flex-wrap gap-1.5">
-                    {item.tech.map((t) => (
+                    {item.tech.map((tech) => (
                       <span
-                        key={t}
+                        key={tech}
                         className="rounded-full border border-border/30 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-muted-foreground/60"
                       >
-                        {t}
+                        {tech}
                       </span>
                     ))}
                   </div>
-
                   <div className="mt-5 flex items-center justify-between">
                     <span className="font-mono text-[10px] text-muted-foreground/50">
                       {item.metric ?? String(idx + 1).padStart(2, "0")}
@@ -171,11 +154,7 @@ export function WorkSection() {
                       href={`/projetos/${item.slug}`}
                       className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition-colors duration-300 group-hover:text-accent"
                     >
-                      <ScrambleTextOnHover
-                        text="Ver case study"
-                        as="span"
-                        duration={0.45}
-                      />
+                      <ScrambleTextOnHover text={t("view_case")} as="span" duration={0.45} />
                       <BitmapChevron className="w-3 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
                     </Link>
                   </div>
@@ -183,20 +162,18 @@ export function WorkSection() {
               </div>
             </article>
           ))}
+        </div>
 
-          {/* CTA — arquivo completo */}
+        <div className="mt-8 flex items-center justify-between border-t border-border/20 pt-6 md:mt-10">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/50">
+            {t("more", { count: remainingCount })}
+          </p>
           <Link
             href="/projetos"
-            data-cta="true"
-            className="group relative flex flex-col items-center justify-center gap-4 overflow-hidden rounded-lg border border-border/25 border-dashed bg-card/30 p-5 text-center transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/40 hover:bg-card/50 sm:p-6 md:col-span-4 md:row-span-1"
+            className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-accent transition-colors duration-300 hover:text-accent/75"
           >
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/60">
-              +{remainingCount} projetos no arquivo
-            </p>
-            <span className="font-display text-3xl tracking-tight text-foreground/70 transition-colors duration-300 group-hover:text-foreground sm:text-4xl">
-              Ver arquivo completo
-            </span>
-            <BitmapChevron className="w-3 rotate-90 text-accent opacity-60 transition-opacity duration-300 group-hover:opacity-100" />
+            {t("explore")}
+            <BitmapChevron className="w-3 rotate-90" />
           </Link>
         </div>
       </Container>
