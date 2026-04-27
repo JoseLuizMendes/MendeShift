@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { getServerTranslations, loadMessages } from "@/i18n/server";
 
 import { LanguageToggle } from "@/_components/language-toggle";
+import { Preloader } from "@/_components/preloader";
 import { SmoothScroll } from "@/_components/smooth-scroll";
 import "../globals.css";
 
@@ -90,6 +91,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         className={`${primarySans.variable} ${primaryMono.variable} ${display.variable} bg-background text-foreground antialiased`}
       >
         <TranslationsProvider locale={locale} messages={messages}>
+          <Preloader />
           <SmoothScroll>{children}</SmoothScroll>
           <LanguageToggle />
         </TranslationsProvider>
