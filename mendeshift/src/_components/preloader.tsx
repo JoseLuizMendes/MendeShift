@@ -40,6 +40,9 @@ export function Preloader() {
     cancelRef.current = true;
     cleanupListenersRef.current?.();
 
+    // Snap page to top while overlay is still fully visible
+    window.dispatchEvent(new CustomEvent("lenis:scrollToTop"));
+
     const tl = gsap.timeline();
     tl.to(hintRef.current, { opacity: 0, duration: 0.18, ease: "power1.in" });
 
@@ -59,7 +62,10 @@ export function Preloader() {
       { opacity: 0, duration: 0.48, ease: "power2.inOut" },
       "-=0.14",
     );
-    tl.call(() => setVisible(false));
+    tl.call(() => {
+      window.dispatchEvent(new CustomEvent("preloader:done"));
+      setVisible(false);
+    });
   };
 
   useEffect(() => {

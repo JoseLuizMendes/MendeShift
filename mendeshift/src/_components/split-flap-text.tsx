@@ -100,11 +100,12 @@ interface SplitFlapTextProps {
   text: string;
   className?: string;
   speed?: number;
+  ready?: boolean;
 }
 
 const CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split("");
 
-export function SplitFlapText({ text, className = "", speed = 50 }: SplitFlapTextProps) {
+export function SplitFlapText({ text, className = "", speed = 50, ready = true }: SplitFlapTextProps) {
   const chars = useMemo(() => text.split(""), [text]);
   const [animationKey, setAnimationKey] = useState(0);
   const audio = useSplitFlapAudio();
@@ -113,7 +114,7 @@ export function SplitFlapText({ text, className = "", speed = 50 }: SplitFlapTex
     <div
       className={`inline-flex cursor-pointer items-center gap-[0.08em] ${className}`}
       aria-label={text}
-      onMouseEnter={() => setAnimationKey((prev) => prev + 1)}
+      onMouseEnter={() => ready && setAnimationKey((prev) => prev + 1)}
       style={{ perspective: "1000px" }}
     >
       {chars.map((char, index) => (
@@ -123,6 +124,7 @@ export function SplitFlapText({ text, className = "", speed = 50 }: SplitFlapTex
           index={index}
           animationKey={animationKey}
           speed={speed}
+          ready={ready}
           playClick={audio?.playClick}
         />
       ))}
@@ -135,12 +137,14 @@ function SplitFlapChar({
   index,
   animationKey,
   speed,
+  ready = true,
   playClick,
 }: {
   char: string;
   index: number;
   animationKey: number;
   speed: number;
+  ready?: boolean;
   playClick?: () => void;
 }) {
   const displayChar = CHARSET.includes(char) ? char : " ";
@@ -160,7 +164,7 @@ function SplitFlapChar({
       intervalRef.current = null;
     }
 
-    if (isSpace) return;
+    if (isSpace || !ready) return;
 
     let flipIndex = 0;
     const settleThreshold = 8 + index * 2;
@@ -197,7 +201,7 @@ function SplitFlapChar({
         intervalRef.current = null;
       }
     };
-  }, [displayChar, index, isSpace, animationKey, speed, playClick]);
+  }, [displayChar, index, isSpace, animationKey, speed, ready, playClick]);
 
   if (isSpace) {
     return <div style={{ width: "0.3em", fontSize: "clamp(2.2rem, 12vw, 14rem)" }} />;

@@ -24,6 +24,23 @@ export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [scrambleToken, setScrambleToken] = useState(0);
+  const [splitFlapReady, setSplitFlapReady] = useState(false);
+
+  useEffect(() => {
+    const navType = (
+      performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined
+    )?.type;
+    const willShowPreloader = navType === "navigate" || navType === "reload";
+
+    if (!willShowPreloader) {
+      setSplitFlapReady(true);
+      return;
+    }
+
+    const handleDone = () => setSplitFlapReady(true);
+    window.addEventListener("preloader:done", handleDone, { once: true });
+    return () => window.removeEventListener("preloader:done", handleDone);
+  }, []);
 
   useEffect(() => {
     if (!sectionRef.current || !contentRef.current) return;
@@ -52,7 +69,7 @@ export function HeroSection() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative min-h-screen overflow-hidden pb-16 pt-14 sm:pb-20 sm:pt-20 md:pb-28 md:pt-28"
+      className="relative min-h-screen overflow-hidden pb-16 pt-4 sm:pb-20 sm:pt-20 md:pb-28 md:pt-28"
     >
       <AnimatedNoise opacity={0.03} />
 
@@ -70,7 +87,7 @@ export function HeroSection() {
 
             <SplitFlapAudioProvider>
               <div className="mt-4">
-                <SplitFlapText text="MendeShift" speed={80} />
+                <SplitFlapText text="MendeShift" speed={80} ready={splitFlapReady} />
               </div>
               <SplitFlapMuteToggle className="mt-4" />
 
