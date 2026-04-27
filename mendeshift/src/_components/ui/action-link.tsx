@@ -1,20 +1,24 @@
 import * as React from "react";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
 type Variant = "outline" | "ghost";
 
-type Props = React.ComponentPropsWithoutRef<"a"> & {
+type Props = Omit<React.ComponentPropsWithoutRef<typeof Link>, "href"> & {
+  href: string;
   variant?: Variant;
 };
 
 export function ActionLink({
   className,
   variant = "outline",
+  href,
   ...props
 }: Props) {
   return (
-    <a
+    <Link
+      href={href}
       className={cn(
         "inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-full font-mono text-xs uppercase tracking-widest transition-colors",
         variant === "outline" &&
