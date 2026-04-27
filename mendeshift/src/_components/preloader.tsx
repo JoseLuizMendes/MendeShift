@@ -163,7 +163,7 @@ export function Preloader() {
       ref={overlayRef}
       onClick={triggerExit}
       onTouchStart={triggerExit}
-      className="fixed inset-0 z-[9999] flex cursor-pointer select-none items-center justify-center bg-background"
+      className="fixed inset-0 z-9999 flex cursor-pointer select-none items-center justify-center bg-background"
       aria-hidden="true"
     >
       {/* Corner labels */}
