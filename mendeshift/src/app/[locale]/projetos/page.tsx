@@ -160,18 +160,18 @@ function ProjectArchiveCard({
 
         {/* Content */}
         <div className="px-4 pb-4 pt-4 sm:px-5 sm:pb-5">
-          <div className="flex items-start justify-between gap-4">
-            <div className="min-w-0">
+          <div className="flex flex-col gap-1">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
               <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                 {project.category}
               </p>
-              <h2 className="mt-2 font-display text-2xl tracking-tight text-foreground sm:text-3xl">
-                {project.title}
-              </h2>
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+                {project.metric}
+              </span>
             </div>
-            <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-              {project.metric}
-            </span>
+            <h2 className="font-display text-2xl tracking-tight text-foreground sm:text-3xl">
+              {project.title}
+            </h2>
           </div>
 
           <p className="mt-3 w-full font-mono text-xs leading-relaxed text-muted-foreground">

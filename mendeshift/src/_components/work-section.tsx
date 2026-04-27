@@ -146,7 +146,7 @@ export function WorkSection({ projects }: Props) {
                       </span>
                     ))}
                   </div>
-                  <div className="mt-5 flex items-center justify-between">
+                  <div className="mt-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
                     <span className="font-mono text-[10px] text-muted-foreground/50">
                       {item.metric ?? String(idx + 1).padStart(2, "0")}
                     </span>
