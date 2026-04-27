@@ -79,13 +79,13 @@ export function PrinciplesSection() {
           {principles.map((principle, idx) => (
             <article
               key={principle.number}
-              className={`flex px-5 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10 ${
+              className={`flex min-w-0 overflow-hidden px-5 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10 ${
                 idx % 2 === 1
                   ? "justify-end text-right"
                   : "justify-start text-left"
               }`}
             >
-              <div className="max-w-3xl">
+              <div className="min-w-0 w-full max-w-3xl">
                 <span className="mb-4 block font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                   {principle.number}
                 </span>

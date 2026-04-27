@@ -30,7 +30,7 @@ export default async function ExperiencePage({ params }: Props) {
     <>
       <div className="noise-overlay" aria-hidden="true" />
       <main id="experience-page-top" className="app-shell relative min-h-screen">
-        <section className="border-b border-border/20 pt-0 md:pt-8">
+        <section className="border-b border-border/20 pt-10 sm:pt-12 md:pt-8">
           <Container className="md:px-30">
             <div className="flex flex-col gap-8 py-12 md:flex-row md:items-end md:justify-between md:py-16">
               <div className="max-w-2xl">

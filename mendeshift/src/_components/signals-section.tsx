@@ -108,7 +108,7 @@ export function SignalsSection() {
   }, []);
 
   return (
-    <Section id="services" className="relative" ref={sectionRef}>
+    <Section id="services" className="relative overflow-x-hidden" ref={sectionRef}>
       <Container className="md:px-30">
         <div
           ref={cursorRef}

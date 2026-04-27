@@ -114,7 +114,7 @@ export function AboutSection() {
 
             <div className="relative overflow-hidden rounded-(--radius) border border-border/35 bg-card/45 p-6 sm:p-7 md:p-8">
               <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-accent/60 to-transparent" />
-              <div className="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_220px] lg:items-start">
+              <div className="grid gap-6 md:grid-cols-2 md:items-start lg:grid-cols-[minmax(0,1.2fr)_220px]">
                 <div className="space-y-5">
                   <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
                     {t("operating_base")}
@@ -163,8 +163,8 @@ export function AboutSection() {
           </div>
 
           {/* Right — photo + quote */}
-          <div className="mx-auto flex w-full max-w-md flex-col gap-6 lg:mx-0 lg:max-w-none">
-            <div className="relative aspect-3/4 w-full overflow-hidden rounded-sm border border-border/40">
+          <div className="mx-auto flex w-full max-w-sm flex-col gap-6 sm:max-w-md lg:mx-0 lg:max-w-none">
+            <div className="relative aspect-square w-full overflow-hidden rounded-sm border border-border/40 sm:aspect-[3/4]">
               <Image
                 src="/Card_Profissional.png"
                 alt="José Luiz Mendes — Product Engineer"
@@ -189,7 +189,7 @@ export function AboutSection() {
 
         <div
           ref={statsRef}
-          className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3"
+          className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
         >
           {profileCards.map((card) => (
             <Card

@@ -52,7 +52,7 @@ export function HeroSection() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative min-h-screen overflow-hidden pb-16 pt-18 sm:pb-20 sm:pt-24 md:pb-28 md:pt-28"
+      className="relative min-h-screen overflow-hidden pb-16 pt-14 sm:pb-20 sm:pt-20 md:pb-28 md:pt-28"
     >
       <AnimatedNoise opacity={0.03} />
 

@@ -39,7 +39,7 @@ export function SectionTitle({
   return (
     <h2
       className={cn(
-        "mt-4 font-display text-4xl tracking-tight sm:text-5xl md:text-6xl lg:text-7xl",
+        "mt-4 font-display text-3xl tracking-tight sm:text-5xl md:text-6xl lg:text-7xl",
         className,
       )}
       {...props}

@@ -51,7 +51,7 @@ export function CtaSection() {
           {/* Header */}
           <div ref={headlineRef}>
             <Eyebrow>{t("eyebrow")}</Eyebrow>
-            <h2 className="mt-4 font-display text-4xl tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+            <h2 className="mt-4 font-display text-[2rem] leading-none tracking-tight sm:text-5xl md:text-7xl lg:text-8xl">
               {t("headline_1")}
               <br className="hidden sm:block" />
               {t("headline_2")}

@@ -282,7 +282,7 @@ export function ContactChat() {
         </section>
 
         {/* Contact Links */}
-        <section className="flex w-full max-w-none flex-col gap-4 self-start rounded-[28px] border border-border/60 bg-card/60 p-4 sm:max-w-sm sm:p-5">
+        <section className="flex w-full flex-col gap-4 self-start rounded-[28px] border border-border/60 bg-card/60 p-4 sm:p-5">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
             {t("direct_label")}
           </p>
