@@ -114,6 +114,8 @@ export function WorkSection({ projects }: Props) {
                       src={item.previewImage}
                       alt=""
                       fill
+                      priority={idx === 0}
+                      loading={idx === 0 ? "eager" : "lazy"}
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover grayscale brightness-[0.28]"
                       style={{ objectPosition: item.previewImageFocus ?? "center" }}
