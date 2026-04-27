@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { getServerTranslations } from "@/i18n/server";
 
 import { BitmapChevron } from "@/_components/bitmap-chevron";
@@ -69,6 +70,7 @@ export default async function ProjectsPage({ params }: Props) {
                   project={project}
                   index={index}
                   openCaseLabel={t("open_case")}
+                  priority={index === 0}
                 />
               ))}
             </div>
@@ -103,6 +105,7 @@ function ProjectsColumn({
             project={project}
             index={index % items.length}
             openCaseLabel={openCaseLabel}
+            priority={direction === "up" && index === 0}
           />
         ))}
       </div>
@@ -114,10 +117,12 @@ function ProjectArchiveCard({
   project,
   index,
   openCaseLabel,
+  priority = false,
 }: {
   project: Omit<Project, "pt">;
   index: number;
   openCaseLabel: string;
+  priority?: boolean;
 }) {
   return (
     <article className="group">
@@ -131,6 +136,8 @@ function ProjectArchiveCard({
               src={project.previewImage}
               alt=""
               fill
+              priority={priority}
+              loading={priority ? "eager" : "lazy"}
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover grayscale brightness-[0.32]"
               style={{
@@ -189,13 +196,13 @@ function ProjectArchiveCard({
             ))}
           </div>
 
-          <a
+          <Link
             href={`/projetos/${project.slug}`}
             className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground transition-colors duration-300 group-hover:text-accent"
           >
             {openCaseLabel}
             <BitmapChevron className="w-3 transition-transform duration-500 group-hover:rotate-45" />
-          </a>
+          </Link>
         </div>
       </Card>
     </article>
