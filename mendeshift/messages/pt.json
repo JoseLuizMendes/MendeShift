@@ -25,7 +25,7 @@
     "cta_secondary": "Sobre o MendeShift"
   },
   "services": {
-    "eyebrow": "01 / Serviços",
+    "eyebrow": "02 / Serviços",
     "title": "O que construo",
     "lead": "Especialidades e áreas de atuação — do backend à interface.",
     "items": [
@@ -36,7 +36,7 @@
     ]
   },
   "work": {
-    "eyebrow": "02 / Projetos",
+    "eyebrow": "03 / Projetos",
     "title": "Trabalhos Selecionados",
     "lead": "Produtos construídos end-to-end — arquitetura, desenvolvimento e entrega com qualidade de produção.",
     "view_case": "Ver case study",
@@ -44,7 +44,7 @@
     "more": "+{count} projetos no arquivo"
   },
   "principles": {
-    "eyebrow": "03 / Princípios",
+    "eyebrow": "04 / Princípios",
     "title": "Como trabalho",
     "items": [
       {
@@ -78,7 +78,7 @@
     ]
   },
   "about": {
-    "eyebrow": "04 / Perfil",
+    "eyebrow": "01 / Perfil",
     "title": "Engenheiro de produto, pensamento transversal",
     "p1": "Construo produtos digitais do zero até a produção — arquitetura, desenvolvimento e entrega numa só responsabilidade. Sem intermediários, sem perda de contexto: cada decisão técnica parte de entender o problema real do cliente.",
     "p2": "Neurociência, música e finanças não são hobbies separados da engenharia — são lentes que mudam como processo um problema. Esse pensamento transversal aparece na modelagem de dados, na legibilidade do código e em como comunico soluções.",

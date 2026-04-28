@@ -25,7 +25,7 @@
     "cta_secondary": "About MendeShift"
   },
   "services": {
-    "eyebrow": "01 / Services",
+    "eyebrow": "02 / Services",
     "title": "What I build",
     "lead": "Specialties and areas of expertise — from backend to interface.",
     "items": [
@@ -36,7 +36,7 @@
     ]
   },
   "work": {
-    "eyebrow": "02 / Projects",
+    "eyebrow": "03 / Projects",
     "title": "Selected Work",
     "lead": "Products built end-to-end — architecture, development and delivery at production quality.",
     "view_case": "View case study",
@@ -44,7 +44,7 @@
     "more": "+{count} more projects in archive"
   },
   "principles": {
-    "eyebrow": "03 / Principles",
+    "eyebrow": "04 / Principles",
     "title": "How I work",
     "items": [
       {
@@ -78,7 +78,7 @@
     ]
   },
   "about": {
-    "eyebrow": "04 / Profile",
+    "eyebrow": "01 / Profile",
     "title": "Product engineer, cross-disciplinary thinker",
     "p1": "I build digital products from zero to production — architecture, development, and delivery as a single responsibility. No intermediaries, no loss of context: every technical decision starts from understanding the client's real problem.",
     "p2": "Neuroscience, music, and finance aren't hobbies separate from engineering — they're lenses that change how I process a problem. That cross-disciplinary thinking shows up in data modeling, code readability, and how I communicate solutions.",

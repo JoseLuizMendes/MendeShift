@@ -23,10 +23,10 @@ export default async function HomePage({ params }: Props) {
       <div className="noise-overlay" aria-hidden="true" />
       <main className="app-shell relative min-h-screen">
         <HeroSection />
+        <AboutSection />
         <SignalsSection />
         <WorkSection projects={projects} />
         <PrinciplesSection />
-        <AboutSection />
         <CtaSection />
         <ColophonSection />
       </main>
