@@ -6,6 +6,7 @@ import { getServerTranslations } from "@/i18n/server";
 import { BitmapChevron } from "@/_components/bitmap-chevron";
 import { ColophonSection } from "@/_components/colophon-section";
 import { ActionLink } from "@/_components/ui/action-link";
+import { BackToHomeLink } from "@/_components/back-to-home-link";
 import { Card } from "@/_components/ui/card";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, SectionLead, SectionTitle } from "@/_components/ui/section";
@@ -46,9 +47,9 @@ export default async function ProjectsPage({ params }: Props) {
               </div>
 
               <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
-                <ActionLink href="/#work" className="w-full justify-center sm:w-auto">
+                <BackToHomeLink className="w-full justify-center sm:w-auto">
                   {t("back")}
-                </ActionLink>
+                </BackToHomeLink>
               </div>
             </div>
           </Container>

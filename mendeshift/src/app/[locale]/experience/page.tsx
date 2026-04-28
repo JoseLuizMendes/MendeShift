@@ -5,6 +5,7 @@ import { getExperienceByLocale } from "@/lib/experience";
 import { ColophonSection } from "@/_components/colophon-section";
 import { ExperienceSection } from "@/_components/experience-section";
 import { ActionLink } from "@/_components/ui/action-link";
+import { BackToHomeLink } from "@/_components/back-to-home-link";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, SectionLead, SectionTitle } from "@/_components/ui/section";
 
@@ -43,9 +44,9 @@ export default async function ExperiencePage({ params }: Props) {
                 <ActionLink href="/#work" className="w-full justify-center sm:w-auto">
                   {t("view_projects")}
                 </ActionLink>
-                <ActionLink href="/" variant="ghost" className="w-full justify-center sm:w-auto">
+                <BackToHomeLink variant="ghost" className="w-full justify-center sm:w-auto">
                   {t("back")}
-                </ActionLink>
+                </BackToHomeLink>
               </div>
             </div>
           </Container>
