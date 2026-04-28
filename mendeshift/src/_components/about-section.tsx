@@ -5,12 +5,11 @@ import { useTranslations } from "@/i18n/context";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
-
 import { ActionLink } from "@/_components/ui/action-link";
 import { Card } from "@/_components/ui/card";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, Section, SectionTitle } from "@/_components/ui/section";
+import { ProfileCard } from "@/_components/profile-card";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -164,17 +163,7 @@ export function AboutSection() {
 
           {/* Right — photo + quote */}
           <div className="mx-auto flex w-full max-w-sm flex-col gap-6 sm:max-w-md lg:mx-0 lg:max-w-none">
-            <div className="relative aspect-square w-full overflow-hidden rounded-sm border border-border/40 sm:aspect-[3/4]">
-              <Image
-                src="/Card_Profissional.png"
-                alt="José Luiz Mendes — Product Engineer"
-                fill
-                className="object-cover object-[center_20%]"
-                sizes="(max-width: 768px) 100vw, 300px"
-                priority
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-background/60 via-transparent to-transparent" />
-            </div>
+            <ProfileCard />
 
             <Card className="border-border/40 bg-card/60 p-5 sm:p-6">
               <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
