@@ -13,15 +13,15 @@ export function ProfileCard() {
   const [scrambleToken, setScrambleToken] = useState(0);
 
   return (
-    <div className="group relative aspect-3/4 w-full overflow-hidden rounded-sm border border-border/40">
+    <div className="group relative h-115 w-full overflow-hidden rounded-3xl border border-border/40">
       {/* Photo */}
       <Image
-        src="/Card_Profissional.png"
+        src="/card_profile.webp"
         alt="José Luiz Mendes — Product Engineer"
         fill
         priority
-        sizes="(max-width: 768px) 100vw, 300px"
-        className="object-cover object-[center_20%] transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.03]"
+        sizes="(max-width: 768px) 100vw, 100vw"
+        className="object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.01]"
       />
 
       {/* Base gradient — dark bottom */}
@@ -41,8 +41,8 @@ export function ProfileCard() {
       {/* Top — location pill */}
       <div className="absolute left-4 top-4">
         <span className="inline-flex items-center gap-1.5 rounded-full border border-border/30 bg-background/60 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.22em] text-muted-foreground/80 backdrop-blur-sm">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500/80" />
-          Vitória, ES
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500/80" />
+          Online
         </span>
       </div>
 
