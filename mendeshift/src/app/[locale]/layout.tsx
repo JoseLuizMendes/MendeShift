@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { TranslationsProvider } from "@/i18n/context";
 import { notFound } from "next/navigation";
 import { getServerTranslations, loadMessages } from "@/i18n/server";
@@ -92,10 +93,12 @@ export default async function LocaleLayout({ children, params }: Props) {
       >
         <TranslationsProvider locale={locale} messages={messages}>
           <Preloader />
-          <SmoothScroll>{children}</SmoothScroll>
+          <SmoothScroll>{children}
+          <Analytics/>
+          <SpeedInsights/>
+          </SmoothScroll>
           <LanguageToggle />
         </TranslationsProvider>
-        <Analytics />
       </body>
     </html>
   );
