@@ -163,16 +163,14 @@ export function ContactChat() {
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex ${
-                    message.role === "user" ? "justify-end" : "justify-start"
-                  }`}
+                  className={`flex ${message.role === "user" ? "justify-end" : "justify-start"
+                    }`}
                 >
                   <div
-                    className={`max-w-[90%] rounded-2xl px-4 py-3 font-mono text-sm leading-relaxed sm:max-w-[85%] ${
-                      message.role === "user"
+                    className={`max-w-[90%] rounded-2xl px-4 py-3 font-mono text-sm leading-relaxed sm:max-w-[85%] ${message.role === "user"
                         ? "bg-accent text-accent-foreground"
                         : "bg-muted text-foreground"
-                    }`}
+                      }`}
                   >
                     {message.content}
                   </div>
@@ -242,7 +240,7 @@ export function ContactChat() {
               return (
                 <div
                   key={item.label}
-                  className="overflow-hidden rounded-2xl border border-border/60 bg-card/40"
+                  className="overflow-hidden rounded-2xl border border-border/60 bg-card/40 hover:border-accent/60"
                 >
                   <button
                     type="button"
@@ -255,9 +253,8 @@ export function ContactChat() {
                       {item.label}
                     </span>
                     <span
-                      className={`text-xs text-muted-foreground transition-transform duration-300 ${
-                        isOpen ? "rotate-90" : ""
-                      }`}
+                      className={`text-xs text-muted-foreground transition-transform duration-300 ${isOpen ? "rotate-90" : ""
+                        }`}
                     >
                       ▶
                     </span>
@@ -288,7 +285,7 @@ export function ContactChat() {
           </p>
           <div className="flex flex-col gap-2.5">
             <ActionLink
-              href="https://wa.me/5521964868505"
+              href="https://wa.me/5527996300333"
               variant="ghost"
               className="group h-14 w-full justify-between rounded-full border border-border/60 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-foreground transition-all duration-300 hover:border-accent/70 hover:bg-accent/5 hover:text-accent"
               onMouseEnter={() => triggerScramble("whatsapp")}
