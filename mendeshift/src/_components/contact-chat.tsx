@@ -138,7 +138,7 @@ export function ContactChat() {
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,22rem)] lg:items-start lg:gap-8">
       {/* Chatbot Principal - Left Side */}
       <div ref={chatRef}>
-        <Card className="flex h-[28rem] flex-col overflow-hidden sm:h-125 lg:h-152.5">
+        <Card className="flex flex-col overflow-hidden sm:h-125 lg:h-152.5">
           {/* Chat Header */}
           <div className="flex items-center gap-3 border-b border-border/50 px-4 py-4 sm:px-5">
             <div className="relative">
@@ -284,7 +284,7 @@ export function ContactChat() {
 
                   {/* Animated expand — CSS grid trick */}
                   <div
-                    className="grid transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                    className="grid transition-all duration-300 ease-in-out"
                     style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                   >
                     <div className="overflow-hidden">
