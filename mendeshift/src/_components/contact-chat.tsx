@@ -3,7 +3,7 @@
 import { FormEvent, KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "@/i18n/context";
 import gsap from "gsap";
-import { Linkedin, MessageCircle } from "lucide-react";
+import { ChevronDown, Linkedin, MessageCircle } from "lucide-react";
 
 import { BitmapChevron } from "@/_components/bitmap-chevron";
 import { ScrambleTextOnHover } from "@/_components/scramble-text";
@@ -229,49 +229,85 @@ export function ContactChat() {
       {/* Coluna lateral: Perguntas rápidas + Contato direto */}
       <div className="flex w-full flex-col gap-6 sm:gap-8 lg:justify-self-end">
         {/* Quick Actions */}
-        <section className="flex flex-col gap-4">
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            {t("quick_label")}
-          </p>
-          <div className="space-y-3">
+        <section className="flex flex-col gap-3">
+          <div className="flex items-center justify-between">
+            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              {t("quick_label")}
+            </p>
+            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground/50">
+              {quickPrompts.length} tópicos
+            </p>
+          </div>
+          <div className="space-y-2">
             {quickPrompts.map((item) => {
               const isOpen = openQuestion === item.label;
 
               return (
                 <div
                   key={item.label}
-                  className="overflow-hidden rounded-2xl border border-border/60 bg-card/40 hover:border-accent/60"
+                  className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
+                    isOpen
+                      ? "border-accent/50 bg-card/60"
+                      : "border-border/50 bg-card/30 hover:border-accent/35 hover:bg-card/50"
+                  }`}
                 >
                   <button
                     type="button"
-                    onClick={() =>
-                      setOpenQuestion(isOpen ? null : item.label)
-                    }
-                    className="flex w-full items-center justify-between px-4 py-3 text-left"
+                    onClick={() => setOpenQuestion(isOpen ? null : item.label)}
+                    className="flex w-full items-start justify-between gap-3 px-4 py-3.5 text-left"
                   >
-                    <span className="font-mono text-xs text-foreground">
-                      {item.label}
-                    </span>
-                    <span
-                      className={`text-xs text-muted-foreground transition-transform duration-300 ${isOpen ? "rotate-90" : ""
+                    <div className="flex min-w-0 flex-col gap-1">
+                      <span
+                        className={`font-mono text-xs font-medium transition-colors duration-200 ${
+                          isOpen ? "text-accent" : "text-foreground"
                         }`}
-                    >
-                      ▶
-                    </span>
+                      >
+                        {item.label}
+                      </span>
+                      {/* Preview truncado — affordance de conteúdo escondido */}
+                      <span
+                        className={`font-mono text-[10px] leading-relaxed text-muted-foreground/55 transition-all duration-300 ${
+                          isOpen ? "max-h-0 overflow-hidden opacity-0" : "max-h-8 opacity-100"
+                        }`}
+                      >
+                        {item.answer.slice(0, 62)}…
+                      </span>
+                    </div>
+                    <ChevronDown
+                      className={`mt-0.5 h-4 w-4 shrink-0 transition-all duration-300 ${
+                        isOpen
+                          ? "rotate-180 text-accent/70"
+                          : "text-muted-foreground/40"
+                      }`}
+                    />
                   </button>
 
-                  {isOpen && (
-                    <div className="space-y-3 border-t border-border/60 px-4 py-3">
-                      <p className="font-mono text-[11px] leading-relaxed text-muted-foreground">
-                        {item.prompt}
-                      </p>
-                      {item.answer && (
-                        <p className="font-mono text-xs leading-relaxed text-foreground">
-                          {item.answer}
+                  {/* Animated expand — CSS grid trick */}
+                  <div
+                    className="grid transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                    style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="space-y-2.5 border-t border-border/40 px-4 py-3.5">
+                        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/55">
+                          Pergunta
                         </p>
-                      )}
+                        <p className="font-mono text-[11px] leading-relaxed text-muted-foreground/80">
+                          {item.prompt}
+                        </p>
+                        {item.answer && (
+                          <>
+                            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-accent/60">
+                              Resposta
+                            </p>
+                            <p className="font-mono text-xs leading-relaxed text-foreground/90">
+                              {item.answer}
+                            </p>
+                          </>
+                        )}
+                      </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}
