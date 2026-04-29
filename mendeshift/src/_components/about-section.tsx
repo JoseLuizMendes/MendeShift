@@ -165,7 +165,7 @@ export function AboutSection() {
           <div className="mx-auto flex w-full max-w-sm flex-col gap-6 sm:max-w-md lg:mx-0 lg:max-w-none">
             <ProfileCard />
 
-            <Card className="border-border/40 bg-card/60 p-5 sm:p-6">
+            <Card className="border-border/40 bg-card/60 p-5 top-4.5 sm:p-6">
               <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                 {t("motivation_label")}
               </p>
