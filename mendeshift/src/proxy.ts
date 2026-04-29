@@ -6,6 +6,6 @@ export default createMiddleware(routing);
 export const config = {
   matcher: [
     // Match all pathnames except for internal Next.js paths and static files
-    "/((?!_next|_vercel|favicon\\.ico|.*\\..*).*)",
+    "/((?!_next|_vercel|.*\\..*).*)",
   ],
 };
