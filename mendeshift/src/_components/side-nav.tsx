@@ -10,10 +10,10 @@ export function SideNav() {
 
   const navItems = [
     { id: "hero", label: t("home") },
+    { id: "about", label: t("profile") },
     { id: "services", label: t("services") },
     { id: "work", label: t("projects") },
     { id: "principles", label: t("principles") },
-    { id: "about", label: t("profile") },
     { id: "contact", label: t("contact") },
   ];
 
