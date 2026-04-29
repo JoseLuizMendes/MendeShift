@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: "website",
       images: [
         {
-          url: "/Card_Profissional.png",
+          url: "/card_profile.webp",
           width: 1200,
           height: 630,
           alt: "José Luiz Mendes — Product Engineer",
@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: "summary_large_image",
       title: t("home_title"),
       description: t("twitter_desc"),
-      images: ["/Card_Profissional.png"],
+      images: ["/card_profile.webp"],
     },
     alternates: {
       canonical:
