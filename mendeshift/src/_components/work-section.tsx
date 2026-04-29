@@ -94,7 +94,7 @@ export function WorkSection({ projects }: Props) {
           {featuredProjects.map((item, idx) => (
             <article
               key={item.slug}
-              className="group relative overflow-hidden rounded-lg border border-border/40 bg-card/70 p-0 transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/60"
+              className="group relative cursor-pointer overflow-hidden rounded-lg border border-border/40 bg-card/70 p-0 transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/60"
             >
               <div className="flex flex-col">
                 <div className="px-5 pb-0 pt-5 sm:px-6 sm:pt-6">
@@ -154,7 +154,7 @@ export function WorkSection({ projects }: Props) {
                     </span>
                     <Link
                       href={`/projetos/${item.slug}`}
-                      className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition-colors duration-300 group-hover:text-accent"
+                      className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition-colors duration-300 group-hover:text-accent after:absolute after:inset-0"
                     >
                       <ScrambleTextOnHover text={t("view_case")} as="span" duration={0.45} />
                       <BitmapChevron className="w-3 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
