@@ -20,6 +20,35 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Chatbot & Rate Limiting
+
+O chatbot de contato usa uma API route (`src/app/api/chat/route.ts`) que chama o Gemini
+com uma key **server-side** (nunca exposta no browser).
+
+### Variáveis de ambiente
+
+| Variável | Obrigatória | Descrição |
+| --- | --- | --- |
+| `GEMINI_API_KEY` | Sim (se não usar n8n) | Key do Google AI Studio para o Gemini. |
+| `CHATBOT_WEBHOOK_URL` | Não | Se definida, encaminha o chat para um webhook do n8n em vez do Gemini direto. |
+| `UPSTASH_REDIS_REST_URL` | Não | URL do Upstash Redis para ativar o rate limiting. |
+| `UPSTASH_REDIS_REST_TOKEN` | Não | Token do Upstash Redis. |
+
+### Proteção contra abuso
+
+Quando as credenciais do Upstash Redis estão presentes, a route aplica:
+
+- **Limite por IP:** 5 requisições/hora por IP (sliding window) — barra o usuário abusivo.
+- **Teto global diário:** 200 requisições/dia no site inteiro (fixed window) — seguro contra
+  ataque distribuído com IPs rotativos, protegendo a cota do Gemini.
+- **Limite de conteúdo:** mensagens acima de 2000 caracteres são rejeitadas e apenas as últimas
+  10 mensagens do histórico são enviadas ao provedor por turno.
+
+Sem as variáveis do Upstash (ex. dev local) o rate limiting é ignorado e o chat funciona normal.
+
+> Dica de custo: mantenha o billing **desligado** no Google AI Studio. Assim, quando a cota
+> gratuita acabar, a API retorna erro em vez de gerar fatura — teto natural sem surpresa.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

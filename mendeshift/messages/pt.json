@@ -137,6 +137,7 @@
     "online": "Online agora",
     "initial_message": "Olá! Sou o assistente virtual do José. Como posso ajudá-lo hoje?",
     "fallback_response": "Obrigado pela mensagem! Para uma resposta mais detalhada, entre em contato em josemendess004@gmail.com ou pelo LinkedIn.",
+    "rate_limit_response": "Você atingiu o limite de mensagens por agora. Tente novamente mais tarde ou fale direto pelo e-mail josemendess004@gmail.com ou pelo LinkedIn.",
     "quick_prompts": [
       {
         "label": "Disponibilidade",
