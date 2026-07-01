@@ -10,8 +10,8 @@ import { Redis } from "@upstash/redis";
  * chat funcional.
  *
  * Duas barreiras:
- *  - ipLimiter:     10 req/hora por IP (sliding window) — barra o usuário abusivo.
- *  - globalLimiter: 500 req/dia no site inteiro (fixed window) — seguro contra ataque
+ *  - ipLimiter:     5 req/hora por IP (sliding window) — barra o usuário abusivo.
+ *  - globalLimiter: 200 req/dia no site inteiro (fixed window) — seguro contra ataque
  *                   distribuído/IPs rotativos que protege a cota do Gemini.
  */
 
@@ -23,7 +23,7 @@ const redis = url && token ? new Redis({ url, token }) : null;
 export const ipLimiter = redis
   ? new Ratelimit({
       redis,
-      limiter: Ratelimit.slidingWindow(10, "1 h"),
+      limiter: Ratelimit.slidingWindow(5, "1 h"),
       prefix: "chat_ip",
       analytics: true,
     })
@@ -32,7 +32,7 @@ export const ipLimiter = redis
 export const globalLimiter = redis
   ? new Ratelimit({
       redis,
-      limiter: Ratelimit.fixedWindow(500, "1 d"),
+      limiter: Ratelimit.fixedWindow(200, "1 d"),
       prefix: "chat_global",
       analytics: true,
     })

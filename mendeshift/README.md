@@ -38,8 +38,8 @@ com uma key **server-side** (nunca exposta no browser).
 
 Quando as credenciais do Upstash Redis estão presentes, a route aplica:
 
-- **Limite por IP:** 10 requisições/hora por IP (sliding window) — barra o usuário abusivo.
-- **Teto global diário:** 500 requisições/dia no site inteiro (fixed window) — seguro contra
+- **Limite por IP:** 5 requisições/hora por IP (sliding window) — barra o usuário abusivo.
+- **Teto global diário:** 200 requisições/dia no site inteiro (fixed window) — seguro contra
   ataque distribuído com IPs rotativos, protegendo a cota do Gemini.
 - **Limite de conteúdo:** mensagens acima de 2000 caracteres são rejeitadas e apenas as últimas
   10 mensagens do histórico são enviadas ao provedor por turno.
