@@ -78,48 +78,66 @@ export function ContactChat() {
     return () => ctx.revert();
   }, []);
 
-  const simulateResponse = (userMessage: string) => {
+  const simulateResponse = async (userMessage: string, currentMessages: Message[]) => {
     setIsTyping(true);
+    try {
+      const apiMessages = [
+        ...currentMessages.map((msg) => ({ role: msg.role, content: msg.content })),
+        { role: "user", content: userMessage },
+      ];
 
-    setTimeout(() => {
-      const lowerMessage = userMessage.toLowerCase();
-      let response = t("fallback_response");
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ messages: apiMessages }),
+      });
 
-      for (const qp of quickPrompts) {
-        if (lowerMessage.includes(qp.label.toLowerCase())) {
-          response = qp.answer;
-          break;
-        }
+      if (!response.ok) {
+        throw new Error("Failed to fetch chat response");
       }
 
+      const data = await response.json();
       setMessages((prev) => [
         ...prev,
         {
           id: (prev.length + 1).toString(),
           role: "assistant",
-          content: response,
+          content: data.content,
           timestamp: new Date(),
         },
       ]);
+    } catch (error) {
+      console.error("Chat error:", error);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: (prev.length + 1).toString(),
+          role: "assistant",
+          content: t("fallback_response"),
+          timestamp: new Date(),
+        },
+      ]);
+    } finally {
       setIsTyping(false);
-    }, 1200);
+    }
   };
 
   const handleSendMessage = (content: string) => {
     const trimmed = content.trim();
     if (!trimmed) return;
 
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: (prev.length + 1).toString(),
-        role: "user",
-        content: trimmed,
-        timestamp: new Date(),
-      },
-    ]);
+    const userMsg: Message = {
+      id: (messages.length + 1).toString(),
+      role: "user",
+      content: trimmed,
+      timestamp: new Date(),
+    };
+
+    setMessages((prev) => [...prev, userMsg]);
     setInputValue("");
-    simulateResponse(trimmed);
+    simulateResponse(trimmed, messages);
   };
 
   const handleSubmit = (e: FormEvent) => {
