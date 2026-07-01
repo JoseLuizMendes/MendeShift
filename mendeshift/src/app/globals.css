@@ -1,6 +1,16 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Esconde a scrollbar visualmente mantendo o scroll funcional */
+@utility no-scrollbar {
+  -ms-overflow-style: none; /* IE / Edge legado */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome / Safari / Edge */
+  }
+}
+
 :root {
   /* Core surfaces */
   --background: #fbfbfc;

@@ -189,7 +189,10 @@ export function ContactChat() {
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto px-4 py-4 sm:px-5">
+          <div
+            data-lenis-prevent
+            className="no-scrollbar flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-5"
+          >
             <div className="flex flex-col gap-4">
               {messages.map((message) => (
                 <div
@@ -232,7 +235,8 @@ export function ContactChat() {
               onKeyDown={handleKeyDown}
               placeholder={t("placeholder")}
               rows={1}
-              className="max-h-32 min-h-11 flex-1 resize-none rounded-xl border border-border/50 bg-muted/50 px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+              data-lenis-prevent
+              className="no-scrollbar max-h-32 min-h-11 flex-1 resize-none overscroll-contain rounded-xl border border-border/50 bg-muted/50 px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
             />
             <button
               type="submit"
