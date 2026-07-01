@@ -94,6 +94,19 @@ export function ContactChat() {
         body: JSON.stringify({ messages: apiMessages }),
       });
 
+      if (response.status === 429) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: (prev.length + 1).toString(),
+            role: "assistant",
+            content: t("rate_limit_response"),
+            timestamp: new Date(),
+          },
+        ]);
+        return;
+      }
+
       if (!response.ok) {
         throw new Error("Failed to fetch chat response");
       }

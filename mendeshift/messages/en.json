@@ -137,6 +137,7 @@
     "online": "Online now",
     "initial_message": "Hi! I'm José's virtual assistant. How can I help you today?",
     "fallback_response": "Thanks for your message! For a more detailed response, reach out directly at josemendess004@gmail.com or via LinkedIn.",
+    "rate_limit_response": "You've reached the message limit for now. Please try again later or reach out directly at josemendess004@gmail.com or via LinkedIn.",
     "quick_prompts": [
       {
         "label": "Availability",
