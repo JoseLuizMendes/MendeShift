@@ -5,6 +5,7 @@ import { ColophonSection } from "@/_components/colophon-section";
 import { CtaSection } from "@/_components/cta-section";
 import { HeroSection } from "@/_components/hero-section";
 import { PrinciplesSection } from "@/_components/principles-section";
+import { ProcessSection } from "@/_components/process-section";
 import { SideNav } from "@/_components/side-nav";
 import { SignalsSection } from "@/_components/signals-section";
 import { WorkSection } from "@/_components/work-section";
@@ -27,6 +28,7 @@ export default async function HomePage({ params }: Props) {
         <SignalsSection />
         <WorkSection projects={projects} />
         <PrinciplesSection />
+        <ProcessSection locale={locale} />
         <CtaSection />
         <ColophonSection />
       </main>

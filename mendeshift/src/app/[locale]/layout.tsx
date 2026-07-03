@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
           url: "/card_profile.webp",
           width: 1200,
           height: 630,
-          alt: "José Luiz Mendes — Product Engineer",
+          alt: "MendeShift — Estúdio Digital",
         },
       ],
     },
@@ -77,6 +77,48 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
+/**
+ * JSON-LD ProfessionalService — identidade da agência para buscadores.
+ * makesOffer espelha os 4 serviços de messages/{pt,en}.json (services.items).
+ */
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "MendeShift",
+  description:
+    "Estúdio digital em Vitória, ES: criação de sites e landing pages, sistemas web sob medida, e-commerce e identidade visual.",
+  url: "https://mendeshift.vercel.app",
+  image: "https://mendeshift.vercel.app/card_profile.webp",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Vitória",
+    addressRegion: "ES",
+    addressCountry: "BR",
+  },
+  areaServed: "BR",
+  founder: {
+    "@type": "Person",
+    name: "José Luiz Mendes",
+    jobTitle: "Software Engineer",
+  },
+  sameAs: [
+    "https://github.com/JoseLuizMendes",
+    "https://www.linkedin.com/in/josé-luiz-dos-santos-azeredo-mendes/",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "sales",
+    email: "josemendess004@gmail.com",
+    url: "https://wa.me/5527996300333",
+  },
+  makesOffer: [
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sites & Landing Pages" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sistemas Web & SaaS" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "E-commerce" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Design & Identidade Visual" } },
+  ],
+};
+
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
@@ -91,6 +133,10 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body
         className={`${primarySans.variable} ${primaryMono.variable} ${display.variable} bg-background text-foreground antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <TranslationsProvider locale={locale} messages={messages}>
           <Preloader />
           <SmoothScroll>{children}

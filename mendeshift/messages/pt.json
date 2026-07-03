@@ -1,170 +1,356 @@
 {
   "meta": {
-    "home_title": "José Luiz Mendes — Engenheiro de Produto",
-    "home_desc": "Engenheiro de Produto em Vitória, ES. Construo aplicações web fullstack, APIs e sistemas orientados a produto — do modelo de dados à experiência do usuário final.",
-    "og_desc": "Engenheiro de Produto em Vitória, ES. Aplicações web fullstack, APIs e sistemas orientados a produto — do modelo de dados à experiência do usuário final.",
-    "twitter_desc": "Engenheiro de Produto em Vitória, ES. Aplicações web fullstack, APIs e sistemas orientados a produto.",
-    "projects_title": "Projetos | José Luiz Mendes",
-    "projects_desc": "Arquivo de projetos com foco em arquitetura, execução e entrega em produção.",
-    "experience_title": "Experiência | MendeShift",
-    "experience_desc": "Trajetória profissional e acadêmica de José Luiz Mendes em engenharia de software, sistemas públicos e qualidade de entrega."
+    "home_title": "MendeShift — Estúdio Digital | Sites, Sistemas e E-commerce em Vitória, ES",
+    "home_desc": "Estúdio digital em Vitória, ES. Criação de sites e landing pages, sistemas web sob medida, e-commerce e identidade visual — com engenharia de produto do briefing ao lançamento.",
+    "og_desc": "Estúdio digital em Vitória, ES. Sites, landing pages, sistemas web, e-commerce e identidade visual — engenharia de produto do briefing ao lançamento.",
+    "twitter_desc": "Estúdio digital em Vitória, ES. Sites, sistemas web, e-commerce e identidade visual.",
+    "projects_title": "Cases | MendeShift — Estúdio Digital",
+    "projects_desc": "Cases de produtos digitais entregues em produção: contexto, solução e resultado de cada projeto.",
+    "experience_title": "Fundador | MendeShift",
+    "experience_desc": "Trajetória profissional e acadêmica de José Luiz Mendes, engenheiro de software e fundador do MendeShift.",
+    "services_title": "Serviços | MendeShift — Sites, Sistemas, E-commerce e Design",
+    "services_desc": "Criação de sites em Vitória, ES: landing pages profissionais, sistemas web sob medida, lojas virtuais e identidade visual. Veja entregáveis, prazos e como funciona.",
+    "contact_title": "Contato & Briefing | MendeShift",
+    "contact_desc": "Conte seu projeto para o MendeShift: preencha o briefing e receba uma proposta em até 24h úteis — ou chame direto no WhatsApp."
   },
   "nav": {
     "home": "Início",
     "services": "Serviços",
-    "projects": "Projetos",
-    "principles": "Princípios",
-    "profile": "Perfil",
+    "projects": "Cases",
+    "principles": "Método",
+    "process": "Processo",
+    "profile": "O Estúdio",
     "contact": "Contato"
   },
   "hero": {
-    "tagline": "Engenheiro de Produto / Vitória, ES",
-    "headline": "Construo produtos completos — do modelo de dados à experiência do usuário final.",
-    "sub": "Aplicações web robustas, interfaces modernas e arquitetura orientada a produto. Do levantamento de requisitos ao deploy em produção — com ownership end-to-end.",
-    "cta_primary": "Ver projetos",
-    "cta_secondary": "Sobre o MendeShift"
+    "tagline": "Estúdio Digital / Vitória, ES",
+    "headline": "Sites, sistemas e e-commerces que transformam presença digital em resultado.",
+    "sub": "O MendeShift é um estúdio de produtos digitais: design e engenharia no mesmo lugar. Do briefing ao lançamento, você fala direto com quem constrói.",
+    "cta_primary": "Ver serviços",
+    "cta_secondary": "Ver cases"
   },
   "services": {
     "eyebrow": "02 / Serviços",
-    "title": "O que construo",
-    "lead": "Especialidades e áreas de atuação — do backend à interface.",
+    "title": "O que entregamos",
+    "lead": "Quatro frentes de atuação — do site institucional ao produto digital completo.",
+    "link": "Ver entregáveis, prazos e processo",
     "items": [
-      { "no": "No. 01", "category": "Web", "title": "Aplicações Web Fullstack", "desc": "Next.js, React, Node.js e PostgreSQL. Do banco de dados à interface, com arquitetura construída para escalar." },
-      { "no": "No. 02", "category": "Backend", "title": "APIs & Integrações", "desc": "APIs REST com autenticação JWT, webhooks, pagamentos e integrações com serviços externos." },
-      { "no": "No. 03", "category": "Qualidade", "title": "Testes & Qualidade", "desc": "Testes unitários, E2E com Playwright e métricas verificáveis. SonarQube Grau A em projetos críticos." },
-      { "no": "No. 04", "category": "Infra", "title": "Containers & Deploy", "desc": "Docker, Docker Compose e deploy em produção. CI/CD com Azure DevOps e boas práticas de entrega." }
+      { "no": "No. 01", "category": "Sites", "slug": "sites-e-landing-pages", "title": "Sites & Landing Pages", "desc": "Sites institucionais e landing pages de alta conversão — design sob medida, performance e SEO desde o primeiro dia." },
+      { "no": "No. 02", "category": "Sistemas", "slug": "sistemas-web", "title": "Sistemas Web & SaaS", "desc": "Aplicações completas sob medida: painéis, automações e integrações. Arquitetura pensada para crescer junto com o negócio." },
+      { "no": "No. 03", "category": "E-commerce", "slug": "ecommerce", "title": "E-commerce", "desc": "Lojas virtuais com checkout otimizado, pagamentos via PIX e cartão, e gestão simples no dia a dia." },
+      { "no": "No. 04", "category": "Design", "slug": "design-e-branding", "title": "Design & Identidade", "desc": "Identidade visual e interface no mesmo pacote do site — sua marca e seu produto falando a mesma língua." }
     ]
   },
   "work": {
-    "eyebrow": "03 / Projetos",
-    "title": "Trabalhos Selecionados",
-    "lead": "Produtos construídos end-to-end — arquitetura, desenvolvimento e entrega com qualidade de produção.",
-    "view_case": "Ver case study",
-    "explore": "Explorar arquivo completo",
-    "more": "+{count} projetos no arquivo"
+    "eyebrow": "03 / Cases",
+    "title": "Cases Selecionados",
+    "lead": "Produtos reais em produção — cada case mostra o problema do cliente, a solução construída e o resultado entregue.",
+    "view_case": "Ver case completo",
+    "explore": "Explorar todos os cases",
+    "more": "+{count} cases no arquivo"
   },
   "principles": {
-    "eyebrow": "04 / Princípios",
-    "title": "Como trabalho",
+    "eyebrow": "04 / Método",
+    "title": "Como trabalhamos",
     "items": [
       {
         "number": "01",
-        "title": "Ownership End-to-End",
-        "description": "Do banco de dados à interface, responsabilidade total pelo produto. Nenhuma camada é problema de outra pessoa.",
-        "signal": "Produto inteiro no radar, sem transferência silenciosa de responsabilidade.",
-        "tags": "arquitetura · backend · frontend · deploy"
+        "title": "Comunicação Direta",
+        "description": "Você fala com quem constrói o projeto — sem gerente intermediário, sem telefone sem fio. Cada decisão é explicada em linguagem clara.",
+        "signal": "Resposta em até 24h úteis, do primeiro contato ao pós-lançamento.",
+        "tags": "transparência · briefing · alinhamento · resposta rápida"
       },
       {
         "number": "02",
-        "title": "Engenharia com Impacto",
-        "description": "Código sem impacto é exercício. Toda solução precisa resolver uma dor real do produto.",
-        "signal": "Uma decisão técnica só se sustenta quando reduz risco ou aumenta resultado.",
-        "tags": "resultado · clareza · produto · decisão"
+        "title": "Prazo é Compromisso",
+        "description": "Escopo e cronograma definidos por escrito antes de começar. Se algo muda no caminho, você fica sabendo antes — nunca depois.",
+        "signal": "Landing pages em 1–2 semanas; produtos completos em 4–8 semanas.",
+        "tags": "escopo · cronograma · previsibilidade · entrega"
       },
       {
         "number": "03",
-        "title": "Qualidade como Disciplina",
-        "description": "Grau A no SonarQube não é acidente. É cultura aplicada commit a commit, sem exceções.",
-        "signal": "Qualidade entra no fluxo — não como revisão tardia ou esforço de última hora.",
-        "tags": "testes · revisão · sonarqube · consistência"
+        "title": "Qualidade Auditável",
+        "description": "Testes automatizados, métricas de performance e código limpo em todo projeto. Qualidade que você pode verificar, não só acreditar.",
+        "signal": "O próprio site do estúdio é a demonstração do padrão de entrega.",
+        "tags": "testes · performance · seo · manutenção"
       },
       {
         "number": "04",
-        "title": "Aprender no Contexto",
-        "description": "O aprendizado acelera com propósito real. O mercado não espera condições ideais.",
-        "signal": "Aprender em produção constrói repertório mais rápido do que estudo isolado.",
-        "tags": "contexto · execução · aprendizado · adaptação"
+        "title": "Entrega de Ponta a Ponta",
+        "description": "Do briefing ao lançamento: design, desenvolvimento, deploy e suporte no mesmo lugar. Nenhuma camada é problema de outra pessoa.",
+        "signal": "Um único responsável por todo o projeto — contexto nunca se perde.",
+        "tags": "design · desenvolvimento · deploy · suporte"
       }
     ]
   },
   "about": {
-    "eyebrow": "01 / Perfil",
-    "title": "Engenheiro de produto, pensamento transversal",
-    "p1": "Construo produtos digitais do zero até a produção — arquitetura, desenvolvimento e entrega numa só responsabilidade. Sem intermediários, sem perda de contexto: cada decisão técnica parte de entender o problema real do cliente.",
-    "p2": "Neurociência, música e finanças não são hobbies separados da engenharia — são lentes que mudam como processo um problema. Esse pensamento transversal aparece na modelagem de dados, na legibilidade do código e em como comunico soluções.",
-    "p3": "Trabalho sem atalhos porque o custo da dívida técnica aparece sempre — na manutenção, no crescimento, na próxima feature. Quando o problema está bem definido, o ritmo de entrega muda de escala.",
-    "cta": "Ver trajetória profissional e acadêmica",
+    "eyebrow": "01 / O Estúdio",
+    "title": "Um estúdio digital com engenharia no centro",
+    "p1": "O MendeShift é um estúdio de produtos digitais fundado por José Luiz Mendes, engenheiro de software. Aqui, design e código não são etapas separadas: quem desenha a solução é quem constrói — sem intermediários, sem perda de contexto.",
+    "p2": "Cada projeto começa pelo problema real do negócio: o que precisa gerar resultado antes de qualquer decisão de tecnologia. É essa leitura de produto que separa um site bonito de um site que vende.",
+    "p3": "Trabalhamos sem atalhos porque o custo da dívida técnica sempre aparece — na manutenção, no crescimento, na próxima feature. O que entregamos continua funcionando muito depois do lançamento.",
+    "cta": "Conhecer a trajetória do fundador",
     "operating_base": "Base operacional",
     "profile_label": "Perfil",
-    "profile_value": "Full Stack",
+    "profile_value": "Design + Engenharia",
     "mode_label": "Modo",
-    "mode_value": "Freelance",
+    "mode_value": "Estúdio digital",
     "focus_label": "Foco",
-    "focus_value": "Produto + Qualidade",
-    "motivation_label": "motivação",
-    "motivation_text": "Quando decidi me casar, ainda não dominava programação. Usei o casamento como combustível para aprender. O resultado se tornou o projeto mais completo do portfólio.",
+    "focus_value": "Produto + Conversão",
+    "motivation_label": "origem",
+    "motivation_text": "O estúdio nasceu de um projeto real: a plataforma completa do próprio casamento do fundador — RSVP, pagamentos e galeria, rodando em produção sem falhas. A mesma disciplina vale para cada projeto de cliente.",
     "signals": [
       {
         "title": "Entrega end-to-end",
-        "description": "Do briefing ao deploy: arquitetura, desenvolvimento e operação numa só responsabilidade. Sem camadas intermediárias, sem perda de contexto."
+        "description": "Do briefing ao deploy: design, desenvolvimento e operação numa só responsabilidade. Sem camadas intermediárias, sem perda de contexto."
       },
       {
-        "title": "Pensamento transversal",
-        "description": "Interesses em neurociência, música e finanças constroem uma leitura analítica diferente. Problemas complexos pedem perspectivas que extrapolam o código."
+        "title": "Design + Engenharia",
+        "description": "Interface bonita e código sólido não são opostos. Cada projeto une identidade visual, experiência do usuário e arquitetura que aguenta crescer."
       },
       {
         "title": "Sem atalhos, sem surpresa",
-        "description": "Cada decisão é justificada e comunicada. Nada de dívida técnica escondida — o que funciona em desenvolvimento funciona igual em produção."
+        "description": "Cada decisão é justificada e comunicada. Nada de dívida técnica escondida — o que funciona na entrega continua funcionando em produção."
       }
     ],
     "profile_cards": [
       {
-        "eyebrow": "Como trabalho",
+        "eyebrow": "Como trabalhamos",
         "title": "Produto de ponta a ponta, sem intermediários",
-        "description": "Arquitetura, desenvolvimento e entrega numa só responsabilidade. O cliente fala direto com quem toma as decisões técnicas — e sabe o porquê de cada uma."
+        "description": "Design, desenvolvimento e entrega numa só responsabilidade. Você fala direto com quem toma as decisões técnicas — e sabe o porquê de cada uma."
       },
       {
         "eyebrow": "Método",
         "title": "Execução disciplinada, sem teatro técnico",
-        "description": "Boa engenharia é alinhar contexto, modelagem, testes e entrega. A solução precisa funcionar sob pressão, não só parecer bonita no repositório."
+        "description": "Escopo claro, cronograma por escrito e qualidade verificável. A solução precisa funcionar sob pressão, não só parecer bonita na apresentação."
       },
       {
-        "eyebrow": "O que me diferencia",
-        "title": "Visão analítica além do código",
-        "description": "Neurociência, música e finanças constroem uma leitura transversal dos problemas. Isso aparece em como modelo dados, comunico decisões e priorizo o que importa."
+        "eyebrow": "Diferencial",
+        "title": "Engenharia de verdade por trás do design",
+        "description": "Fundado por um engenheiro de software com projetos em produção para o setor público e privado. O site que você está vendo é a prova do padrão."
       }
     ]
   },
+  "process": {
+    "eyebrow": "05 / Processo",
+    "title": "Do briefing ao lançamento",
+    "lead": "Um processo claro em seis etapas — você sabe exatamente onde o projeto está em cada momento.",
+    "steps": [
+      { "no": "01", "title": "Briefing", "desc": "Você conta o objetivo, o público e as referências. Um formulário rápido ou uma conversa no WhatsApp." },
+      { "no": "02", "title": "Proposta", "desc": "Escopo, prazo e investimento por escrito em até 24h úteis. Sem letra miúda." },
+      { "no": "03", "title": "Design", "desc": "Identidade e interface aprovadas antes de qualquer linha de código. Você valida cada tela." },
+      { "no": "04", "title": "Construção", "desc": "Desenvolvimento com atualizações constantes de progresso — você acompanha o projeto tomando forma." },
+      { "no": "05", "title": "Lançamento", "desc": "Deploy em produção com domínio, SEO técnico, analytics e performance auditada." },
+      { "no": "06", "title": "Suporte", "desc": "Acompanhamento pós-lançamento, ajustes e evolução contínua conforme o negócio cresce." }
+    ]
+  },
+  "services_page": {
+    "eyebrow": "Serviços / Entregáveis",
+    "title": "Serviços do estúdio",
+    "lead": "Criação de sites, sistemas web, e-commerce e identidade visual em Vitória, ES — atendimento remoto para todo o Brasil. Escopo claro, prazo por escrito e proposta em até 24h úteis.",
+    "back": "← Voltar para o início",
+    "cta_briefing": "Pedir proposta",
+    "deliverables_label": "O que está incluído",
+    "timeline_label": "Prazo típico",
+    "price_label": "Investimento",
+    "faq_title": "Perguntas frequentes",
+    "items": [
+      {
+        "slug": "sites-e-landing-pages",
+        "no": "No. 01",
+        "category": "Sites",
+        "title": "Sites & Landing Pages",
+        "desc": "Sites institucionais e landing pages profissionais, desenhados para converter visitantes em contatos. Design exclusivo — nada de template — com performance e SEO técnico desde o primeiro dia.",
+        "deliverables": [
+          "Design exclusivo aprovado antes do desenvolvimento",
+          "Site responsivo (mobile, tablet e desktop)",
+          "SEO técnico: metadados, sitemap e dados estruturados",
+          "Performance auditada (Core Web Vitals)",
+          "Formulário de contato e integração com WhatsApp",
+          "Analytics configurado e treinamento de uso"
+        ],
+        "timeline": "1 a 3 semanas",
+        "price": "Sob consulta — proposta em até 24h úteis"
+      },
+      {
+        "slug": "sistemas-web",
+        "no": "No. 02",
+        "category": "Sistemas",
+        "title": "Sistemas Web & SaaS",
+        "desc": "Aplicações web completas sob medida: painéis administrativos, sistemas de agendamento, automações e integrações com APIs externas. Arquitetura pensada para crescer junto com o negócio.",
+        "deliverables": [
+          "Levantamento de requisitos e modelagem do sistema",
+          "Autenticação, perfis de acesso e painel administrativo",
+          "Integrações com APIs, pagamentos e serviços externos",
+          "Testes automatizados nos fluxos críticos",
+          "Deploy em produção com CI/CD",
+          "Documentação e suporte pós-lançamento"
+        ],
+        "timeline": "4 a 8 semanas",
+        "price": "Sob consulta — escopo definido após briefing"
+      },
+      {
+        "slug": "ecommerce",
+        "no": "No. 03",
+        "category": "E-commerce",
+        "title": "E-commerce",
+        "desc": "Lojas virtuais com experiência de compra fluida: catálogo, carrinho, checkout otimizado e pagamentos via PIX, cartão e boleto. Gestão simples para quem opera a loja no dia a dia.",
+        "deliverables": [
+          "Loja virtual com design exclusivo",
+          "Checkout otimizado com PIX, cartão e boleto",
+          "Integração com gateway de pagamento (Mercado Pago e outros)",
+          "Painel de gestão de produtos e pedidos",
+          "SEO para produtos e categorias",
+          "Treinamento de operação da loja"
+        ],
+        "timeline": "4 a 8 semanas",
+        "price": "Sob consulta — proposta em até 24h úteis"
+      },
+      {
+        "slug": "design-e-branding",
+        "no": "No. 04",
+        "category": "Design",
+        "title": "Design & Identidade Visual",
+        "desc": "Identidade visual completa integrada ao seu site ou produto: logo, paleta, tipografia e sistema de design. Marca e produto falando a mesma língua, do cartão de visita à interface.",
+        "deliverables": [
+          "Logo e variações de aplicação",
+          "Paleta de cores e tipografia",
+          "Manual de identidade visual",
+          "Sistema de design aplicado ao site/produto",
+          "Templates para redes sociais",
+          "Arquivos-fonte entregues ao cliente"
+        ],
+        "timeline": "2 a 4 semanas",
+        "price": "Sob consulta — pacotes com site têm condição especial"
+      }
+    ]
+  },
+  "faq": {
+    "items": [
+      {
+        "q": "Quanto custa um site?",
+        "a": "Depende do escopo: uma landing page tem investimento diferente de um e-commerce completo. Após o briefing (5 minutos do seu tempo), você recebe uma proposta fechada em até 24h úteis — com escopo, prazo e valor por escrito, sem surpresa no final."
+      },
+      {
+        "q": "Qual o prazo de entrega?",
+        "a": "Landing pages e sites institucionais: 1 a 3 semanas. Sistemas web e e-commerce: 4 a 8 semanas. O cronograma é definido por escrito na proposta e acompanhado com atualizações constantes."
+      },
+      {
+        "q": "Como funciona o pagamento?",
+        "a": "Normalmente 50% na aprovação da proposta e 50% na entrega, via PIX ou transferência. Para projetos maiores, dá para parcelar por etapa entregue."
+      },
+      {
+        "q": "Vocês usam template pronto?",
+        "a": "Não. Todo projeto tem design exclusivo, desenhado a partir do seu negócio e aprovado por você antes do desenvolvimento. É isso que diferencia um site que representa sua marca de um site igual aos outros."
+      },
+      {
+        "q": "E depois do lançamento?",
+        "a": "Todo projeto inclui um período de suporte pós-lançamento para ajustes. Depois disso, você pode contratar manutenção contínua ou evoluir o projeto por demanda — o código é seu."
+      },
+      {
+        "q": "Atendem fora de Vitória?",
+        "a": "Sim. O estúdio fica em Vitória, ES, mas o atendimento é 100% remoto para todo o Brasil — briefing, aprovações e reuniões acontecem online."
+      }
+    ]
+  },
+  "contact_page": {
+    "eyebrow": "Contato / Briefing",
+    "title": "Conte seu projeto",
+    "lead": "Preencha o briefing abaixo e receba uma proposta em até 24h úteis. Prefere conversar? Chame direto no WhatsApp.",
+    "back": "← Voltar para o início",
+    "form": {
+      "name_label": "Nome",
+      "name_placeholder": "Seu nome",
+      "email_label": "E-mail",
+      "email_placeholder": "voce@empresa.com.br",
+      "phone_label": "WhatsApp (opcional)",
+      "phone_placeholder": "(27) 99999-9999",
+      "company_label": "Empresa (opcional)",
+      "company_placeholder": "Nome da empresa ou projeto",
+      "service_label": "O que você precisa?",
+      "service_options": [
+        { "value": "site", "label": "Site ou landing page" },
+        { "value": "sistema", "label": "Sistema web / SaaS" },
+        { "value": "ecommerce", "label": "Loja virtual / e-commerce" },
+        { "value": "design", "label": "Design / identidade visual" }
+      ],
+      "budget_label": "Faixa de investimento",
+      "budget_options": [
+        { "value": "ate-5k", "label": "Até R$ 5 mil" },
+        { "value": "5k-15k", "label": "R$ 5 mil a R$ 15 mil" },
+        { "value": "15k-40k", "label": "R$ 15 mil a R$ 40 mil" },
+        { "value": "acima-40k", "label": "Acima de R$ 40 mil" },
+        { "value": "nao-sei", "label": "Ainda não sei" }
+      ],
+      "timeline_label": "Para quando?",
+      "timeline_options": [
+        { "value": "urgente", "label": "Urgente (até 1 mês)" },
+        { "value": "1-3-meses", "label": "1 a 3 meses" },
+        { "value": "3-mais-meses", "label": "Mais de 3 meses" },
+        { "value": "sem-prazo", "label": "Sem prazo definido" }
+      ],
+      "message_label": "Conte sobre o projeto",
+      "message_placeholder": "O que você quer construir? Qual o objetivo? Tem referências de sites que gosta?",
+      "submit": "Enviar briefing",
+      "sending": "Enviando...",
+      "success_title": "Briefing recebido!",
+      "success_text": "Obrigado! Você recebe uma proposta em até 24h úteis no e-mail informado. Se preferir adiantar a conversa:",
+      "success_whatsapp": "Continuar no WhatsApp",
+      "error_text": "Não foi possível enviar agora. Você pode tentar de novo ou mandar o briefing direto pelo WhatsApp:",
+      "error_whatsapp": "Enviar pelo WhatsApp",
+      "rate_limited": "Muitos envios em pouco tempo. Aguarde um pouco ou chame direto no WhatsApp.",
+      "validation": {
+        "name_required": "Informe seu nome",
+        "email_invalid": "Informe um e-mail válido",
+        "service_required": "Selecione o tipo de projeto",
+        "message_required": "Conte um pouco sobre o projeto (mínimo 10 caracteres)"
+      }
+    },
+    "direct_label": "Contato direto",
+    "direct_text": "Prefere pular o formulário? Fale agora com o estúdio:"
+  },
   "contact": {
-    "eyebrow": "05 / Contato",
+    "eyebrow": "06 / Contato",
     "headline_1": "Vamos construir",
     "headline_2": "algo juntos.",
-    "availability": "Disponível para projetos freelance e oportunidades em empresas de tecnologia. Use o chat abaixo ou entre em contato diretamente.",
+    "availability": "O estúdio está aberto a novos projetos. Tire dúvidas no chat, preencha o briefing ou chame direto no WhatsApp.",
     "quick_label": "Perguntas Rápidas",
     "direct_label": "Contato Direto",
+    "briefing_label": "Pronto para começar?",
+    "briefing_cta": "Preencher briefing do projeto",
     "placeholder": "Digite sua mensagem...",
-    "virtual_assistant": "Assistente Virtual",
+    "virtual_assistant": "Assistente MendeShift",
     "online": "Online agora",
-    "initial_message": "Olá! Sou o assistente virtual do José. Como posso ajudá-lo hoje?",
-    "fallback_response": "Obrigado pela mensagem! Para uma resposta mais detalhada, entre em contato em josemendess004@gmail.com ou pelo LinkedIn.",
-    "rate_limit_response": "Você atingiu o limite de mensagens por agora. Tente novamente mais tarde ou fale direto pelo e-mail josemendess004@gmail.com ou pelo LinkedIn.",
+    "initial_message": "Olá! Sou o assistente do MendeShift. Quer saber preços, prazos ou como funciona um projeto? Pode perguntar.",
+    "fallback_response": "Obrigado pela mensagem! Para uma resposta mais detalhada, preencha o briefing em /contato ou chame no WhatsApp.",
+    "rate_limit_response": "Você atingiu o limite de mensagens por agora. Tente novamente mais tarde ou fale direto pelo WhatsApp ou e-mail josemendess004@gmail.com.",
     "quick_prompts": [
       {
-        "label": "Disponibilidade",
-        "prompt": "Qual é a sua disponibilidade atual para iniciar um projeto e qual é a sua capacidade semanal?",
-        "answer": "Estou disponível para novos projetos. Posso começar imediatamente ou alinhar uma data que faça sentido para o escopo e a sua urgência."
+        "label": "Quanto custa um site?",
+        "prompt": "Quanto custa um site ou landing page e como funciona o orçamento?",
+        "answer": "O investimento depende do escopo — uma landing page é diferente de um e-commerce. Após um briefing rápido, você recebe proposta fechada em até 24h úteis, com escopo, prazo e valor por escrito."
       },
       {
-        "label": "Stack",
-        "prompt": "Quais tecnologias, frameworks e ferramentas você domina e usa com mais frequência em projetos?",
-        "answer": "Trabalho principalmente com React, Next.js, TypeScript, Node.js e tecnologias modernas de frontend. Também tenho experiência com design systems, animações e arquitetura orientada a produto."
+        "label": "Qual o prazo?",
+        "prompt": "Qual é o prazo médio de entrega para um site, sistema ou loja virtual?",
+        "answer": "Landing pages e sites: 1 a 3 semanas. Sistemas web e e-commerce: 4 a 8 semanas. O cronograma é definido por escrito antes de começar."
       },
       {
-        "label": "Orçamento",
-        "prompt": "Como funciona o seu modelo de precificação, quais são as opções de cobrança e como você normalmente estrutura as propostas?",
-        "answer": "O preço é definido com base na complexidade e no escopo. Normalmente trabalho com taxas fixas por projeto ou por hora em casos específicos, sempre com total transparência sobre o que está incluído."
+        "label": "Fazem e-commerce?",
+        "prompt": "Vocês desenvolvem lojas virtuais com pagamento por PIX e cartão?",
+        "answer": "Sim — lojas completas com checkout otimizado, PIX, cartão e boleto via gateways como Mercado Pago, além de painel de gestão de produtos e pedidos."
       },
       {
-        "label": "Prazo",
-        "prompt": "Qual é o prazo médio de entrega para diferentes tipos de projetos, como landing pages ou aplicações completas?",
-        "answer": "Landing pages geralmente levam 1 a 2 semanas; produtos mais complexos, entre 4 e 8 semanas. O foco é sempre equilibrar velocidade com qualidade e manutenibilidade a longo prazo."
+        "label": "Como funciona?",
+        "prompt": "Como funciona o processo de um projeto, do primeiro contato à entrega?",
+        "answer": "Seis etapas: briefing → proposta em 24h úteis → design aprovado por você → construção com atualizações constantes → lançamento completo → suporte pós-entrega."
       }
     ]
   },
   "colophon": {
-    "eyebrow": "06 / Colofão",
+    "eyebrow": "07 / Colofão",
     "title": "Créditos",
-    "lead": "Sistema visual, stack e decisões fundamentais por trás da interface. No mobile, o layout prioriza blocos curtos e ações diretas.",
+    "lead": "Sistema visual, stack e decisões fundamentais por trás da interface. Este site é a demonstração viva do padrão de entrega do estúdio.",
     "build_notes": "Notas de Build",
     "build_text": "Um colofão mais editorial, com blocos agrupados por função. Reduz a altura no mobile e melhora a escaneabilidade sem perder densidade.",
     "groups_count": "05 grupos",
@@ -176,17 +362,17 @@
     "year_label": "Ano"
   },
   "projects_page": {
-    "eyebrow": "Arquivo / Projetos",
-    "title": "Projetos em fluxo contínuo",
-    "lead": "Uma leitura mais editorial do portfólio: duas colunas em ritmos opostos, com contexto visual antes de entrar em cada case study.",
+    "eyebrow": "Arquivo / Cases",
+    "title": "Cases em fluxo contínuo",
+    "lead": "Produtos reais entregues em produção: duas colunas em ritmos opostos, com contexto visual antes de entrar em cada case.",
     "back": "← Voltar para home",
     "open_case": "Abrir case"
   },
   "experience_page": {
-    "eyebrow": "Experiência / Profundidade",
-    "title": "Trajetória profissional e acadêmica",
-    "lead": "O histórico fica aqui como camada de profundidade. A home continua vendendo execução, qualidade de produto e capacidade de entrega.",
-    "view_projects": "Ver projetos",
+    "eyebrow": "Fundador / Profundidade",
+    "title": "Trajetória do fundador",
+    "lead": "A experiência de engenharia por trás do estúdio: projetos em produção para o setor público e privado, com disciplina de qualidade verificável.",
+    "view_projects": "Ver cases",
     "back": "Voltar para home"
   },
   "experience_section": {
@@ -198,7 +384,7 @@
     "eyebrow_education": "03 / Formação"
   },
   "project_detail": {
-    "all_projects": "← Todos os projetos",
+    "all_projects": "← Todos os cases",
     "home": "Início",
     "context": "Contexto",
     "problem": "Problema",
@@ -207,7 +393,7 @@
     "engineering": "Decisões de Engenharia",
     "challenges": "Desafios",
     "outcome": "Resultado",
-    "back": "← Voltar para projetos",
+    "back": "← Voltar para cases",
     "next": "Próximo: {title} →"
   }
 }

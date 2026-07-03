@@ -38,6 +38,20 @@ export const globalLimiter = redis
     })
   : null;
 
+/**
+ * Rate limit do formulário de briefing (/api/lead).
+ * Limiter separado do chat para um abuso não consumir a cota do outro.
+ * 3 envios/hora por IP é folgado para humanos e barra flood de bots.
+ */
+export const leadLimiter = redis
+  ? new Ratelimit({
+      redis,
+      limiter: Ratelimit.slidingWindow(3, "1 h"),
+      prefix: "lead_ip",
+      analytics: true,
+    })
+  : null;
+
 /** Tamanho máximo (em caracteres) de uma mensagem de usuário. */
 export const MAX_INPUT_CHARS = 2000;
 

@@ -9,6 +9,7 @@ import { BitmapChevron } from "@/_components/bitmap-chevron";
 import { ScrambleTextOnHover } from "@/_components/scramble-text";
 import { ActionLink } from "@/_components/ui/action-link";
 import { Card } from "@/_components/ui/card";
+import { FileText } from "lucide-react";
 
 interface Message {
   id: string;
@@ -169,7 +170,7 @@ export function ContactChat() {
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,22rem)] lg:items-start lg:gap-8">
       {/* Chatbot Principal - Left Side */}
       <div ref={chatRef}>
-        <Card className="flex flex-col overflow-hidden sm:h-125 lg:h-152.5">
+        <Card className="flex flex-col overflow-hidden sm:h-125 lg:h-192.5">
           {/* Chat Header */}
           <div className="flex items-center gap-3 border-b border-border/50 px-4 py-4 sm:px-5">
             <div className="relative">
@@ -197,13 +198,12 @@ export function ContactChat() {
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex ${message.role === "user" ? "justify-end" : "justify-start"
-                    }`}
+                  className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
                     className={`max-w-[90%] rounded-2xl px-4 py-3 font-mono text-sm leading-relaxed sm:max-w-[85%] ${message.role === "user"
-                        ? "bg-accent text-accent-foreground"
-                        : "bg-muted text-foreground"
+                      ? "bg-accent text-accent-foreground"
+                      : "bg-muted text-foreground"
                       }`}
                   >
                     {message.content}
@@ -280,11 +280,10 @@ export function ContactChat() {
               return (
                 <div
                   key={item.label}
-                  className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
-                    isOpen
+                  className={`overflow-hidden rounded-2xl border transition-all duration-300 ${isOpen
                       ? "border-accent/50 bg-card/60"
                       : "border-border/50 bg-card/30 hover:border-accent/35 hover:bg-card/50"
-                  }`}
+                    }`}
                 >
                   <button
                     type="button"
@@ -293,27 +292,24 @@ export function ContactChat() {
                   >
                     <div className="flex min-w-0 flex-col gap-1">
                       <span
-                        className={`font-mono text-xs font-medium transition-colors duration-200 ${
-                          isOpen ? "text-accent" : "text-foreground"
-                        }`}
+                        className={`font-mono text-xs font-medium transition-colors duration-200 ${isOpen ? "text-accent" : "text-foreground"
+                          }`}
                       >
                         {item.label}
                       </span>
                       {/* Preview truncado — affordance de conteúdo escondido */}
                       <span
-                        className={`font-mono text-[10px] leading-relaxed text-muted-foreground/55 transition-all duration-300 ${
-                          isOpen ? "max-h-0 overflow-hidden opacity-0" : "max-h-8 opacity-100"
-                        }`}
+                        className={`font-mono text-[10px] leading-relaxed text-muted-foreground/55 transition-all duration-300 ${isOpen ? "max-h-0 overflow-hidden opacity-0" : "max-h-8 opacity-100"
+                          }`}
                       >
                         {item.answer.slice(0, 62)}…
                       </span>
                     </div>
                     <ChevronDown
-                      className={`mt-0.5 h-4 w-4 shrink-0 transition-all duration-300 ${
-                        isOpen
+                      className={`mt-0.5 h-4 w-4 shrink-0 transition-all duration-300 ${isOpen
                           ? "rotate-180 text-accent/70"
                           : "text-muted-foreground/40"
-                      }`}
+                        }`}
                     />
                   </button>
 
@@ -399,8 +395,31 @@ export function ContactChat() {
             </ActionLink>
           </div>
         </section>
+
+        {/* Briefing CTA — caminho principal de conversão */}
+        <section className="flex w-full flex-col gap-3 rounded-[28px] border border-accent/40 bg-accent/5 p-4 sm:p-5">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            {t("briefing_label")}
+          </p>
+          <ActionLink
+            href="/contato"
+            className="group h-14 w-full justify-between rounded-full border border-accent/50 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-accent transition-all duration-300 hover:border-accent hover:bg-accent/10"
+          >
+            <span className="flex items-center gap-3 whitespace-break-spaces">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-accent/50 bg-card/80 text-accent">
+                <FileText className="h-4 w-4" />
+              </span>
+              <ScrambleTextOnHover
+                text={t("briefing_cta")}
+                as="span"
+                duration={0.7}
+                className="text-[11px] transition-colors duration-300"
+              />
+            </span>
+            <BitmapChevron className="w-4 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
+          </ActionLink>
+        </section>
       </div>
     </div>
   );
 }
-

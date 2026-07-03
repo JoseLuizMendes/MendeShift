@@ -3,13 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
-const COMMAND = "hire jose.mendes --role=product-engineer";
+const COMMAND = "init mendeshift --studio=digital";
 const CHAR_DELAY = 38; // ms per character
 
 const RESPONSES = [
   { text: "fetching assets..." },
   { text: "compiling routes..." },
-  { text: "rendering portfolio..." },
+  { text: "rendering studio..." },
 ];
 
 export function Preloader() {
