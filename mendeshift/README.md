@@ -49,6 +49,41 @@ Sem as variáveis do Upstash (ex. dev local) o rate limiting é ignorado e o cha
 > Dica de custo: mantenha o billing **desligado** no Google AI Studio. Assim, quando a cota
 > gratuita acabar, a API retorna erro em vez de gerar fatura — teto natural sem surpresa.
 
+## Captação de Leads (Briefing)
+
+O formulário de briefing (`/contato`) envia leads pela route `src/app/api/lead/route.ts`,
+que valida com o schema canônico em `src/lib/leads.ts` e notifica o estúdio por e-mail
+via [Resend](https://resend.com).
+
+### Variáveis de ambiente
+
+| Variável | Obrigatória | Descrição |
+| --- | --- | --- |
+| `RESEND_API_KEY` | Sim | Key do Resend para envio do e-mail de notificação. |
+| `LEAD_TO_EMAIL` | Não | E-mail de destino (default: josemendess004@gmail.com). |
+| `LEAD_FROM_EMAIL` | Não | Remetente verificado no Resend (default: onboarding@resend.dev). |
+| `CRM_WEBHOOK_URL` | Fase 2 | Reservada: webhook do CRM que receberá o payload do lead. |
+
+### Proteção contra spam
+
+- **Honeypot:** campo escondido `website` — se preenchido (bot), o envio é aceito em silêncio e descartado.
+- **Limite por IP:** 3 envios/hora (Upstash, limiter separado do chat — `lead_ip`).
+- **Validação zod** no servidor (schema compartilhado com o client).
+- **Fallback WhatsApp:** se a API falhar, o formulário oferece link `wa.me` com o briefing serializado.
+
+## Roadmap
+
+- **Fase 1 (atual) — MVP Agência:** posicionamento de estúdio, `/servicos`, `/contato` com briefing,
+  SEO (sitemap, robots, JSON-LD), chatbot com voz de agência.
+- **Fase 2 — Credibilidade & pipeline:** integração CRM via `CRM_WEBHOOK_URL` (payload já no
+  contrato de `src/lib/leads.ts`), depoimentos reais (`testimonials-section.tsx`, já pronta e
+  oculta até ter quotes reais), OG images dinâmicas por case, captação estruturada pelo chatbot
+  (`source: "chatbot"`), possível split de `/servicos/[slug]`, blog para keywords PT.
+- **Fase 3 — Portal do cliente:** links de proposta privados (signed URLs) → autenticação +
+  banco (Neon/Vercel Postgres) + status de projeto + aprovações.
+- **Pré-requisito de negócio:** registrar domínio próprio (ex.: mendeshift.com.br) — SEO em
+  `vercel.app` tem teto baixo. Atualizar `metadataBase`, sitemap e JSON-LD ao migrar.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

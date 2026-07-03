@@ -14,6 +14,7 @@ export function SideNav() {
     { id: "services", label: t("services") },
     { id: "work", label: t("projects") },
     { id: "principles", label: t("principles") },
+    { id: "process", label: t("process") },
     { id: "contact", label: t("contact") },
   ];
 

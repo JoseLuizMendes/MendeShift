@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProjectBySlug(slug, locale);
   if (!project) return {};
   return {
-    title: `${project.title} | José Luiz Mendes`,
+    title: `${project.title} | MendeShift`,
     description: project.shortDesc,
   };
 }
@@ -44,8 +44,24 @@ export default async function ProjectPage({ params }: Props) {
   const currentIndex = allProjects.findIndex((p) => p.slug === slug);
   const nextProject = allProjects[currentIndex + 1] ?? null;
 
+  const caseJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.title,
+    description: project.shortDesc,
+    url: `https://mendeshift.vercel.app/projetos/${project.slug}`,
+    creator: { "@type": "Organization", name: "MendeShift" },
+    ...(project.previewImage && {
+      image: `https://mendeshift.vercel.app${project.previewImage}`,
+    }),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseJsonLd) }}
+      />
       <div className="noise-overlay" aria-hidden="true" />
       <main id="project-top" className="app-shell relative min-h-screen">
         {/* Header */}

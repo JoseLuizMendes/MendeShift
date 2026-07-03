@@ -102,7 +102,7 @@ export function HeroSection() {
 
                   <div className="mt-8 flex flex-col items-stretch gap-4 sm:mt-10 sm:flex-row sm:items-center">
                     <ActionLink
-                      href="#work"
+                      href="#services"
                       className="group w-full justify-center sm:w-auto"
                       onMouseEnter={triggerScramble}
                       onFocus={triggerScramble}
@@ -117,7 +117,7 @@ export function HeroSection() {
                       <BitmapChevron className="transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
                     </ActionLink>
                     <ActionLink
-                      href="#about"
+                      href="#work"
                       variant="ghost"
                       className="w-full justify-center sm:w-auto"
                     >

@@ -17,7 +17,7 @@ export function ProfileCard() {
       {/* Photo */}
       <Image
         src="/card_profile.webp"
-        alt="José Luiz Mendes — Product Engineer"
+        alt="José Luiz Mendes — Fundador do MendeShift"
         fill
         priority
         sizes="(max-width: 768px) 100vw, 100vw"
@@ -63,7 +63,7 @@ export function ProfileCard() {
 
         {/* Role */}
         <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.28em] text-muted-foreground/75">
-          Product Engineer · Freelancer
+          Fundador · MendeShift
         </p>
 
         {/* Stats row */}
