@@ -46,6 +46,13 @@ Quando as credenciais do Upstash Redis estão presentes, a route aplica:
 
 Sem as variáveis do Upstash (ex. dev local) o rate limiting é ignorado e o chat funciona normal.
 
+### Captação de lead pelo chat
+
+Quando o visitante informa nome + contato na conversa, o modelo anexa um bloco
+`[[LEAD]]{...}[[/LEAD]]` ao final da resposta (instrução 10 de `src/lib/chat-prompt.ts`).
+A route extrai o bloco antes de responder (o usuário nunca o vê) e `src/lib/chat-lead.ts`
+notifica o estúdio por e-mail e posta no `CRM_WEBHOOK_URL` com `source: "chatbot"`.
+
 > Dica de custo: mantenha o billing **desligado** no Google AI Studio. Assim, quando a cota
 > gratuita acabar, a API retorna erro em vez de gerar fatura — teto natural sem surpresa.
 
@@ -62,7 +69,7 @@ via [Resend](https://resend.com).
 | `RESEND_API_KEY` | Sim | Key do Resend para envio do e-mail de notificação. |
 | `LEAD_TO_EMAIL` | Não | E-mail de destino (default: josemendess004@gmail.com). |
 | `LEAD_FROM_EMAIL` | Não | Remetente verificado no Resend (default: onboarding@resend.dev). |
-| `CRM_WEBHOOK_URL` | Fase 2 | Reservada: webhook do CRM que receberá o payload do lead. |
+| `CRM_WEBHOOK_URL` | Não | Se definida, cada lead (form e chatbot) é postado nela após o e-mail — aponte para um fluxo n8n que encaminhe para Sheets/Notion/WhatsApp. |
 
 ### Proteção contra spam
 
@@ -70,6 +77,19 @@ via [Resend](https://resend.com).
 - **Limite por IP:** 3 envios/hora (Upstash, limiter separado do chat — `lead_ip`).
 - **Validação zod** no servidor (schema compartilhado com o client).
 - **Fallback WhatsApp:** se a API falhar, o formulário oferece link `wa.me` com o briefing serializado.
+
+## Medição & Presença
+
+- **Vercel Analytics + Speed Insights:** montados no layout. Evento de conversão
+  `lead_submitted` (com `serviceType`, `budgetRange`, `locale`) disparado no sucesso do
+  briefing — acompanhar em Vercel → Analytics → Events.
+- **Google Search Console (ação do dono):** em [search.google.com/search-console](https://search.google.com/search-console),
+  adicionar a propriedade `https://mendeshift.vercel.app` (tipo "Prefixo do URL"), verificar
+  via meta tag HTML (adicionar a tag em `[locale]/layout.tsx` → `metadata.verification.google`)
+  e enviar o sitemap `https://mendeshift.vercel.app/sitemap.xml`.
+- **Google Business Profile (ação do dono):** criar perfil "MendeShift — Estúdio Digital"
+  em Vitória, ES ([business.google.com](https://business.google.com)) — junto com o domínio
+  próprio, é a maior alavanca de SEO local ("criação de sites em Vitória ES").
 
 ## Roadmap
 
