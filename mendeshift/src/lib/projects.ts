@@ -1,6 +1,21 @@
+import type { Lead } from "@/lib/leads";
+
+/** Mesmo union do lead — liga cada case a um dos 4 serviços vendidos. */
+export type ServiceType = Lead["serviceType"];
+
+/** Âncoras da página /servicos correspondentes a cada tipo de serviço. */
+export const serviceAnchors: Record<ServiceType, string> = {
+  site: "sites-e-landing-pages",
+  sistema: "sistemas-web",
+  ecommerce: "ecommerce",
+  design: "design-e-branding",
+};
+
 export type Project = {
   slug: string;
   category: string;
+  /** Serviço do estúdio que este case demonstra (badge/link no case). */
+  serviceType: ServiceType;
   title: string;
   shortDesc: string;
   tech: string[];
@@ -23,6 +38,7 @@ export type Project = {
   pt?: Partial<
     Pick<
       Project,
+      | "metric"
       | "shortDesc"
       | "context"
       | "problem"
@@ -39,6 +55,7 @@ export const projects: Project[] = [
   {
     slug: "wedding-platform",
     category: "Full Stack",
+    serviceType: "sistema",
     title: "Wedding Platform",
     shortDesc: "RSVP • Payments via Mercado Pago • Collaborative gallery • E2E tests in CI",
     tech: ["Next.js 16", "Prisma", "Neon", "Mercado Pago", "Playwright"],
@@ -73,6 +90,7 @@ export const projects: Project[] = [
     outcome:
       "The platform ran without incidents throughout the entire event. RSVPs, payments and the gallery operated at 100% uptime. The most complete project in the portfolio — a real product, shipped on a fixed deadline, used by real people.",
     pt: {
+      metric: "Entregue em produção — 07/09",
       shortDesc: "RSVP • Pagamentos via Mercado Pago • Galeria colaborativa • Testes E2E em CI",
       context:
         "Precisei gerenciar um casamento com ~200 convidados: confirmações de presença, pagamentos e uma galeria colaborativa aberta para todos os participantes. Nenhuma ferramenta pronta combinava personalização total com integração nativa a um gateway de pagamento brasileiro. O projeto começou como necessidade pessoal e se tornou o laboratório de engenharia mais intenso que já tive.",
@@ -101,6 +119,7 @@ export const projects: Project[] = [
   {
     slug: "barber-saas",
     category: "Product",
+    serviceType: "sistema",
     title: "Barber Pro",
     shortDesc: "Barbershop scheduling • Multi-role • NextAuth • AgendamentoAPI",
     tech: ["Next.js 14", "Prisma", "PostgreSQL", "NextAuth", "Shadcn UI"],
@@ -134,6 +153,7 @@ export const projects: Project[] = [
     outcome:
       "Project paused with a complete data model and working authentication flow. The decoupled architecture (frontend + dedicated API) demonstrates the ability to think in distributed systems, not just Next.js monoliths.",
     pt: {
+      metric: "Em desenvolvimento",
       shortDesc: "Agendamento para barbearia • Multi-papel • NextAuth • AgendamentoAPI",
       context:
         "Barbearias locais gerenciam agendamentos pelo WhatsApp e cadernos, perdendo controle sobre horários e histórico de clientes. O objetivo era construir um sistema leve com uma hierarquia de usuários real — dono, funcionários e clientes — integrado a uma API de agendamento dedicada.",
@@ -161,6 +181,7 @@ export const projects: Project[] = [
   {
     slug: "agendamento-api",
     category: "Backend",
+    serviceType: "sistema",
     title: "Scheduling API",
     shortDesc: "Fastify 5 • JWT • Rate limiting • Auto Swagger via Zod • Vitest",
     tech: ["Fastify", "TypeScript", "Prisma", "Zod", "Vitest"],
@@ -194,6 +215,7 @@ export const projects: Project[] = [
     outcome:
       "API documented, tested and deployed. Demonstrates mastery of modern Node.js backend architecture — beyond Next.js API Routes — with real production concerns: security, observability and testability.",
     pt: {
+      metric: "Documentada · Deploy na Vercel",
       shortDesc: "Fastify 5 • JWT • Rate limiting • Swagger automático via Zod • Vitest",
       context:
         "Backend dedicado para o sistema Barber Pro — construído separadamente do frontend para ter controle total sobre arquitetura, segurança e testabilidade da camada de dados. Objetivo secundário: aprofundar conhecimento no ecossistema Fastify, uma alternativa performática ao Express com type-safety nativa.",
@@ -221,6 +243,7 @@ export const projects: Project[] = [
   {
     slug: "belessence",
     category: "E-commerce",
+    serviceType: "ecommerce",
     title: "Belessence",
     shortDesc: "Premium fragrance e-commerce • MP Checkout • Inventory management • Coupons • Resend",
     tech: ["Next.js 16", "Prisma", "PostgreSQL", "Mercado Pago", "Zustand"],
@@ -254,6 +277,7 @@ export const projects: Project[] = [
     outcome:
       "E-commerce with a complete data model, functional Mercado Pago checkout, order tracking and email notifications. Actively in development — demonstrates the ability to build commerce platforms from scratch without relying on third-party solutions.",
     pt: {
+      metric: "Em desenvolvimento",
       shortDesc: "E-commerce de fragrâncias premium • Checkout MP • Gestão de estoque • Cupons • Resend",
       context:
         "E-commerce de fragrâncias premium construído do zero — sem Shopify, sem Firebase, sem atalhos. A motivação era ter controle total sobre o modelo de dados: catálogo, carrinho, checkout, gestão de estoque, cupons, avaliações e notificações transacionais, tudo dentro de uma stack familiar e sob ownership end-to-end.",
