@@ -42,9 +42,9 @@ export function SideNav() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (!element) return;
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Sempre via Lenis — scrollIntoView nativo briga com o rAF do Lenis
+    // e produz scroll travado. O SmoothScroll escuta este evento.
+    window.dispatchEvent(new CustomEvent("lenis:scrollTo", { detail: id }));
   };
 
   return (

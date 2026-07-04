@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useLocale } from "@/i18n/context";
 import { ActionLink } from "@/_components/ui/action-link";
 
@@ -10,33 +9,19 @@ type Props = Omit<
 >;
 
 /**
- * A "Back to Home" link that leverages `router.back()` to return
- * the user to their previous scroll position on the homepage.
+ * Link "Voltar para home": navegação normal para a home do locale.
  *
- * When the user arrived directly (bookmark / external link),
- * falls back to navigating to the homepage root.
+ * Nunca usa router.back() — back() vai para a entrada ANTERIOR do
+ * histórico, que só é a home quando o usuário veio direto dela (num fluxo
+ * home → cases → case, "voltar para home" cairia na lista de cases).
+ * A posição de scroll da home é restaurada pelo SmoothScroll, que salva
+ * a posição por rota e restaura também em navegações push para a home.
  */
-export function BackToHomeLink({ children, onClick, ...props }: Props) {
-  const router = useRouter();
+export function BackToHomeLink({ children, ...props }: Props) {
   const locale = useLocale();
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    onClick?.(e);
-
-    const cameFromOurSite =
-      document.referrer &&
-      new URL(document.referrer).origin === window.location.origin;
-
-    if (cameFromOurSite) {
-      router.back();
-    } else {
-      router.push(`/${locale}`);
-    }
-  };
-
   return (
-    <ActionLink href={`/${locale}`} onClick={handleClick} {...props}>
+    <ActionLink href={`/${locale}`} {...props}>
       {children}
     </ActionLink>
   );

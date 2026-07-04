@@ -30,7 +30,7 @@ export function ContactChat() {
     [],
   );
   const chatRef = useRef<HTMLDivElement>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const [messages, setMessages] = useState<Message[]>(initialMessages);
@@ -50,7 +50,12 @@ export function ContactChat() {
   };
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Rola SÓ o container interno de mensagens. scrollIntoView rolava
+    // também a janela — toda montagem da home arrastava a página inteira
+    // até o chat (o bug do "caio no chatbot ao voltar").
+    const container = messagesContainerRef.current;
+    if (!container) return;
+    container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -70,7 +75,7 @@ export function ContactChat() {
           scrollTrigger: {
             trigger: chatRef.current,
             start: "top 85%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         });
       }
@@ -191,6 +196,7 @@ export function ContactChat() {
 
           {/* Messages Area */}
           <div
+            ref={messagesContainerRef}
             data-lenis-prevent
             className="no-scrollbar flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-5"
           >
@@ -219,7 +225,6 @@ export function ContactChat() {
                   </div>
                 </div>
               )}
-              <div ref={messagesEndRef} />
             </div>
           </div>
 

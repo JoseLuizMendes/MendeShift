@@ -40,7 +40,7 @@ export function PrinciplesSection() {
         scrollTrigger: {
           trigger: headerRef.current,
           start: "top 85%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
       });
 
@@ -58,7 +58,7 @@ export function PrinciplesSection() {
           scrollTrigger: {
             trigger: article,
             start: "top 85%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         });
       });

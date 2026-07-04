@@ -46,7 +46,7 @@ export function WorkSection({ projects }: Props) {
           scrollTrigger: {
             trigger: headerRef.current,
             start: "top 90%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         },
       );
@@ -66,7 +66,7 @@ export function WorkSection({ projects }: Props) {
             scrollTrigger: {
               trigger: gridRef.current,
               start: "top 90%",
-              toggleActions: "play none none reverse",
+              toggleActions: "play none none none",
             },
           },
         );

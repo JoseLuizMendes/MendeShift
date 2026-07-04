@@ -91,7 +91,7 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
           scrollTrigger: {
             trigger: headerRef.current,
             start: "top 85%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         });
       }
@@ -107,7 +107,7 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
           scrollTrigger: {
             trigger: gridRef.current,
             start: "top 85%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         });
       }
@@ -121,7 +121,7 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
           scrollTrigger: {
             trigger: footerRef.current,
             start: "top 95%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         });
       }

@@ -32,7 +32,7 @@ export function CtaSection() {
           scrollTrigger: {
             trigger: headlineRef.current,
             start: "top 85%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         });
       }
