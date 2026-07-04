@@ -101,7 +101,22 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "email_failed" }, { status: 500 });
     }
 
-    // Fase 2 (CRM): postar `{ ...lead, createdAt }` para process.env.CRM_WEBHOOK_URL aqui.
+    // Fase 2 (CRM): entrega o payload validado (contrato de src/lib/leads.ts)
+    // ao pipeline externo. Timeout curto e erro engolido: o webhook nunca
+    // pode atrasar nem derrubar a resposta ao cliente — o e-mail já saiu.
+    const crmWebhookUrl = process.env.CRM_WEBHOOK_URL;
+    if (crmWebhookUrl) {
+      try {
+        await fetch(crmWebhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...lead, website: undefined, createdAt }),
+          signal: AbortSignal.timeout(3000),
+        });
+      } catch (webhookError) {
+        console.error("CRM webhook error:", webhookError);
+      }
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {

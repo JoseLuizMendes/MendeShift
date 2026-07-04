@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { extractChatLead, notifyChatLead } from "@/lib/chat-lead";
 import { CHAT_SYSTEM_PROMPT } from "@/lib/chat-prompt";
 import {
   MAX_HISTORY_MESSAGES,
@@ -89,7 +90,12 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "No content returned from n8n webhook" }, { status: 500 });
       }
 
-      return NextResponse.json({ content: replyContent });
+      // Bloco [[LEAD]] (se houver) é extraído antes de responder — o
+      // usuário nunca o vê; o estúdio é notificado (e-mail + CRM).
+      const { cleanReply, lead } = extractChatLead(String(replyContent));
+      if (lead) await notifyChatLead(lead);
+
+      return NextResponse.json({ content: cleanReply });
     }
 
     // --- MODO 2: Conexão Direta com o Gemini 2.5 Flash-Lite ---
@@ -152,7 +158,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No response text generated from Gemini" }, { status: 500 });
     }
 
-    return NextResponse.json({ content: candidateText });
+    // Bloco [[LEAD]] (se houver) é extraído antes de responder — o
+    // usuário nunca o vê; o estúdio é notificado (e-mail + CRM).
+    const { cleanReply, lead } = extractChatLead(candidateText);
+    if (lead) await notifyChatLead(lead);
+
+    return NextResponse.json({ content: cleanReply });
   } catch (error) {
     console.error("Chat route error:", error);
     const message = error instanceof Error ? error.message : "Internal Server Error";
