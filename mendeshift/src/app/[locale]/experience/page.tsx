@@ -41,7 +41,8 @@ export default async function ExperiencePage({ params }: Props) {
               </div>
 
               <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
-                <ActionLink href="/#work" className="w-full justify-center sm:w-auto">
+                {/* Locale explícito: o redirect "/"→"/{locale}" descarta o #hash */}
+                <ActionLink href={`/${locale}#work`} className="w-full justify-center sm:w-auto">
                   {t("view_projects")}
                 </ActionLink>
                 <BackToHomeLink variant="ghost" className="w-full justify-center sm:w-auto">
