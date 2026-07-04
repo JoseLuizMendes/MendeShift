@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { MessageCircle } from "lucide-react";
+import { track } from "@vercel/analytics";
 
 import { useLocale, useTranslations } from "@/i18n/context";
 import {
@@ -110,6 +111,12 @@ export function BriefingForm() {
       if (!response.ok) {
         throw new Error("lead_failed");
       }
+      // Evento de conversão — única métrica que diz se o site vende.
+      track("lead_submitted", {
+        serviceType: values.serviceType,
+        budgetRange: values.budgetRange,
+        locale,
+      });
       setStatus("success");
     } catch (error) {
       console.error("Briefing form error:", error);

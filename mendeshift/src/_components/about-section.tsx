@@ -38,7 +38,7 @@ export function AboutSection() {
           scrollTrigger: {
             trigger: headerRef.current,
             start: "top 85%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         });
       }
@@ -54,7 +54,7 @@ export function AboutSection() {
           scrollTrigger: {
             trigger: contentRef.current,
             start: "top 85%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         });
       }
@@ -70,7 +70,7 @@ export function AboutSection() {
           scrollTrigger: {
             trigger: statsRef.current,
             start: "top 88%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         });
       }

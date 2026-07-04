@@ -26,6 +26,7 @@ export type EducationEntry = {
 
 export type ExperienceData = {
   currentRole: ExperienceRole;
+  previousRoles: ExperienceRole[];
   experienceAchievements: ExperienceAchievement[];
   techStack: TechStackEntry[];
   educationEntries: EducationEntry[];
@@ -33,12 +34,22 @@ export type ExperienceData = {
 
 const enData: ExperienceData = {
   currentRole: {
-    title: "IT Analyst",
-    organization: "PRODEST — Institute of Information and Communication Technology of Espírito Santo",
-    period: "Oct/2024 — Present",
+    title: "Back-end & Integrations Developer",
+    organization: "TOTVS — Brazil's Largest Technology Company",
+    period: "Jun/2026 — Present",
     summary:
-      "First and second-level technical support, system development and maintenance, unit testing, UML process modeling, and database administration with SQL Developer. Involved in strategic projects for the State Government.",
+      "Back-end development in ADVPL on the Protheus ERP and system-to-system integrations with n8n and REST APIs. Responsible for the end-to-end integration between a retail client's sales platform, Protheus and the Asaas payment gateway — billing, customers, payments, webhooks and notifications. Database and log analysis, technical documentation and continuous system improvement.",
   },
+
+  previousRoles: [
+    {
+      title: "IT Analyst",
+      organization: "PRODEST — Institute of Information and Communication Technology of Espírito Santo",
+      period: "Oct/2024 — Jun/2026",
+      summary:
+        "First and second-level technical support, system development and maintenance, unit testing, UML process modeling, and database administration with SQL Developer. Involved in strategic projects for the State Government.",
+    },
+  ],
 
   experienceAchievements: [
     {
@@ -46,6 +57,12 @@ const enData: ExperienceData = {
       title: "Strategic roadmap adopted by other Brazilian states",
       detail:
         "Led the complete mapping of systems integrated with SIARHES — the Human Resources Administration System of the ES State Government, which manages payroll and HR for the entire state civil service. Conducted interviews with development teams, consolidated critical integration data, and produced the full roadmap for migration to the new SIARHES. The project was recognized as a reference and taken for study and implementation in Santa Catarina.",
+    },
+    {
+      label: "Integrations — TOTVS",
+      title: "Protheus ERP × payment gateway (Asaas)",
+      detail:
+        "Responsible for the end-to-end integration between a retail client's sales platform, the Protheus ERP and the Asaas payment gateway: billing, customers, payments, webhooks and notifications — flow design, ADVPL development and n8n automations.",
     },
     {
       label: "Quality",
@@ -75,6 +92,22 @@ const enData: ExperienceData = {
       period: "2024 — Present",
     },
     {
+      label: "Certification",
+      title: "International AI Pre-Master's",
+      institution: "Faculdade HUB · AGTU",
+      period: "Nov/2025",
+      detail:
+        "Strategic application of AI/ML: process automation, prompt engineering, no-code solutions and AI media generation — the foundation of the chatbots and automations the studio ships.",
+    },
+    {
+      label: "Certification",
+      title: "The Impact of AI on Business — Academic PMIES",
+      institution: "PMI Espírito Santo · FAESA",
+      period: "Jun/2024",
+      detail:
+        "Project management and the strategic application of AI in business, with the Project Management Institute — ES chapter.",
+    },
+    {
       label: "High School",
       title: "1st place — ES · 17th place — Brazil",
       institution: "Colégio Sagrado Coração de Maria",
@@ -98,6 +131,10 @@ const enData: ExperienceData = {
       items: ["PostgreSQL", "SQL Server", "SQL Developer"],
     },
     {
+      category: "Integrations & Automation",
+      items: ["n8n", "REST APIs", "ADVPL / Protheus", "Webhooks"],
+    },
+    {
       category: "DevOps & Infrastructure",
       items: ["Azure DevOps", "Git", "Docker", "CI/CD Pipelines"],
     },
@@ -110,12 +147,22 @@ const enData: ExperienceData = {
 
 const ptData: ExperienceData = {
   currentRole: {
-    title: "Analista de TI",
-    organization: "PRODEST — Instituto de Tecnologia da Informação e Comunicação do Espírito Santo",
-    period: "Out/2024 — Presente",
+    title: "Desenvolvedor Back-end & Integrações",
+    organization: "TOTVS — Maior Empresa de Tecnologia do Brasil",
+    period: "Jun/2026 — Presente",
     summary:
-      "Suporte técnico de primeiro e segundo nível, desenvolvimento e manutenção de sistemas, testes unitários, modelagem de processos em UML e administração de banco de dados com SQL Developer. Envolvido em projetos estratégicos para o Governo do Estado.",
+      "Desenvolvimento back-end em ADVPL no ERP Protheus e integrações entre sistemas com n8n e APIs REST. Responsável pela integração de ponta a ponta entre a plataforma de vendas de um cliente do varejo, o Protheus e o gateway de pagamento Asaas — cobranças, clientes, pagamentos, webhooks e notificações. Análise de banco de dados e logs, documentação técnica e melhoria contínua dos sistemas.",
   },
+
+  previousRoles: [
+    {
+      title: "Analista de TI",
+      organization: "PRODEST — Instituto de Tecnologia da Informação e Comunicação do Espírito Santo",
+      period: "Out/2024 — Jun/2026",
+      summary:
+        "Suporte técnico de primeiro e segundo nível, desenvolvimento e manutenção de sistemas, testes unitários, modelagem de processos em UML e administração de banco de dados com SQL Developer. Envolvido em projetos estratégicos para o Governo do Estado.",
+    },
+  ],
 
   experienceAchievements: [
     {
@@ -123,6 +170,12 @@ const ptData: ExperienceData = {
       title: "Roadmap estratégico adotado por outros estados brasileiros",
       detail:
         "Liderança no mapeamento completo dos sistemas integrados ao SIARHES — o Sistema de Administração de Recursos Humanos do Governo do ES, que gerencia folha de pagamento e RH de todo o funcionalismo estadual. Conduzi entrevistas com equipes de desenvolvimento, consolidei dados críticos de integração e produzi o roadmap completo para migração para o novo SIARHES. O projeto foi reconhecido como referência e levado para estudo e implementação em Santa Catarina.",
+    },
+    {
+      label: "Integrações — TOTVS",
+      title: "ERP Protheus × gateway de pagamento (Asaas)",
+      detail:
+        "Responsável pela integração de ponta a ponta entre a plataforma de vendas de um cliente do varejo, o ERP Protheus e o gateway Asaas: cobranças, clientes, pagamentos, webhooks e notificações — desenho do fluxo, desenvolvimento em ADVPL e automações com n8n.",
     },
     {
       label: "Qualidade",
@@ -152,6 +205,22 @@ const ptData: ExperienceData = {
       period: "2024 — Presente",
     },
     {
+      label: "Certificação",
+      title: "Pré-Mestrado Internacional em Inteligência Artificial",
+      institution: "Faculdade HUB · AGTU",
+      period: "Nov/2025",
+      detail:
+        "Aplicação estratégica de IA/ML: automação de processos, engenharia de prompts, soluções no-code e geração de mídia com IA — a base dos chatbots e automações que o estúdio entrega.",
+    },
+    {
+      label: "Certificação",
+      title: "O Impacto da IA no Negócio — Academic PMIES",
+      institution: "PMI Espírito Santo · FAESA",
+      period: "Jun/2024",
+      detail:
+        "Gestão de projetos e aplicação estratégica de IA nos negócios, com o capítulo Espírito Santo do Project Management Institute.",
+    },
+    {
       label: "Ensino Médio",
       title: "1° lugar — ES · 17° lugar — Brasil",
       institution: "Colégio Sagrado Coração de Maria",
@@ -173,6 +242,10 @@ const ptData: ExperienceData = {
     {
       category: "Banco de Dados",
       items: ["PostgreSQL", "SQL Server", "SQL Developer"],
+    },
+    {
+      category: "Integrações & Automação",
+      items: ["n8n", "APIs REST", "ADVPL / Protheus", "Webhooks"],
     },
     {
       category: "DevOps & Infraestrutura",

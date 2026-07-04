@@ -394,6 +394,7 @@
     "challenges": "Desafios",
     "outcome": "Resultado",
     "back": "← Voltar para cases",
-    "next": "Próximo: {title} →"
+    "next": "Próximo: {title} →",
+    "service_cta": "Serviço relacionado: {service} →"
   }
 }

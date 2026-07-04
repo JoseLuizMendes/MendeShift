@@ -16,6 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function ExperienceSection({
   currentRole,
+  previousRoles,
   experienceAchievements,
   techStack,
   educationEntries,
@@ -40,7 +41,7 @@ export function ExperienceSection({
           scrollTrigger: {
             trigger: headerRef.current,
             start: "top 85%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         });
       }
@@ -55,7 +56,7 @@ export function ExperienceSection({
           scrollTrigger: {
             trigger: roleRef.current,
             start: "top 88%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         });
       }
@@ -72,7 +73,7 @@ export function ExperienceSection({
           scrollTrigger: {
             trigger: listRef.current,
             start: "top 88%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         });
       }
@@ -110,6 +111,31 @@ export function ExperienceSection({
               {currentRole.summary}
             </p>
           </Card>
+
+          {/* Cargos anteriores — mesmo layout, tom mais discreto */}
+          {previousRoles.map((role) => (
+            <Card
+              key={role.organization}
+              className="mb-10 border-border/30 bg-card/40 p-6 md:p-8"
+            >
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+                <div>
+                  <h3 className="font-display text-xl tracking-tight sm:text-2xl">
+                    {role.title}
+                  </h3>
+                  <p className="mt-1 font-mono text-sm text-muted-foreground">
+                    {role.organization}
+                  </p>
+                </div>
+                <time className="shrink-0 font-mono text-[10px] text-muted-foreground/60">
+                  {role.period}
+                </time>
+              </div>
+              <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground">
+                {role.summary}
+              </p>
+            </Card>
+          ))}
         </div>
 
         {/* Achievements — SIARHES destacado */}

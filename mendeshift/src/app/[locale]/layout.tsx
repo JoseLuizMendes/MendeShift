@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { getServerTranslations, loadMessages } from "@/i18n/server";
 
 import { LanguageToggle } from "@/_components/language-toggle";
+import { MobileNav } from "@/_components/mobile-nav";
 import { Preloader } from "@/_components/preloader";
 import { SmoothScroll } from "@/_components/smooth-scroll";
 import "../globals.css";
@@ -49,20 +50,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: "MendeShift",
       locale: locale === "pt" ? "pt_BR" : "en_US",
       type: "website",
-      images: [
-        {
-          url: "/card_profile.webp",
-          width: 1200,
-          height: 630,
-          alt: "MendeShift — Estúdio Digital",
-        },
-      ],
+      // og:image vem do file-based opengraph-image.tsx deste segmento
+      // (imagem de agência via next/og), que tem precedência sobre config.
     },
     twitter: {
       card: "summary_large_image",
       title: t("home_title"),
       description: t("twitter_desc"),
-      images: ["/card_profile.webp"],
     },
     alternates: {
       canonical:
@@ -88,7 +82,7 @@ const organizationJsonLd = {
   description:
     "Estúdio digital em Vitória, ES: criação de sites e landing pages, sistemas web sob medida, e-commerce e identidade visual.",
   url: "https://mendeshift.vercel.app",
-  image: "https://mendeshift.vercel.app/card_profile.webp",
+  image: "https://mendeshift.vercel.app/pt/opengraph-image",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Vitória",
@@ -144,6 +138,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <SpeedInsights/>
           </SmoothScroll>
           <LanguageToggle />
+          <MobileNav />
         </TranslationsProvider>
       </body>
     </html>

@@ -394,6 +394,7 @@
     "challenges": "Challenges",
     "outcome": "Outcome",
     "back": "← Back to cases",
-    "next": "Next: {title} →"
+    "next": "Next: {title} →",
+    "service_cta": "Related service: {service} →"
   }
 }

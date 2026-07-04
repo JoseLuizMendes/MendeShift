@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getServerTranslations } from "@/i18n/server";
+import { getServerTranslations, loadMessages } from "@/i18n/server";
 
 import { ColophonSection } from "@/_components/colophon-section";
 import { ActionLink } from "@/_components/ui/action-link";
@@ -8,7 +8,11 @@ import { BackToHomeLink } from "@/_components/back-to-home-link";
 import { Card } from "@/_components/ui/card";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, SectionLead, SectionTitle } from "@/_components/ui/section";
-import { getProjectBySlug, getProjectsByLocale } from "@/lib/projects";
+import {
+  getProjectBySlug,
+  getProjectsByLocale,
+  serviceAnchors,
+} from "@/lib/projects";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -39,6 +43,15 @@ export default async function ProjectPage({ params }: Props) {
   if (!project) notFound();
 
   const t = await getServerTranslations(locale, "project_detail");
+
+  // Título localizado do serviço relacionado (mesma fonte da página /servicos)
+  const messages = await loadMessages(locale);
+  const serviceItems = (
+    messages.services_page as { items: { slug: string; title: string }[] }
+  ).items;
+  const serviceAnchor = serviceAnchors[project.serviceType];
+  const serviceTitle =
+    serviceItems.find((item) => item.slug === serviceAnchor)?.title ?? "";
 
   const allProjects = getProjectsByLocale(locale);
   const currentIndex = allProjects.findIndex((p) => p.slug === slug);
@@ -79,6 +92,17 @@ export default async function ProjectPage({ params }: Props) {
                   <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
                     {project.metric}
                   </p>
+                )}
+
+                {serviceTitle && (
+                  <ActionLink
+                    // Locale explícito: o redirect de locale descarta o #hash
+                    href={`/${locale}/servicos#${serviceAnchor}`}
+                    variant="ghost"
+                    className="mt-6 px-0 text-accent hover:text-accent/80"
+                  >
+                    {t("service_cta", { service: serviceTitle })}
+                  </ActionLink>
                 )}
               </div>
 
