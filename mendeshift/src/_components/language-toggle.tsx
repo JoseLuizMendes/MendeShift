@@ -37,8 +37,10 @@ export function LanguageToggle({ className }: { className?: string }) {
       onMouseEnter={() => setScrambleToken((t) => t + 1)}
       onFocus={() => setScrambleToken((t) => t + 1)}
       className={cn(
-        "fixed bottom-6 right-6 z-50",
-        "flex h-10 items-center gap-2 rounded-full border border-border/50 bg-background/80 px-4",
+        // Escondido no mobile: a troca de idioma vive dentro do menu mobile
+        // (o toggle flutuante sobrepunha o chat e o textarea do formulário).
+        "fixed bottom-6 right-6 z-50 hidden md:flex",
+        "h-10 items-center gap-2 rounded-full border border-border/50 bg-background/80 px-4",
         "font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground",
         "backdrop-blur-sm transition-all duration-300",
         "hover:border-accent/60 hover:text-accent",
