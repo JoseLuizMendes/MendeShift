@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Favicon da marca: M em #ff4d4f sobre o dark do OG (#0a0a0b),
+       com a "dobra" horizontal do split-flap do hero. -->
+  <rect width="64" height="64" rx="12" fill="#0a0a0b"/>
+  <polygon fill="#ff4d4f" points="14,48 14,16 23,16 32,32 41,16 50,16 50,48 42,48 42,30 35,44 29,44 22,30 22,48"/>
+  <rect y="31" width="64" height="2" fill="#0a0a0b" opacity="0.55"/>
+</svg>
