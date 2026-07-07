@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 
 import { ScrambleTextOnHover } from "@/_components/scramble-text";
 import { cn } from "@/lib/utils";
+import { LanguagesIcon } from "lucide-react";
 
 export function LanguageToggle({ className }: { className?: string }) {
   const locale = useLocale();
@@ -32,30 +33,21 @@ export function LanguageToggle({ className }: { className?: string }) {
 
   return (
     <button
-      type="button"
-      onClick={handleSwitch}
-      onMouseEnter={() => setScrambleToken((t) => t + 1)}
-      onFocus={() => setScrambleToken((t) => t + 1)}
-      className={cn(
-        // Escondido no mobile: a troca de idioma vive dentro do menu mobile
-        // (o toggle flutuante sobrepunha o chat e o textarea do formulário).
-        "fixed bottom-6 right-6 z-50 hidden md:flex",
-        "h-10 items-center gap-2 rounded-full border border-border/50 bg-background/80 px-4",
-        "font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground",
-        "backdrop-blur-sm transition-all duration-300",
-        "hover:border-accent/60 hover:text-accent",
-        className,
-      )}
-      aria-label={`Switch to ${targetLocale === "pt" ? "Portuguese" : "English"}`}
-    >
-      <span className="text-muted-foreground/40">{locale.toUpperCase()}</span>
-      <span className="text-muted-foreground/25">/</span>
-      <ScrambleTextOnHover
-        text={label}
-        as="span"
-        duration={0.4}
-        triggerToken={scrambleToken}
-      />
-    </button>
+  type="button"
+  onClick={handleSwitch}
+  onMouseEnter={() => setScrambleToken((t) => t + 1)}
+  onFocus={() => setScrambleToken((t) => t + 1)}
+  className={cn(
+    "fixed bottom-6 right-6 z-50 hidden md:flex",
+    "h-10 w-10 items-center justify-center rounded-full border border-border/50 bg-background/80",
+    "backdrop-blur-sm transition-all duration-300",
+    "hover:border-accent/60 hover:text-accent",
+    className,
+  )}
+  aria-label={`Mudar para ${targetLocale === "pt" ? "Português" : "Inglês"}`}
+>
+  {/* Certifique-se de que o ícone possui aria-hidden se for apenas decorativo */}
+  <LanguagesIcon className="h-4 w-4" aria-hidden="true" />
+</button>
   );
 }
