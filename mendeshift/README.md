@@ -29,6 +29,7 @@ com uma key **server-side** (nunca exposta no browser).
 
 | Variável | Obrigatória | Descrição |
 | --- | --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Não | URL pública canônica (ex.: `https://mendeshift.com.br`). Alimenta canonicals, sitemap, robots, og:url e JSON-LD. Sem ela, cai no fallback `https://mendeshift.vercel.app`. Trocar o domínio = mudar esta env na Vercel e redeployar (sem commit). Ver [docs/go-live-dominio-seo.md](docs/go-live-dominio-seo.md). |
 | `GEMINI_API_KEY` | Sim (se não usar n8n) | Key do Google AI Studio para o Gemini. |
 | `CHATBOT_WEBHOOK_URL` | Não | Se definida, encaminha o chat para um webhook do n8n em vez do Gemini direto. |
 | `UPSTASH_REDIS_REST_URL` | Não | URL do Upstash Redis para ativar o rate limiting. |
@@ -83,13 +84,12 @@ via [Resend](https://resend.com).
 - **Vercel Analytics + Speed Insights:** montados no layout. Evento de conversão
   `lead_submitted` (com `serviceType`, `budgetRange`, `locale`) disparado no sucesso do
   briefing — acompanhar em Vercel → Analytics → Events.
-- **Google Search Console (ação do dono):** em [search.google.com/search-console](https://search.google.com/search-console),
-  adicionar a propriedade `https://mendeshift.vercel.app` (tipo "Prefixo do URL"), verificar
-  via meta tag HTML (adicionar a tag em `[locale]/layout.tsx` → `metadata.verification.google`)
-  e enviar o sitemap `https://mendeshift.vercel.app/sitemap.xml`.
-- **Google Business Profile (ação do dono):** criar perfil "MendeShift — Estúdio Digital"
-  em Vitória, ES ([business.google.com](https://business.google.com)) — junto com o domínio
-  próprio, é a maior alavanca de SEO local ("criação de sites em Vitória ES").
+- **Domínio próprio + Search Console + Business Profile (ações do dono):** passo a passo
+  completo em **[docs/go-live-dominio-seo.md](docs/go-live-dominio-seo.md)** — registro do
+  domínio, conexão na Vercel, `NEXT_PUBLIC_SITE_URL`, verificação do Search Console por **DNS TXT**
+  (propriedade de Domínio, cobre todos os subdomínios) e criação do perfil no Google Business.
+  Junto com o domínio próprio, o Business Profile é a maior alavanca de SEO local
+  ("criação de sites em Vitória ES").
 
 ## Roadmap
 
@@ -102,7 +102,9 @@ via [Resend](https://resend.com).
 - **Fase 3 — Portal do cliente:** links de proposta privados (signed URLs) → autenticação +
   banco (Neon/Vercel Postgres) + status de projeto + aprovações.
 - **Pré-requisito de negócio:** registrar domínio próprio (ex.: mendeshift.com.br) — SEO em
-  `vercel.app` tem teto baixo. Atualizar `metadataBase`, sitemap e JSON-LD ao migrar.
+  `vercel.app` tem teto baixo. `metadataBase`, sitemap, robots e JSON-LD já leem de
+  `NEXT_PUBLIC_SITE_URL`, então migrar é só setar essa env na Vercel (sem commit). Ver
+  [docs/go-live-dominio-seo.md](docs/go-live-dominio-seo.md).
 
 ## Learn More
 
