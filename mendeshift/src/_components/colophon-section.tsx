@@ -241,9 +241,9 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
 function MetaColumn({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="rounded-2xl border border-border/25 bg-background/15 p-4 sm:p-5">
-      <h4 className="mb-3 font-mono text-[9px] uppercase tracking-[0.3em] text-muted-foreground">
+      <p className="mb-3 font-mono text-[9px] uppercase tracking-[0.3em] text-muted-foreground">
         {title}
-      </h4>
+      </p>
       <ul className="space-y-2.5">
         {items.map((item) => (
           <li key={item} className="font-mono text-xs leading-relaxed text-foreground/80 sm:text-[13px]">
