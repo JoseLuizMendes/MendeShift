@@ -1,8 +1,0 @@
-allowBuilds:
-  sharp: true
-  unrs-resolver: true
-minimumReleaseAgeExclude:
-  - resend@6.17.0
-onlyBuiltDependencies:
-  - sharp
-  - unrs-resolver
