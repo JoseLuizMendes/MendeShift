@@ -12,7 +12,7 @@ Legenda de quem faz: 🧑 = você · 🤖 = Claude (código).
 
 ## 0. Pendência técnica (🤖 — já pronta, falta só commitar)
 
-- [ ] Commitar as 3 mudanças de código (`metadata.ts` via env var, `README.md`, docs novos).
+- [x] Commitar as 3 mudanças de código (`metadata.ts` via env var, `README.md`, docs novos).
   > Nota: peça ao Claude "commite as mudanças" ou faça você: `git add -A && git commit`.
 
 ---
