@@ -319,6 +319,7 @@
     "briefing_label": "Ready to start?",
     "briefing_cta": "Fill in the project briefing",
     "placeholder": "Type your message...",
+    "send_message": "Send message",
     "virtual_assistant": "MendeShift Assistant",
     "online": "Online now",
     "initial_message": "Hi! I'm the MendeShift assistant. Want to know about pricing, timelines or how a project works? Just ask.",

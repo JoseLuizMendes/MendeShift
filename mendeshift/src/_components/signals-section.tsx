@@ -149,7 +149,7 @@ export function SignalsSection() {
                         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                           {item.no}
                         </span>
-                        <span className="font-mono text-[10px] text-muted-foreground/60">
+                        <span className="font-mono text-[10px] text-muted-foreground">
                           {item.category}
                         </span>
                       </div>

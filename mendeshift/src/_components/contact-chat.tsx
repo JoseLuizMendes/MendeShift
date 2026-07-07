@@ -249,9 +249,11 @@ export function ContactChat() {
             <button
               type="submit"
               disabled={!inputValue.trim() || isTyping}
+              aria-label={t("send_message")}
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground transition-all hover:scale-[1.02] hover:bg-accent/90 disabled:opacity-50 disabled:hover:scale-100"
             >
               <svg
+                aria-hidden="true"
                 className="h-5 w-5"
                 fill="none"
                 stroke="currentColor"
@@ -277,7 +279,7 @@ export function ContactChat() {
             <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
               {t("quick_label")}
             </p>
-            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground/50">
+            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground">
               {quickPrompts.length} tópicos
             </p>
           </div>
@@ -289,8 +291,8 @@ export function ContactChat() {
                 <div
                   key={item.label}
                   className={`overflow-hidden rounded-2xl border transition-all duration-300 ${isOpen
-                      ? "border-accent/50 bg-card/60"
-                      : "border-border/50 bg-card/30 hover:border-accent/35 hover:bg-card/50"
+                    ? "border-accent/50 bg-card/60"
+                    : "border-border/50 bg-card/30 hover:border-accent/35 hover:bg-card/50"
                     }`}
                 >
                   <button
@@ -307,7 +309,7 @@ export function ContactChat() {
                       </span>
                       {/* Preview truncado — affordance de conteúdo escondido */}
                       <span
-                        className={`font-mono text-[10px] leading-relaxed text-muted-foreground/55 transition-all duration-300 ${isOpen ? "max-h-0 overflow-hidden opacity-0" : "max-h-8 opacity-100"
+                        className={`font-mono text-[10px] leading-relaxed text-muted-foreground transition-all duration-300 ${isOpen ? "max-h-0 overflow-hidden opacity-0" : "max-h-8 opacity-100"
                           }`}
                       >
                         {item.answer.slice(0, 62)}…
@@ -328,7 +330,7 @@ export function ContactChat() {
                   >
                     <div className="overflow-hidden">
                       <div className="space-y-2.5 border-t border-border/40 px-4 py-3.5">
-                        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/55">
+                        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                           Pergunta
                         </p>
                         <p className="font-mono text-[11px] leading-relaxed text-muted-foreground/80">
@@ -336,7 +338,7 @@ export function ContactChat() {
                         </p>
                         {item.answer && (
                           <>
-                            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-accent/60">
+                            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
                               Resposta
                             </p>
                             <p className="font-mono text-xs leading-relaxed text-foreground/90">

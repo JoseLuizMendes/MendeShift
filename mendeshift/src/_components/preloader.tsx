@@ -179,10 +179,10 @@ export function Preloader() {
       aria-hidden="true"
     >
       {/* Corner labels */}
-      <span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.22em] text-muted-foreground/30 sm:left-8 sm:top-8">
+      <span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.22em] text-muted-foreground sm:left-8 sm:top-8">
         MendeShift
       </span>
-      <span className="absolute right-5 top-5 font-mono text-[9px] uppercase tracking-[0.22em] text-muted-foreground/30 sm:right-8 sm:top-8">
+      <span className="absolute right-5 top-5 font-mono text-[9px] uppercase tracking-[0.22em] text-muted-foreground sm:right-8 sm:top-8">
         v1.0.0
       </span>
 
@@ -238,9 +238,9 @@ export function Preloader() {
         ref={hintRef}
         className="absolute bottom-8 left-0 right-0 flex justify-center"
       >
-        <p className="font-mono text-[9px] uppercase tracking-[0.28em] text-muted-foreground/40">
-          <span className="text-accent/50">press any key</span> or{" "}
-          <span className="text-accent/50">scroll</span> to enter
+        <p className="font-mono text-[9px] uppercase tracking-[0.28em] text-muted-foreground">
+          <span className="text-accent">press any key</span> or{" "}
+          <span className="text-accent">scroll</span> to enter
         </p>
       </div>
 

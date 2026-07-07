@@ -146,14 +146,14 @@ export function WorkSection({ projects }: Props) {
                     {item.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="rounded-full border border-border/30 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-muted-foreground/60"
+                        className="rounded-full border border-border/30 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-muted-foreground"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
                   <div className="mt-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-                    <span className="font-mono text-[10px] text-muted-foreground/50">
+                    <span className="font-mono text-[10px] text-muted-foreground">
                       {item.metric ?? String(idx + 1).padStart(2, "0")}
                     </span>
                     <Link
@@ -171,7 +171,7 @@ export function WorkSection({ projects }: Props) {
         </div>
 
         <div className="mt-8 flex items-center justify-between border-t border-border/20 pt-6 md:mt-10">
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/50">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
             {t("more", { count: remainingCount })}
           </p>
           <Link

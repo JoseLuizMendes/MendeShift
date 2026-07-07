@@ -105,7 +105,7 @@ export function ExperienceSection({
                   {currentRole.organization}
                 </p>
               </div>
-              <time className="shrink-0 font-mono text-[10px] text-muted-foreground/60">
+              <time className="shrink-0 font-mono text-[10px] text-muted-foreground">
                 {currentRole.period}
               </time>
             </div>
@@ -129,7 +129,7 @@ export function ExperienceSection({
                     {role.organization}
                   </p>
                 </div>
-                <time className="shrink-0 font-mono text-[10px] text-muted-foreground/60">
+                <time className="shrink-0 font-mono text-[10px] text-muted-foreground">
                   {role.period}
                 </time>
               </div>
@@ -215,7 +215,7 @@ export function ExperienceSection({
                     </h4>
                     <span className="font-mono text-xs text-accent">· {entry.institution}</span>
                   </div>
-                  <time className="shrink-0 font-mono text-[10px] text-muted-foreground/60">
+                  <time className="shrink-0 font-mono text-[10px] text-muted-foreground">
                     {entry.period}
                   </time>
                 </div>

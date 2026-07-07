@@ -105,7 +105,7 @@ export function MobileNav() {
           open ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       >
-        <div className="absolute left-8 top-6 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/50">
+        <div className="absolute left-8 top-6 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
           MendeShift
         </div>
 
@@ -134,8 +134,8 @@ export function MobileNav() {
           onClick={switchLanguage}
           className="mt-10 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground transition-colors hover:text-accent"
         >
-          <span className="text-muted-foreground/40">{locale.toUpperCase()}</span>
-          <span className="text-muted-foreground/25">/</span>
+          <span className="text-muted-foreground/80">{locale.toUpperCase()}</span>
+          <span className="text-muted-foreground/80">/</span>
           <span>{targetLocale.toUpperCase()}</span>
         </button>
       </nav>

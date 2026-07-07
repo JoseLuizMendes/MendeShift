@@ -179,7 +179,7 @@ export default async function ProjectPage({ params }: Props) {
               <div className="mt-6 space-y-4">
                 {project.challenges.map((challenge, idx) => (
                   <div key={idx} className="flex gap-4 border-l border-border/40 pl-5">
-                    <span className="shrink-0 font-mono text-[10px] text-muted-foreground/50">
+                    <span className="shrink-0 font-mono text-[10px] text-muted-foreground">
                       {String(idx + 1).padStart(2, "0")}
                     </span>
                     <p className="font-mono text-xs leading-relaxed text-muted-foreground">

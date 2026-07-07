@@ -199,7 +199,7 @@ function ProjectArchiveCard({
             {project.tech.map((tech) => (
               <span
                 key={tech}
-                className="rounded-full border border-border/30 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground/75"
+                className="rounded-full border border-border/30 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground"
               >
                 {tech}
               </span>
