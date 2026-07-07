@@ -3,6 +3,7 @@ import { Linkedin, Mail, MessageCircle } from "lucide-react";
 
 import { getServerTranslations, loadMessages } from "@/i18n/server";
 import { whatsAppLink } from "@/lib/leads";
+import { pageMetadata } from "@/lib/metadata";
 
 import { BackToHomeLink } from "@/_components/back-to-home-link";
 import { BriefingForm } from "@/_components/briefing-form";
@@ -18,10 +19,12 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getServerTranslations(locale, "meta");
-  return {
+  return pageMetadata({
+    locale,
+    path: "/contato",
     title: t("contact_title"),
     description: t("contact_desc"),
-  };
+  });
 }
 
 type ContactPageMessages = {

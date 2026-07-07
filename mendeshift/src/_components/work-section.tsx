@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { useTranslations } from "@/i18n/context";
+import { useLocale, useTranslations } from "@/i18n/context";
+import { localeHref } from "@/lib/navigation";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -22,6 +23,7 @@ type Props = {
 
 export function WorkSection({ projects }: Props) {
   const t = useTranslations("work");
+  const locale = useLocale();
 
   const featuredProjects = projects.slice(0, 2);
   const remainingCount = projects.length - featuredProjects.length;
@@ -153,7 +155,7 @@ export function WorkSection({ projects }: Props) {
                       {item.metric ?? String(idx + 1).padStart(2, "0")}
                     </span>
                     <Link
-                      href={`/projetos/${item.slug}`}
+                      href={localeHref(`/projetos/${item.slug}`, locale)}
                       className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition-colors duration-300 group-hover:text-accent after:absolute after:inset-0"
                     >
                       <ScrambleTextOnHover text={t("view_case")} as="span" duration={0.45} />
@@ -171,7 +173,7 @@ export function WorkSection({ projects }: Props) {
             {t("more", { count: remainingCount })}
           </p>
           <Link
-            href="/projetos"
+            href={localeHref("/projetos", locale)}
             className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-accent transition-colors duration-300 hover:text-accent/75"
           >
             {t("explore")}

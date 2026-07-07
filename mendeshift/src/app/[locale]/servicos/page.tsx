@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { getServerTranslations, loadMessages } from "@/i18n/server";
+import { pageMetadata } from "@/lib/metadata";
 
 import { BackToHomeLink } from "@/_components/back-to-home-link";
 import { ColophonSection } from "@/_components/colophon-section";
@@ -18,10 +19,12 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getServerTranslations(locale, "meta");
-  return {
+  return pageMetadata({
+    locale,
+    path: "/servicos",
     title: t("services_title"),
     description: t("services_desc"),
-  };
+  });
 }
 
 type ServicesPageMessages = {

@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-import { motion } from "framer-motion";
 import {
   createContext,
   useCallback,
@@ -208,12 +207,12 @@ function SplitFlapChar({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.1 * index, duration: 0.3, ease: "easeOut" }}
-      className="relative flex items-center justify-center overflow-hidden font-display"
+    <div
+      // Entrada fade-in-up escalonada em CSS puro (keyframe flap-in no
+      // globals.css) — era o único uso de framer-motion no projeto.
+      className="flap-enter relative flex items-center justify-center overflow-hidden font-display"
       style={{
+        animationDelay: `${0.1 * index}s`,
         fontSize: "clamp(2.2rem, 12vw, 14rem)",
         width: "0.65em",
         height: "1.05em",
@@ -247,6 +246,6 @@ function SplitFlapChar({
           {currentChar}
         </span>
       </div>
-    </motion.div>
+    </div>
   );
 }

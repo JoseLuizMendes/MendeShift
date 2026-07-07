@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
 
+import { SITE_URL } from "@/lib/metadata";
 import { projects } from "@/lib/projects";
 
-const BASE_URL = "https://mendeshift.vercel.app";
+const BASE_URL = SITE_URL;
 
 /**
  * Sitemap de todas as rotas × locales.
@@ -23,9 +24,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
+  // Sem lastModified: new Date() a cada build vira informação falsa
+  // para o Google; melhor omitir do que mentir.
   return routes.map(({ path, priority, changeFrequency }) => ({
     url: `${BASE_URL}${path}`,
-    lastModified: new Date(),
     changeFrequency,
     priority,
     alternates: {

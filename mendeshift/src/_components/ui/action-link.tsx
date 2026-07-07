@@ -1,6 +1,10 @@
+"use client";
+
 import * as React from "react";
 import Link from "next/link";
 
+import { useLocale } from "@/i18n/context";
+import { localeHref } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
 
 type Variant = "outline" | "ghost";
@@ -16,9 +20,11 @@ export function ActionLink({
   href,
   ...props
 }: Props) {
+  const locale = useLocale();
+
   return (
     <Link
-      href={href}
+      href={localeHref(href, locale)}
       className={cn(
         "inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-full font-mono text-xs uppercase tracking-widest transition-colors",
         variant === "outline" &&

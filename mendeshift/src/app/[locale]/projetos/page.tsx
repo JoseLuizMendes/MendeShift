@@ -3,9 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { getServerTranslations } from "@/i18n/server";
 
+import { pageMetadata } from "@/lib/metadata";
+import { localeHref } from "@/lib/navigation";
 import { BitmapChevron } from "@/_components/bitmap-chevron";
 import { ColophonSection } from "@/_components/colophon-section";
-import { ActionLink } from "@/_components/ui/action-link";
 import { BackToHomeLink } from "@/_components/back-to-home-link";
 import { Card } from "@/_components/ui/card";
 import { Container } from "@/_components/ui/container";
@@ -19,10 +20,12 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getServerTranslations(locale, "meta");
-  return {
+  return pageMetadata({
+    locale,
+    path: "/projetos",
     title: t("projects_title"),
     description: t("projects_desc"),
-  };
+  });
 }
 
 export default async function ProjectsPage({ params }: Props) {
@@ -59,8 +62,8 @@ export default async function ProjectsPage({ params }: Props) {
           <Container className="md:px-30">
             {/* Desktop — continuous scroll columns */}
             <div className="hidden gap-6 lg:grid lg:grid-cols-2">
-              <ProjectsColumn items={leftColumn} direction="up" openCaseLabel={t("open_case")} />
-              <ProjectsColumn items={rightColumn} direction="down" openCaseLabel={t("open_case")} />
+              <ProjectsColumn items={leftColumn} direction="up" openCaseLabel={t("open_case")} locale={locale} />
+              <ProjectsColumn items={rightColumn} direction="down" openCaseLabel={t("open_case")} locale={locale} />
             </div>
 
             {/* Mobile / Tablet — stacked cards */}
@@ -72,6 +75,7 @@ export default async function ProjectsPage({ params }: Props) {
                   index={index}
                   openCaseLabel={t("open_case")}
                   priority={index === 0}
+                  locale={locale}
                 />
               ))}
             </div>
@@ -88,10 +92,12 @@ function ProjectsColumn({
   items,
   direction,
   openCaseLabel,
+  locale,
 }: {
   items: ReturnType<typeof getProjectsByLocale>;
   direction: "up" | "down";
   openCaseLabel: string;
+  locale: string;
 }) {
   const repeatedItems = [...items, ...items];
 
@@ -107,6 +113,7 @@ function ProjectsColumn({
             index={index % items.length}
             openCaseLabel={openCaseLabel}
             priority={direction === "up" && index === 0}
+            locale={locale}
           />
         ))}
       </div>
@@ -119,11 +126,13 @@ function ProjectArchiveCard({
   index,
   openCaseLabel,
   priority = false,
+  locale,
 }: {
   project: Omit<Project, "pt">;
   index: number;
   openCaseLabel: string;
   priority?: boolean;
+  locale: string;
 }) {
   return (
     <article className="group">
@@ -198,7 +207,7 @@ function ProjectArchiveCard({
           </div>
 
           <Link
-            href={`/projetos/${project.slug}`}
+            href={localeHref(`/projetos/${project.slug}`, locale)}
             className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground transition-colors duration-300 group-hover:text-accent"
           >
             {openCaseLabel}

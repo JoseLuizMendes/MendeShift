@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { TranslationsProvider } from "@/i18n/context";
 import { notFound } from "next/navigation";
 import { getServerTranslations, loadMessages } from "@/i18n/server";
+import { SITE_URL, pageMetadata } from "@/lib/metadata";
 
 import { LanguageToggle } from "@/_components/language-toggle";
 import { MobileNav } from "@/_components/mobile-nav";
@@ -35,18 +36,30 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
+// Pré-renderiza os dois locales: sem isto, todas as páginas sob [locale]
+// renderizam dinamicamente (função por request em vez de estático no CDN).
+export function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "pt" }];
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getServerTranslations(locale, "meta");
 
   return {
-    metadataBase: new URL("https://mendeshift.vercel.app"),
-    title: t("home_title"),
-    description: t("home_desc"),
+    metadataBase: new URL(SITE_URL),
+    // Metadata da home; subpáginas definem as próprias via pageMetadata()
+    // (src/lib/metadata.ts) — sem isso herdariam o canonical da home.
+    ...pageMetadata({
+      locale,
+      path: "",
+      title: t("home_title"),
+      description: t("home_desc"),
+    }),
     openGraph: {
       title: t("home_title"),
       description: t("og_desc"),
-      url: "https://mendeshift.vercel.app",
+      url: locale === "pt" ? `${SITE_URL}/pt` : SITE_URL,
       siteName: "MendeShift",
       locale: locale === "pt" ? "pt_BR" : "en_US",
       type: "website",
@@ -57,16 +70,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: "summary_large_image",
       title: t("home_title"),
       description: t("twitter_desc"),
-    },
-    alternates: {
-      canonical:
-        locale === "en"
-          ? "https://mendeshift.vercel.app"
-          : `https://mendeshift.vercel.app/${locale}`,
-      languages: {
-        en: "https://mendeshift.vercel.app",
-        pt: "https://mendeshift.vercel.app/pt",
-      },
     },
   };
 }
@@ -81,8 +84,8 @@ const organizationJsonLd = {
   name: "MendeShift",
   description:
     "Estúdio digital em Vitória, ES: criação de sites e landing pages, sistemas web sob medida, e-commerce e identidade visual.",
-  url: "https://mendeshift.vercel.app",
-  image: "https://mendeshift.vercel.app/pt/opengraph-image",
+  url: SITE_URL,
+  image: `${SITE_URL}/pt/opengraph-image`,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Vitória",

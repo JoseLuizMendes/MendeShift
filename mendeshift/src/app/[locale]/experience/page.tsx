@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getServerTranslations } from "@/i18n/server";
 
 import { getExperienceByLocale } from "@/lib/experience";
+import { pageMetadata } from "@/lib/metadata";
 import { ColophonSection } from "@/_components/colophon-section";
 import { ExperienceSection } from "@/_components/experience-section";
 import { ActionLink } from "@/_components/ui/action-link";
@@ -16,10 +17,12 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getServerTranslations(locale, "meta");
-  return {
+  return pageMetadata({
+    locale,
+    path: "/experience",
     title: t("experience_title"),
     description: t("experience_desc"),
-  };
+  });
 }
 
 export default async function ExperiencePage({ params }: Props) {

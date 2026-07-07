@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getServerTranslations, loadMessages } from "@/i18n/server";
 
+import { SITE_URL, pageMetadata } from "@/lib/metadata";
 import { ColophonSection } from "@/_components/colophon-section";
 import { ActionLink } from "@/_components/ui/action-link";
 import { BackToHomeLink } from "@/_components/back-to-home-link";
@@ -30,10 +31,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, locale } = await params;
   const project = getProjectBySlug(slug, locale);
   if (!project) return {};
-  return {
+  return pageMetadata({
+    locale,
+    path: `/projetos/${slug}`,
     title: `${project.title} | MendeShift`,
     description: project.shortDesc,
-  };
+  });
 }
 
 export default async function ProjectPage({ params }: Props) {
@@ -62,10 +65,10 @@ export default async function ProjectPage({ params }: Props) {
     "@type": "CreativeWork",
     name: project.title,
     description: project.shortDesc,
-    url: `https://mendeshift.vercel.app/projetos/${project.slug}`,
+    url: `${SITE_URL}${locale === "pt" ? "/pt" : ""}/projetos/${project.slug}`,
     creator: { "@type": "Organization", name: "MendeShift" },
     ...(project.previewImage && {
-      image: `https://mendeshift.vercel.app${project.previewImage}`,
+      image: `${SITE_URL}${project.previewImage}`,
     }),
   };
 
