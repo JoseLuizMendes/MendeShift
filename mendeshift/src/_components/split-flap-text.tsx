@@ -88,10 +88,10 @@ export function SplitFlapMuteToggle({ className = "" }: { className?: string }) 
       type="button"
       onClick={audio.toggleMute}
       className={`inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition-colors duration-200 hover:text-foreground ${className}`}
-      aria-label={audio.isMuted ? "Ativar som" : "Silenciar som"}
+      aria-label={audio.isMuted ? "Ligar som" : "Silenciar som"}
     >
       {audio.isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-      <span>{audio.isMuted ? "Sound Off" : "Sound On"}</span>
+      <span>{audio.isMuted ? "Som Desligado" : "Som Ligado"}</span>
     </button>
   );
 }
