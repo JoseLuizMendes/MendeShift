@@ -7,6 +7,7 @@ import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { prefersReducedMotion } from "@/lib/motion";
 import { SCROLL_KEY_PREFIX } from "@/lib/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -34,6 +35,40 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     // Lenis + ScrollTrigger e o usuário aterrissa na seção errada.
     const previousRestoration = window.history.scrollRestoration;
     window.history.scrollRestoration = "manual";
+
+    // Reduced motion: scroll 100% nativo — sem Lenis nem ticker GSAP.
+    // Mantém só a contabilidade de posição (restauração de scroll, que
+    // já tem fallback window.scrollTo) e os eventos que outros
+    // componentes disparam.
+    if (prefersReducedMotion()) {
+      const onNativeScroll = () => {
+        lastScrollYRef.current = Math.round(window.scrollY);
+      };
+      window.addEventListener("scroll", onNativeScroll, { passive: true });
+
+      const onScrollToTop = () => window.scrollTo(0, 0);
+      window.addEventListener("lenis:scrollToTop", onScrollToTop);
+
+      const onScrollToSection = (event: Event) => {
+        const id = (event as CustomEvent<string>).detail;
+        document.getElementById(id)?.scrollIntoView();
+      };
+      window.addEventListener("lenis:scrollTo", onScrollToSection);
+
+      const onPopState = () => {
+        isPopState.current = true;
+        window.history.scrollRestoration = "manual";
+      };
+      window.addEventListener("popstate", onPopState);
+
+      return () => {
+        window.history.scrollRestoration = previousRestoration;
+        window.removeEventListener("scroll", onNativeScroll);
+        window.removeEventListener("lenis:scrollToTop", onScrollToTop);
+        window.removeEventListener("lenis:scrollTo", onScrollToSection);
+        window.removeEventListener("popstate", onPopState);
+      };
+    }
 
     const lenis = new Lenis({
       duration: 1.15,
@@ -286,7 +321,12 @@ function scrollToHashWhenReady(
       const top = Math.round(
         target.getBoundingClientRect().top + window.scrollY,
       );
-      lenisRef.current?.scrollTo(top, { immediate: true, force: true });
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(top, { immediate: true, force: true });
+      } else {
+        // Reduced motion (sem Lenis): salto nativo.
+        window.scrollTo(0, top);
+      }
       ScrollTrigger.refresh();
       return;
     }

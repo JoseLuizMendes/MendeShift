@@ -6,6 +6,7 @@ import { useTranslations } from "@/i18n/context";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { prefersReducedMotion } from "@/lib/motion";
 import { HighlightText } from "@/_components/highlight-text";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, Section, SectionTitle } from "@/_components/ui/section";
@@ -30,6 +31,7 @@ export function PrinciplesSection() {
 
   useEffect(() => {
     if (!sectionRef.current || !headerRef.current || !listRef.current) return;
+    if (prefersReducedMotion()) return;
 
     const ctx = gsap.context(() => {
       gsap.from(headerRef.current, {

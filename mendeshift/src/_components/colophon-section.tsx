@@ -6,6 +6,7 @@ import { useTranslations } from "@/i18n/context";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { prefersReducedMotion } from "@/lib/motion";
 import { ActionLink } from "@/_components/ui/action-link";
 import { Card } from "@/_components/ui/card";
 import { Container } from "@/_components/ui/container";
@@ -80,6 +81,7 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
 
   useEffect(() => {
     if (!sectionRef.current) return;
+    if (prefersReducedMotion()) return;
 
     const ctx = gsap.context(() => {
       if (headerRef.current) {

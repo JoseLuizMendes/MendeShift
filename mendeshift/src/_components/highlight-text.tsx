@@ -4,6 +4,8 @@ import { type ReactNode, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { prefersReducedMotion } from "@/lib/motion";
+
 gsap.registerPlugin(ScrollTrigger);
 
 interface HighlightTextProps {
@@ -22,6 +24,13 @@ export function HighlightText({
 
   useEffect(() => {
     if (!containerRef.current || !highlightRef.current) return;
+
+    // O highlight nasce com scaleX(0); sem animação ele precisa ser
+    // aplicado direto, senão o texto escuro fica invisível no fundo dark.
+    if (prefersReducedMotion()) {
+      highlightRef.current.style.transform = "scaleX(1)";
+      return;
+    }
 
     const ctx = gsap.context(() => {
       gsap.fromTo(

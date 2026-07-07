@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
+import { prefersReducedMotion } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 interface ScrambleTextOnHoverProps {
@@ -67,6 +68,7 @@ export function ScrambleTextOnHover({
   const isControlledByParent = triggerToken !== undefined;
 
   const startScramble = useCallback(() => {
+    if (prefersReducedMotion()) return;
     if (isAnimating.current) return;
     isAnimating.current = true;
 

@@ -6,6 +6,7 @@ import { useTranslations } from "@/i18n/context";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { prefersReducedMotion } from "@/lib/motion";
 import { Card } from "@/_components/ui/card";
 import { Container } from "@/_components/ui/container";
 import { Separator } from "@/_components/ui/separator";
@@ -29,6 +30,7 @@ export function ExperienceSection({
 
   useEffect(() => {
     if (!sectionRef.current) return;
+    if (prefersReducedMotion()) return;
 
     const ctx = gsap.context(() => {
       if (headerRef.current) {

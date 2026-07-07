@@ -5,6 +5,8 @@ import { useTranslations } from "@/i18n/context";
 import gsap from "gsap";
 import { ChevronDown, Linkedin, MessageCircle } from "lucide-react";
 
+import { prefersReducedMotion } from "@/lib/motion";
+
 import { BitmapChevron } from "@/_components/bitmap-chevron";
 import { ScrambleTextOnHover } from "@/_components/scramble-text";
 import { ActionLink } from "@/_components/ui/action-link";
@@ -64,6 +66,7 @@ export function ContactChat() {
 
   useEffect(() => {
     if (!chatRef.current) return;
+    if (prefersReducedMotion()) return;
 
     const ctx = gsap.context(() => {
       if (chatRef.current) {

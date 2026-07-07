@@ -39,19 +39,20 @@ export function useTranslations(namespace: string): TFunction {
   const { messages } = useContext(IntlContext);
   const ns = (messages[namespace] ?? {}) as Record<string, unknown>;
 
-  const t = (key: string, params?: Record<string, string | number>): string => {
-    let str = (ns[key] as string) ?? key;
-    if (params) {
-      for (const [k, v] of Object.entries(params)) {
-        str = str.replace(new RegExp(`\\{${k}\\}`, "g"), String(v));
+  // Object.assign numa expressão só: mutar `t` depois de criado viola a
+  // imutabilidade que o React Compiler assume para valores do render.
+  return Object.assign(
+    (key: string, params?: Record<string, string | number>): string => {
+      let str = (ns[key] as string) ?? key;
+      if (params) {
+        for (const [k, v] of Object.entries(params)) {
+          str = str.replace(new RegExp(`\\{${k}\\}`, "g"), String(v));
+        }
       }
-    }
-    return str;
-  };
-
-  t.raw = (key: string): unknown => ns[key];
-
-  return t as TFunction;
+      return str;
+    },
+    { raw: (key: string): unknown => ns[key] },
+  );
 }
 
 export function useLocale(): string {

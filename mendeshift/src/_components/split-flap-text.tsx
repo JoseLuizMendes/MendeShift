@@ -1,6 +1,7 @@
 "use client";
 
 import type React from "react";
+import { prefersReducedMotion } from "@/lib/motion";
 import {
   createContext,
   useCallback,
@@ -164,6 +165,8 @@ function SplitFlapChar({
     }
 
     if (isSpace || !ready) return;
+    // Reduced motion: sem flip — o estado inicial já é o caractere final.
+    if (prefersReducedMotion()) return;
 
     let flipIndex = 0;
     const settleThreshold = 8 + index * 2;

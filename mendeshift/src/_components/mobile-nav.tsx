@@ -23,6 +23,15 @@ export function MobileNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  // Fecha ao trocar de rota (ex.: back/forward com o menu aberto).
+  // Ajuste de estado durante o render (padrão dos docs do React) em vez
+  // de setState num efeito, que dispara render em cascata.
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setOpen(false);
+  }
+
   // Rotas reais — funcionam de qualquer página (diferente das âncoras da
   // side-nav desktop, que só existem na home).
   const links = [
@@ -32,11 +41,6 @@ export function MobileNav() {
     { label: t("projects"), href: `/${locale}/projetos` },
     { label: t("contact"), href: `/${locale}/contato` },
   ];
-
-  // Fecha ao trocar de rota (ex.: link clicado) e trava o scroll de fundo.
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   useEffect(() => {
     if (!open) return;

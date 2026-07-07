@@ -6,6 +6,7 @@ import { useTranslations } from "@/i18n/context";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { prefersReducedMotion } from "@/lib/motion";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, Section } from "@/_components/ui/section";
 import { ContactChat } from "./contact-chat";
@@ -19,6 +20,7 @@ export function CtaSection() {
 
   useEffect(() => {
     if (!sectionRef.current) return;
+    if (prefersReducedMotion()) return;
 
     const ctx = gsap.context(() => {
       if (headlineRef.current) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -51,22 +51,21 @@ export function BriefingForm() {
   const timelineOptions = form.timeline_options as Option[];
 
   // Validação client-side com mensagens localizadas; o schema canônico
-  // (src/lib/leads.ts) revalida no servidor.
-  const formSchema = useMemo(
-    () =>
-      z.object({
-        name: z.string().trim().min(1, validation.name_required),
-        email: z.string().trim().email(validation.email_invalid),
-        phone: z.string().trim().max(30).optional(),
-        company: z.string().trim().max(120).optional(),
-        serviceType: z.enum(serviceTypes, { message: validation.service_required }),
-        budgetRange: z.enum(budgetRanges),
-        timeline: z.enum(timelines),
-        message: z.string().trim().min(10, validation.message_required),
-        website: z.string().optional(),
-      }),
-    [validation],
-  );
+  // (src/lib/leads.ts) revalida no servidor. Sem useMemo: o React
+  // Compiler não conseguia provar a imutabilidade de `validation` e
+  // pulava a otimização do componente inteiro — deixá-lo memoizar
+  // sozinho resolve, e montar o schema é barato.
+  const formSchema = z.object({
+    name: z.string().trim().min(1, validation.name_required),
+    email: z.string().trim().email(validation.email_invalid),
+    phone: z.string().trim().max(30).optional(),
+    company: z.string().trim().max(120).optional(),
+    serviceType: z.enum(serviceTypes, { message: validation.service_required }),
+    budgetRange: z.enum(budgetRanges),
+    timeline: z.enum(timelines),
+    message: z.string().trim().min(10, validation.message_required),
+    website: z.string().optional(),
+  });
 
   const {
     register,

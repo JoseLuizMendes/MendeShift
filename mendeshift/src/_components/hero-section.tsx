@@ -6,6 +6,7 @@ import { useTranslations } from "@/i18n/context";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { prefersReducedMotion } from "@/lib/motion";
 import { AnimatedNoise } from "@/_components/animated-noise";
 import { BitmapChevron } from "@/_components/bitmap-chevron";
 import {
@@ -30,11 +31,15 @@ export function HeroSection() {
     const navType = (
       performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined
     )?.type;
-    const willShowPreloader = navType === "navigate" || navType === "reload";
+    // Espelha a condição do Preloader (que também pula em reduced motion).
+    const willShowPreloader =
+      (navType === "navigate" || navType === "reload") && !prefersReducedMotion();
 
     if (!willShowPreloader) {
-      setSplitFlapReady(true);
-      return;
+      // rAF em vez de setState síncrono no corpo do efeito (regra do
+      // React Compiler contra renders em cascata).
+      const raf = requestAnimationFrame(() => setSplitFlapReady(true));
+      return () => cancelAnimationFrame(raf);
     }
 
     const handleDone = () => setSplitFlapReady(true);
@@ -44,6 +49,7 @@ export function HeroSection() {
 
   useEffect(() => {
     if (!sectionRef.current || !contentRef.current) return;
+    if (prefersReducedMotion()) return;
 
     const ctx = gsap.context(() => {
       gsap.to(contentRef.current, {

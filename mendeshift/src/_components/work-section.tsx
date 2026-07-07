@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { useLocale, useTranslations } from "@/i18n/context";
+import { prefersReducedMotion } from "@/lib/motion";
 import { localeHref } from "@/lib/navigation";
 
 import gsap from "gsap";
@@ -34,6 +35,7 @@ export function WorkSection({ projects }: Props) {
 
   useEffect(() => {
     if (!sectionRef.current || !headerRef.current || !gridRef.current) return;
+    if (prefersReducedMotion()) return;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(

@@ -11,6 +11,7 @@ import { ActionLink } from "@/_components/ui/action-link";
 import { Card } from "@/_components/ui/card";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, Section, SectionLead, SectionTitle } from "@/_components/ui/section";
+import { prefersReducedMotion } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -34,6 +35,9 @@ export function SignalsSection() {
 
   useEffect(() => {
     if (!sectionRef.current || !cursorRef.current) return;
+    // Sem o follow do cursor custom em reduced motion (também evita que
+    // ele apareça travado num canto, já que o gsap.to não rodaria).
+    if (prefersReducedMotion()) return;
 
     const section = sectionRef.current;
     const cursor = cursorRef.current;
@@ -67,6 +71,7 @@ export function SignalsSection() {
 
   useEffect(() => {
     if (!sectionRef.current || !headerRef.current || !cardsRef.current) return;
+    if (prefersReducedMotion()) return;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(

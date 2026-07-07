@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
+import { prefersReducedMotion } from "@/lib/motion";
+
 const COMMAND = "init mendeshift --studio=digital";
 const CHAR_DELAY = 38; // ms per character
 
@@ -75,8 +77,13 @@ export function Preloader() {
       performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined
     )?.type;
     const isHardLoad = navType === "navigate" || navType === "reload";
-    if (isHardLoad) {
-      setMounted(true);
+    // Reduced motion: pula o terminal animado por completo (o HeroSection
+    // espelha esta condição e libera o split-flap direto).
+    if (isHardLoad && !prefersReducedMotion()) {
+      // rAF em vez de setState síncrono no corpo do efeito (regra do
+      // React Compiler contra renders em cascata).
+      const raf = requestAnimationFrame(() => setMounted(true));
+      return () => cancelAnimationFrame(raf);
     }
   }, []);
 
@@ -159,7 +166,6 @@ export function Preloader() {
       cancelRef.current = true;
       cleanupListenersRef.current?.();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted]);
 
   if (!mounted || !visible) return null;
