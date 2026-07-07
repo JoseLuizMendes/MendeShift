@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 
 /**
- * URL pública do site. Quando o domínio próprio for registrado
- * (ex.: mendeshift.com.br), basta trocar aqui — sitemap, robots,
- * canonicals e JSON-LD consomem esta constante.
+ * URL pública do site. Alimenta sitemap, robots, canonicals, og:url e JSON-LD.
+ *
+ * Definida por `NEXT_PUBLIC_SITE_URL` (setada na Vercel), com fallback para o
+ * domínio atual. Quando o domínio próprio for registrado, basta atualizar a
+ * env var na Vercel e redeployar — nenhum commit é necessário.
+ * Como é `NEXT_PUBLIC_*`, o valor é inlined no build (SSG) e vale também no client.
  */
-export const SITE_URL = "https://mendeshift.vercel.app";
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://mendeshift.vercel.app"
+).replace(/\/$/, "");
 
 type PageMetadataInput = {
   locale: string;
