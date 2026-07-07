@@ -98,6 +98,7 @@ export function MobileNav() {
       {/* Overlay fullscreen */}
       <nav
         aria-hidden={!open}
+        inert={!open}
         data-lenis-prevent
         className={cn(
           "fixed inset-0 z-[65] flex flex-col justify-center gap-2 bg-background px-8",

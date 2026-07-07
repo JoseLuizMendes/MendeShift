@@ -118,6 +118,7 @@ export function SplitFlapText({ text, className = "", speed = 50, ready = true }
   return (
     <div
       className={`inline-flex cursor-pointer items-center gap-[0.08em] ${className}`}
+      role="img"
       aria-label={text}
       onMouseEnter={() => ready && setAnimationKey((prev) => prev + 1)}
       style={{ perspective: "1000px" }}
