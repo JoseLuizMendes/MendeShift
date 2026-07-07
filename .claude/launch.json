@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "mendeshift-dev",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["--dir", "mendeshift", "dev"],
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd mendeshift && npm run dev"],
       "port": 3000,
       "autoPort": true
     }
