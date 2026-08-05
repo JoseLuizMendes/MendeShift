@@ -53,7 +53,10 @@ export function MobileNav() {
 
   const targetLocale = locale === "en" ? "pt" : "en";
   const switchLanguage = () => {
-    document.cookie = `NEXT_LOCALE=${targetLocale}; path=/; max-age=31536000; SameSite=Lax`;
+    // Secure só em HTTPS (produção) — em dev local http o Secure impediria
+    // a gravação do cookie.
+    const secure = window.location.protocol === "https:" ? "; Secure" : "";
+    document.cookie = `NEXT_LOCALE=${targetLocale}; path=/; max-age=31536000; SameSite=Lax${secure}`;
     const newPath =
       locale === "pt" ? pathname.replace(/^\/pt/, "") || "/" : `/pt${pathname}`;
     window.location.href = newPath;
