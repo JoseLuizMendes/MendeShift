@@ -20,7 +20,10 @@
     "principles": "Método",
     "process": "Processo",
     "profile": "O Estúdio",
-    "contact": "Contato"
+    "contact": "Contato",
+    "skip_to_content": "Pular para o conteúdo",
+    "switch_to_portuguese": "Mudar para Português",
+    "switch_to_english": "Mudar para Inglês"
   },
   "hero": {
     "tagline": "Estúdio Digital / Vitória, ES",
@@ -322,6 +325,7 @@
     "send_message": "Enviar mensagem",
     "virtual_assistant": "Assistente MendeShift",
     "online": "Online agora",
+    "typing": "Assistente digitando…",
     "initial_message": "Olá! Sou o assistente do MendeShift. Quer saber preços, prazos ou como funciona um projeto? Pode perguntar.",
     "fallback_response": "Obrigado pela mensagem! Para uma resposta mais detalhada, preencha o briefing em /contato ou chame no WhatsApp.",
     "rate_limit_response": "Você atingiu o limite de mensagens por agora. Tente novamente mais tarde ou fale direto pelo WhatsApp ou e-mail josemendess004@gmail.com.",

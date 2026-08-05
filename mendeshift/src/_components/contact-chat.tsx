@@ -34,6 +34,11 @@ export function ContactChat() {
   const chatRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  // Contador monotônico de ids: derivar o id de messages.length colidia em
+  // envios rápidos e após o ramo 429 (duas mensagens com o mesmo length+1),
+  // gerando keys React duplicadas. "1" é o id da mensagem inicial.
+  const nextIdRef = useRef(2);
+  const nextId = () => String(nextIdRef.current++);
 
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [inputValue, setInputValue] = useState("");
@@ -107,7 +112,7 @@ export function ContactChat() {
         setMessages((prev) => [
           ...prev,
           {
-            id: (prev.length + 1).toString(),
+            id: nextId(),
             role: "assistant",
             content: t("rate_limit_response"),
             timestamp: new Date(),
@@ -124,7 +129,7 @@ export function ContactChat() {
       setMessages((prev) => [
         ...prev,
         {
-          id: (prev.length + 1).toString(),
+          id: nextId(),
           role: "assistant",
           content: data.content,
           timestamp: new Date(),
@@ -135,7 +140,7 @@ export function ContactChat() {
       setMessages((prev) => [
         ...prev,
         {
-          id: (prev.length + 1).toString(),
+          id: nextId(),
           role: "assistant",
           content: t("fallback_response"),
           timestamp: new Date(),
@@ -151,7 +156,7 @@ export function ContactChat() {
     if (!trimmed) return;
 
     const userMsg: Message = {
-      id: (messages.length + 1).toString(),
+      id: nextId(),
       role: "user",
       content: trimmed,
       timestamp: new Date(),
@@ -201,6 +206,10 @@ export function ContactChat() {
           <div
             ref={messagesContainerRef}
             data-lenis-prevent
+            role="log"
+            aria-live="polite"
+            aria-atomic="false"
+            aria-label={t("virtual_assistant")}
             className="no-scrollbar flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-5"
           >
             <div className="flex flex-col gap-4">
@@ -220,11 +229,12 @@ export function ContactChat() {
                 </div>
               ))}
               {isTyping && (
-                <div className="flex justify-start">
+                <div className="flex justify-start" role="status">
+                  <span className="sr-only">{t("typing")}</span>
                   <div className="flex items-center gap-1.5 rounded-2xl bg-muted px-4 py-3">
-                    <span className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground" />
-                    <span className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground [animation-delay:150ms]" />
-                    <span className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground [animation-delay:300ms]" />
+                    <span aria-hidden="true" className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground" />
+                    <span aria-hidden="true" className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground [animation-delay:150ms]" />
+                    <span aria-hidden="true" className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground [animation-delay:300ms]" />
                   </div>
                 </div>
               )}
