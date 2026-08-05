@@ -125,8 +125,16 @@ export function BriefingForm() {
 
   if (status === "success") {
     return (
-      <Card className="flex flex-col items-start gap-5 border-accent/40 bg-card/60 p-6 sm:p-10">
-        <h2 className="font-display text-3xl tracking-tight sm:text-4xl">
+      <Card
+        role="status"
+        aria-live="polite"
+        className="flex flex-col items-start gap-5 border-accent/40 bg-card/60 p-6 sm:p-10"
+      >
+        <h2
+          ref={(el) => el?.focus()}
+          tabIndex={-1}
+          className="font-display text-3xl tracking-tight outline-none sm:text-4xl"
+        >
           {label("success_title")}
         </h2>
         <p className="max-w-xl font-mono text-sm leading-relaxed text-muted-foreground">
@@ -159,10 +167,11 @@ export function BriefingForm() {
             id="lead-name"
             placeholder={label("name_placeholder")}
             aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? "err-name" : undefined}
             {...register("name")}
           />
           {errors.name && (
-            <p className="font-mono text-[10px] text-accent">{errors.name.message}</p>
+            <p id="err-name" role="alert" className="font-mono text-[10px] text-accent">{errors.name.message}</p>
           )}
         </div>
 
@@ -173,10 +182,11 @@ export function BriefingForm() {
             type="email"
             placeholder={label("email_placeholder")}
             aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? "err-email" : undefined}
             {...register("email")}
           />
           {errors.email && (
-            <p className="font-mono text-[10px] text-accent">{errors.email.message}</p>
+            <p id="err-email" role="alert" className="font-mono text-[10px] text-accent">{errors.email.message}</p>
           )}
         </div>
 
@@ -196,7 +206,13 @@ export function BriefingForm() {
 
         <div className="flex flex-col gap-2">
           <Label htmlFor="lead-service">{label("service_label")}</Label>
-          <Select id="lead-service" aria-invalid={!!errors.serviceType} defaultValue="" {...register("serviceType")}>
+          <Select
+            id="lead-service"
+            aria-invalid={!!errors.serviceType}
+            aria-describedby={errors.serviceType ? "err-service" : undefined}
+            defaultValue=""
+            {...register("serviceType")}
+          >
             <option value="" disabled>
               —
             </option>
@@ -207,7 +223,7 @@ export function BriefingForm() {
             ))}
           </Select>
           {errors.serviceType && (
-            <p className="font-mono text-[10px] text-accent">{errors.serviceType.message}</p>
+            <p id="err-service" role="alert" className="font-mono text-[10px] text-accent">{errors.serviceType.message}</p>
           )}
         </div>
 
@@ -239,10 +255,11 @@ export function BriefingForm() {
             id="lead-message"
             placeholder={label("message_placeholder")}
             aria-invalid={!!errors.message}
+            aria-describedby={errors.message ? "err-message" : undefined}
             {...register("message")}
           />
           {errors.message && (
-            <p className="font-mono text-[10px] text-accent">{errors.message.message}</p>
+            <p id="err-message" role="alert" className="font-mono text-[10px] text-accent">{errors.message.message}</p>
           )}
         </div>
 

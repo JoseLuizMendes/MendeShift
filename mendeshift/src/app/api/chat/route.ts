@@ -116,12 +116,15 @@ export async function POST(request: Request) {
     };
 
     const makeRequest = async (model: string) => {
+      // Chave via header (não na query string): URLs vazam para logs de
+      // acesso, observabilidade e o header Referer.
       return await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "x-goog-api-key": apiKey,
           },
           body: JSON.stringify({
             contents,

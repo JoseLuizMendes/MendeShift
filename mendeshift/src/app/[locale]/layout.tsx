@@ -10,6 +10,7 @@ import { SITE_URL, pageMetadata } from "@/lib/metadata";
 import { LanguageToggle } from "@/_components/language-toggle";
 import { MobileNav } from "@/_components/mobile-nav";
 import { Preloader } from "@/_components/preloader";
+import { SkipLink } from "@/_components/skip-link";
 import { SmoothScroll } from "@/_components/smooth-scroll";
 import "../globals.css";
 
@@ -135,10 +136,14 @@ export default async function LocaleLayout({ children, params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <TranslationsProvider locale={locale} messages={messages}>
+          <SkipLink />
           <Preloader />
-          <SmoothScroll>{children}
-          <Analytics/>
-          <SpeedInsights/>
+          <SmoothScroll>
+            <div id="main-content" tabIndex={-1} className="outline-none">
+              {children}
+            </div>
+            <Analytics/>
+            <SpeedInsights/>
           </SmoothScroll>
           <LanguageToggle />
           <MobileNav />

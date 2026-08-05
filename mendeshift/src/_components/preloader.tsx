@@ -91,8 +91,15 @@ export function Preloader() {
     if (!mounted) return;
     cancelRef.current = false;
 
-    // Attach exit listeners
-    const onKey = () => triggerExit();
+    // Attach exit listeners. Qualquer tecla/scroll dispara a saída; o Tab
+    // recebe preventDefault ANTES de sair para que o foco não vaze para o
+    // conteúdo (aria-hidden) atrás do overlay — sem tornar o fundo inert,
+    // que quebraria o leitor de tela (o splash não sai sozinho e o
+    // aria-hidden já deixa a AT pular direto para o conteúdo).
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Tab") event.preventDefault();
+      triggerExit();
+    };
     const onWheel = () => triggerExit();
     document.addEventListener("keydown", onKey);
     document.addEventListener("wheel", onWheel, { passive: true });
@@ -115,11 +122,11 @@ export function Preloader() {
         }, CHAR_DELAY);
       });
 
+    // A cada await de pause() o chamador checa cancelRef; o executor de uma
+    // Promise ignora o valor de retorno, então não há cleanup a devolver aqui.
     const pause = (ms: number): Promise<void> =>
       new Promise((resolve) => {
-        const id = setTimeout(resolve, ms);
-        // cancelRef check handled by the caller after await
-        return () => clearTimeout(id);
+        setTimeout(resolve, ms);
       });
 
     // Set initial hidden states
