@@ -91,8 +91,15 @@ export function Preloader() {
     if (!mounted) return;
     cancelRef.current = false;
 
-    // Attach exit listeners
-    const onKey = () => triggerExit();
+    // Attach exit listeners. Qualquer tecla/scroll dispara a saída; o Tab
+    // recebe preventDefault ANTES de sair para que o foco não vaze para o
+    // conteúdo (aria-hidden) atrás do overlay — sem tornar o fundo inert,
+    // que quebraria o leitor de tela (o splash não sai sozinho e o
+    // aria-hidden já deixa a AT pular direto para o conteúdo).
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Tab") event.preventDefault();
+      triggerExit();
+    };
     const onWheel = () => triggerExit();
     document.addEventListener("keydown", onKey);
     document.addEventListener("wheel", onWheel, { passive: true });
