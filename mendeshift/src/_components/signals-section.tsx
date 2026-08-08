@@ -140,7 +140,7 @@ export function SignalsSection() {
                 {services.map((item, index) => (
                   <article
                     key={`${item.no}-${copy}-${index}`}
-                    className="group relative flex w-72 shrink-0 transition-transform duration-500 ease-emphasis hover:-translate-y-2 sm:w-80"
+                    className="group relative flex w-72 shrink-0 transition-transform duration-500 ease-emphasis hover:-translate-y-2 active:-translate-y-1 sm:w-80"
                   >
                     <Card className="flex h-full min-h-69 flex-1 flex-col border-border/50 bg-card/80 p-6 sm:min-h-75 sm:p-8">
                       <div className="absolute -top-px left-0 right-0 h-px bg-linear-to-r from-transparent via-border/40 to-transparent" />

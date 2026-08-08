@@ -14,6 +14,7 @@ import { BitmapChevron } from "@/_components/bitmap-chevron";
 import { ScrambleTextOnHover } from "@/_components/scramble-text";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, Section, SectionLead, SectionTitle } from "@/_components/ui/section";
+import { StarBorder } from "@/_components/ui/star-border";
 import type { Project } from "@/lib/projects";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -96,11 +97,15 @@ export function WorkSection({ projects }: Props) {
           className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 md:gap-6"
         >
           {featuredProjects.map((item, idx) => (
-            <article
+            <StarBorder
               key={item.slug}
-              className="group relative cursor-pointer overflow-hidden rounded-lg border border-border/40 bg-card/70 p-0 transition-all duration-500 ease-emphasis hover:-translate-y-1 hover:border-accent/60"
+              className="rounded-lg transition-transform duration-500 ease-emphasis hover:-translate-y-1 active:-translate-y-0.5"
+              innerClassName="rounded-lg"
+              thickness={1}
             >
-              <div className="flex flex-col">
+              <article className="glare group relative cursor-pointer overflow-hidden rounded-lg border border-border/40 bg-card/90 p-0 transition-colors duration-500 ease-emphasis hover:border-accent/60">
+                <span className="glare__streak" aria-hidden="true" />
+                <div className="flex flex-col">
                 <div className="px-5 pb-0 pt-5 sm:px-6 sm:pt-6">
                   <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                     {item.category}
@@ -167,6 +172,7 @@ export function WorkSection({ projects }: Props) {
                 </div>
               </div>
             </article>
+            </StarBorder>
           ))}
         </div>
 

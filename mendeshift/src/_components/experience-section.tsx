@@ -145,7 +145,7 @@ export function ExperienceSection({
           {experienceAchievements.map((item, index) => (
             <Card
               key={item.label}
-              className={`group border-border/40 bg-card/60 p-5 transition-all duration-500 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:border-accent/50 sm:p-6 ${
+              className={`group border-border/40 bg-card/60 p-5 transition-all duration-500 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:border-accent/50 active:-translate-y-0.5 active:border-accent/50 sm:p-6 ${
                 index === 0 ? "md:col-span-2 border-accent/30 bg-accent/5" : ""
               }`}
             >

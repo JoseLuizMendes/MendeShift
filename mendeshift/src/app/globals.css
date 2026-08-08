@@ -128,9 +128,149 @@ body {
   z-index: 1;
 }
 
+/* Blog — código inline e blocos (shiki via rehype-pretty-code no build).
+   Blocos de texto (h2/p/ul…) são estilizados pelos componentes MDX;
+   aqui só o que o pretty-code emite. */
+.prose-blog :not(pre) > code {
+  background: var(--muted);
+  color: var(--accent);
+  padding: 0.12em 0.4em;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+.prose-blog pre {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid color-mix(in oklab, var(--foreground) 12%, transparent);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.prose-blog pre code {
+  background: transparent;
+  padding: 0;
+  font-family: var(--font-mono);
+}
+
+.prose-blog figure[data-rehype-pretty-code-figure] {
+  margin: 1.5rem 0;
+}
+
+.prose-blog [data-rehype-pretty-code-figure] pre {
+  margin: 0;
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+/* ── React Bits (adaptados) — só transform/opacity (GPU), reduced-motion-aware ── */
+
+/* Star Border: luz que percorre a moldura, em loop. Reservado a destaques. */
+.star-border {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.star-border__travel {
+  position: absolute;
+  width: 300%;
+  height: 50%;
+  z-index: 0;
+  opacity: 0.7;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: radial-gradient(circle, var(--sb-color, var(--accent)), transparent 10%);
+}
+.star-border__travel--bottom {
+  bottom: -11px;
+  right: -250%;
+  animation: star-travel-bottom var(--sb-speed, 6s) linear infinite alternate;
+}
+.star-border__travel--top {
+  top: -11px;
+  left: -250%;
+  animation: star-travel-top var(--sb-speed, 6s) linear infinite alternate;
+}
+.star-border__inner {
+  position: relative;
+  z-index: 1;
+}
+@keyframes star-travel-bottom {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+@keyframes star-travel-top {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+
+/* Specular Button: brilho especular que segue o ponteiro (desktop) e responde
+   ao press (toque). O highlight só aparece em dispositivos com hover fino. */
+.specular-btn {
+  position: relative;
+  overflow: hidden;
+  --mx: 50%;
+  --my: 50%;
+}
+.specular-btn__sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    200px circle at var(--mx) var(--my),
+    color-mix(in oklab, white 32%, transparent),
+    transparent 60%
+  );
+  transition: opacity var(--motion-base) var(--ease-standard);
+}
+@media (hover: hover) and (pointer: fine) {
+  .specular-btn:hover .specular-btn__sheen { opacity: 1; }
+}
+.specular-btn:active .specular-btn__sheen {
+  opacity: 1;
+  background: radial-gradient(
+    130% 130% at 50% 50%,
+    color-mix(in oklab, white 22%, transparent),
+    transparent 70%
+  );
+}
+
+/* Glare Hover: sheen diagonal que varre no hover. Desktop-only por design —
+   no touch (sem hover fino) o streak fica fora da tela, invisível. */
+.glare {
+  position: relative;
+  overflow: hidden;
+}
+.glare__streak {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  transform: translateX(-120%);
+  transition: transform 700ms var(--ease-standard);
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    color-mix(in oklab, white 16%, transparent) 50%,
+    transparent 60%
+  );
+}
+@media (hover: hover) and (pointer: fine) {
+  .glare:hover .glare__streak { transform: translateX(120%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-border__travel { animation: none; }
+  .specular-btn__sheen { transition: none; }
+  .glare__streak { display: none; }
 }
 
 @keyframes signals-marquee {

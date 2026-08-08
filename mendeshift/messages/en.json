@@ -11,7 +11,9 @@
     "services_title": "Services | MendeShift — Websites, Web Systems, E-commerce & Design",
     "services_desc": "Professional websites and landing pages, custom web systems, online stores and brand identity. See deliverables, timelines and how a project works.",
     "contact_title": "Contact & Briefing | MendeShift",
-    "contact_desc": "Tell MendeShift about your project: fill in the briefing and get a proposal within 24 business hours — or reach out directly on WhatsApp."
+    "contact_desc": "Tell MendeShift about your project: fill in the briefing and get a proposal within 24 business hours — or reach out directly on WhatsApp.",
+    "blog_title": "Blog | MendeShift — Notes on architecture & engineering",
+    "blog_desc": "Notes on software architecture, engineering decisions and the things I'm learning — from the founder of MendeShift."
   },
   "nav": {
     "home": "Home",
@@ -23,7 +25,8 @@
     "contact": "Contact",
     "skip_to_content": "Skip to content",
     "switch_to_portuguese": "Switch to Portuguese",
-    "switch_to_english": "Switch to English"
+    "switch_to_english": "Switch to English",
+    "blog": "Blog"
   },
   "hero": {
     "tagline": "Digital Studio / Vitória, Brazil",
@@ -401,5 +404,20 @@
     "back": "← Back to cases",
     "next": "Next: {title} →",
     "service_cta": "Related service: {service} →"
+  },
+  "blog": {
+    "eyebrow": "05 / Writing",
+    "title": "Writing",
+    "lead": "Notes on architecture, engineering and the things I'm learning — in public.",
+    "read_more": "Read",
+    "all_tag": "All",
+    "empty": "No posts yet — soon.",
+    "back": "← All posts",
+    "home": "Home",
+    "fallback_notice": "This post isn't available in English yet — showing the Portuguese version.",
+    "recent_eyebrow": "Writing",
+    "recent_title": "From the blog",
+    "recent_lead": "Notes on architecture, engineering and what I'm learning.",
+    "recent_cta": "Read the blog"
   }
 }

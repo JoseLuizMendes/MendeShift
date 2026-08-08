@@ -39,6 +39,7 @@ export function MobileNav() {
     { label: t("profile"), href: `/${locale}/experience` },
     { label: t("services"), href: `/${locale}/servicos` },
     { label: t("projects"), href: `/${locale}/projetos` },
+    { label: t("blog"), href: `/${locale}/blog` },
     { label: t("contact"), href: `/${locale}/contato` },
   ];
 
@@ -57,8 +58,12 @@ export function MobileNav() {
     // a gravação do cookie.
     const secure = window.location.protocol === "https:" ? "; Secure" : "";
     document.cookie = `NEXT_LOCALE=${targetLocale}; path=/; max-age=31536000; SameSite=Lax${secure}`;
+    // Override opt-in (posts de blog têm slug por idioma → #lang-alternate).
+    const override =
+      document.getElementById("lang-alternate")?.dataset[targetLocale];
     const newPath =
-      locale === "pt" ? pathname.replace(/^\/pt/, "") || "/" : `/pt${pathname}`;
+      override ??
+      (locale === "pt" ? pathname.replace(/^\/pt/, "") || "/" : `/pt${pathname}`);
     window.location.href = newPath;
   };
 

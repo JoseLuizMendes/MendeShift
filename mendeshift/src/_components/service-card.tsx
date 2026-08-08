@@ -2,6 +2,7 @@ import { Check } from "lucide-react";
 
 import { ActionLink } from "@/_components/ui/action-link";
 import { Card } from "@/_components/ui/card";
+import { GlareHover } from "@/_components/ui/glare-hover";
 
 export type ServiceDetail = {
   slug: string;
@@ -34,6 +35,7 @@ export function ServiceCard({
 }) {
   return (
     <article id={service.slug} className="scroll-mt-24">
+      <GlareHover className="rounded-[var(--radius)]">
       <Card className="border-border/50 bg-card/60 p-6 sm:p-8 md:p-10">
         <div className="mb-6 flex items-baseline justify-between sm:mb-8">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
@@ -97,6 +99,7 @@ export function ServiceCard({
           </div>
         </div>
       </Card>
+      </GlareHover>
     </article>
   );
 }

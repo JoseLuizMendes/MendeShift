@@ -24,8 +24,16 @@ export function LanguageToggle({ className }: { className?: string }) {
     const secure = window.location.protocol === "https:" ? "; Secure" : "";
     document.cookie = `NEXT_LOCALE=${targetLocale}; path=/; max-age=31536000; SameSite=Lax${secure}`;
 
+    // Override opt-in: páginas com slug por idioma (posts de blog) declaram
+    // um #lang-alternate com o caminho equivalente por locale. Sem ele,
+    // troca ingênua de prefixo (preserva âncoras nas outras páginas).
+    const override =
+      document.getElementById("lang-alternate")?.dataset[targetLocale];
+
     let newPath: string;
-    if (locale === "pt") {
+    if (override) {
+      newPath = override;
+    } else if (locale === "pt") {
       newPath = pathname.replace(/^\/pt/, "") || "/";
     } else {
       newPath = `/pt${pathname}`;

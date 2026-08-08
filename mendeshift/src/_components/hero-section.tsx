@@ -17,6 +17,8 @@ import {
 import { ScrambleTextOnHover } from "@/_components/scramble-text";
 import { ActionLink } from "@/_components/ui/action-link";
 import { Container } from "@/_components/ui/container";
+import { SpecularButton } from "@/_components/ui/specular-button";
+import { StarBorder } from "@/_components/ui/star-border";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -107,28 +109,33 @@ export function HeroSection() {
                   </p>
 
                   <div className="mt-8 flex flex-col items-stretch gap-4 sm:mt-10 sm:flex-row sm:items-center">
-                    <ActionLink
-                      href="#services"
-                      className="group w-full justify-center sm:w-auto"
-                      onMouseEnter={triggerScramble}
-                      onFocus={triggerScramble}
+                    <StarBorder
+                      className="w-full rounded-full sm:w-auto"
+                      innerClassName="rounded-full bg-background"
+                      thickness={2}
                     >
-                      <ScrambleTextOnHover
-                        text={t("cta_primary")}
-                        as="span"
-                        duration={0.55}
-                        className="text-[10px] transition-colors duration-300"
-                        triggerToken={scrambleToken}
-                      />
-                      <BitmapChevron className="transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
-                    </ActionLink>
-                    <ActionLink
+                      <ActionLink
+                        href="#services"
+                        className="group w-full justify-center border-transparent sm:w-auto"
+                        onMouseEnter={triggerScramble}
+                        onFocus={triggerScramble}
+                      >
+                        <ScrambleTextOnHover
+                          text={t("cta_primary")}
+                          as="span"
+                          duration={0.55}
+                          className="text-[10px] transition-colors duration-300"
+                          triggerToken={scrambleToken}
+                        />
+                        <BitmapChevron className="transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
+                      </ActionLink>
+                    </StarBorder>
+                    <SpecularButton
                       href="#work"
-                      variant="ghost"
                       className="w-full justify-center sm:w-auto"
                     >
                       {t("cta_secondary")}
-                    </ActionLink>
+                    </SpecularButton>
                   </div>
                 </div>
               </div>

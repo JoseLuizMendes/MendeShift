@@ -11,7 +11,9 @@
     "services_title": "Serviços | MendeShift — Sites, Sistemas, E-commerce e Design",
     "services_desc": "Criação de sites em Vitória, ES: landing pages profissionais, sistemas web sob medida, lojas virtuais e identidade visual. Veja entregáveis, prazos e como funciona.",
     "contact_title": "Contato & Briefing | MendeShift",
-    "contact_desc": "Conte seu projeto para o MendeShift: preencha o briefing e receba uma proposta em até 24h úteis — ou chame direto no WhatsApp."
+    "contact_desc": "Conte seu projeto para o MendeShift: preencha o briefing e receba uma proposta em até 24h úteis — ou chame direto no WhatsApp.",
+    "blog_title": "Blog | MendeShift — Notas sobre arquitetura & engenharia",
+    "blog_desc": "Notas sobre arquitetura de software, decisões de engenharia e o que estou aprendendo — do fundador da MendeShift."
   },
   "nav": {
     "home": "Início",
@@ -23,7 +25,8 @@
     "contact": "Contato",
     "skip_to_content": "Pular para o conteúdo",
     "switch_to_portuguese": "Mudar para Português",
-    "switch_to_english": "Mudar para Inglês"
+    "switch_to_english": "Mudar para Inglês",
+    "blog": "Blog"
   },
   "hero": {
     "tagline": "Estúdio Digital / Vitória, ES",
@@ -401,5 +404,20 @@
     "back": "← Voltar para cases",
     "next": "Próximo: {title} →",
     "service_cta": "Serviço relacionado: {service} →"
+  },
+  "blog": {
+    "eyebrow": "05 / Escritos",
+    "title": "Escritos",
+    "lead": "Notas sobre arquitetura, engenharia e o que estou aprendendo — em público.",
+    "read_more": "Ler",
+    "all_tag": "Todas",
+    "empty": "Ainda sem posts — em breve.",
+    "back": "← Todos os posts",
+    "home": "Home",
+    "fallback_notice": "Este post ainda não está em português — exibindo a versão em inglês.",
+    "recent_eyebrow": "Escritos",
+    "recent_title": "Do blog",
+    "recent_lead": "Notas sobre arquitetura, engenharia e o que estou aprendendo.",
+    "recent_cta": "Ler o blog"
   }
 }
