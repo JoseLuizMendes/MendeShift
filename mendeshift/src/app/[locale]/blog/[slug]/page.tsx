@@ -14,7 +14,7 @@ import { ColophonSection } from "@/_components/colophon-section";
 import { LanguageFallbackNotice } from "@/_components/blog/language-fallback-notice";
 import { PostBody } from "@/_components/blog/post-body";
 import { PostMeta } from "@/_components/blog/post-meta";
-import { ActionLink } from "@/_components/ui/action-link";
+import { Button } from "@/_components/ui/button";
 import { Container } from "@/_components/ui/container";
 import { SectionTitle } from "@/_components/ui/section";
 
@@ -100,13 +100,13 @@ export default async function BlogPostPage({ params }: Props) {
         <section className="border-b border-border/20 pt-20 md:pt-28">
           <Container className="md:px-30">
             <div className="max-w-3xl py-12 md:py-16">
-              <ActionLink
+              <Button
                 href="/blog"
                 variant="ghost"
                 className="px-0 text-accent hover:text-accent/80"
               >
                 {t("back")}
-              </ActionLink>
+              </Button>
               <SectionTitle className="mt-6">
                 {post.frontmatter.title}
               </SectionTitle>
@@ -130,9 +130,9 @@ export default async function BlogPostPage({ params }: Props) {
               <PostBody source={post.content} />
 
               <div className="mt-16 flex flex-col gap-4 border-t border-border/20 pt-10 sm:flex-row sm:items-center sm:justify-between">
-                <ActionLink href="/blog" variant="ghost">
+                <Button href="/blog" variant="ghost">
                   {t("back")}
-                </ActionLink>
+                </Button>
                 <BackToHomeLink variant="ghost">{t("home")}</BackToHomeLink>
               </div>
             </div>

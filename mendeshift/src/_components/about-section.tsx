@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { prefersReducedMotion } from "@/lib/motion";
-import { ActionLink } from "@/_components/ui/action-link";
+import { Button } from "@/_components/ui/button";
 import { Card } from "@/_components/ui/card";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, Section, SectionTitle } from "@/_components/ui/section";
@@ -109,9 +109,9 @@ export function AboutSection() {
             </div>
 
             <div>
-              <ActionLink href="/experience" variant="ghost" className="px-0 text-accent hover:text-accent/80">
+              <Button href="/experience" variant="ghost" className="px-0 text-accent hover:text-accent/80">
                 {t("cta")}
-              </ActionLink>
+              </Button>
             </div>
 
             <div className="relative overflow-hidden rounded-(--radius) border border-border/35 bg-card/45 p-6 sm:p-7 md:p-8">

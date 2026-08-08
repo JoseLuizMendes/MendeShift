@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { BackToHomeLink } from "@/_components/back-to-home-link";
 import { BriefingForm } from "@/_components/briefing-form";
 import { ColophonSection } from "@/_components/colophon-section";
-import { ActionLink } from "@/_components/ui/action-link";
+import { Button } from "@/_components/ui/button";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, SectionLead, SectionTitle } from "@/_components/ui/section";
 
@@ -98,7 +98,7 @@ export default async function ContactPage({ params }: Props) {
                 </p>
                 <div className="flex flex-col gap-2.5">
                   {directLinks.map(({ key, label, href, icon: Icon }) => (
-                    <ActionLink
+                    <Button
                       key={key}
                       href={href}
                       variant="ghost"
@@ -112,7 +112,7 @@ export default async function ContactPage({ params }: Props) {
                         </span>
                         {label}
                       </span>
-                    </ActionLink>
+                    </Button>
                   ))}
                 </div>
               </aside>

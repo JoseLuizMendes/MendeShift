@@ -1,11 +1,8 @@
-import Link from "next/link";
-
 import type { Locale, PostSummary } from "@/lib/blog";
-import { localeHref } from "@/lib/navigation";
+import { Button } from "@/_components/ui/button";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, Section, SectionLead, SectionTitle } from "@/_components/ui/section";
 import { PostCard } from "@/_components/blog/post-card";
-import router from "next/router";
 import { BitmapChevron } from "./bitmap-chevron";
 
 type Labels = {
@@ -53,10 +50,11 @@ export function RecentWritingSection({
           ))}
         </div>
 
-        <div className="mt-8 flex justify-end border-border/20 pt-6 md:mt-10">
-          <button className="app-button" type="button" onClick={() => router.push(localeHref("/blog", locale))}>
-            {labels.cta} <BitmapChevron direction="right" className="size-3" />
-          </button>
+        <div className="mt-8 flex justify-end border-t border-border/20 pt-6 md:mt-10">
+          <Button href="/blog" variant="ghost" className="group">
+            {labels.cta}
+            <BitmapChevron className="w-3 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
+          </Button>
         </div>
       </Container>
     </Section>

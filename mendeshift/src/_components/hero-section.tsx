@@ -15,9 +15,8 @@ import {
   SplitFlapText,
 } from "@/_components/split-flap-text";
 import { ScrambleTextOnHover } from "@/_components/scramble-text";
-import { ActionLink } from "@/_components/ui/action-link";
+import { Button } from "@/_components/ui/button";
 import { Container } from "@/_components/ui/container";
-import { SpecularButton } from "@/_components/ui/specular-button";
 import { StarBorder } from "@/_components/ui/star-border";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -114,7 +113,7 @@ export function HeroSection() {
                       innerClassName="rounded-full bg-background"
                       thickness={2}
                     >
-                      <ActionLink
+                      <Button
                         href="#services"
                         className="group w-full justify-center border-transparent sm:w-auto"
                         onMouseEnter={triggerScramble}
@@ -128,14 +127,16 @@ export function HeroSection() {
                           triggerToken={scrambleToken}
                         />
                         <BitmapChevron className="transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
-                      </ActionLink>
+                      </Button>
                     </StarBorder>
-                    <SpecularButton
+                    <Button
                       href="#work"
+                      variant="secondary"
+                      specular
                       className="w-full justify-center sm:w-auto"
                     >
                       {t("cta_secondary")}
-                    </SpecularButton>
+                    </Button>
                   </div>
                 </div>
               </div>

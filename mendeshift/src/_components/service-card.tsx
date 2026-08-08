@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 
-import { ActionLink } from "@/_components/ui/action-link";
+import { Button } from "@/_components/ui/button";
 import { Card } from "@/_components/ui/card";
 import { GlareHover } from "@/_components/ui/glare-hover";
 
@@ -75,9 +75,9 @@ export function ServiceCard({
               </div>
             </dl>
 
-            <ActionLink href="/contato" className="mt-8">
+            <Button href="/contato" variant="primary" className="mt-8">
               {labels.cta}
-            </ActionLink>
+            </Button>
           </div>
 
           <div>

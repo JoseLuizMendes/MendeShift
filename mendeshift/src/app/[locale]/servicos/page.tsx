@@ -8,7 +8,7 @@ import { ColophonSection } from "@/_components/colophon-section";
 import { FaqSection, type FaqItem } from "@/_components/faq-section";
 import { ProcessSection } from "@/_components/process-section";
 import { ServiceCard, type ServiceDetail } from "@/_components/service-card";
-import { ActionLink } from "@/_components/ui/action-link";
+import { Button } from "@/_components/ui/button";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, SectionLead, SectionTitle } from "@/_components/ui/section";
 
@@ -77,9 +77,9 @@ export default async function ServicesPage({ params }: Props) {
                 <BackToHomeLink className="w-full justify-center sm:w-auto">
                   {t.back}
                 </BackToHomeLink>
-                <ActionLink href="/contato" className="w-full justify-center sm:w-auto">
+                <Button href="/contato" className="w-full justify-center sm:w-auto">
                   {t.cta_briefing}
-                </ActionLink>
+                </Button>
               </div>
             </div>
           </Container>

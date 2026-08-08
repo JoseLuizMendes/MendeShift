@@ -4,7 +4,7 @@ import { getServerTranslations, loadMessages } from "@/i18n/server";
 
 import { SITE_URL, pageMetadata } from "@/lib/metadata";
 import { ColophonSection } from "@/_components/colophon-section";
-import { ActionLink } from "@/_components/ui/action-link";
+import { Button } from "@/_components/ui/button";
 import { BackToHomeLink } from "@/_components/back-to-home-link";
 import { Card } from "@/_components/ui/card";
 import { Container } from "@/_components/ui/container";
@@ -98,21 +98,21 @@ export default async function ProjectPage({ params }: Props) {
                 )}
 
                 {serviceTitle && (
-                  <ActionLink
+                  <Button
                     // Locale explícito: o redirect de locale descarta o #hash
                     href={`/${locale}/servicos#${serviceAnchor}`}
                     variant="ghost"
                     className="mt-6 px-0 text-accent hover:text-accent/80"
                   >
                     {t("service_cta", { service: serviceTitle })}
-                  </ActionLink>
+                  </Button>
                 )}
               </div>
 
               <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
-                <ActionLink href="/projetos" className="w-full justify-center sm:w-auto">
+                <Button href="/projetos" className="w-full justify-center sm:w-auto">
                   {t("all_projects")}
-                </ActionLink>
+                </Button>
                 <BackToHomeLink variant="ghost" className="w-full justify-center sm:w-auto">
                   {t("home")}
                 </BackToHomeLink>
@@ -202,13 +202,13 @@ export default async function ProjectPage({ params }: Props) {
 
             {/* Navigation */}
             <div className="mt-16 flex flex-col gap-4 border-t border-border/20 pt-10 sm:flex-row sm:items-center sm:justify-between">
-              <ActionLink href="/projetos" variant="ghost">
+              <Button href="/projetos" variant="ghost">
                 {t("back")}
-              </ActionLink>
+              </Button>
               {nextProject && (
-                <ActionLink href={`/projetos/${nextProject.slug}`}>
+                <Button href={`/projetos/${nextProject.slug}`}>
                   {t("next", { title: nextProject.title })}
-                </ActionLink>
+                </Button>
               )}
             </div>
           </Container>

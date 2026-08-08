@@ -5,7 +5,7 @@ import { getExperienceByLocale } from "@/lib/experience";
 import { pageMetadata } from "@/lib/metadata";
 import { ColophonSection } from "@/_components/colophon-section";
 import { ExperienceSection } from "@/_components/experience-section";
-import { ActionLink } from "@/_components/ui/action-link";
+import { Button } from "@/_components/ui/button";
 import { BackToHomeLink } from "@/_components/back-to-home-link";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, SectionLead, SectionTitle } from "@/_components/ui/section";
@@ -45,9 +45,9 @@ export default async function ExperiencePage({ params }: Props) {
 
               <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
                 {/* Locale explícito: o redirect "/"→"/{locale}" descarta o #hash */}
-                <ActionLink href={`/${locale}#work`} className="w-full justify-center sm:w-auto">
+                <Button href={`/${locale}#work`} className="w-full justify-center sm:w-auto">
                   {t("view_projects")}
-                </ActionLink>
+                </Button>
                 <BackToHomeLink variant="ghost" className="w-full justify-center sm:w-auto">
                   {t("back")}
                 </BackToHomeLink>

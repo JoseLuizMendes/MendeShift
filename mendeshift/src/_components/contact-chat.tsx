@@ -9,7 +9,7 @@ import { prefersReducedMotion } from "@/lib/motion";
 
 import { BitmapChevron } from "@/_components/bitmap-chevron";
 import { ScrambleTextOnHover } from "@/_components/scramble-text";
-import { ActionLink } from "@/_components/ui/action-link";
+import { Button } from "@/_components/ui/button";
 import { Card } from "@/_components/ui/card";
 import { FileText } from "lucide-react";
 
@@ -371,7 +371,7 @@ export function ContactChat() {
             {t("direct_label")}
           </p>
           <div className="flex flex-col gap-2.5">
-            <ActionLink
+            <Button
               href="https://wa.me/5527996300333"
               variant="ghost"
               className="group h-14 w-full justify-between rounded-full border border-border/60 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-foreground transition-all duration-300 hover:border-accent/70 hover:bg-accent/5 hover:text-accent"
@@ -391,8 +391,8 @@ export function ContactChat() {
                 />
               </span>
               <BitmapChevron className="w-4 h-5 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
-            </ActionLink>
-            <ActionLink
+            </Button>
+            <Button
               href="https://www.linkedin.com/in/josé-luiz-dos-santos-azeredo-mendes/"
               variant="ghost"
               className="group h-14 w-full justify-between rounded-full border border-border/60 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-foreground transition-all duration-300 hover:border-accent/70 hover:bg-accent/5 hover:text-accent"
@@ -412,7 +412,7 @@ export function ContactChat() {
                 />
               </span>
               <BitmapChevron className="w-4 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
-            </ActionLink>
+            </Button>
           </div>
         </section>
 
@@ -421,7 +421,7 @@ export function ContactChat() {
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
             {t("briefing_label")}
           </p>
-          <ActionLink
+          <Button
             href="/contato"
             className="group h-14 w-full justify-between rounded-full border border-accent/50 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-accent transition-all duration-300 hover:border-accent hover:bg-accent/10"
           >
@@ -437,7 +437,7 @@ export function ContactChat() {
               />
             </span>
             <BitmapChevron className="w-4 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
-          </ActionLink>
+          </Button>
         </section>
       </div>
     </div>

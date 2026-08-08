@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { BitmapChevron } from "@/_components/bitmap-chevron";
-import { ActionLink } from "@/_components/ui/action-link";
+import { Button } from "@/_components/ui/button";
 import { Card } from "@/_components/ui/card";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, Section, SectionLead, SectionTitle } from "@/_components/ui/section";
@@ -172,10 +172,10 @@ export function SignalsSection() {
         </div>
 
         <div className="mt-10 flex justify-center sm:mt-12">
-          <ActionLink href="/servicos" className="group">
+          <Button href="/servicos" className="group">
             {t("link")}
             <BitmapChevron className="transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
-          </ActionLink>
+          </Button>
         </div>
       </Container>
     </Section>

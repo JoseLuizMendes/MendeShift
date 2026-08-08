@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "@/i18n/context";
 
@@ -7,15 +8,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { prefersReducedMotion } from "@/lib/motion";
-import { ActionLink } from "@/_components/ui/action-link";
-import { Card } from "@/_components/ui/card";
+import { Button } from "@/_components/ui/button";
 import { Container } from "@/_components/ui/container";
-import {
-  Eyebrow,
-  Section,
-  SectionLead,
-  SectionTitle,
-} from "@/_components/ui/section";
+import { LogoLoop } from "@/_components/ui/logo-loop";
+import { Eyebrow, Section, SectionLead, SectionTitle } from "@/_components/ui/section";
 import { BitmapChevron } from "./bitmap-chevron";
 import { ScrambleTextOnHover } from "./scramble-text";
 
@@ -23,36 +19,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 type ContactKey = "email" | "github" | "linkedin";
 
-const metaGroups = [
-  {
-    title: "Design",
-    items: ["MendeShift", "Interface Lab"],
-  },
-  {
-    title: "Stack",
-    items: ["Next.js", "Tailwind CSS", "TypeScript"],
-  },
-  {
-    title: "Typography",
-    items: ["Bebas Neue", "IBM Plex Sans", "IBM Plex Mono"],
-  },
-  {
-    title: "Mode",
-    items: ["Dark-first", "Token-driven"],
-  },
+/** Categorias que passam no marquee (4 fileiras, direção alternada). */
+const marqueeRows = [
+  { label: "Design", items: ["MendeShift", "Interface Lab"] },
+  { label: "Stack", items: ["Next.js", "React 19", "Tailwind CSS", "TypeScript"] },
+  { label: "Typography", items: ["Bebas Neue", "IBM Plex Sans", "IBM Plex Mono"] },
+  { label: "Mode", items: ["Dark-first", "Token-driven", "Motion-aware"] },
 ] as const;
 
 const contactLinks = [
-  {
-    key: "email" as const,
-    href: "mailto:josemendess004@gmail.com",
-    label: "Email",
-  },
-  {
-    key: "github" as const,
-    href: "https://github.com/JoseLuizMendes",
-    label: "GitHub",
-  },
+  { key: "email" as const, href: "mailto:josemendess004@gmail.com", label: "Email" },
+  { key: "github" as const, href: "https://github.com/JoseLuizMendes", label: "GitHub" },
   {
     key: "linkedin" as const,
     href: "https://www.linkedin.com/in/josé-luiz-dos-santos-azeredo-mendes/",
@@ -60,11 +37,35 @@ const contactLinks = [
   },
 ] as const;
 
+/** Monta os nós de uma fileira do marquee, repetidos para preencher a largura. */
+function buildRowItems(label: string, items: readonly string[], reps = 5): ReactNode[] {
+  const nodes: ReactNode[] = [];
+  for (let r = 0; r < reps; r++) {
+    nodes.push(
+      <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-accent">
+        {label}
+      </span>,
+    );
+    for (const item of items) {
+      nodes.push(
+        <span aria-hidden className="font-mono text-lg text-border">
+          /
+        </span>,
+      );
+      nodes.push(
+        <span className="font-display text-2xl tracking-tight text-foreground/55 sm:text-3xl">
+          {item}
+        </span>,
+      );
+    }
+  }
+  return nodes;
+}
+
 export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
   const t = useTranslations("colophon");
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
   const [scrambleTokens, setScrambleTokens] = useState<Record<ContactKey, number>>({
     email: 0,
@@ -73,10 +74,7 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
   });
 
   const triggerScramble = (key: ContactKey) => {
-    setScrambleTokens((current) => ({
-      ...current,
-      [key]: current[key] + 1,
-    }));
+    setScrambleTokens((current) => ({ ...current, [key]: current[key] + 1 }));
   };
 
   useEffect(() => {
@@ -84,45 +82,16 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
     if (prefersReducedMotion()) return;
 
     const ctx = gsap.context(() => {
-      if (headerRef.current) {
-        gsap.from(headerRef.current, {
-          x: -60,
+      for (const el of [headerRef.current, footerRef.current]) {
+        if (!el) continue;
+        gsap.from(el, {
+          y: 30,
           opacity: 0,
-          duration: 1,
+          duration: 0.9,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
-
-      if (gridRef.current) {
-        const columns = gridRef.current.querySelectorAll(":scope > *");
-        gsap.from(columns, {
-          y: 40,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: gridRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
-
-      if (footerRef.current) {
-        gsap.from(footerRef.current, {
-          y: 20,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: "top 95%",
+            trigger: el,
+            start: "top 90%",
             toggleActions: "play none none none",
           },
         });
@@ -133,15 +102,11 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
   }, []);
 
   return (
-    <Section
-      id="colophon"
-      className="relative border-t border-border/20"
-      ref={sectionRef}
-    >
+    <Section id="colophon" className="relative border-t border-border/20" ref={sectionRef}>
       <Container className="md:px-30">
         <div
           ref={headerRef}
-          className="mb-10 grid gap-6 md:mb-12 lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] lg:items-end lg:gap-10"
+          className="grid gap-6 lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] lg:items-end lg:gap-10"
         >
           <div>
             <Eyebrow>{t("eyebrow")}</Eyebrow>
@@ -151,106 +116,64 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
             {t("lead")}
           </SectionLead>
         </div>
+      </Container>
 
-        <div
-          ref={gridRef}
-          className="grid gap-4 md:gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,22rem)]"
-        >
-          <Card className="border-border/40 bg-card/55 p-5 sm:p-6 md:p-8">
-            <div className="flex flex-col gap-6 border-b border-border/30 pb-6 md:flex-row md:items-start md:justify-between">
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-                  {t("build_notes")}
-                </p>
-                <p className="mt-3 max-w-lg font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                  {t("build_text")}
-                </p>
-              </div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground md:text-right">
-                {t("groups_count")}
-                <br />
-                {t("system_count")}
-              </p>
-            </div>
+      {/* Marquee full-bleed — 4 fileiras alternando direção. */}
+      <div className="mt-10 flex flex-col gap-2.5 border-y border-border/15 py-8 md:mt-14 md:gap-3.5 md:py-10">
+        {marqueeRows.map((row, i) => (
+          <LogoLoop
+            key={row.label}
+            items={buildRowItems(row.label, row.items)}
+            direction={i % 2 === 0 ? "left" : "right"}
+            durationSec={40 + i * 4}
+            label={row.label}
+          />
+        ))}
+      </div>
 
-            <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
-              {metaGroups.map((group) => (
-                <MetaColumn key={group.title} title={group.title} items={[...group.items]} />
-              ))}
-              <MetaColumn
-                title={t("year_label")}
-                items={[String(new Date().getFullYear()), "Ongoing"]}
-              />
-            </div>
-          </Card>
-
-          <Card className="border-border/40 bg-card/70 p-5 sm:p-6">
-            <div className="flex h-full flex-col">
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-                  {t("contact_label")}
-                </p>
-                <p className="mt-3 font-mono text-xs leading-relaxed text-muted-foreground">
-                  {t("contact_text")}
-                </p>
-              </div>
-
-              <div className="mt-6 flex flex-1 flex-col gap-2.5">
-                {contactLinks.map((link) => (
-                  <ActionLink
-                    key={link.key}
-                    href={link.href}
-                    className="group h-12 w-full justify-between rounded-full border border-border/50 bg-background/20 px-4 text-[10px] tracking-[0.24em] text-foreground transition-all duration-300 hover:border-accent/70 hover:bg-accent/5 hover:text-accent"
-                    onMouseEnter={() => triggerScramble(link.key)}
-                    onFocus={() => triggerScramble(link.key)}
-                    variant="ghost"
-                  >
-                    <ScrambleTextOnHover
-                      text={link.label}
-                      as="span"
-                      duration={0.55}
-                      className="text-[10px] transition-colors duration-300"
-                      triggerToken={scrambleTokens[link.key]}
-                    />
-                    <BitmapChevron className="w-3.5 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
-                  </ActionLink>
-                ))}
-              </div>
-            </div>
-          </Card>
+      <Container className="md:px-30">
+        {/* Contato — linha slim, sem card. */}
+        <div className="mt-12 flex flex-col gap-5 md:mt-14 md:flex-row md:items-center md:justify-between">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+            {t("contact_label")}
+          </p>
+          <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
+            {contactLinks.map((link) => (
+              <Button
+                key={link.key}
+                href={link.href}
+                variant="ghost"
+                size="sm"
+                className="tracking-[0.24em]"
+                onMouseEnter={() => triggerScramble(link.key)}
+                onFocus={() => triggerScramble(link.key)}
+              >
+                <ScrambleTextOnHover
+                  text={link.label}
+                  as="span"
+                  duration={0.55}
+                  className="text-[11px]"
+                  triggerToken={scrambleTokens[link.key]}
+                />
+                <BitmapChevron className="w-3 transition-transform duration-400 ease-emphasis group-hover/btn:rotate-45 group-hover/btn:duration-1000" />
+              </Button>
+            ))}
+          </div>
         </div>
 
-        <Card
+        {/* Rodapé — linha simples, sem card. */}
+        <div
           ref={footerRef}
-          className="mt-16 border-border/40 bg-card/70 p-6 md:p-10"
+          className="mt-14 flex flex-col gap-4 border-t border-border/20 pt-8 md:flex-row md:items-center md:justify-between"
         >
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-              {t("copyright", { year: new Date().getFullYear() })}
-            </p>
-            <ActionLink href={topHref} variant="ghost" className="self-start md:self-auto">
-              {t("back_to_top")}
-            </ActionLink>
-          </div>
-        </Card>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+            {t("copyright", { year: new Date().getFullYear() })}
+          </p>
+          <Button href={topHref} variant="ghost" size="sm">
+            {t("back_to_top")}
+          </Button>
+        </div>
       </Container>
     </Section>
-  );
-}
-
-function MetaColumn({ title, items }: { title: string; items: string[] }) {
-  return (
-    <div className="rounded-2xl border border-border/25 bg-background/15 p-4 sm:p-5">
-      <p className="mb-3 font-mono text-[9px] uppercase tracking-[0.3em] text-muted-foreground">
-        {title}
-      </p>
-      <ul className="space-y-2.5">
-        {items.map((item) => (
-          <li key={item} className="font-mono text-xs leading-relaxed text-foreground/80 sm:text-[13px]">
-            {item}
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
