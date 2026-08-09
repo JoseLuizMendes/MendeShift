@@ -38,22 +38,12 @@ const contactLinks = [
 ] as const;
 
 /** Monta os nós de uma fileira do marquee, repetidos para preencher a largura. */
-function buildRowItems(label: string, items: readonly string[], reps = 5): ReactNode[] {
+function buildRowItems(items: readonly string[], reps = 6): ReactNode[] {
   const nodes: ReactNode[] = [];
   for (let r = 0; r < reps; r++) {
-    nodes.push(
-      <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-accent">
-        {label}
-      </span>,
-    );
     for (const item of items) {
       nodes.push(
-        <span aria-hidden className="font-mono text-lg text-border">
-          /
-        </span>,
-      );
-      nodes.push(
-        <span className="font-display text-2xl tracking-tight text-foreground/55 sm:text-3xl">
+        <span className="logo-loop-item font-display text-2xl tracking-tight text-foreground/55 sm:text-3xl">
           {item}
         </span>,
       );
@@ -123,10 +113,9 @@ export function ColophonSection({ topHref = "#hero" }: { topHref?: string }) {
         {marqueeRows.map((row, i) => (
           <LogoLoop
             key={row.label}
-            items={buildRowItems(row.label, row.items)}
+            items={buildRowItems(row.items)}
             direction={i % 2 === 0 ? "left" : "right"}
             durationSec={40 + i * 4}
-            label={row.label}
           />
         ))}
       </div>

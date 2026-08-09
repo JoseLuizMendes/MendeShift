@@ -317,6 +317,17 @@ body {
 .logo-loop:hover .logo-loop-track {
   animation-play-state: paused;
 }
+
+/* Hover na fileira → conteúdo fica accent, suave (não instantâneo).
+   Sem gate de @media (hover:hover): notebooks touch (Windows) reportam
+   (hover:none) mesmo com mouse — o :hover dispara (pausa a fileira),
+   então a cor precisa acompanhar sem o portão, igual à pausa acima. */
+.logo-loop-item {
+  transition: color 350ms var(--ease-standard);
+}
+.logo-loop:hover .logo-loop-item {
+  color: var(--accent);
+}
 @keyframes logo-loop-left {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
