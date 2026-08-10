@@ -41,10 +41,34 @@
     "lead": "Four fronts of work — from institutional websites to complete digital products.",
     "link": "See deliverables, timelines and process",
     "items": [
-      { "no": "No. 01", "category": "Websites", "slug": "sites-e-landing-pages", "title": "Websites & Landing Pages", "desc": "Institutional websites and high-converting landing pages — custom design, performance and SEO from day one." },
-      { "no": "No. 02", "category": "Systems", "slug": "sistemas-web", "title": "Web Systems & SaaS", "desc": "Complete custom applications: dashboards, automations and integrations. Architecture built to grow with the business." },
-      { "no": "No. 03", "category": "E-commerce", "slug": "ecommerce", "title": "E-commerce", "desc": "Online stores with optimized checkout, PIX and card payments, and simple day-to-day management." },
-      { "no": "No. 04", "category": "Design", "slug": "design-e-branding", "title": "Design & Brand Identity", "desc": "Complete brand identity and interface in the same package as the website — your brand and product speaking the same language." }
+      {
+        "no": "No. 01",
+        "category": "Websites",
+        "slug": "sites-e-landing-pages",
+        "title": "Websites & Landing Pages",
+        "desc": "Institutional websites and high-converting landing pages — custom design, performance and SEO from day one."
+      },
+      {
+        "no": "No. 02",
+        "category": "Systems",
+        "slug": "sistemas-web",
+        "title": "Web Systems & SaaS",
+        "desc": "Complete custom applications: dashboards, automations and integrations. Architecture built to grow with the business."
+      },
+      {
+        "no": "No. 03",
+        "category": "E-commerce",
+        "slug": "ecommerce",
+        "title": "E-commerce",
+        "desc": "Online stores with optimized checkout, PIX and card payments, and simple day-to-day management."
+      },
+      {
+        "no": "No. 04",
+        "category": "Design",
+        "slug": "design-e-branding",
+        "title": "Design & Brand Identity",
+        "desc": "Complete brand identity and interface in the same package as the website — your brand and product speaking the same language."
+      }
     ]
   },
   "work": {
@@ -142,12 +166,36 @@
     "title": "From briefing to launch",
     "lead": "A clear six-step process — you know exactly where the project stands at every moment.",
     "steps": [
-      { "no": "01", "title": "Briefing", "desc": "You share the goal, the audience and references. A quick form or a WhatsApp conversation." },
-      { "no": "02", "title": "Proposal", "desc": "Scope, timeline and investment in writing within 24 business hours. No fine print." },
-      { "no": "03", "title": "Design", "desc": "Identity and interface approved before any line of code. You validate every screen." },
-      { "no": "04", "title": "Build", "desc": "Development with constant progress updates — you watch the project take shape." },
-      { "no": "05", "title": "Launch", "desc": "Production deploy with domain, technical SEO, analytics and audited performance." },
-      { "no": "06", "title": "Support", "desc": "Post-launch follow-up, adjustments and continuous evolution as the business grows." }
+      {
+        "no": "01",
+        "title": "Briefing",
+        "desc": "You share the goal, the audience and references. A quick form or a WhatsApp conversation."
+      },
+      {
+        "no": "02",
+        "title": "Proposal",
+        "desc": "Scope, timeline and investment in writing within 24 business hours. No fine print."
+      },
+      {
+        "no": "03",
+        "title": "Design",
+        "desc": "Identity and interface approved before any line of code. You validate every screen."
+      },
+      {
+        "no": "04",
+        "title": "Build",
+        "desc": "Development with constant progress updates — you watch the project take shape."
+      },
+      {
+        "no": "05",
+        "title": "Launch",
+        "desc": "Production deploy with domain, technical SEO, analytics and audited performance."
+      },
+      {
+        "no": "06",
+        "title": "Support",
+        "desc": "Post-launch follow-up, adjustments and continuous evolution as the business grows."
+      }
     ]
   },
   "services_page": {
@@ -275,25 +323,64 @@
       "company_placeholder": "Company or project name",
       "service_label": "What do you need?",
       "service_options": [
-        { "value": "site", "label": "Website or landing page" },
-        { "value": "sistema", "label": "Web system / SaaS" },
-        { "value": "ecommerce", "label": "Online store / e-commerce" },
-        { "value": "design", "label": "Design / brand identity" }
+        {
+          "value": "site",
+          "label": "Website or landing page"
+        },
+        {
+          "value": "sistema",
+          "label": "Web system / SaaS"
+        },
+        {
+          "value": "ecommerce",
+          "label": "Online store / e-commerce"
+        },
+        {
+          "value": "design",
+          "label": "Design / brand identity"
+        }
       ],
       "budget_label": "Investment range",
       "budget_options": [
-        { "value": "ate-5k", "label": "Up to R$ 5k" },
-        { "value": "5k-15k", "label": "R$ 5k to R$ 15k" },
-        { "value": "15k-40k", "label": "R$ 15k to R$ 40k" },
-        { "value": "acima-40k", "label": "Above R$ 40k" },
-        { "value": "nao-sei", "label": "Not sure yet" }
+        {
+          "value": "ate-5k",
+          "label": "Up to R$ 5k"
+        },
+        {
+          "value": "5k-15k",
+          "label": "R$ 5k to R$ 15k"
+        },
+        {
+          "value": "15k-40k",
+          "label": "R$ 15k to R$ 40k"
+        },
+        {
+          "value": "acima-40k",
+          "label": "Above R$ 40k"
+        },
+        {
+          "value": "nao-sei",
+          "label": "Not sure yet"
+        }
       ],
       "timeline_label": "When do you need it?",
       "timeline_options": [
-        { "value": "urgente", "label": "Urgent (within 1 month)" },
-        { "value": "1-3-meses", "label": "1 to 3 months" },
-        { "value": "3-mais-meses", "label": "More than 3 months" },
-        { "value": "sem-prazo", "label": "No set deadline" }
+        {
+          "value": "urgente",
+          "label": "Urgent (within 1 month)"
+        },
+        {
+          "value": "1-3-meses",
+          "label": "1 to 3 months"
+        },
+        {
+          "value": "3-mais-meses",
+          "label": "More than 3 months"
+        },
+        {
+          "value": "sem-prazo",
+          "label": "No set deadline"
+        }
       ],
       "message_label": "Tell us about the project",
       "message_placeholder": "What do you want to build? What's the goal? Any websites you like as references?",
@@ -356,18 +443,20 @@
     ]
   },
   "colophon": {
-    "eyebrow": "07 / Colophon",
-    "title": "Credits",
+    "eyebrow": "07 / Brand",
+    "title": "The Brand",
     "lead": "Visual system, stack and foundational decisions behind the interface. This website is the living demonstration of the studio's delivery standard.",
-    "build_notes": "Build Notes",
-    "build_text": "A more editorial colophon, with blocks grouped by function. Reduces height on mobile and improves scannability without losing density.",
-    "groups_count": "05 groups",
-    "system_count": "01 system",
-    "contact_label": "Contact",
-    "contact_text": "Direct channels for conversation, proposals or project follow-up.",
+    "manifesto_a": "The hand that designs",
+    "manifesto_b": "is the hand that builds.",
+    "pages_label": "Pages",
+    "follow_label": "Follow",
+    "founder_role": "Founder",
+    "portrait_alt": "José Luiz Mendes, founder of MendeShift",
+    "cta_project": "Start a project",
+    "privacy": "Privacy",
+    "terms": "Terms",
     "copyright": "© {year} MendeShift. All rights reserved.",
-    "back_to_top": "Back to top",
-    "year_label": "Year"
+    "back_to_top": "Back to top"
   },
   "projects_page": {
     "eyebrow": "Archive / Cases",

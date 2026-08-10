@@ -427,3 +427,28 @@ body {
     animation: none;
   }
 }
+
+/* Notched Frame — borda coral que se "desenha" (stroke-dashoffset) ao entrar na viewport */
+.notch-frame__stroke {
+  stroke-dasharray: var(--dash, 0);
+  stroke-dashoffset: var(--dash, 0);
+  transition: stroke-dashoffset 1200ms var(--ease-emphasis);
+}
+
+.notch-frame__stroke.is-drawn {
+  stroke-dashoffset: 0;
+}
+
+/* Retrato — dissolve na base para "emergir" do painel */
+.portrait-fade {
+  -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notch-frame__stroke {
+    transition: none;
+    stroke-dashoffset: 0;
+  }
+}
+

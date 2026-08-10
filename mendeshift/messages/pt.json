@@ -41,10 +41,34 @@
     "lead": "Quatro frentes de atuação — do site institucional ao produto digital completo.",
     "link": "Ver entregáveis, prazos e processo",
     "items": [
-      { "no": "No. 01", "category": "Sites", "slug": "sites-e-landing-pages", "title": "Sites & Landing Pages", "desc": "Sites institucionais e landing pages de alta conversão — design sob medida, performance e SEO desde o primeiro dia." },
-      { "no": "No. 02", "category": "Sistemas", "slug": "sistemas-web", "title": "Sistemas Web & SaaS", "desc": "Aplicações completas sob medida: painéis, automações e integrações. Arquitetura pensada para crescer junto com o negócio." },
-      { "no": "No. 03", "category": "E-commerce", "slug": "ecommerce", "title": "E-commerce", "desc": "Lojas virtuais com checkout otimizado, pagamentos via PIX e cartão, e gestão simples no dia a dia." },
-      { "no": "No. 04", "category": "Design", "slug": "design-e-branding", "title": "Design & Identidade", "desc": "Identidade visual e interface no mesmo pacote do site — sua marca e seu produto falando a mesma língua." }
+      {
+        "no": "No. 01",
+        "category": "Sites",
+        "slug": "sites-e-landing-pages",
+        "title": "Sites & Landing Pages",
+        "desc": "Sites institucionais e landing pages de alta conversão — design sob medida, performance e SEO desde o primeiro dia."
+      },
+      {
+        "no": "No. 02",
+        "category": "Sistemas",
+        "slug": "sistemas-web",
+        "title": "Sistemas Web & SaaS",
+        "desc": "Aplicações completas sob medida: painéis, automações e integrações. Arquitetura pensada para crescer junto com o negócio."
+      },
+      {
+        "no": "No. 03",
+        "category": "E-commerce",
+        "slug": "ecommerce",
+        "title": "E-commerce",
+        "desc": "Lojas virtuais com checkout otimizado, pagamentos via PIX e cartão, e gestão simples no dia a dia."
+      },
+      {
+        "no": "No. 04",
+        "category": "Design",
+        "slug": "design-e-branding",
+        "title": "Design & Identidade",
+        "desc": "Identidade visual e interface no mesmo pacote do site — sua marca e seu produto falando a mesma língua."
+      }
     ]
   },
   "work": {
@@ -142,12 +166,36 @@
     "title": "Do briefing ao lançamento",
     "lead": "Um processo claro em seis etapas — você sabe exatamente onde o projeto está em cada momento.",
     "steps": [
-      { "no": "01", "title": "Briefing", "desc": "Você conta o objetivo, o público e as referências. Um formulário rápido ou uma conversa no WhatsApp." },
-      { "no": "02", "title": "Proposta", "desc": "Escopo, prazo e investimento por escrito em até 24h úteis. Sem letra miúda." },
-      { "no": "03", "title": "Design", "desc": "Identidade e interface aprovadas antes de qualquer linha de código. Você valida cada tela." },
-      { "no": "04", "title": "Construção", "desc": "Desenvolvimento com atualizações constantes de progresso — você acompanha o projeto tomando forma." },
-      { "no": "05", "title": "Lançamento", "desc": "Deploy em produção com domínio, SEO técnico, analytics e performance auditada." },
-      { "no": "06", "title": "Suporte", "desc": "Acompanhamento pós-lançamento, ajustes e evolução contínua conforme o negócio cresce." }
+      {
+        "no": "01",
+        "title": "Briefing",
+        "desc": "Você conta o objetivo, o público e as referências. Um formulário rápido ou uma conversa no WhatsApp."
+      },
+      {
+        "no": "02",
+        "title": "Proposta",
+        "desc": "Escopo, prazo e investimento por escrito em até 24h úteis. Sem letra miúda."
+      },
+      {
+        "no": "03",
+        "title": "Design",
+        "desc": "Identidade e interface aprovadas antes de qualquer linha de código. Você valida cada tela."
+      },
+      {
+        "no": "04",
+        "title": "Construção",
+        "desc": "Desenvolvimento com atualizações constantes de progresso — você acompanha o projeto tomando forma."
+      },
+      {
+        "no": "05",
+        "title": "Lançamento",
+        "desc": "Deploy em produção com domínio, SEO técnico, analytics e performance auditada."
+      },
+      {
+        "no": "06",
+        "title": "Suporte",
+        "desc": "Acompanhamento pós-lançamento, ajustes e evolução contínua conforme o negócio cresce."
+      }
     ]
   },
   "services_page": {
@@ -275,25 +323,64 @@
       "company_placeholder": "Nome da empresa ou projeto",
       "service_label": "O que você precisa?",
       "service_options": [
-        { "value": "site", "label": "Site ou landing page" },
-        { "value": "sistema", "label": "Sistema web / SaaS" },
-        { "value": "ecommerce", "label": "Loja virtual / e-commerce" },
-        { "value": "design", "label": "Design / identidade visual" }
+        {
+          "value": "site",
+          "label": "Site ou landing page"
+        },
+        {
+          "value": "sistema",
+          "label": "Sistema web / SaaS"
+        },
+        {
+          "value": "ecommerce",
+          "label": "Loja virtual / e-commerce"
+        },
+        {
+          "value": "design",
+          "label": "Design / identidade visual"
+        }
       ],
       "budget_label": "Faixa de investimento",
       "budget_options": [
-        { "value": "ate-5k", "label": "Até R$ 5 mil" },
-        { "value": "5k-15k", "label": "R$ 5 mil a R$ 15 mil" },
-        { "value": "15k-40k", "label": "R$ 15 mil a R$ 40 mil" },
-        { "value": "acima-40k", "label": "Acima de R$ 40 mil" },
-        { "value": "nao-sei", "label": "Ainda não sei" }
+        {
+          "value": "ate-5k",
+          "label": "Até R$ 5 mil"
+        },
+        {
+          "value": "5k-15k",
+          "label": "R$ 5 mil a R$ 15 mil"
+        },
+        {
+          "value": "15k-40k",
+          "label": "R$ 15 mil a R$ 40 mil"
+        },
+        {
+          "value": "acima-40k",
+          "label": "Acima de R$ 40 mil"
+        },
+        {
+          "value": "nao-sei",
+          "label": "Ainda não sei"
+        }
       ],
       "timeline_label": "Para quando?",
       "timeline_options": [
-        { "value": "urgente", "label": "Urgente (até 1 mês)" },
-        { "value": "1-3-meses", "label": "1 a 3 meses" },
-        { "value": "3-mais-meses", "label": "Mais de 3 meses" },
-        { "value": "sem-prazo", "label": "Sem prazo definido" }
+        {
+          "value": "urgente",
+          "label": "Urgente (até 1 mês)"
+        },
+        {
+          "value": "1-3-meses",
+          "label": "1 a 3 meses"
+        },
+        {
+          "value": "3-mais-meses",
+          "label": "Mais de 3 meses"
+        },
+        {
+          "value": "sem-prazo",
+          "label": "Sem prazo definido"
+        }
       ],
       "message_label": "Conte sobre o projeto",
       "message_placeholder": "O que você quer construir? Qual o objetivo? Tem referências de sites que gosta?",
@@ -356,18 +443,20 @@
     ]
   },
   "colophon": {
-    "eyebrow": "07 / Colofão",
-    "title": "Créditos",
+    "eyebrow": "07 / Marca",
+    "title": "A Marca",
     "lead": "Sistema visual, stack e decisões fundamentais por trás da interface. Este site é a demonstração viva do padrão de entrega do estúdio.",
-    "build_notes": "Notas de Build",
-    "build_text": "Um colofão mais editorial, com blocos agrupados por função. Reduz a altura no mobile e melhora a escaneabilidade sem perder densidade.",
-    "groups_count": "05 grupos",
-    "system_count": "01 sistema",
-    "contact_label": "Contato",
-    "contact_text": "Canais diretos para conversa, propostas ou acompanhamento de projetos.",
+    "manifesto_a": "Quem desenha",
+    "manifesto_b": "é quem constrói.",
+    "pages_label": "Páginas",
+    "follow_label": "Seguir",
+    "founder_role": "Fundador",
+    "portrait_alt": "José Luiz Mendes, fundador da MendeShift",
+    "cta_project": "Iniciar projeto",
+    "privacy": "Privacidade",
+    "terms": "Termos",
     "copyright": "© {year} MendeShift. Todos os direitos reservados.",
-    "back_to_top": "Voltar ao topo",
-    "year_label": "Ano"
+    "back_to_top": "Voltar ao topo"
   },
   "projects_page": {
     "eyebrow": "Arquivo / Cases",
