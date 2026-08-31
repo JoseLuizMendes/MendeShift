@@ -88,16 +88,19 @@
 }
 
 html {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
+/* `clip` (e não `hidden`): `overflow-x: hidden` faz o body virar um container de
+   scroll — com barra vertical própria comendo ~15px à direita de TODO o conteúdo,
+   o que desalinhava as margens laterais. `max-width: 100vw` também sobrava, já que
+   100vw inclui a scrollbar. */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
   letter-spacing: -0.01em;
-  overflow-x: hidden;
-  max-width: 100vw;
+  overflow-x: clip;
 }
 
 ::selection {

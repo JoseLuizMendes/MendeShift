@@ -57,7 +57,7 @@ export default async function ExperiencePage({ params }: Props) {
         </section>
 
         <ExperienceSection {...experienceData} />
-        <ColophonSection topHref="#experience-page-top" />
+        <ColophonSection />
       </main>
     </>
   );

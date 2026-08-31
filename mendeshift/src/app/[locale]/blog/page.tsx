@@ -96,7 +96,7 @@ export default async function BlogIndexPage({ params, searchParams }: Props) {
             </div>
           </Container>
         </section>
-        <ColophonSection topHref="#blog-top" />
+        <ColophonSection />
       </main>
     </>
   );

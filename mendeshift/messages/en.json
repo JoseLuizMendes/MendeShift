@@ -445,18 +445,19 @@
   "colophon": {
     "eyebrow": "07 / Brand",
     "title": "The Brand",
+    "subtitle": "MENDESHIFT",
     "lead": "Visual system, stack and foundational decisions behind the interface. This website is the living demonstration of the studio's delivery standard.",
     "manifesto_a": "The hand that designs",
     "manifesto_b": "is the hand that builds.",
     "pages_label": "Pages",
     "follow_label": "Follow",
+    "stack_label": "Studio stack",
     "founder_role": "Founder",
     "portrait_alt": "José Luiz Mendes, founder of MendeShift",
     "cta_project": "Start a project",
     "privacy": "Privacy",
     "terms": "Terms",
-    "copyright": "© {year} MendeShift. All rights reserved.",
-    "back_to_top": "Back to top"
+    "copyright": "© {year} MendeShift. All rights reserved."
   },
   "projects_page": {
     "eyebrow": "Archive / Cases",

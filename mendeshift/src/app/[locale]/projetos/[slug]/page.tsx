@@ -214,7 +214,7 @@ export default async function ProjectPage({ params }: Props) {
           </Container>
         </section>
 
-        <ColophonSection topHref="#project-top" />
+        <ColophonSection />
       </main>
     </>
   );

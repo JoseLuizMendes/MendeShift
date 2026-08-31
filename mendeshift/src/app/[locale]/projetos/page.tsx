@@ -82,7 +82,7 @@ export default async function ProjectsPage({ params }: Props) {
           </Container>
         </section>
 
-        <ColophonSection topHref="#projects-top" />
+        <ColophonSection />
       </main>
     </>
   );

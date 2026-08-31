@@ -138,7 +138,7 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           </Container>
         </section>
-        <ColophonSection topHref="#post-top" />
+        <ColophonSection />
       </main>
     </>
   );
