@@ -1,5 +1,7 @@
 # MendeShift
 
+<p align="center"><img src="assets/p-mendeshift.png" width="70%" alt="MendeShift — Next.js 16, React Compiler, GSAP, next-intl — RES 99/100"/></p>
+
 Site agência-portfólio pessoal: vitrine dos meus projetos, captação de lead (formulário de briefing + chatbot com IA) e terreno onde testo decisões de performance e arquitetura.
 
 **[mende-shift.vercel.app](https://mende-shift.vercel.app)** — Real Experience Score de 99/100 no Vercel Speed Insights, medido com usuários reais: 8 ms de interação até a próxima pintura, zero layout shift cumulativo, TTFB de 0,03 s.
