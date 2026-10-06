@@ -1,6 +1,7 @@
 # MendeShift
 
-<p align="center"><img src="assets/p-mendeshift.png" width="70%" alt="MendeShift — Next.js 16, React Compiler, GSAP, next-intl — RES 99/100"/></p>
+<p align="center"><img src="assets/art-mendeshift.jpg" width="100%" alt="MendeShift em desktop e mobile — site, chatbot e cases"/></p>
+<p align="center"><img src="assets/p-mendeshift.png" width="60%" alt="MendeShift — Next.js 16, React Compiler, GSAP, next-intl — RES 99/100"/></p>
 
 Site agência-portfólio pessoal: vitrine dos meus projetos, captação de lead (formulário de briefing + chatbot com IA) e terreno onde testo decisões de performance e arquitetura.
 
