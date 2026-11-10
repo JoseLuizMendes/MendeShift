@@ -1,0 +1,41 @@
+---
+slug: "por-que-construi-um-blog-mdx-nativo"
+title: "Por que construí um blog MDX nativo"
+description: "Conteúdo como arquivos versionados, renderizados no build — e por que essa decisão combina com um portfólio feito pra mostrar arquitetura, não só publicar posts."
+date: "2026-08-08"
+tags: ["arquitetura", "opinião", "nextjs"]
+---
+
+A maioria dos blogs de dev mora numa plataforma de terceiros. É um ótimo padrão — até o blog fazer parte de um site cujo propósito inteiro é demonstrar **como** você constrói as coisas.
+
+No MendeShift eu quis que os textos fossem **parte do código**: versionados no git, revisados como qualquer outra mudança, e renderizados no build com zero backend. Sem CMS, sem banco, sem fetch em runtime.
+
+## O formato de um post
+
+Cada post é uma pasta com um arquivo MDX por idioma:
+
+```ts
+// src/lib/blog.ts — o núcleo puro, sem filesystem à vista
+export function listPostsFromIndex(
+  index: LoadedPost[],
+  locale: Locale,
+  opts: QueryOptions = {},
+): PostSummary[] {
+  return index
+    .filter((p) => p.locale === locale && visible(p, opts))
+    .sort(byDateDesc)
+    .map(toSummary);
+}
+```
+
+A camada de dados é um conjunto de **funções puras** — recebem posts já parseados e devolvem dados. Ler arquivos do disco é uma casca fina por cima. Essa separação é o jogo inteiro: é o *seam* que eu testo sem tocar no filesystem, e o *seam* que eu trocaria se um dia migrasse pra um CMS.
+
+## Por que isso se sustenta
+
+- **YAGNI** — sem newsletter, sem comentários, sem busca. Só posts. A arquitetura deixa espaço pra isso, mas não paga por isso hoje.
+- **Testável** — o schema do frontmatter, o fallback de idioma, o mapa de slug: tudo coberto por testes que rodam em milissegundos.
+- **Honesto** — o blog é, ele mesmo, um exemplo dos princípios sobre os quais ele fala.
+
+> A melhor peça de portfólio é o próprio portfólio.
+
+Em breve, mais — sobre arquitetura, sobre o que estou aprendendo, e sobre as opiniões que eu não consigo guardar pra mim.

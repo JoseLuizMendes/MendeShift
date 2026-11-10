@@ -1,0 +1,41 @@
+---
+slug: "why-i-built-a-native-mdx-blog"
+title: "Why I built a native MDX blog"
+description: "Content as versioned files, rendered at build time — and why that decision fits a portfolio meant to show architecture, not just ship posts."
+date: "2026-08-08"
+tags: ["architecture", "opinion", "nextjs"]
+---
+
+Most developer blogs live on a third-party platform. That is a perfectly good default — until the blog is part of a site whose whole point is to demonstrate how you build things.
+
+For MendeShift I wanted the writing to be **part of the codebase**: versioned in git, reviewed like any other change, and rendered at build time with zero backend. No CMS, no database, no runtime fetch.
+
+## The shape of a post
+
+Each post is a folder with one MDX file per language:
+
+```ts
+// src/lib/blog.ts — the pure core, no filesystem in sight
+export function listPostsFromIndex(
+  index: LoadedPost[],
+  locale: Locale,
+  opts: QueryOptions = {},
+): PostSummary[] {
+  return index
+    .filter((p) => p.locale === locale && visible(p, opts))
+    .sort(byDateDesc)
+    .map(toSummary);
+}
+```
+
+The data layer is a set of **pure functions** — they take parsed posts and return data. Reading files from disk is a thin shell on top. That separation is the whole game: it is the seam I can unit-test without touching the filesystem, and the seam I'd swap if I ever moved to a CMS.
+
+## Why this holds up
+
+- **YAGNI** — no newsletter, no comments, no search. Just posts. The architecture leaves room for those, but doesn't pay for them today.
+- **Testable** — the frontmatter schema, the language fallback, the slug map: all covered by tests that run in milliseconds.
+- **Honest** — the blog is itself an example of the principles it talks about.
+
+> The best portfolio piece is the portfolio.
+
+More soon — on architecture, on the things I'm learning, and on the opinions I can't keep to myself.

@@ -15,7 +15,7 @@ export const Select = React.forwardRef<
     <select
       ref={ref}
       className={cn(
-        "h-12 w-full appearance-none rounded-xl border border-border/50 bg-muted/50 px-4 font-mono text-sm text-foreground",
+        "h-12 w-full appearance-none border border-border/50 bg-muted/50 px-4 font-mono text-sm text-foreground",
         "focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20",
         "aria-invalid:border-accent/70",
         // chevron via background para manter o appearance-none consistente

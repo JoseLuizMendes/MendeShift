@@ -1,30 +1,17 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getServerTranslations, loadMessages } from "@/i18n/server";
-
 import { SITE_URL, pageMetadata } from "@/lib/metadata";
+import { localeHref } from "@/lib/navigation";
+import { getProjectBySlug, getProjectsByLocale, serviceAnchors } from "@/lib/projects";
 import { ColophonSection } from "@/_components/colophon-section";
-import { ActionLink } from "@/_components/ui/action-link";
-import { BackToHomeLink } from "@/_components/back-to-home-link";
-import { Card } from "@/_components/ui/card";
-import { Container } from "@/_components/ui/container";
-import { Eyebrow, SectionLead, SectionTitle } from "@/_components/ui/section";
-import {
-  getProjectBySlug,
-  getProjectsByLocale,
-  serviceAnchors,
-} from "@/lib/projects";
 
-type Props = {
-  params: Promise<{ locale: string; slug: string }>;
-};
+type Props = { params: Promise<{ locale: string; slug: string }> };
 
-export async function generateStaticParams() {
-  // Generate for both locales
-  const locales = ["en", "pt"];
-  return locales.flatMap((locale) =>
-    getProjectsByLocale(locale).map((p) => ({ locale, slug: p.slug })),
-  );
+export function generateStaticParams() {
+  return getProjectsByLocale("en").map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -42,193 +29,100 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProjectPage({ params }: Props) {
   const { slug, locale } = await params;
   const project = getProjectBySlug(slug, locale);
-
   if (!project) notFound();
 
-  const t = await getServerTranslations(locale, "project_detail");
-
-  // Título localizado do serviço relacionado (mesma fonte da página /servicos)
-  const messages = await loadMessages(locale);
-  const serviceItems = (
-    messages.services_page as { items: { slug: string; title: string }[] }
-  ).items;
+  const [t, ui, messages] = await Promise.all([
+    getServerTranslations(locale, "project_detail"),
+    getServerTranslations(locale, "portfolio"),
+    loadMessages(locale),
+  ]);
   const serviceAnchor = serviceAnchors[project.serviceType];
-  const serviceTitle =
-    serviceItems.find((item) => item.slug === serviceAnchor)?.title ?? "";
-
-  const allProjects = getProjectsByLocale(locale);
-  const currentIndex = allProjects.findIndex((p) => p.slug === slug);
-  const nextProject = allProjects[currentIndex + 1] ?? null;
-
+  const services = (messages.services_page as { items: { slug: string; title: string }[] }).items;
+  const serviceTitle = services.find((service) => service.slug === serviceAnchor)?.title;
+  const projects = getProjectsByLocale(locale);
+  const index = projects.findIndex((item) => item.slug === slug);
+  const previous = projects[index - 1];
+  const next = projects[index + 1];
+  const number = String(index + 1).padStart(2, "0");
+  const href = (path: string) => localeHref(path, locale);
   const caseJsonLd = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
     name: project.title,
     description: project.shortDesc,
-    url: `${SITE_URL}${locale === "pt" ? "/pt" : ""}/projetos/${project.slug}`,
+    url: `${SITE_URL}${href(`/projetos/${slug}`)}`,
     creator: { "@type": "Organization", name: "MendeShift" },
-    ...(project.previewImage && {
-      image: `${SITE_URL}${project.previewImage}`,
-    }),
+    ...(project.previewImage && { image: `${SITE_URL}${project.previewImage}` }),
   };
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseJsonLd) }}
-      />
-      <div className="noise-overlay" aria-hidden="true" />
-      <main id="project-top" className="app-shell relative min-h-screen">
-        {/* Header */}
-        <section className="border-b border-border/20 pt-20 md:pt-28">
-          <Container className="md:px-30">
-            <div className="flex flex-col gap-8 py-12 md:flex-row md:items-end md:justify-between md:py-16">
-              <div className="max-w-2xl">
-                <Eyebrow>
-                  {project.category} / {project.slug}
-                </Eyebrow>
-                <SectionTitle className="mt-4">{project.title}</SectionTitle>
-                <SectionLead>{project.shortDesc}</SectionLead>
+    <main id="project-top" className="app-shell min-h-screen">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(caseJsonLd) }} />
+      <div className="portfolio-frame">
+        <div className="portfolio-case">
+          <header className="portfolio-case-intro">
+            <Link className="portfolio-text-link" href={href("/projetos")}>{t("all_projects")}</Link>
+            <div>
+              <p className="portfolio-mono text-accent">CASE {number} / {project.category}</p>
+              <h1 className="portfolio-display">{project.title}<span className="text-accent">.</span></h1>
+              <p>{project.shortDesc}</p>
+            </div>
+            <dl className="portfolio-case-meta">
+              {project.metric && <div><dt>{ui("case_status")}</dt><dd>{project.metric}</dd></div>}
+              <div><dt>Stack</dt><dd>{project.tech.join(" / ")}</dd></div>
+            </dl>
+            {serviceTitle && (
+              <Link className="portfolio-text-link" href={`/${locale}/servicos#${serviceAnchor}`}>
+                {t("service_cta", { service: serviceTitle })}
+              </Link>
+            )}
+          </header>
 
-                {project.metric && (
-                  <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-                    {project.metric}
-                  </p>
-                )}
-
-                {serviceTitle && (
-                  <ActionLink
-                    // Locale explícito: o redirect de locale descarta o #hash
-                    href={`/${locale}/servicos#${serviceAnchor}`}
-                    variant="ghost"
-                    className="mt-6 px-0 text-accent hover:text-accent/80"
-                  >
-                    {t("service_cta", { service: serviceTitle })}
-                  </ActionLink>
-                )}
+          {project.previewImage && (
+            <figure className="portfolio-case-figure">
+              <div className="portfolio-case-image">
+                <Image
+                  src={project.previewImage}
+                  alt={project.previewImageAlt ?? ""}
+                  sizes="(max-width: 760px) 100vw, 62vw"
+                  fill
+                  preload
+                />
               </div>
+              <figcaption className="portfolio-mono"><span>FIG. {number}</span><span>{ui("artwork")}</span></figcaption>
+            </figure>
+          )}
+        </div>
 
-              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
-                <ActionLink href="/projetos" className="w-full justify-center sm:w-auto">
-                  {t("all_projects")}
-                </ActionLink>
-                <BackToHomeLink variant="ghost" className="w-full justify-center sm:w-auto">
-                  {t("home")}
-                </BackToHomeLink>
-              </div>
-            </div>
+        <div className="portfolio-case-body">
+          <CaseSection label={t("context")}><p>{project.context}</p></CaseSection>
+          <CaseSection label={t("problem")}><p>{project.problem}</p></CaseSection>
+          <CaseSection label={t("constraints")}><p>{project.constraints}</p></CaseSection>
+          <CaseSection label={t("solution")}><p>{project.solution}</p></CaseSection>
+          <CaseSection label={t("engineering")}>
+            <ol>{project.engineeringDecisions.map((decision) => <li key={decision}>{decision}</li>)}</ol>
+          </CaseSection>
+          <CaseSection label={t("challenges")}>
+            <ul>{project.challenges.map((challenge) => <li key={challenge}>{challenge}</li>)}</ul>
+          </CaseSection>
+          <CaseSection label={t("outcome")}><p>{project.outcome}</p></CaseSection>
+        </div>
 
-            {/* Tech stack */}
-            <div className="flex flex-wrap gap-2 pb-8 md:pb-10">
-              {project.tech.map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-full border border-border/40 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        {/* Case Study */}
-        <section className="py-20 md:py-28">
-          <Container className="md:px-30">
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <CaseCard label={t("context")} content={project.context} />
-              <CaseCard label={t("problem")} content={project.problem} />
-              <CaseCard label={t("constraints")} content={project.constraints} />
-            </div>
-
-            {/* Solution — full width */}
-            <Card className="mt-6 border-border/40 bg-card/60 p-6 md:p-8">
-              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                {t("solution")}
-              </p>
-              <p className="mt-4 font-mono text-sm leading-relaxed text-muted-foreground">
-                {project.solution}
-              </p>
-            </Card>
-
-            {/* Engineering Decisions */}
-            <div className="mt-12">
-              <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-                {t("engineering")}
-              </h3>
-              <div className="mt-6 grid gap-4 md:grid-cols-2">
-                {project.engineeringDecisions.map((decision, idx) => (
-                  <div key={idx} className="flex gap-4 border-l border-accent/40 pl-5">
-                    <span className="shrink-0 font-mono text-[10px] text-accent">
-                      {String(idx + 1).padStart(2, "0")}
-                    </span>
-                    <p className="font-mono text-xs leading-relaxed text-muted-foreground">
-                      {decision}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Challenges */}
-            <div className="mt-12">
-              <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-                {t("challenges")}
-              </h3>
-              <div className="mt-6 space-y-4">
-                {project.challenges.map((challenge, idx) => (
-                  <div key={idx} className="flex gap-4 border-l border-border/40 pl-5">
-                    <span className="shrink-0 font-mono text-[10px] text-muted-foreground">
-                      {String(idx + 1).padStart(2, "0")}
-                    </span>
-                    <p className="font-mono text-xs leading-relaxed text-muted-foreground">
-                      {challenge}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Outcome */}
-            <Card className="mt-12 border-accent/30 bg-card/60 p-6 md:p-8">
-              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-                {t("outcome")}
-              </p>
-              <p className="mt-4 font-mono text-sm leading-relaxed text-foreground/90">
-                {project.outcome}
-              </p>
-            </Card>
-
-            {/* Navigation */}
-            <div className="mt-16 flex flex-col gap-4 border-t border-border/20 pt-10 sm:flex-row sm:items-center sm:justify-between">
-              <ActionLink href="/projetos" variant="ghost">
-                {t("back")}
-              </ActionLink>
-              {nextProject && (
-                <ActionLink href={`/projetos/${nextProject.slug}`}>
-                  {t("next", { title: nextProject.title })}
-                </ActionLink>
-              )}
-            </div>
-          </Container>
-        </section>
-
-        <ColophonSection topHref="#project-top" />
-      </main>
-    </>
+        <nav className="portfolio-case-pagination portfolio-mono" aria-label={ui("case_navigation")}>
+          {previous && <Link href={href(`/projetos/${previous.slug}`)}>← {previous.title}</Link>}
+          {next && <Link href={href(`/projetos/${next.slug}`)}>{t("next", { title: next.title })}</Link>}
+        </nav>
+      </div>
+      <ColophonSection />
+    </main>
   );
 }
 
-function CaseCard({ label, content }: { label: string; content: string }) {
+function CaseSection({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <Card className="border-border/40 bg-card/60 p-6">
-      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-        {label}
-      </p>
-      <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground">
-        {content}
-      </p>
-    </Card>
+    <section className="portfolio-case-row">
+      <h2 className="portfolio-mono">{label}</h2>
+      <div>{children}</div>
+    </section>
   );
 }

@@ -16,7 +16,7 @@ import {
   whatsAppLink,
   type Lead,
 } from "@/lib/leads";
-import { ActionLink } from "@/_components/ui/action-link";
+import { Button } from "@/_components/ui/button";
 import { Card } from "@/_components/ui/card";
 import { Input } from "@/_components/ui/input";
 import { Label } from "@/_components/ui/label";
@@ -140,10 +140,10 @@ export function BriefingForm() {
         <p className="max-w-xl font-mono text-sm leading-relaxed text-muted-foreground">
           {label("success_text")}
         </p>
-        <ActionLink href={whatsAppFallback()} target="_blank" rel="noopener noreferrer">
+        <Button href={whatsAppFallback()} target="_blank" rel="noopener noreferrer">
           <MessageCircle className="h-4 w-4" />
           {label("success_whatsapp")}
-        </ActionLink>
+        </Button>
       </Card>
     );
   }
@@ -264,11 +264,11 @@ export function BriefingForm() {
         </div>
 
         {(status === "error" || status === "rate_limited") && (
-          <div className="flex flex-col gap-3 rounded-2xl border border-accent/40 bg-accent/5 p-4 sm:col-span-2">
+          <div className="flex flex-col gap-3 border border-accent/40 bg-accent/5 p-4 sm:col-span-2">
             <p className="font-mono text-xs leading-relaxed text-foreground/90">
               {status === "rate_limited" ? label("rate_limited") : label("error_text")}
             </p>
-            <ActionLink
+            <Button
               href={whatsAppFallback()}
               target="_blank"
               rel="noopener noreferrer"
@@ -276,7 +276,7 @@ export function BriefingForm() {
             >
               <MessageCircle className="h-4 w-4" />
               {label("error_whatsapp")}
-            </ActionLink>
+            </Button>
           </div>
         )}
 
@@ -284,7 +284,7 @@ export function BriefingForm() {
           <button
             type="submit"
             disabled={status === "sending"}
-            className="inline-flex h-12 items-center justify-center gap-3 rounded-full bg-accent px-8 font-mono text-xs uppercase tracking-widest text-accent-foreground transition-all hover:scale-[1.01] hover:bg-accent/90 disabled:opacity-50 disabled:hover:scale-100"
+            className="inline-flex h-12 items-center justify-center gap-3 bg-accent px-8 font-mono text-xs uppercase tracking-widest text-accent-foreground transition-[background-color,opacity,scale] interaction-motion hover:scale-[1.01] hover:bg-accent/90 disabled:opacity-50 disabled:hover:scale-100"
           >
             {status === "sending" ? label("sending") : label("submit")}
           </button>

@@ -65,13 +65,14 @@ const nextConfig: NextConfig = {
   },
 
   async redirects() {
-    return [
-      {
-        source: "/projetos/spring-rest-api",
-        destination: "/projetos/agendamento-api",
+    const retiredCases = ["barber-saas", "agendamento-api", "spring-rest-api"];
+    return ["", "/pt"].flatMap((prefix) =>
+      retiredCases.map((slug) => ({
+        source: prefix + "/projetos/" + slug,
+        destination: prefix + "/projetos",
         permanent: true,
-      },
-    ];
+      })),
+    );
   },
 };
 

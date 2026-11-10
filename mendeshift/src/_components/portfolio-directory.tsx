@@ -1,0 +1,41 @@
+import Link from "next/link";
+import { localeHref } from "@/lib/navigation";
+import type { Project } from "@/lib/projects";
+import { FolderGlyph, TargetCorners } from "./folder-glyph";
+
+export type DirectoryProject = Pick<Project, "slug" | "title" | "category" | "tech" | "previewImage" | "previewImageAlt">;
+
+export function PortfolioDirectory({
+  projects,
+  locale,
+  activeSlug,
+  onPreview,
+}: {
+  projects: DirectoryProject[];
+  locale: string;
+  activeSlug?: string;
+  onPreview: (slug: string) => void;
+}) {
+  return (
+    <ul className="portfolio-directory">
+      {projects.map((project, index) => (
+        <li key={project.slug}>
+          <Link
+            className="directory-entry"
+            href={localeHref(`/projetos/${project.slug}`, locale)}
+            data-previewed={activeSlug === project.slug ? "" : undefined}
+            onPointerEnter={() => onPreview(project.slug)}
+            onFocus={() => onPreview(project.slug)}
+          >
+            <span className="directory-icon">
+              <TargetCorners />
+              <span aria-hidden="true" className="directory-number portfolio-mono">{String(index + 1).padStart(2, "0")}</span>
+              <FolderGlyph />
+            </span>
+            <span className="directory-name portfolio-mono">{project.title}</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}

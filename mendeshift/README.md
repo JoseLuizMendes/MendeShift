@@ -98,13 +98,42 @@ via [Resend](https://resend.com).
 - **Fase 2 — Credibilidade & pipeline:** integração CRM via `CRM_WEBHOOK_URL` (payload já no
   contrato de `src/lib/leads.ts`), depoimentos reais (`testimonials-section.tsx`, já pronta e
   oculta até ter quotes reais), OG images dinâmicas por case, captação estruturada pelo chatbot
-  (`source: "chatbot"`), possível split de `/servicos/[slug]`, blog para keywords PT.
+  (`source: "chatbot"`), possível split de `/servicos/[slug]`. Blog nativo: **entregue** (ver seção Blog).
 - **Fase 3 — Portal do cliente:** links de proposta privados (signed URLs) → autenticação +
   banco (Neon/Vercel Postgres) + status de projeto + aprovações.
 - **Pré-requisito de negócio:** registrar domínio próprio (ex.: mendeshift.com.br) — SEO em
   `vercel.app` tem teto baixo. `metadataBase`, sitemap, robots e JSON-LD já leem de
   `NEXT_PUBLIC_SITE_URL`, então migrar é só setar essa env na Vercel (sem commit). Ver
   [docs/go-live-dominio-seo.md](docs/go-live-dominio-seo.md).
+
+## Blog
+
+Blog nativo, MDX versionado no repo — sem CMS, sem banco, tudo estático (SSG).
+Usado deliberadamente como vitrine de arquitetura (SOLID, YAGNI, camadas testáveis).
+
+**Como escrever:** um post é uma pasta em `content/blog/<id>/` com um arquivo por
+idioma (`en.mdx` e `pt.mdx`). Frontmatter validado por zod (`slug`, `title`,
+`description`, `date` `YYYY-MM-DD`, `tags[]`, `draft?`) — post malformado quebra o
+build, não a produção. `slug` é **por idioma** (melhor SEO em PT); `draft: true`
+aparece só em `pnpm dev`.
+
+**Arquitetura:** `src/lib/blog.ts` é a camada de dados — funções **puras**
+(parse, listagem, fallback de idioma, mapa de slug) separadas da leitura de disco.
+É o seam testado por `src/lib/blog.test.ts` (Vitest — `pnpm test`). Render via
+`next-mdx-remote/rsc`; syntax highlighting em build por `rehype-pretty-code` (shiki),
+zero JS no cliente.
+
+**Bilíngue com rede de segurança:** o índice de cada locale mostra só os posts
+daquele idioma; um post que existe em um só idioma é servido no outro com um aviso
+(`LanguageFallbackNotice`) — nunca trava a publicação. O `language-toggle` mapeia o
+slug equivalente via `#lang-alternate`.
+
+**Já tem:** posts, tags + filtro (`/blog?tag=`), RSS (`/blog/feed.xml` e
+`/pt/blog/feed.xml`), OG image por post, sitemap, seção "escritos recentes" na home.
+
+**Backlog (fora da v1):** polish de leitura (capa + tempo de leitura + relacionados),
+páginas `/blog/tags/[tag]` para SEO, busca, captação de newsletter (Resend/Upstash) →
+newsletter ativa (double opt-in, unsubscribe), comunidade/comentários.
 
 ## Learn More
 

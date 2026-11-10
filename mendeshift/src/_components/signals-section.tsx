@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { BitmapChevron } from "@/_components/bitmap-chevron";
-import { ActionLink } from "@/_components/ui/action-link";
+import { Button } from "@/_components/ui/button";
 import { Card } from "@/_components/ui/card";
 import { Container } from "@/_components/ui/container";
 import { Eyebrow, Section, SectionLead, SectionTitle } from "@/_components/ui/section";
@@ -121,8 +121,8 @@ export function SignalsSection() {
           ref={cursorRef}
           className={cn(
             "pointer-events-none absolute left-0 top-0 z-50 hidden -translate-x-1/2 -translate-y-1/2 md:block",
-            "h-12 w-12 rounded-full border-2 border-accent bg-accent",
-            "transition-opacity duration-300",
+            "h-4 w-4 border border-accent",
+            "transition-opacity interaction-motion",
             isHovering ? "opacity-100" : "opacity-0",
           )}
         />
@@ -140,7 +140,7 @@ export function SignalsSection() {
                 {services.map((item, index) => (
                   <article
                     key={`${item.no}-${copy}-${index}`}
-                    className="group relative flex w-72 shrink-0 transition-transform duration-500 ease-emphasis hover:-translate-y-2 sm:w-80"
+                    className="group relative flex w-72 shrink-0 transition-transform interaction-motion hover:-translate-y-2 active:-translate-y-1 sm:w-80"
                   >
                     <Card className="flex h-full min-h-69 flex-1 flex-col border-border/50 bg-card/80 p-6 sm:min-h-75 sm:p-8">
                       <div className="absolute -top-px left-0 right-0 h-px bg-linear-to-r from-transparent via-border/40 to-transparent" />
@@ -155,10 +155,10 @@ export function SignalsSection() {
                       </div>
 
                       <div className="flex flex-1 flex-col">
-                        <h3 className="font-display text-3xl tracking-tight transition-colors duration-300 group-hover:text-accent sm:text-4xl">
+                        <h3 className="font-display text-3xl tracking-tight transition-colors interaction-motion group-hover:text-accent sm:text-4xl">
                           {item.title}
                         </h3>
-                        <div className="mb-6 mt-4 h-px w-12 bg-accent/70 transition-all duration-500 group-hover:w-full" />
+                        <div className="mb-6 mt-4 h-px w-12 bg-accent/70 transition-all interaction-motion group-hover:w-full" />
                         <p className="font-mono text-xs leading-relaxed text-muted-foreground">
                           {item.desc}
                         </p>
@@ -172,10 +172,10 @@ export function SignalsSection() {
         </div>
 
         <div className="mt-10 flex justify-center sm:mt-12">
-          <ActionLink href="/servicos" className="group">
+          <Button href="/servicos" className="group">
             {t("link")}
-            <BitmapChevron className="transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
-          </ActionLink>
+            <BitmapChevron className="transition-transform interaction-motion group-hover:rotate-45" />
+          </Button>
         </div>
       </Container>
     </Section>

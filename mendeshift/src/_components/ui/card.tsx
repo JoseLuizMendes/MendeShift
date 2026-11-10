@@ -10,7 +10,7 @@ export const Card = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "relative rounded-[var(--radius)] border border-border/50 bg-card",
+        "relative border border-border/50 bg-card",
         className,
       )}
       {...props}

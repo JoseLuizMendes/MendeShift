@@ -1,10 +1,10 @@
 "use client";
 
 import { useLocale } from "@/i18n/context";
-import { ActionLink } from "@/_components/ui/action-link";
+import { Button } from "@/_components/ui/button";
 
 type Props = Omit<
-  React.ComponentPropsWithoutRef<typeof ActionLink>,
+  React.ComponentPropsWithoutRef<typeof Button>,
   "href"
 >;
 
@@ -21,8 +21,8 @@ export function BackToHomeLink({ children, ...props }: Props) {
   const locale = useLocale();
 
   return (
-    <ActionLink href={`/${locale}`} {...props}>
+    <Button href={`/${locale}`} {...props}>
       {children}
-    </ActionLink>
+    </Button>
   );
 }
