@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { prefersReducedMotion } from "@/lib/motion";
+import { ShaderImage } from "@/_components/shader-image";
 import { AnimatedNoise } from "@/_components/animated-noise";
 import { BitmapChevron } from "@/_components/bitmap-chevron";
 import {
@@ -23,6 +24,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function HeroSection() {
   const t = useTranslations("hero");
+  const visuals = useTranslations("portfolio");
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [scrambleToken, setScrambleToken] = useState(0);
@@ -76,8 +78,17 @@ export function HeroSection() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative overflow-hidden pb-16 pt-10 sm:pb-6 sm:pt-20 md:pb-8 md:pt-28"
+      className="relative isolate flex min-h-[min(48rem,calc(100svh-5rem))] items-center overflow-hidden py-16 sm:py-20 md:py-24"
     >
+      <ShaderImage
+        className="hero-shader"
+        src="/portfolio/hero.webp"
+        alt=""
+        sizes="100vw"
+        position={0.72}
+        trackParent
+        priority
+      />
       <AnimatedNoise opacity={0.03} />
 
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -85,7 +96,7 @@ export function HeroSection() {
         <div className="absolute left-0 top-0 h-full w-px bg-linear-to-b from-transparent via-border/40 to-transparent md:left-16" />
       </div>
 
-      <Container className="md:px-20">
+      <Container className="relative z-10 md:px-20">
         <div ref={contentRef} className="space-y-8 sm:space-y-10">
           <div className="min-w-0">
             <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
@@ -100,17 +111,17 @@ export function HeroSection() {
 
               <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
                 <div className="min-w-0">
-                  <h2 className="font-display text-xl tracking-wide text-muted-foreground/70 sm:text-2xl md:text-4xl">
+                  <h2 className="max-w-2xl font-display text-xl tracking-wide text-foreground sm:text-2xl md:text-4xl">
                     {t("headline")}
                   </h2>
-                  <p className="mt-6 max-w-2xl font-mono text-sm leading-relaxed text-muted-foreground sm:mt-8">
+                  <p className="mt-6 max-w-xl font-mono text-sm leading-relaxed text-foreground/80 sm:mt-8">
                     {t("sub")}
                   </p>
 
                   <div className="mt-8 flex flex-col items-stretch gap-4 sm:mt-10 sm:flex-row sm:items-center">
                     <StarBorder
-                      className="w-full rounded-full sm:w-auto"
-                      innerClassName="rounded-full bg-background"
+                      className="w-full sm:w-auto"
+                      innerClassName="bg-background"
                       thickness={2}
                     >
                       <Button
@@ -123,10 +134,10 @@ export function HeroSection() {
                           text={t("cta_primary")}
                           as="span"
                           duration={0.55}
-                          className="text-[10px] transition-colors duration-300"
+                          className="text-[10px] transition-colors interaction-motion"
                           triggerToken={scrambleToken}
                         />
-                        <BitmapChevron className="transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
+                        <BitmapChevron className="transition-transform interaction-motion group-hover:rotate-45" />
                       </Button>
                     </StarBorder>
                     <Button
@@ -144,6 +155,9 @@ export function HeroSection() {
           </div>
         </div>
       </Container>
+      <span className="hero-shader-hint portfolio-mono" aria-hidden="true">
+        {visuals("hover_hint")} <span className="text-accent">+</span>
+      </span>
     </section>
   );
 }

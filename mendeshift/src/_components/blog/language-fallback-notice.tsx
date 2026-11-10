@@ -7,7 +7,7 @@ export function LanguageFallbackNotice({ message }: { message: string }) {
   return (
     <p
       role="note"
-      className="mb-8 rounded-[var(--radius)] border border-accent/30 bg-accent/5 px-4 py-3 font-mono text-[11px] leading-relaxed tracking-wide text-muted-foreground"
+      className="mb-8 border border-accent/30 bg-accent/5 px-4 py-3 font-mono text-[11px] leading-relaxed tracking-wide text-muted-foreground"
     >
       {message}
     </p>

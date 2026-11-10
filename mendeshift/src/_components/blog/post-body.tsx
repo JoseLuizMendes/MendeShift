@@ -76,7 +76,7 @@ const components = {
     // eslint-disable-next-line @next/next/no-img-element
     <img
       alt={alt}
-      className="my-8 w-full rounded-[var(--radius)] border border-border/40"
+      className="my-8 w-full border border-border/40"
       {...props}
     />
   ),

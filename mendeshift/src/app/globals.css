@@ -11,6 +11,15 @@
   }
 }
 
+@utility interaction-motion {
+  transition-duration: var(--motion-interaction);
+  transition-timing-function: var(--ease-interaction);
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0s;
+  }
+}
+
 :root {
   /* Core surfaces */
   --background: #fbfbfc;
@@ -36,6 +45,8 @@
   --motion-fast: 150ms;
   --motion-base: 220ms;
   --motion-slow: 420ms;
+  --motion-interaction: 480ms;
+  --ease-interaction: cubic-bezier(.33, 0, .2, 1);
 }
 
 @theme inline {

@@ -23,7 +23,7 @@ export function TagFilter({
 
   const base = localeHref("/blog", locale);
   const chip =
-    "rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-widest transition-colors duration-300";
+    "border px-3 py-1 font-mono text-[10px] uppercase tracking-widest transition-colors interaction-motion";
 
   return (
     <div className="flex flex-wrap gap-2">

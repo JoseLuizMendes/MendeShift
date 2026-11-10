@@ -35,7 +35,7 @@ export function ServiceCard({
 }) {
   return (
     <article id={service.slug} className="scroll-mt-24">
-      <GlareHover className="rounded-[var(--radius)]">
+      <GlareHover>
       <Card className="border-border/50 bg-card/60 p-6 sm:p-8 md:p-10">
         <div className="mb-6 flex items-baseline justify-between sm:mb-8">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
@@ -57,7 +57,7 @@ export function ServiceCard({
             </p>
 
             <dl className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-border/40 bg-background/40 p-4">
+              <div className="border border-border/40 bg-background/40 p-4">
                 <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                   {labels.timeline}
                 </dt>
@@ -65,7 +65,7 @@ export function ServiceCard({
                   {service.timeline}
                 </dd>
               </div>
-              <div className="rounded-2xl border border-border/40 bg-background/40 p-4">
+              <div className="border border-border/40 bg-background/40 p-4">
                 <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                   {labels.price}
                 </dt>
@@ -87,7 +87,7 @@ export function ServiceCard({
             <ul className="space-y-3">
               {service.deliverables.map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-accent/40 text-accent">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border border-accent/40 text-accent">
                     <Check className="h-3 w-3" />
                   </span>
                   <span className="font-mono text-xs leading-relaxed text-foreground/90">

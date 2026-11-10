@@ -30,7 +30,7 @@ export function StarBorder({
 
   return (
     <div
-      className={cn("star-border rounded-[var(--radius)]", className)}
+      className={cn("star-border", className)}
       style={vars}
     >
       <span
@@ -43,7 +43,7 @@ export function StarBorder({
       />
       <div
         className={cn(
-          "star-border__inner h-full rounded-[calc(var(--radius)-2px)]",
+          "star-border__inner h-full",
           innerClassName,
         )}
       >

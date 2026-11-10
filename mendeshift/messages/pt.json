@@ -5,7 +5,7 @@
     "og_desc": "Estúdio digital em Vitória, ES. Sites, landing pages, sistemas web, e-commerce e identidade visual — engenharia de produto do briefing ao lançamento.",
     "twitter_desc": "Estúdio digital em Vitória, ES. Sites, sistemas web, e-commerce e identidade visual.",
     "projects_title": "Cases | MendeShift — Estúdio Digital",
-    "projects_desc": "Cases de produtos digitais entregues em produção: contexto, solução e resultado de cada projeto.",
+    "projects_desc": "Explore os projetos selecionados do MendeShift, do contexto às decisões de engenharia.",
     "experience_title": "Fundador | MendeShift",
     "experience_desc": "Trajetória profissional e acadêmica de José Luiz Mendes, engenheiro de software e fundador do MendeShift.",
     "services_title": "Serviços | MendeShift — Sites, Sistemas, E-commerce e Design",
@@ -509,5 +509,34 @@
     "recent_title": "Do blog",
     "recent_lead": "Notas sobre arquitetura, engenharia e o que estou aprendendo.",
     "recent_cta": "Ler o blog"
+  },
+  "portfolio": {
+    "nav_label": "Navegação principal",
+    "profile": "Trajetória",
+    "archive_title": "Arquivo de projetos",
+    "archive_intro": "Abra uma pasta para explorar o projeto, suas decisões técnicas e o resultado.",
+    "home": "Início",
+    "folder_count": "{count} pastas",
+    "case_status": "Status",
+    "case_navigation": "Navegação entre projetos",
+    "artwork": "Ilustração conceitual",
+    "hover_hint": "Passe o cursor para revelar",
+    "lab_intro": "Experimentos com imagem gerada e código criativo no navegador.",
+    "lab_nav": "Estudos do laboratório",
+    "hero_study": "Circuito em grafite",
+    "hero_study_body": "A imagem da abertura explora o contraste entre a rocha escura e as trilhas de um circuito. A retícula reage ao cursor e revela aos poucos os materiais e as cores originais.",
+    "project_study": "Sinal em trânsito",
+    "project_study_body": "Três fibras transportam luz através de um bloco de grafite. A retícula revela como a imagem muda quando só o contraste e o relevo são visíveis."
+  },
+  "studio_editorial": {
+    "eyebrow": "01 / O Estúdio",
+    "title": "Design e engenharia na mesma mesa.",
+    "intro": "Sou José Luiz Mendes, fundador do MendeShift. Desenho e construo sites e sistemas web, do primeiro esboço ao lançamento.",
+    "base_label": "Base",
+    "practice_label": "Atuação",
+    "practice": "Design e desenvolvimento web",
+    "profile": "Conhecer minha trajetória",
+    "portrait": "Retrato de José Luiz Mendes",
+    "founder": "Fundador · MendeShift"
   }
 }

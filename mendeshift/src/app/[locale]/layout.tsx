@@ -7,12 +7,12 @@ import { notFound } from "next/navigation";
 import { getServerTranslations, loadMessages } from "@/i18n/server";
 import { SITE_URL, pageMetadata } from "@/lib/metadata";
 
-import { LanguageToggle } from "@/_components/language-toggle";
-import { MobileNav } from "@/_components/mobile-nav";
 import { Preloader } from "@/_components/preloader";
+import { PortfolioHeader } from "@/_components/portfolio-shell";
 import { SkipLink } from "@/_components/skip-link";
 import { SmoothScroll } from "@/_components/smooth-scroll";
 import "../globals.css";
+import "../portfolio.css";
 
 const primarySans = IBM_Plex_Sans({
   variable: "--font-sans",
@@ -65,7 +65,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: locale === "pt" ? "pt_BR" : "en_US",
       type: "website",
       // og:image vem do file-based opengraph-image.tsx deste segmento
-      // (imagem de agência via next/og), que tem precedência sobre config.
+      // (imagem via next/og), que tem precedência sobre config.
     },
     twitter: {
       card: "summary_large_image",
@@ -136,17 +136,17 @@ export default async function LocaleLayout({ children, params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <TranslationsProvider locale={locale} messages={messages}>
+          <div className="portfolio-grain" aria-hidden="true" />
           <SkipLink />
           <Preloader />
           <SmoothScroll>
+            <PortfolioHeader locale={locale} />
             <div id="main-content" tabIndex={-1} className="outline-none">
               {children}
             </div>
             <Analytics/>
             <SpeedInsights/>
           </SmoothScroll>
-          <LanguageToggle />
-          <MobileNav />
         </TranslationsProvider>
       </body>
     </html>

@@ -53,7 +53,7 @@ export function RecentWritingSection({
         <div className="mt-8 flex justify-end border-border/20 pt-6 md:mt-10">
           <Button href="/blog" variant="ghost" className="group">
             {labels.cta}
-            <BitmapChevron className="w-3 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
+            <BitmapChevron className="w-3 transition-transform interaction-motion group-hover:rotate-45" />
           </Button>
         </div>
       </Container>

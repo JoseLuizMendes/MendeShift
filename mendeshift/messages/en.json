@@ -5,7 +5,7 @@
     "og_desc": "Digital studio based in Vitória, Brazil. Websites, landing pages, web systems, e-commerce and brand identity — product engineering from briefing to launch.",
     "twitter_desc": "Digital studio based in Vitória, Brazil. Websites, web systems, e-commerce and brand identity.",
     "projects_title": "Case Studies | MendeShift — Digital Studio",
-    "projects_desc": "Case studies of digital products shipped to production: context, solution and outcome of each project.",
+    "projects_desc": "Explore selected MendeShift projects, from their context to the engineering decisions.",
     "experience_title": "Founder | MendeShift",
     "experience_desc": "Professional and academic background of José Luiz Mendes, software engineer and founder of MendeShift.",
     "services_title": "Services | MendeShift — Websites, Web Systems, E-commerce & Design",
@@ -509,5 +509,34 @@
     "recent_title": "From the blog",
     "recent_lead": "Notes on architecture, engineering and what I'm learning.",
     "recent_cta": "Read the blog"
+  },
+  "portfolio": {
+    "nav_label": "Main navigation",
+    "profile": "Experience",
+    "archive_title": "Project archive",
+    "archive_intro": "Open a folder to explore the project, its engineering decisions and the result.",
+    "home": "Home",
+    "folder_count": "{count} folders",
+    "case_status": "Status",
+    "case_navigation": "Project navigation",
+    "artwork": "Concept illustration",
+    "hover_hint": "Move the cursor to reveal",
+    "lab_intro": "Experiments with generated imagery and creative coding in the browser.",
+    "lab_nav": "Lab studies",
+    "hero_study": "Graphite circuit",
+    "hero_study_body": "The opening image explores the contrast between dark rock and circuit traces. The halftone reacts to the cursor and gradually reveals the original materials and colors.",
+    "project_study": "Signal in transit",
+    "project_study_body": "Three optical fibers carry light through a block of graphite. The halftone explores how an image reads through contrast and relief."
+  },
+  "studio_editorial": {
+    "eyebrow": "01 / The Studio",
+    "title": "Design and engineering at the same table.",
+    "intro": "I’m José Luiz Mendes, founder of MendeShift. I design and build websites and web applications, from the first sketch to launch.",
+    "base_label": "Based in",
+    "practice_label": "Practice",
+    "practice": "Web design and development",
+    "profile": "Explore my experience",
+    "portrait": "Portrait of José Luiz Mendes",
+    "founder": "Founder · MendeShift"
   }
 }

@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/projetos", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/blog", priority: 0.7, changeFrequency: "weekly" as const },
     { path: "/experience", priority: 0.5, changeFrequency: "yearly" as const },
+    { path: "/ai-exploration", priority: 0.6, changeFrequency: "monthly" as const },
     ...projects.map((project) => ({
       path: `/projetos/${project.slug}`,
       priority: 0.7,

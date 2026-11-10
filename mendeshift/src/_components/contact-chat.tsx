@@ -187,7 +187,7 @@ export function ContactChat() {
           {/* Chat Header */}
           <div className="flex items-center gap-3 border-b border-border/50 px-4 py-4 sm:px-5">
             <div className="relative">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 font-mono text-sm text-accent">
+              <div className="flex h-10 w-10 items-center justify-center bg-accent/10 font-mono text-sm text-accent">
                 JL
               </div>
               <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-card bg-emerald-500" />
@@ -219,7 +219,7 @@ export function ContactChat() {
                   className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[90%] rounded-2xl px-4 py-3 font-mono text-sm leading-relaxed sm:max-w-[85%] ${message.role === "user"
+                    className={`max-w-[90%] px-4 py-3 font-mono text-sm leading-relaxed sm:max-w-[85%] ${message.role === "user"
                       ? "bg-accent text-accent-foreground"
                       : "bg-muted text-foreground"
                       }`}
@@ -231,7 +231,7 @@ export function ContactChat() {
               {isTyping && (
                 <div className="flex justify-start" role="status">
                   <span className="sr-only">{t("typing")}</span>
-                  <div className="flex items-center gap-1.5 rounded-2xl bg-muted px-4 py-3">
+                  <div className="flex items-center gap-1.5 bg-muted px-4 py-3">
                     <span aria-hidden="true" className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground" />
                     <span aria-hidden="true" className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground [animation-delay:150ms]" />
                     <span aria-hidden="true" className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground [animation-delay:300ms]" />
@@ -254,13 +254,13 @@ export function ContactChat() {
               placeholder={t("placeholder")}
               rows={1}
               data-lenis-prevent
-              className="no-scrollbar max-h-32 min-h-11 flex-1 resize-none overscroll-contain rounded-xl border border-border/50 bg-muted/50 px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+              className="no-scrollbar max-h-32 min-h-11 flex-1 resize-none overscroll-contain border border-border/50 bg-muted/50 px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
             />
             <button
               type="submit"
               disabled={!inputValue.trim() || isTyping}
               aria-label={t("send_message")}
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground transition-all hover:scale-[1.02] hover:bg-accent/90 disabled:opacity-50 disabled:hover:scale-100"
+              className="flex h-11 w-11 shrink-0 items-center justify-center bg-accent text-accent-foreground transition-[background-color,opacity,scale] interaction-motion hover:scale-[1.02] hover:bg-accent/90 disabled:opacity-50 disabled:hover:scale-100"
             >
               <svg
                 aria-hidden="true"
@@ -300,7 +300,7 @@ export function ContactChat() {
               return (
                 <div
                   key={item.label}
-                  className={`overflow-hidden rounded-2xl border transition-all duration-300 ${isOpen
+                  className={`overflow-hidden border transition-all interaction-motion ${isOpen
                     ? "border-accent/50 bg-card/60"
                     : "border-border/50 bg-card/30 hover:border-accent/35 hover:bg-card/50"
                     }`}
@@ -312,21 +312,21 @@ export function ContactChat() {
                   >
                     <div className="flex min-w-0 flex-col gap-1">
                       <span
-                        className={`font-mono text-xs font-medium transition-colors duration-200 ${isOpen ? "text-accent" : "text-foreground"
+                        className={`font-mono text-xs font-medium transition-colors interaction-motion ${isOpen ? "text-accent" : "text-foreground"
                           }`}
                       >
                         {item.label}
                       </span>
                       {/* Preview truncado — affordance de conteúdo escondido */}
                       <span
-                        className={`font-mono text-[10px] leading-relaxed text-muted-foreground transition-all duration-300 ${isOpen ? "max-h-0 overflow-hidden opacity-0" : "max-h-8 opacity-100"
+                        className={`font-mono text-[10px] leading-relaxed text-muted-foreground transition-all interaction-motion ${isOpen ? "max-h-0 overflow-hidden opacity-0" : "max-h-8 opacity-100"
                           }`}
                       >
                         {item.answer.slice(0, 62)}…
                       </span>
                     </div>
                     <ChevronDown
-                      className={`mt-0.5 h-4 w-4 shrink-0 transition-all duration-300 ${isOpen
+                      className={`mt-0.5 h-4 w-4 shrink-0 transition-all interaction-motion ${isOpen
                           ? "rotate-180 text-accent/70"
                           : "text-muted-foreground/40"
                         }`}
@@ -335,7 +335,7 @@ export function ContactChat() {
 
                   {/* Animated expand — CSS grid trick */}
                   <div
-                    className="grid transition-all duration-300 ease-in-out"
+                    className="grid transition-all interaction-motion"
                     style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                   >
                     <div className="overflow-hidden">
@@ -366,7 +366,7 @@ export function ContactChat() {
         </section>
 
         {/* Contact Links */}
-        <section className="flex w-full flex-col gap-4 self-start rounded-[28px] border border-border/60 bg-card/60 p-4 sm:p-5">
+        <section className="flex w-full flex-col gap-4 self-start border border-border/60 bg-card/60 p-4 sm:p-5">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
             {t("direct_label")}
           </p>
@@ -374,69 +374,69 @@ export function ContactChat() {
             <Button
               href="https://wa.me/5527996300333"
               variant="ghost"
-              className="group h-14 w-full justify-between rounded-full border border-border/60 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-foreground transition-all duration-300 hover:border-accent/70 hover:bg-accent/5 hover:text-accent"
+              className="group h-14 w-full justify-between border border-border/60 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-foreground transition-all interaction-motion hover:border-accent/70 hover:bg-accent/5 hover:text-accent"
               onMouseEnter={() => triggerScramble("whatsapp")}
               onFocus={() => triggerScramble("whatsapp")}
             >
               <span className="flex items-center gap-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-card/80 text-muted-foreground transition-colors duration-300 group-hover:border-accent/70 group-hover:text-accent">
+                <span className="flex h-9 w-9 items-center justify-center border border-border/60 bg-card/80 text-muted-foreground transition-colors interaction-motion group-hover:border-accent/70 group-hover:text-accent">
                   <MessageCircle className="h-4 w-4" />
                 </span>
                 <ScrambleTextOnHover
                   text="WhatsApp"
                   as="span"
                   duration={0.7}
-                  className="text-[11px] transition-colors duration-300"
+                  className="text-[11px] transition-colors interaction-motion"
                   triggerToken={scrambleTokens.whatsapp}
                 />
               </span>
-              <BitmapChevron className="w-4 h-5 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
+              <BitmapChevron className="w-4 h-5 transition-transform interaction-motion group-hover:rotate-45" />
             </Button>
             <Button
               href="https://www.linkedin.com/in/josé-luiz-dos-santos-azeredo-mendes/"
               variant="ghost"
-              className="group h-14 w-full justify-between rounded-full border border-border/60 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-foreground transition-all duration-300 hover:border-accent/70 hover:bg-accent/5 hover:text-accent"
+              className="group h-14 w-full justify-between border border-border/60 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-foreground transition-all interaction-motion hover:border-accent/70 hover:bg-accent/5 hover:text-accent"
               onMouseEnter={() => triggerScramble("linkedin")}
               onFocus={() => triggerScramble("linkedin")}
             >
               <span className="flex items-center gap-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-card/80 text-muted-foreground transition-colors duration-300 group-hover:border-accent/70 group-hover:text-accent">
+                <span className="flex h-9 w-9 items-center justify-center border border-border/60 bg-card/80 text-muted-foreground transition-colors interaction-motion group-hover:border-accent/70 group-hover:text-accent">
                   <Linkedin className="h-4 w-4" />
                 </span>
                 <ScrambleTextOnHover
                   text="LinkedIn"
                   as="span"
                   duration={0.7}
-                  className="text-[11px] transition-colors duration-300"
+                  className="text-[11px] transition-colors interaction-motion"
                   triggerToken={scrambleTokens.linkedin}
                 />
               </span>
-              <BitmapChevron className="w-4 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
+              <BitmapChevron className="w-4 transition-transform interaction-motion group-hover:rotate-45" />
             </Button>
           </div>
         </section>
 
         {/* Briefing CTA — caminho principal de conversão */}
-        <section className="flex w-full flex-col gap-3 rounded-[28px] border border-accent/40 bg-accent/5 p-4 sm:p-5">
+        <section className="flex w-full flex-col gap-3 border border-accent/40 bg-accent/5 p-4 sm:p-5">
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
             {t("briefing_label")}
           </p>
           <Button
             href="/contato"
-            className="group h-14 w-full justify-between rounded-full border border-accent/50 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-accent transition-all duration-300 hover:border-accent hover:bg-accent/10"
+            className="group h-14 w-full justify-between border border-accent/50 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-accent transition-all interaction-motion hover:border-accent hover:bg-accent/10"
           >
             <span className="flex items-center gap-3 whitespace-break-spaces">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-accent/50 bg-card/80 text-accent">
+              <span className="flex h-9 w-9 items-center justify-center border border-accent/50 bg-card/80 text-accent">
                 <FileText className="h-4 w-4" />
               </span>
               <ScrambleTextOnHover
                 text={t("briefing_cta")}
                 as="span"
                 duration={0.7}
-                className="text-[11px] transition-colors duration-300"
+                className="text-[11px] transition-colors interaction-motion"
               />
             </span>
-            <BitmapChevron className="w-4 transition-transform duration-400 ease-emphasis group-hover:rotate-45 group-hover:duration-1000" />
+            <BitmapChevron className="w-4 transition-transform interaction-motion group-hover:rotate-45" />
           </Button>
         </section>
       </div>

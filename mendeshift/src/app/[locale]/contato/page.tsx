@@ -89,7 +89,7 @@ export default async function ContactPage({ params }: Props) {
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(18rem,22rem)] lg:items-start">
               <BriefingForm />
 
-              <aside className="flex flex-col gap-4 rounded-[28px] border border-border/60 bg-card/60 p-5 sm:p-6">
+              <aside className="flex flex-col gap-4 border border-border/60 bg-card/60 p-5 sm:p-6">
                 <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
                   {t.direct_label}
                 </p>
@@ -104,10 +104,10 @@ export default async function ContactPage({ params }: Props) {
                       variant="ghost"
                       target={href.startsWith("mailto:") ? undefined : "_blank"}
                       rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                      className="group h-14 w-full justify-between rounded-full border border-border/60 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-foreground transition-all duration-300 hover:border-accent/70 hover:bg-accent/5 hover:text-accent"
+                      className="group h-14 w-full justify-between border border-border/60 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-foreground transition-all interaction-motion hover:border-accent/70 hover:bg-accent/5 hover:text-accent"
                     >
                       <span className="flex items-center gap-3">
-                        <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-card/80 text-muted-foreground transition-colors duration-300 group-hover:border-accent/70 group-hover:text-accent">
+                        <span className="flex h-9 w-9 items-center justify-center border border-border/60 bg-card/80 text-muted-foreground transition-colors interaction-motion group-hover:border-accent/70 group-hover:text-accent">
                           <Icon className="h-4 w-4" />
                         </span>
                         {label}

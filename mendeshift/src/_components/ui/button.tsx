@@ -32,7 +32,7 @@ type ButtonProps = {
 };
 
 const base =
-  "group/btn relative inline-flex items-center justify-center gap-3 overflow-hidden whitespace-nowrap rounded-full font-mono uppercase tracking-widest transition-colors duration-300 ease-emphasis active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
+  "group/btn relative inline-flex items-center justify-center gap-3 overflow-hidden whitespace-nowrap font-mono uppercase tracking-widest transition-[color,background-color,border-color,box-shadow,opacity,scale] interaction-motion active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
 
 const sizes: Record<Size, string> = {
   sm: "text-[10px] px-4 py-2",
