@@ -27,6 +27,7 @@ function useSplitFlapAudio() {
 
 export function SplitFlapAudioProvider({ children }: { children: React.ReactNode }) {
   const [isMuted, setIsMuted] = useState(true);
+  const mutedRef = useRef(true);
   const audioContextRef = useRef<AudioContext | null>(null);
 
   const getAudioContext = useCallback(() => {
@@ -41,7 +42,7 @@ export function SplitFlapAudioProvider({ children }: { children: React.ReactNode
   }, []);
 
   const playClick = useCallback(() => {
-    if (isMuted) return;
+    if (mutedRef.current) return;
 
     try {
       const ctx = getAudioContext();
@@ -66,10 +67,11 @@ export function SplitFlapAudioProvider({ children }: { children: React.ReactNode
     } catch {
       // no-op
     }
-  }, [isMuted, getAudioContext]);
+  }, [getAudioContext]);
 
   const toggleMute = useCallback(() => {
-    setIsMuted((prev) => !prev);
+    mutedRef.current = !mutedRef.current;
+    setIsMuted(mutedRef.current);
   }, []);
 
   const value = useMemo(() => ({ isMuted, toggleMute, playClick }), [isMuted, toggleMute, playClick]);
@@ -105,32 +107,47 @@ interface SplitFlapTextProps {
   text: string;
   className?: string;
   speed?: number;
-  ready?: boolean;
 }
 
 const CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split("");
+const INTRO_KEY = "mendeshift:split-flap-played";
+let playedInPage = false;
 
-export function SplitFlapText({ text, className = "", speed = 50, ready = true }: SplitFlapTextProps) {
+export function SplitFlapText({ text, className = "", speed = 50 }: SplitFlapTextProps) {
   const chars = useMemo(() => text.split(""), [text]);
-  const [animationKey, setAnimationKey] = useState(0);
+  const [animate, setAnimate] = useState(false);
   const audio = useSplitFlapAudio();
+
+  useEffect(() => {
+    if (prefersReducedMotion()) return;
+    const frame = requestAnimationFrame(() => {
+      if (playedInPage) return;
+      try {
+        if (sessionStorage.getItem(INTRO_KEY)) return;
+        sessionStorage.setItem(INTRO_KEY, "1");
+      } catch {
+        // Storage can be unavailable. The page flag still prevents replays on navigation.
+      }
+      playedInPage = true;
+      setAnimate(true);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   return (
     <div
-      className={`inline-flex cursor-pointer items-center gap-[0.08em] ${className}`}
+      className={`inline-flex items-center gap-[0.08em] ${className}`}
       role="img"
       aria-label={text}
-      onMouseEnter={() => ready && setAnimationKey((prev) => prev + 1)}
       style={{ perspective: "1000px" }}
     >
       {chars.map((char, index) => (
         <SplitFlapChar
-          key={`${index}-${animationKey}`}
+          key={index}
           char={char.toUpperCase()}
           index={index}
-          animationKey={animationKey}
           speed={speed}
-          ready={ready}
+          animate={animate}
           playClick={audio?.playClick}
         />
       ))}
@@ -141,16 +158,14 @@ export function SplitFlapText({ text, className = "", speed = 50, ready = true }
 function SplitFlapChar({
   char,
   index,
-  animationKey,
   speed,
-  ready = true,
+  animate,
   playClick,
 }: {
   char: string;
   index: number;
-  animationKey: number;
   speed: number;
-  ready?: boolean;
+  animate: boolean;
   playClick?: () => void;
 }) {
   const displayChar = CHARSET.includes(char) ? char : " ";
@@ -170,7 +185,7 @@ function SplitFlapChar({
       intervalRef.current = null;
     }
 
-    if (isSpace || !ready) return;
+    if (isSpace || !animate) return;
     // Reduced motion: sem flip — o estado inicial já é o caractere final.
     if (prefersReducedMotion()) return;
 
@@ -209,7 +224,7 @@ function SplitFlapChar({
         intervalRef.current = null;
       }
     };
-  }, [displayChar, index, isSpace, animationKey, speed, ready, playClick]);
+  }, [displayChar, index, isSpace, speed, animate, playClick]);
 
   if (isSpace) {
     return <div style={{ width: "0.3em", fontSize: "clamp(2.2rem, 12vw, 14rem)" }} />;
@@ -219,7 +234,7 @@ function SplitFlapChar({
     <div
       // Entrada fade-in-up escalonada em CSS puro (keyframe flap-in no
       // globals.css) — era o único uso de framer-motion no projeto.
-      className="flap-enter relative flex items-center justify-center overflow-hidden font-display"
+      className={`relative flex items-center justify-center overflow-hidden font-display ${animate ? "flap-enter" : ""}`}
       style={{
         animationDelay: `${0.1 * index}s`,
         fontSize: "clamp(2.2rem, 12vw, 14rem)",

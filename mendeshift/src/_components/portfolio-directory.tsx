@@ -3,7 +3,7 @@ import { localeHref } from "@/lib/navigation";
 import type { Project } from "@/lib/projects";
 import { FolderGlyph, TargetCorners } from "./folder-glyph";
 
-export type DirectoryProject = Pick<Project, "slug" | "title" | "category" | "tech" | "previewImage" | "previewImageAlt">;
+export type DirectoryProject = Pick<Project, "slug" | "title" | "category" | "shortDesc" | "tech" | "previewImage" | "previewImageAlt">;
 
 export function PortfolioDirectory({
   projects,
@@ -22,6 +22,7 @@ export function PortfolioDirectory({
         <li key={project.slug}>
           <Link
             className="directory-entry"
+            data-project={project.slug}
             href={localeHref(`/projetos/${project.slug}`, locale)}
             data-previewed={activeSlug === project.slug ? "" : undefined}
             onPointerEnter={() => onPreview(project.slug)}
@@ -33,6 +34,8 @@ export function PortfolioDirectory({
               <FolderGlyph />
             </span>
             <span className="directory-name portfolio-mono">{project.title}</span>
+            <span className="directory-category portfolio-mono">{project.category}</span>
+            <span className="directory-description">{project.shortDesc}</span>
           </Link>
         </li>
       ))}

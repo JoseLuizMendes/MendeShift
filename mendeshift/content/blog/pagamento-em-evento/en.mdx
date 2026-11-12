@@ -1,0 +1,19 @@
+---
+slug: "payments-and-rsvp-on-my-wedding-site"
+title: "Payments and RSVP on my wedding site"
+description: "How I organized RSVPs, payments and photo uploads for an event with a fixed date."
+date: "2026-11-11"
+tags: ["architecture","payments"]
+---
+
+On [my wedding site](/en/projetos/wedding-platform), the event date set the order of work. The first journeys to finish were the ones guests needed to confirm attendance and contribute to the gift list.
+
+## Checkout and payment confirmation
+
+Mercado Pago checkout is part of the guest journey. Payment confirmation arrives through a webhook from the provider. That message can arrive more than once, so the handler checks whether the contribution has already been approved before repeating the work.
+
+## The gallery after the celebration
+
+The shared gallery had a different requirement. Guests needed to upload photos without creating accounts. The flow uses temporary access and uploads the file directly to storage, so the application server does not need to relay the entire photo.
+
+The case describes the decisions behind each flow and shows the public page that guests used to reach RSVP.

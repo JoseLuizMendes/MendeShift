@@ -102,12 +102,12 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="max-w-3xl py-12 md:py-16">
               <Button
                 href="/blog"
-                variant="ghost"
+                variant="secondary"
                 className="px-0 text-accent hover:text-accent/80"
               >
                 {t("back")}
               </Button>
-              <SectionTitle className="mt-6">
+              <SectionTitle as="h1" className="mt-6">
                 {post.frontmatter.title}
               </SectionTitle>
               <div className="mt-6">
@@ -130,10 +130,10 @@ export default async function BlogPostPage({ params }: Props) {
               <PostBody source={post.content} />
 
               <div className="mt-16 flex flex-col gap-4 border-t border-border/20 pt-10 sm:flex-row sm:items-center sm:justify-between">
-                <Button href="/blog" variant="ghost">
+                <Button href="/blog" variant="secondary">
                   {t("back")}
                 </Button>
-                <BackToHomeLink variant="ghost">{t("home")}</BackToHomeLink>
+                <BackToHomeLink variant="secondary">{t("home")}</BackToHomeLink>
               </div>
             </div>
           </Container>

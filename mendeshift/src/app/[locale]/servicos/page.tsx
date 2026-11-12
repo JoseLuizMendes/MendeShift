@@ -3,14 +3,13 @@ import type { Metadata } from "next";
 import { getServerTranslations, loadMessages } from "@/i18n/server";
 import { pageMetadata } from "@/lib/metadata";
 
-import { BackToHomeLink } from "@/_components/back-to-home-link";
 import { ColophonSection } from "@/_components/colophon-section";
 import { FaqSection, type FaqItem } from "@/_components/faq-section";
 import { ProcessSection } from "@/_components/process-section";
 import { ServiceCard, type ServiceDetail } from "@/_components/service-card";
 import { Button } from "@/_components/ui/button";
 import { Container } from "@/_components/ui/container";
-import { Eyebrow, SectionLead, SectionTitle } from "@/_components/ui/section";
+import { Eyebrow, SectionLead } from "@/_components/ui/section";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -45,6 +44,7 @@ export default async function ServicesPage({ params }: Props) {
   const messages = await loadMessages(locale);
   const t = messages.services_page as ServicesPageMessages;
   const faqItems = (messages.faq as { items: FaqItem[] }).items;
+  const portfolio = await getServerTranslations(locale, "portfolio");
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -64,30 +64,36 @@ export default async function ServicesPage({ params }: Props) {
       />
       <div className="noise-overlay" aria-hidden="true" />
       <main className="app-shell relative min-h-screen">
-        <section className="border-b border-border/20 pt-10 sm:pt-12 md:pt-8">
+        <section className="border-b border-border/20 sm:pt-12 md:pt-8">
           <Container className="md:px-30">
-            <div className="flex flex-col gap-8 py-12 md:flex-row md:items-end md:justify-between md:py-16">
+            <div className="flex flex-col gap-6 py-8 sm:gap-8 sm:py-12 md:flex-row md:items-end md:justify-between md:py-16">
               <div className="max-w-3xl">
                 <Eyebrow>{t.eyebrow}</Eyebrow>
-                <SectionTitle className="mt-4">{t.title}</SectionTitle>
+                <h1 className="portfolio-display mt-4">{t.title}</h1>
                 <SectionLead>{t.lead}</SectionLead>
               </div>
 
               <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
-                <BackToHomeLink className="w-full justify-center sm:w-auto">
-                  {t.back}
-                </BackToHomeLink>
-                <Button href="/contato" className="w-full justify-center sm:w-auto">
+                <Button href="/contato" className="min-h-11 w-full justify-center sm:w-auto">
                   {t.cta_briefing}
                 </Button>
               </div>
             </div>
+            <nav aria-label={portfolio("service_compare")} className="mb-8 grid grid-cols-2 gap-px border border-border/60 bg-border/60 xl:grid-cols-4">
+              {t.items.map((service) => (
+                <a key={service.slug} href={`#${service.slug}`} className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-2 gap-y-1 bg-background p-3 transition-colors interaction-motion hover:bg-card focus-visible:bg-card active:bg-card sm:p-4">
+                  <strong className="text-xs sm:text-sm">{service.title}</strong>
+                  <span aria-hidden="true" className="text-xs text-accent sm:text-sm">↓</span>
+                  <span className="col-span-2 self-end text-xs text-muted-foreground sm:text-sm">{service.timeline}</span>
+                </a>
+              ))}
+            </nav>
           </Container>
         </section>
 
-        <section className="py-14 md:py-20">
+        <section className="py-8 sm:py-14 md:py-20">
           <Container className="md:px-30">
-            <div className="space-y-8 md:space-y-12">
+            <div className="space-y-5 sm:space-y-8 md:space-y-12">
               {t.items.map((service) => (
                 <ServiceCard
                   key={service.slug}

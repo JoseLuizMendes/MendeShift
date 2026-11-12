@@ -1,24 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslations } from "@/i18n/context";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { prefersReducedMotion } from "@/lib/motion";
 import { ShaderImage } from "@/_components/shader-image";
 import { AnimatedNoise } from "@/_components/animated-noise";
-import { BitmapChevron } from "@/_components/bitmap-chevron";
+import { PortfolioCta } from "@/_components/portfolio-cta";
 import {
   SplitFlapAudioProvider,
   SplitFlapMuteToggle,
   SplitFlapText,
 } from "@/_components/split-flap-text";
-import { ScrambleTextOnHover } from "@/_components/scramble-text";
 import { Button } from "@/_components/ui/button";
 import { Container } from "@/_components/ui/container";
-import { StarBorder } from "@/_components/ui/star-border";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,34 +24,11 @@ export function HeroSection() {
   const visuals = useTranslations("portfolio");
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [scrambleToken, setScrambleToken] = useState(0);
-  const [splitFlapReady, setSplitFlapReady] = useState(false);
-
-  useEffect(() => {
-    const navType = (
-      performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined
-    )?.type;
-    // Espelha a condição do Preloader (que também pula em reduced motion).
-    const willShowPreloader =
-      (navType === "navigate" || navType === "reload") && !prefersReducedMotion();
-
-    if (!willShowPreloader) {
-      // rAF em vez de setState síncrono no corpo do efeito (regra do
-      // React Compiler contra renders em cascata).
-      const raf = requestAnimationFrame(() => setSplitFlapReady(true));
-      return () => cancelAnimationFrame(raf);
-    }
-
-    const handleDone = () => setSplitFlapReady(true);
-    window.addEventListener("preloader:done", handleDone, { once: true });
-    return () => window.removeEventListener("preloader:done", handleDone);
-  }, []);
 
   useEffect(() => {
     if (!sectionRef.current || !contentRef.current) return;
-    if (prefersReducedMotion()) return;
-
-    const ctx = gsap.context(() => {
+    const motion = gsap.matchMedia();
+    motion.add("(min-width: 768px) and (hover: hover) and (prefers-reduced-motion: no-preference)", () => {
       gsap.to(contentRef.current, {
         y: -90,
         opacity: 0.1,
@@ -67,18 +41,14 @@ export function HeroSection() {
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => motion.revert();
   }, []);
-
-  const triggerScramble = () => {
-    setScrambleToken((current) => current + 1);
-  };
 
   return (
     <section
       ref={sectionRef}
       id="hero"
-      className="relative isolate flex min-h-[min(48rem,calc(100svh-5rem))] items-center overflow-hidden py-16 sm:py-20 md:py-24"
+      className="relative isolate flex min-h-[min(36rem,calc(100svh-6.25rem))] items-center overflow-hidden py-12 sm:min-h-[min(48rem,calc(100svh-5rem))] sm:py-20 md:py-24"
     >
       <ShaderImage
         className="hero-shader"
@@ -105,46 +75,26 @@ export function HeroSection() {
 
             <SplitFlapAudioProvider>
               <div className="mt-4">
-                <SplitFlapText text="MendeShift" speed={80} ready={splitFlapReady} />
+                <SplitFlapText text="MendeShift" speed={55} />
               </div>
-              <SplitFlapMuteToggle className="mt-4" />
+              <SplitFlapMuteToggle className="min-h-11 md:mt-4 md:min-h-0" />
 
-              <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
+              <div className="mt-4 grid gap-10 sm:mt-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
                 <div className="min-w-0">
-                  <h2 className="max-w-2xl font-display text-xl tracking-wide text-foreground sm:text-2xl md:text-4xl">
+                  <h1 className="max-w-2xl font-display text-3xl leading-none tracking-wide text-foreground sm:text-2xl sm:leading-normal md:text-4xl">
                     {t("headline")}
-                  </h2>
-                  <p className="mt-6 max-w-xl font-mono text-sm leading-relaxed text-foreground/80 sm:mt-8">
+                  </h1>
+                  <p className="mt-4 max-w-xl font-mono text-sm leading-relaxed text-foreground/80 sm:mt-8">
                     {t("sub")}
                   </p>
 
-                  <div className="mt-8 flex flex-col items-stretch gap-4 sm:mt-10 sm:flex-row sm:items-center">
-                    <StarBorder
-                      className="w-full sm:w-auto"
-                      innerClassName="bg-background"
-                      thickness={2}
-                    >
-                      <Button
-                        href="#services"
-                        className="group w-full justify-center border-transparent sm:w-auto"
-                        onMouseEnter={triggerScramble}
-                        onFocus={triggerScramble}
-                      >
-                        <ScrambleTextOnHover
-                          text={t("cta_primary")}
-                          as="span"
-                          duration={0.55}
-                          className="text-[10px] transition-colors interaction-motion"
-                          triggerToken={scrambleToken}
-                        />
-                        <BitmapChevron className="transition-transform interaction-motion group-hover:rotate-45" />
-                      </Button>
-                    </StarBorder>
+                  <div className="mt-6 flex flex-col items-stretch gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-4">
+                    <PortfolioCta href="#work" label={t("cta_primary")} className="min-h-11 w-full sm:w-auto" />
                     <Button
-                      href="#work"
+                      href="#services"
                       variant="secondary"
                       specular
-                      className="w-full justify-center sm:w-auto"
+                      className="min-h-11 w-full justify-center sm:w-auto"
                     >
                       {t("cta_secondary")}
                     </Button>
@@ -157,6 +107,9 @@ export function HeroSection() {
       </Container>
       <span className="hero-shader-hint portfolio-mono" aria-hidden="true">
         {visuals("hover_hint")} <span className="text-accent">+</span>
+      </span>
+      <span className="shader-touch-hint portfolio-mono" aria-hidden="true">
+        {visuals("touch_hint")} <span className="text-accent">+</span>
       </span>
     </section>
   );

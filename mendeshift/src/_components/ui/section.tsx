@@ -33,11 +33,12 @@ export function Eyebrow({
 }
 
 export function SectionTitle({
+  as: Heading = "h2",
   className,
   ...props
-}: React.ComponentPropsWithoutRef<"h2">) {
+}: React.ComponentPropsWithoutRef<"h2"> & { as?: "h1" | "h2" }) {
   return (
-    <h2
+    <Heading
       className={cn(
         "mt-4 font-display text-3xl tracking-tight sm:text-5xl md:text-6xl lg:text-7xl",
         className,

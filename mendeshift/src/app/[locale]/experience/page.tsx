@@ -8,7 +8,7 @@ import { ExperienceSection } from "@/_components/experience-section";
 import { Button } from "@/_components/ui/button";
 import { BackToHomeLink } from "@/_components/back-to-home-link";
 import { Container } from "@/_components/ui/container";
-import { Eyebrow, SectionLead, SectionTitle } from "@/_components/ui/section";
+import { Eyebrow, SectionLead } from "@/_components/ui/section";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ExperiencePage({ params }: Props) {
   const { locale } = await params;
   const t = await getServerTranslations(locale, "experience_page");
-  const experienceData = getExperienceByLocale(locale);
+  const { experienceAchievements, ...experienceData } = getExperienceByLocale(locale);
 
   return (
     <>
@@ -39,7 +39,7 @@ export default async function ExperiencePage({ params }: Props) {
             <div className="flex flex-col gap-8 py-12 md:flex-row md:items-end md:justify-between md:py-16">
               <div className="max-w-2xl">
                 <Eyebrow>{t("eyebrow")}</Eyebrow>
-                <SectionTitle className="mt-4">{t("title")}</SectionTitle>
+                <h1 className="portfolio-display mt-4">{t("title")}</h1>
                 <SectionLead>{t("lead")}</SectionLead>
               </div>
 
@@ -48,10 +48,25 @@ export default async function ExperiencePage({ params }: Props) {
                 <Button href={`/${locale}#work`} className="w-full justify-center sm:w-auto">
                   {t("view_projects")}
                 </Button>
-                <BackToHomeLink variant="ghost" className="w-full justify-center sm:w-auto">
+                <BackToHomeLink variant="secondary" className="w-full justify-center sm:w-auto">
                   {t("back")}
                 </BackToHomeLink>
               </div>
+            </div>
+          </Container>
+        </section>
+
+        <section className="border-b border-border/30 py-10 md:py-14">
+          <Container>
+            <h2 className="font-display text-3xl md:text-4xl">{t("highlights")}</h2>
+            <div className="mt-6 grid gap-6 md:grid-cols-2">
+              {experienceAchievements.slice(0, 2).map((item) => (
+                <article key={item.label} className="border-t border-border/60 pt-4">
+                  <p className="portfolio-mono text-accent">{item.label}</p>
+                  <h3 className="mt-2 font-display text-2xl">{item.title}</h3>
+                  <p className="mt-3 max-w-prose text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
+                </article>
+              ))}
             </div>
           </Container>
         </section>

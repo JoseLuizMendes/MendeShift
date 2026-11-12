@@ -30,10 +30,10 @@
   },
   "hero": {
     "tagline": "Estúdio Digital / Vitória, ES",
-    "headline": "Sites, sistemas e e-commerces que transformam presença digital em resultado.",
-    "sub": "O MendeShift é um estúdio de produtos digitais: design e engenharia no mesmo lugar. Do briefing ao lançamento, você fala direto com quem constrói.",
-    "cta_primary": "Ver serviços",
-    "cta_secondary": "Ver cases"
+    "headline": "Sites e sistemas com quem desenha e constrói.",
+    "sub": "Sou José Luiz Mendes. No MendeShift, você fala direto comigo, do primeiro esboço ao lançamento. Faço sites, lojas e sistemas web sob medida.",
+    "cta_primary": "Ver cases",
+    "cta_secondary": "Ver serviços"
   },
   "services": {
     "eyebrow": "02 / Serviços",
@@ -162,39 +162,39 @@
     ]
   },
   "process": {
-    "eyebrow": "05 / Processo",
+    "eyebrow": "04 / Processo",
     "title": "Do briefing ao lançamento",
-    "lead": "Um processo claro em seis etapas — você sabe exatamente onde o projeto está em cada momento.",
+    "lead": "Veja o que você recebe e aprova em cada etapa.",
     "steps": [
       {
         "no": "01",
         "title": "Briefing",
-        "desc": "Você conta o objetivo, o público e as referências. Um formulário rápido ou uma conversa no WhatsApp."
+        "desc": "Você recebe um resumo do objetivo, do público e do que o projeto precisa entregar."
       },
       {
         "no": "02",
         "title": "Proposta",
-        "desc": "Escopo, prazo e investimento por escrito em até 24h úteis. Sem letra miúda."
+        "desc": "Você recebe uma proposta por escrito com escopo, prazo e investimento para aprovar."
       },
       {
         "no": "03",
         "title": "Design",
-        "desc": "Identidade e interface aprovadas antes de qualquer linha de código. Você valida cada tela."
+        "desc": "Você revisa as telas e aprova o design antes de começarmos a construir."
       },
       {
         "no": "04",
         "title": "Construção",
-        "desc": "Desenvolvimento com atualizações constantes de progresso — você acompanha o projeto tomando forma."
+        "desc": "Você acompanha o progresso e recebe uma versão de teste para revisar antes da publicação."
       },
       {
         "no": "05",
         "title": "Lançamento",
-        "desc": "Deploy em produção com domínio, SEO técnico, analytics e performance auditada."
+        "desc": "Você recebe o site publicado no domínio combinado, com SEO técnico, analytics e revisão de performance."
       },
       {
         "no": "06",
         "title": "Suporte",
-        "desc": "Acompanhamento pós-lançamento, ajustes e evolução contínua conforme o negócio cresce."
+        "desc": "Você recebe o acompanhamento e os ajustes previstos na proposta."
       }
     ]
   },
@@ -322,6 +322,7 @@
       "company_label": "Empresa (opcional)",
       "company_placeholder": "Nome da empresa ou projeto",
       "service_label": "O que você precisa?",
+      "service_placeholder": "Selecione um serviço",
       "service_options": [
         {
           "value": "site",
@@ -403,20 +404,22 @@
     "direct_text": "Prefere pular o formulário? Fale agora com o estúdio:"
   },
   "contact": {
-    "eyebrow": "06 / Contato",
+    "eyebrow": "05 / Contato",
     "headline_1": "Vamos construir",
     "headline_2": "algo juntos.",
-    "availability": "O estúdio está aberto a novos projetos. Tire dúvidas no chat, preencha o briefing ou chame direto no WhatsApp.",
+    "availability": "Conte o que precisa construir. Você pode mandar um briefing ou falar direto comigo pelo WhatsApp.",
     "quick_label": "Perguntas Rápidas",
     "direct_label": "Contato Direto",
     "briefing_label": "Pronto para começar?",
-    "briefing_cta": "Preencher briefing do projeto",
+    "briefing_cta": "Iniciar projeto",
     "placeholder": "Digite sua mensagem...",
     "send_message": "Enviar mensagem",
     "virtual_assistant": "Assistente MendeShift",
-    "online": "Online agora",
+    "terminal_ready": "MendeShift instalado",
+    "terminal_mascot": "Bit, o fantasminha vermelho do MendeShift, em pixel art",
+    "message_from_you": "Você",
     "typing": "Assistente digitando…",
-    "initial_message": "Olá! Sou o assistente do MendeShift. Quer saber preços, prazos ou como funciona um projeto? Pode perguntar.",
+    "initial_message": "Quer saber sobre preços, prazos ou como funciona um projeto? Escolha uma pergunta ou escreva a sua.",
     "fallback_response": "Obrigado pela mensagem! Para uma resposta mais detalhada, preencha o briefing em /contato ou chame no WhatsApp.",
     "rate_limit_response": "Você atingiu o limite de mensagens por agora. Tente novamente mais tarde ou fale direto pelo WhatsApp ou e-mail josemendess004@gmail.com.",
     "quick_prompts": [
@@ -440,7 +443,9 @@
         "prompt": "Como funciona o processo de um projeto, do primeiro contato à entrega?",
         "answer": "Seis etapas: briefing → proposta em 24h úteis → design aprovado por você → construção com atualizações constantes → lançamento completo → suporte pós-entrega."
       }
-    ]
+    ],
+    "assistant_details": "Abrir assistente e perguntas rápidas",
+    "assistant_close": "Fechar assistente"
   },
   "colophon": {
     "eyebrow": "07 / Marca",
@@ -467,11 +472,12 @@
     "open_case": "Abrir case"
   },
   "experience_page": {
-    "eyebrow": "Fundador / Profundidade",
+    "eyebrow": "Fundador / Experiência",
     "title": "Trajetória do fundador",
-    "lead": "A experiência de engenharia por trás do estúdio: projetos em produção para o setor público e privado, com disciplina de qualidade verificável.",
+    "lead": "Sou José Luiz Mendes. Desenvolvo integrações em produção na TOTVS e já mapeei dependências de sistemas para o Governo do Espírito Santo. Essa experiência orienta como estruturo os projetos do estúdio.",
     "view_projects": "Ver cases",
-    "back": "Voltar para home"
+    "back": "Voltar para home",
+    "highlights": "Entregas em destaque"
   },
   "experience_section": {
     "eyebrow_experience": "01 / Experiência",
@@ -482,7 +488,10 @@
     "eyebrow_education": "03 / Formação"
   },
   "project_detail": {
-    "all_projects": "← Todos os cases",
+    "gallery_title": "Telas do projeto",
+    "editorial_mockup": "Composição editorial",
+    "booking_article": "Como evitei reservas sobrepostas ↗",
+    "all_projects": "Voltar para todos os cases",
     "home": "Início",
     "context": "Contexto",
     "problem": "Problema",
@@ -493,7 +502,7 @@
     "outcome": "Resultado",
     "back": "← Voltar para cases",
     "next": "Próximo: {title} →",
-    "service_cta": "Serviço relacionado: {service} →"
+    "service_cta": "Serviço relacionado: {service}"
   },
   "blog": {
     "eyebrow": "05 / Escritos",
@@ -521,12 +530,25 @@
     "case_navigation": "Navegação entre projetos",
     "artwork": "Ilustração conceitual",
     "hover_hint": "Passe o cursor para revelar",
+    "touch_hint": "Toque no fundo para revelar",
     "lab_intro": "Experimentos com imagem gerada e código criativo no navegador.",
     "lab_nav": "Estudos do laboratório",
     "hero_study": "Circuito em grafite",
     "hero_study_body": "A imagem da abertura explora o contraste entre a rocha escura e as trilhas de um circuito. A retícula reage ao cursor e revela aos poucos os materiais e as cores originais.",
     "project_study": "Sinal em trânsito",
-    "project_study_body": "Três fibras transportam luz através de um bloco de grafite. A retícula revela como a imagem muda quando só o contraste e o relevo são visíveis."
+    "project_study_body": "Três fibras transportam luz através de um bloco de grafite. A retícula revela como a imagem muda quando só o contraste e o relevo são visíveis.",
+    "featured_case": "Case em destaque",
+    "view_case": "Ver estudo de caso",
+    "visit_project": "Abrir o projeto",
+    "screenshot": "Captura da interface",
+    "service_compare": "Compare os serviços",
+    "related_case": "Projeto relacionado",
+    "lab_graphite_note": "A imagem é lida por luminosidade e convertida em pontos. O cursor aumenta a densidade da retícula numa área com borda irregular. É a mesma técnica usada na abertura do MendeShift.",
+    "lab_signal_note": "A mesma retícula foi aplicada a uma imagem com linhas finas. O teste compara o que fica legível em repouso com o que só aparece quando o cursor revela a região.",
+    "lab_open_home": "Ver na abertura",
+    "lab_open_studio": "Ver a troca de roupa em O Estúdio",
+    "lab_wardrobe": "Dev e empresário",
+    "lab_wardrobe_note": "Duas imagens alinhadas compartilham o mesmo enquadramento. No desktop, o cursor desenha uma máscara com rastro sobre a roupa e mantém o rosto na imagem-base."
   },
   "studio_editorial": {
     "eyebrow": "01 / O Estúdio",
@@ -537,6 +559,8 @@
     "practice": "Design e desenvolvimento web",
     "profile": "Conhecer minha trajetória",
     "portrait": "Retrato de José Luiz Mendes",
-    "founder": "Fundador · MendeShift"
+    "founder": "Fundador · MendeShift",
+    "wardrobe_hint": "Passe o cursor sobre a roupa para revelar",
+    "touch_hint": "Toque na roupa para revelar"
   }
 }

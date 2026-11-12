@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { useLocale, useTranslations } from "@/i18n/context";
 import { localeHref } from "@/lib/navigation";
-import { Button } from "./ui/button";
+import { PortfolioCta } from "./portfolio-cta";
 import { Container } from "./ui/container";
 
 const pages = [
-  { label: "profile", href: "/experience" },
+  { label: "profile", href: "/#about" },
   { label: "services", href: "/servicos" },
   { label: "projects", href: "/projetos" },
   { label: "blog", href: "/blog" },
@@ -26,7 +26,7 @@ export function ColophonSection() {
   const t = useTranslations("colophon");
   const nav = useTranslations("nav");
   const locale = useLocale();
-  const linkClass = "inline-flex min-h-8 items-center transition-colors interaction-motion hover:text-accent focus-visible:text-accent";
+  const linkClass = "inline-flex min-h-11 items-center transition-colors interaction-motion hover:text-accent focus-visible:text-accent sm:min-h-8";
 
   return (
     <footer id="colophon" className="border-t border-border/40">
@@ -36,9 +36,7 @@ export function ColophonSection() {
             <Link href={localeHref("/", locale)} className="font-display text-5xl leading-none tracking-tight">
               MendeShift<span className="text-accent">.</span>
             </Link>
-            <Button href="/contato" variant="secondary" size="sm">
-              {t("cta_project")} <span aria-hidden="true">↗</span>
-            </Button>
+            <PortfolioCta href="/contato" label={t("cta_project")} />
           </div>
           <nav aria-label={t("pages_label")} className="portfolio-mono">
             <p className="mb-2 text-muted-foreground">{t("pages_label")}</p>

@@ -15,6 +15,7 @@ export const SCROLL_KEY_PREFIX = "mendeshift:scroll:";
  */
 export function localeHref(href: string, locale: string): string {
   if (!href.startsWith("/") || locale === "en") return href;
+  if (href.startsWith("/#")) return `/${locale}${href.slice(1)}`;
   if (href === `/${locale}` || href.startsWith(`/${locale}/`) || href.startsWith(`/${locale}#`)) {
     return href;
   }

@@ -25,7 +25,7 @@ export function PostCard({
       </p>
       <Link
         href={localeHref(`/blog/${post.slug}`, locale)}
-        className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition-colors interaction-motion group-hover:text-accent after:absolute after:inset-0"
+        className="mt-5 inline-flex min-h-10 items-center self-start border border-accent/45 bg-accent/10 px-3 font-mono text-xs uppercase tracking-wide text-foreground transition-colors interaction-motion group-hover:border-accent group-hover:bg-accent/20 focus-visible:outline-2 focus-visible:outline-accent after:absolute after:inset-0"
       >
         {readMoreLabel} →
       </Link>

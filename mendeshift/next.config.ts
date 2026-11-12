@@ -46,6 +46,10 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  images: {
+    formats: ["image/webp"],
+    qualities: [75, 90],
+  },
 
   // Não expõe a stack (remove o header X-Powered-By).
   poweredByHeader: false,

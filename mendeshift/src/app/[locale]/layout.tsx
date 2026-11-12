@@ -7,7 +7,6 @@ import { notFound } from "next/navigation";
 import { getServerTranslations, loadMessages } from "@/i18n/server";
 import { SITE_URL, pageMetadata } from "@/lib/metadata";
 
-import { Preloader } from "@/_components/preloader";
 import { PortfolioHeader } from "@/_components/portfolio-shell";
 import { SkipLink } from "@/_components/skip-link";
 import { SmoothScroll } from "@/_components/smooth-scroll";
@@ -138,7 +137,6 @@ export default async function LocaleLayout({ children, params }: Props) {
         <TranslationsProvider locale={locale} messages={messages}>
           <div className="portfolio-grain" aria-hidden="true" />
           <SkipLink />
-          <Preloader />
           <SmoothScroll>
             <PortfolioHeader locale={locale} />
             <div id="main-content" tabIndex={-1} className="outline-none">

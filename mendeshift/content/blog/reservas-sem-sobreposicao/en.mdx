@@ -1,0 +1,19 @@
+---
+slug: "how-i-prevented-overlapping-bookings"
+title: "How I prevented overlapping salon bookings"
+description: "Availability helps people choose a time. Confirmation protects that same slot from simultaneous requests."
+date: "2026-11-11"
+tags: ["architecture","booking"]
+---
+
+At [Mari Beauty](/en/projetos/belessence), two people can open the booking page and choose the same time. The available slots are a snapshot. The server checks the calendar again when a booking is submitted.
+
+## The interval a booking occupies
+
+Each service has a start time and a period during which the calendar is blocked. Two appointments overlap when one starts before the other ends and ends after the other starts. That catches appointments with different start times whose durations still collide.
+
+## Check and write in the same transaction
+
+Confirmation starts a transaction and takes a PostgreSQL lock on the calendar resource for that location. Within the transaction, the server checks for overlapping appointments. If it finds one, it rejects the request. If the time is still free, it writes the appointment before releasing the lock.
+
+The second request waits for the first to finish. Its availability check sees the new appointment and can return a conflict to the interface. The decision happens on the server, next to the operation that changes the calendar.

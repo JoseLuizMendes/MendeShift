@@ -23,17 +23,18 @@ export function TagFilter({
 
   const base = localeHref("/blog", locale);
   const chip =
-    "border px-3 py-1 font-mono text-[10px] uppercase tracking-widest transition-colors interaction-motion";
+    "inline-flex min-h-11 items-center gap-1.5 border px-3 font-mono text-xs uppercase tracking-wide transition-colors interaction-motion focus-visible:outline-2 focus-visible:outline-accent sm:min-h-9";
 
   return (
     <div className="flex flex-wrap gap-2">
       <Link
         href={base}
+        aria-current={activeTag === null ? "true" : undefined}
         className={cn(
           chip,
           activeTag === null
-            ? "border-accent/60 text-accent"
-            : "border-border/40 text-muted-foreground hover:border-accent/40 hover:text-accent",
+            ? "border-accent/65 bg-accent/15 text-accent"
+            : "border-border bg-card text-foreground hover:border-accent/60 hover:text-accent",
         )}
       >
         {allLabel}
@@ -48,8 +49,8 @@ export function TagFilter({
             className={cn(
               chip,
               active
-                ? "border-accent/60 text-accent"
-                : "border-border/40 text-muted-foreground hover:border-accent/40 hover:text-accent",
+                ? "border-accent/65 bg-accent/15 text-accent"
+                : "border-border bg-card text-foreground hover:border-accent/60 hover:text-accent",
             )}
           >
             #{tag} <span className="text-muted-foreground/60">{count}</span>

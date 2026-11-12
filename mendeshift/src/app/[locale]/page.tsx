@@ -6,7 +6,6 @@ import { AboutSection } from "@/_components/about-section";
 import { ColophonSection } from "@/_components/colophon-section";
 import { CtaSection } from "@/_components/cta-section";
 import { HeroSection } from "@/_components/hero-section";
-import { PrinciplesSection } from "@/_components/principles-section";
 import { ProcessSection } from "@/_components/process-section";
 import { RecentWritingSection } from "@/_components/recent-writing-section";
 import { SideNav } from "@/_components/side-nav";
@@ -21,7 +20,7 @@ export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   const projects = getProjectsByLocale(locale);
 
-  const recentPosts = getBlogPosts(locale as Locale).slice(0, 3);
+  const recentPosts = getBlogPosts(locale as Locale).slice(0, 1);
   const tb = await getServerTranslations(locale, "blog");
 
   return (
@@ -30,21 +29,17 @@ export default async function HomePage({ params }: Props) {
       <div className="noise-overlay" aria-hidden="true" />
       <main className="app-shell relative min-h-screen">
         <HeroSection />
-        <AboutSection locale={locale} />
-        <SignalsSection />
         <WorkSection projects={projects} locale={locale} />
-        <PrinciplesSection />
+        <AboutSection locale={locale} />
+        <SignalsSection locale={locale} />
         <ProcessSection locale={locale} />
-        <CtaSection />
+        <CtaSection locale={locale} />
         <RecentWritingSection
           posts={recentPosts}
           locale={locale as Locale}
           labels={{
-            eyebrow: tb("recent_eyebrow"),
             title: tb("recent_title"),
-            lead: tb("recent_lead"),
             cta: tb("recent_cta"),
-            readMore: tb("read_more"),
           }}
         />
         <ColophonSection />

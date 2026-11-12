@@ -1,0 +1,19 @@
+---
+slug: "pagamento-e-confirmacao-no-site-do-casamento"
+title: "Confirmação de presença e pagamento no site do casamento"
+description: "Como organizei fluxos de presença, pagamento e fotos para um evento com data fixa."
+date: "2026-11-11"
+tags: ["arquitetura","pagamentos"]
+---
+
+No [site do meu casamento](/pt/projetos/wedding-platform), a data do evento definiu a ordem de trabalho. As primeiras jornadas a ficar prontas foram as que os convidados precisavam usar para confirmar presença e contribuir com a lista de presentes.
+
+## A página e a confirmação do pagamento
+
+O checkout via Mercado Pago faz parte da jornada do convidado. A confirmação financeira chega pelo webhook do provedor. Como esse aviso pode chegar mais de uma vez, a rotina verifica se a contribuição já foi aprovada antes de repetir o processamento.
+
+## A galeria depois da festa
+
+A galeria colaborativa tinha uma necessidade diferente. Os convidados deveriam poder enviar fotos sem criar conta. O envio usa acesso temporário e grava o arquivo diretamente no armazenamento, sem passar a foto inteira pelo servidor da aplicação.
+
+O case reúne as decisões de cada jornada e mostra a página pública por onde o convidado chegava à confirmação de presença.

@@ -1,0 +1,19 @@
+---
+slug: "como-evitei-reservas-sobrepostas"
+title: "Como evitei reservas sobrepostas no salão"
+description: "A disponibilidade ajuda a escolher um horário. A confirmação precisa proteger o mesmo horário de pedidos simultâneos."
+date: "2026-11-11"
+tags: ["arquitetura","agendamento"]
+---
+
+Na [Mari Beauty](/pt/projetos/belessence), duas pessoas podem abrir a agenda e escolher o mesmo horário. A tela de horários serve como uma consulta. Quando a confirmação chega, o servidor confere a agenda de novo.
+
+## O intervalo que realmente ocupa a agenda
+
+Um serviço tem um início e um período durante o qual a agenda fica bloqueada. Dois atendimentos entram em conflito se o início de um ocorre antes do fim do outro e o fim vem depois do início do outro. Isso cobre o caso em que os horários de início são diferentes e ainda assim os atendimentos se cruzam.
+
+## Conferência e gravação na mesma transação
+
+A confirmação abre uma transação e obtém um lock do PostgreSQL para o recurso da agenda daquela unidade. Dentro da transação, consulta os intervalos ocupados. Quando encontra um conflito, encerra a tentativa. Quando o horário continua livre, grava a reserva antes de liberar o lock.
+
+A segunda solicitação espera a primeira terminar. Ao consultar a agenda, já enxerga a reserva recém-gravada e pode devolver um conflito para a interface. A decisão que importa fica no servidor, perto da operação que altera a agenda.

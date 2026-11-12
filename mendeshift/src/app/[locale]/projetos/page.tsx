@@ -22,8 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProjectsPage({ params }: Props) {
   const { locale } = await params;
   const t = await getServerTranslations(locale, "portfolio");
-  const projects = getProjectsByLocale(locale).map(({ slug, title, category, tech, previewImage, previewImageAlt }) => ({
-    slug, title, category, tech, previewImage, previewImageAlt,
+  const projects = getProjectsByLocale(locale).map(({ slug, title, category, shortDesc, tech, previewImage, previewImageAlt }) => ({
+    slug, title, category, shortDesc, tech, previewImage, previewImageAlt,
   }));
 
   return (

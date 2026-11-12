@@ -30,10 +30,10 @@
   },
   "hero": {
     "tagline": "Digital Studio / Vitória, Brazil",
-    "headline": "Websites, systems and e-commerce that turn digital presence into results.",
-    "sub": "MendeShift is a digital product studio: design and engineering under one roof. From briefing to launch, you talk directly to the person who builds.",
-    "cta_primary": "View services",
-    "cta_secondary": "View cases"
+    "headline": "Websites and systems, directly with the person who builds them.",
+    "sub": "I'm José Luiz Mendes. At MendeShift, you work directly with me from first sketch to launch. I design and build websites, stores and web applications.",
+    "cta_primary": "View cases",
+    "cta_secondary": "View services"
   },
   "services": {
     "eyebrow": "02 / Services",
@@ -162,39 +162,39 @@
     ]
   },
   "process": {
-    "eyebrow": "05 / Process",
+    "eyebrow": "04 / Process",
     "title": "From briefing to launch",
-    "lead": "A clear six-step process — you know exactly where the project stands at every moment.",
+    "lead": "See what you receive and approve at each step.",
     "steps": [
       {
         "no": "01",
         "title": "Briefing",
-        "desc": "You share the goal, the audience and references. A quick form or a WhatsApp conversation."
+        "desc": "You receive a summary of the goal, audience and what the project needs to deliver."
       },
       {
         "no": "02",
         "title": "Proposal",
-        "desc": "Scope, timeline and investment in writing within 24 business hours. No fine print."
+        "desc": "You receive a written proposal with scope, timeline and investment to approve."
       },
       {
         "no": "03",
         "title": "Design",
-        "desc": "Identity and interface approved before any line of code. You validate every screen."
+        "desc": "You review the screens and approve the design before development starts."
       },
       {
         "no": "04",
         "title": "Build",
-        "desc": "Development with constant progress updates — you watch the project take shape."
+        "desc": "You follow progress and receive a test version to review before release."
       },
       {
         "no": "05",
         "title": "Launch",
-        "desc": "Production deploy with domain, technical SEO, analytics and audited performance."
+        "desc": "You receive the site on the agreed domain, with technical SEO, analytics and a performance review."
       },
       {
         "no": "06",
         "title": "Support",
-        "desc": "Post-launch follow-up, adjustments and continuous evolution as the business grows."
+        "desc": "You receive the follow-up and adjustments agreed in the proposal."
       }
     ]
   },
@@ -322,6 +322,7 @@
       "company_label": "Company (optional)",
       "company_placeholder": "Company or project name",
       "service_label": "What do you need?",
+      "service_placeholder": "Select a service",
       "service_options": [
         {
           "value": "site",
@@ -403,20 +404,22 @@
     "direct_text": "Prefer to skip the form? Talk to the studio now:"
   },
   "contact": {
-    "eyebrow": "06 / Contact",
+    "eyebrow": "05 / Contact",
     "headline_1": "Let's build",
     "headline_2": "something together.",
-    "availability": "The studio is open to new projects. Ask questions in the chat, fill in the briefing or reach out directly on WhatsApp.",
+    "availability": "Tell me what you need to build. Send a project brief or reach me directly on WhatsApp.",
     "quick_label": "Quick Questions",
     "direct_label": "Direct Contact",
     "briefing_label": "Ready to start?",
-    "briefing_cta": "Fill in the project briefing",
+    "briefing_cta": "Start a project",
     "placeholder": "Type your message...",
     "send_message": "Send message",
     "virtual_assistant": "MendeShift Assistant",
-    "online": "Online now",
+    "terminal_ready": "MendeShift installed",
+    "terminal_mascot": "Bit, the red MendeShift ghost, in pixel art",
+    "message_from_you": "You",
     "typing": "Assistant is typing…",
-    "initial_message": "Hi! I'm the MendeShift assistant. Want to know about pricing, timelines or how a project works? Just ask.",
+    "initial_message": "Want to know about pricing, timelines or how a project works? Pick a question or type your own.",
     "fallback_response": "Thanks for your message! For a more detailed answer, fill in the briefing at /contato or reach out on WhatsApp.",
     "rate_limit_response": "You've reached the message limit for now. Please try again later or reach out directly on WhatsApp or at josemendess004@gmail.com.",
     "quick_prompts": [
@@ -440,7 +443,9 @@
         "prompt": "How does a project work, from first contact to delivery?",
         "answer": "Six steps: briefing → proposal within 24 business hours → design approved by you → build with constant updates → full launch → post-delivery support."
       }
-    ]
+    ],
+    "assistant_details": "Open assistant and quick questions",
+    "assistant_close": "Close assistant"
   },
   "colophon": {
     "eyebrow": "07 / Brand",
@@ -467,11 +472,12 @@
     "open_case": "Open case"
   },
   "experience_page": {
-    "eyebrow": "Founder / Depth",
+    "eyebrow": "Founder / Experience",
     "title": "The founder's background",
-    "lead": "The engineering experience behind the studio: production projects for the public and private sectors, with verifiable quality discipline.",
+    "lead": "I'm José Luiz Mendes. I build production integrations at TOTVS and have mapped system dependencies for the Espírito Santo state government. That work shapes how I structure studio projects.",
     "view_projects": "View cases",
-    "back": "Back to home"
+    "back": "Back to home",
+    "highlights": "Selected work"
   },
   "experience_section": {
     "eyebrow_experience": "01 / Experience",
@@ -482,7 +488,10 @@
     "eyebrow_education": "03 / Education"
   },
   "project_detail": {
-    "all_projects": "← All cases",
+    "gallery_title": "Project screens",
+    "editorial_mockup": "Editorial mockup",
+    "booking_article": "How I prevented overlapping bookings ↗",
+    "all_projects": "Back to all cases",
     "home": "Home",
     "context": "Context",
     "problem": "Problem",
@@ -493,7 +502,7 @@
     "outcome": "Outcome",
     "back": "← Back to cases",
     "next": "Next: {title} →",
-    "service_cta": "Related service: {service} →"
+    "service_cta": "Related service: {service}"
   },
   "blog": {
     "eyebrow": "05 / Writing",
@@ -521,12 +530,25 @@
     "case_navigation": "Project navigation",
     "artwork": "Concept illustration",
     "hover_hint": "Move the cursor to reveal",
+    "touch_hint": "Tap the background to reveal",
     "lab_intro": "Experiments with generated imagery and creative coding in the browser.",
     "lab_nav": "Lab studies",
     "hero_study": "Graphite circuit",
     "hero_study_body": "The opening image explores the contrast between dark rock and circuit traces. The halftone reacts to the cursor and gradually reveals the original materials and colors.",
     "project_study": "Signal in transit",
-    "project_study_body": "Three optical fibers carry light through a block of graphite. The halftone explores how an image reads through contrast and relief."
+    "project_study_body": "Three optical fibers carry light through a block of graphite. The halftone explores how an image reads through contrast and relief.",
+    "featured_case": "Featured case",
+    "view_case": "View case study",
+    "visit_project": "Open project",
+    "screenshot": "Interface screenshot",
+    "service_compare": "Compare services",
+    "related_case": "Related work",
+    "lab_graphite_note": "Image luminance is converted into dots. The pointer increases their density inside an area with an irregular edge. The MendeShift homepage uses the same technique.",
+    "lab_signal_note": "The same halftone was applied to an image with fine lines. The study compares what remains legible at rest with what becomes visible under the pointer.",
+    "lab_open_home": "See the homepage effect",
+    "lab_open_studio": "See the wardrobe reveal in Studio",
+    "lab_wardrobe": "Developer and founder",
+    "lab_wardrobe_note": "Two aligned images share the same framing. On desktop, the pointer draws a mask with a short trail over the clothing, while the face comes from the base image."
   },
   "studio_editorial": {
     "eyebrow": "01 / The Studio",
@@ -537,6 +559,8 @@
     "practice": "Web design and development",
     "profile": "Explore my experience",
     "portrait": "Portrait of José Luiz Mendes",
-    "founder": "Founder · MendeShift"
+    "founder": "Founder · MendeShift",
+    "wardrobe_hint": "Move the pointer over the clothing to reveal",
+    "touch_hint": "Tap the clothing to reveal"
   }
 }

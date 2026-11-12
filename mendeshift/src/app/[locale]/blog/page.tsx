@@ -8,7 +8,7 @@ import { ColophonSection } from "@/_components/colophon-section";
 import { PostCard } from "@/_components/blog/post-card";
 import { TagFilter } from "@/_components/blog/tag-filter";
 import { Container } from "@/_components/ui/container";
-import { Eyebrow, SectionLead, SectionTitle } from "@/_components/ui/section";
+import { Eyebrow, SectionLead } from "@/_components/ui/section";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -55,32 +55,32 @@ export default async function BlogIndexPage({ params, searchParams }: Props) {
     <>
       <div className="noise-overlay" aria-hidden="true" />
       <main id="blog-top" className="app-shell relative min-h-screen">
-        <section className="border-b border-border/20 pt-20 md:pt-28">
+        <section className="border-b border-border/20">
           <Container className="md:px-30">
-            <div className="flex flex-col gap-8 py-12 md:py-16">
+            <div className="flex flex-col gap-5 py-7 md:py-10">
               <div className="max-w-2xl">
                 <Eyebrow>{t("eyebrow")}</Eyebrow>
-                <SectionTitle className="mt-4">{t("title")}</SectionTitle>
-                <SectionLead>{t("lead")}</SectionLead>
+                <h1 className="portfolio-display mt-4">{t("title")}</h1>
+                <SectionLead className="mt-3">{t("lead")}</SectionLead>
               </div>
-              <TagFilter
+              {allPosts.length > 1 && <TagFilter
                 tags={tags}
                 activeTag={activeTag}
                 locale={locale as Locale}
                 allLabel={t("all_tag")}
-              />
+              />}
             </div>
           </Container>
         </section>
 
-        <section className="py-16 md:py-24">
+        <section className="py-6 md:py-9">
           <Container className="md:px-30">
             {posts.length === 0 ? (
               <p className="font-mono text-sm text-muted-foreground">
                 {t("empty")}
               </p>
             ) : (
-              <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
+              <div className={posts.length > 1 ? "grid gap-4 md:grid-cols-2 xl:grid-cols-3" : "grid gap-4"}>
                 {posts.map((post) => (
                   <PostCard
                     key={post.slug}
@@ -91,8 +91,8 @@ export default async function BlogIndexPage({ params, searchParams }: Props) {
                 ))}
               </div>
             )}
-            <div className="mt-16 border-t border-border/20 pt-10">
-              <BackToHomeLink variant="ghost">{t("home")}</BackToHomeLink>
+            <div className="mt-7 border-t border-border/20 pt-4">
+              <BackToHomeLink variant="secondary">{t("home")}</BackToHomeLink>
             </div>
           </Container>
         </section>

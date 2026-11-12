@@ -18,15 +18,13 @@ gsap.registerPlugin(ScrollTrigger);
 export function ExperienceSection({
   currentRole,
   previousRoles,
-  experienceAchievements,
   techStack,
   educationEntries,
-}: ExperienceData) {
+}: Omit<ExperienceData, "experienceAchievements">) {
   const t = useTranslations("experience_section");
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const roleRef = useRef<HTMLDivElement>(null);
-  const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -63,22 +61,6 @@ export function ExperienceSection({
         });
       }
 
-      if (listRef.current) {
-        const cards = listRef.current.querySelectorAll(":scope > *");
-        gsap.from(cards, {
-          y: 40,
-          opacity: 0,
-          duration: 0.75,
-          stagger: 0.12,
-          ease: "power3.out",
-          immediateRender: false,
-          scrollTrigger: {
-            trigger: listRef.current,
-            start: "top 88%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -136,34 +118,6 @@ export function ExperienceSection({
               <p className="mt-4 font-mono text-xs leading-relaxed text-muted-foreground">
                 {role.summary}
               </p>
-            </Card>
-          ))}
-        </div>
-
-        {/* Achievements — SIARHES destacado */}
-        <div ref={listRef} className="grid gap-4 md:grid-cols-2">
-          {experienceAchievements.map((item, index) => (
-            <Card
-              key={item.label}
-              className={`group border-border/40 bg-card/60 p-5 transition-all duration-500 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:border-accent/50 active:-translate-y-0.5 active:border-accent/50 sm:p-6 ${
-                index === 0 ? "md:col-span-2 border-accent/30 bg-accent/5" : ""
-              }`}
-            >
-              <div className="absolute inset-0 bg-accent/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              <div className="relative">
-                <p className={`font-mono text-[10px] uppercase tracking-[0.3em] ${
-                  index === 0 ? "text-accent" : "text-muted-foreground"
-                }`}>
-                  {item.label}
-                </p>
-                <h4 className="mt-3 font-display text-xl tracking-tight sm:text-2xl">
-                  {item.title}
-                </h4>
-                <div className="mb-4 mt-3 h-px w-8 bg-accent/60 transition-all duration-500 group-hover:w-full" />
-                <p className="font-mono text-xs leading-relaxed text-muted-foreground">
-                  {item.detail}
-                </p>
-              </div>
             </Card>
           ))}
         </div>

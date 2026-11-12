@@ -162,9 +162,11 @@ export function BriefingForm() {
         />
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="lead-name">{label("name_label")}</Label>
+          <Label htmlFor="lead-name">{label("name_label")} *</Label>
           <Input
             id="lead-name"
+            required
+            autoComplete="name"
             placeholder={label("name_placeholder")}
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? "err-name" : undefined}
@@ -176,10 +178,12 @@ export function BriefingForm() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="lead-email">{label("email_label")}</Label>
+          <Label htmlFor="lead-email">{label("email_label")} *</Label>
           <Input
             id="lead-email"
             type="email"
+            required
+            autoComplete="email"
             placeholder={label("email_placeholder")}
             aria-invalid={!!errors.email}
             aria-describedby={errors.email ? "err-email" : undefined}
@@ -192,29 +196,31 @@ export function BriefingForm() {
 
         <div className="flex flex-col gap-2">
           <Label htmlFor="lead-phone">{label("phone_label")}</Label>
-          <Input id="lead-phone" placeholder={label("phone_placeholder")} {...register("phone")} />
+          <Input id="lead-phone" type="tel" autoComplete="tel" placeholder={label("phone_placeholder")} {...register("phone")} />
         </div>
 
         <div className="flex flex-col gap-2">
           <Label htmlFor="lead-company">{label("company_label")}</Label>
           <Input
             id="lead-company"
+            autoComplete="organization"
             placeholder={label("company_placeholder")}
             {...register("company")}
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="lead-service">{label("service_label")}</Label>
+          <Label htmlFor="lead-service">{label("service_label")} *</Label>
           <Select
             id="lead-service"
+            required
             aria-invalid={!!errors.serviceType}
             aria-describedby={errors.serviceType ? "err-service" : undefined}
             defaultValue=""
             {...register("serviceType")}
           >
             <option value="" disabled>
-              —
+              {label("service_placeholder")}
             </option>
             {serviceOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -229,7 +235,7 @@ export function BriefingForm() {
 
         <div className="flex flex-col gap-2">
           <Label htmlFor="lead-budget">{label("budget_label")}</Label>
-          <Select id="lead-budget" {...register("budgetRange")}>
+          <Select id="lead-budget" defaultValue="nao-sei" {...register("budgetRange")}>
             {budgetOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
@@ -240,7 +246,7 @@ export function BriefingForm() {
 
         <div className="flex flex-col gap-2 sm:col-span-2">
           <Label htmlFor="lead-timeline">{label("timeline_label")}</Label>
-          <Select id="lead-timeline" {...register("timeline")}>
+          <Select id="lead-timeline" defaultValue="sem-prazo" {...register("timeline")}>
             {timelineOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
@@ -250,9 +256,10 @@ export function BriefingForm() {
         </div>
 
         <div className="flex flex-col gap-2 sm:col-span-2">
-          <Label htmlFor="lead-message">{label("message_label")}</Label>
+          <Label htmlFor="lead-message">{label("message_label")} *</Label>
           <Textarea
             id="lead-message"
+            required
             placeholder={label("message_placeholder")}
             aria-invalid={!!errors.message}
             aria-describedby={errors.message ? "err-message" : undefined}
@@ -281,13 +288,14 @@ export function BriefingForm() {
         )}
 
         <div className="sm:col-span-2">
-          <button
+          <Button
             type="submit"
+            variant="primary"
             disabled={status === "sending"}
-            className="inline-flex h-12 items-center justify-center gap-3 bg-accent px-8 font-mono text-xs uppercase tracking-widest text-accent-foreground transition-[background-color,opacity,scale] interaction-motion hover:scale-[1.01] hover:bg-accent/90 disabled:opacity-50 disabled:hover:scale-100"
+            className="h-12 px-8"
           >
             {status === "sending" ? label("sending") : label("submit")}
-          </button>
+          </Button>
         </div>
       </form>
     </Card>

@@ -1,70 +1,29 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import { useTranslations } from "@/i18n/context";
-
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-import { prefersReducedMotion } from "@/lib/motion";
-import { Container } from "@/_components/ui/container";
-import { Eyebrow, Section } from "@/_components/ui/section";
+import { getServerTranslations } from "@/i18n/server";
+import { whatsAppLink } from "@/lib/leads";
 import { ContactChat } from "./contact-chat";
+import { PortfolioCta } from "./portfolio-cta";
+import { Button } from "./ui/button";
+import { Container } from "./ui/container";
+import { Eyebrow, Section, SectionLead, SectionTitle } from "./ui/section";
 
-gsap.registerPlugin(ScrollTrigger);
-
-export function CtaSection() {
-  const t = useTranslations("contact");
-  const sectionRef = useRef<HTMLElement>(null);
-  const headlineRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    if (prefersReducedMotion()) return;
-
-    const ctx = gsap.context(() => {
-      if (headlineRef.current) {
-        const children = headlineRef.current.querySelectorAll(":scope > *");
-        gsap.from(children, {
-          y: 50,
-          opacity: 0,
-          duration: 1,
-          stagger: 0.12,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: headlineRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+export async function CtaSection({ locale }: { locale: string }) {
+  const t = await getServerTranslations(locale, "contact");
 
   return (
-    <Section
-      id="contact"
-      ref={sectionRef}
-      className="relative border-t border-border/20">
-      <Container className="md:px-30">
-        <div className="flex flex-col gap-12 lg:gap-16">
-          {/* Header */}
-          <div ref={headlineRef}>
+    <Section id="contact" className="border-t border-border/30 py-10 md:py-14 xl:py-16">
+      <Container>
+        <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div>
             <Eyebrow>{t("eyebrow")}</Eyebrow>
-            <h2 className="mt-4 font-display text-[2rem] leading-none tracking-tight sm:text-5xl md:text-7xl lg:text-8xl">
-              {t("headline_1")}
-              <br className="hidden sm:block" />
-              {t("headline_2")}
-            </h2>
-            <p className="mt-8 max-w-lg font-mono text-sm leading-relaxed text-muted-foreground">
-              {t("availability")}
-            </p>
+            <SectionTitle>{t("headline_1")} {t("headline_2")}</SectionTitle>
+            <SectionLead>{t("availability")}</SectionLead>
           </div>
-
-          <ContactChat />
+          <div className="flex flex-wrap gap-3">
+            <PortfolioCta href="/contato" label={t("briefing_cta")} />
+            <Button href={whatsAppLink()} variant="secondary">WhatsApp</Button>
+          </div>
         </div>
+        <ContactChat />
       </Container>
     </Section>
   );

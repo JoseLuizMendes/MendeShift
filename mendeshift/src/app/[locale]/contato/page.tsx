@@ -5,12 +5,11 @@ import { getServerTranslations, loadMessages } from "@/i18n/server";
 import { whatsAppLink } from "@/lib/leads";
 import { pageMetadata } from "@/lib/metadata";
 
-import { BackToHomeLink } from "@/_components/back-to-home-link";
 import { BriefingForm } from "@/_components/briefing-form";
 import { ColophonSection } from "@/_components/colophon-section";
 import { Button } from "@/_components/ui/button";
 import { Container } from "@/_components/ui/container";
-import { Eyebrow, SectionLead, SectionTitle } from "@/_components/ui/section";
+import { Eyebrow, SectionLead } from "@/_components/ui/section";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -66,25 +65,24 @@ export default async function ContactPage({ params }: Props) {
     <>
       <div className="noise-overlay" aria-hidden="true" />
       <main className="app-shell relative min-h-screen">
-        <section className="border-b border-border/20 pt-10 sm:pt-12 md:pt-8">
+        <section className="border-b border-border/20">
           <Container className="md:px-30">
-            <div className="flex flex-col gap-8 py-12 md:flex-row md:items-end md:justify-between md:py-16">
+            <div className="flex flex-col gap-4 py-8 md:flex-row md:items-end md:justify-between md:py-12">
               <div className="max-w-3xl">
                 <Eyebrow>{t.eyebrow}</Eyebrow>
-                <SectionTitle className="mt-4">{t.title}</SectionTitle>
+                <h1 className="portfolio-display mt-4">{t.title}</h1>
                 <SectionLead>{t.lead}</SectionLead>
               </div>
 
               <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
-                <BackToHomeLink className="w-full justify-center sm:w-auto">
-                  {t.back}
-                </BackToHomeLink>
+                <Button href="#briefing" variant="primary">{locale === "pt" ? "Preencher briefing" : "Fill out the brief"}</Button>
+                <Button href={whatsAppLink()} variant="secondary">WhatsApp</Button>
               </div>
             </div>
           </Container>
         </section>
 
-        <section className="py-14 md:py-20">
+        <section id="briefing" className="scroll-mt-6 py-6 md:py-10">
           <Container className="md:px-30">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(18rem,22rem)] lg:items-start">
               <BriefingForm />
@@ -101,7 +99,7 @@ export default async function ContactPage({ params }: Props) {
                     <Button
                       key={key}
                       href={href}
-                      variant="ghost"
+                      variant="secondary"
                       target={href.startsWith("mailto:") ? undefined : "_blank"}
                       rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
                       className="group h-14 w-full justify-between border border-border/60 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-foreground transition-all interaction-motion hover:border-accent/70 hover:bg-accent/5 hover:text-accent"

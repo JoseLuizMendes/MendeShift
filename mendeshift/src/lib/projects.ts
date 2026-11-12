@@ -22,6 +22,20 @@ export type Project = {
   metric?: string;
   previewImage?: string;
   previewImageAlt?: string;
+  gallery?: {
+    src: string;
+    width: number;
+    height: number;
+    caption: { en: string; pt: string };
+  }[];
+  walkthrough?: {
+    title: string;
+    description: string;
+    imageAlt: string;
+    articleSlug: string;
+  };
+  walkthroughImage?: string;
+  publicUrl?: string;
   context: string;
   problem: string;
   constraints: string;
@@ -38,6 +52,7 @@ export type Project = {
       | "metric"
       | "shortDesc"
       | "previewImageAlt"
+      | "walkthrough"
       | "context"
       | "problem"
       | "constraints"
@@ -54,11 +69,19 @@ export const projects: Project[] = [
     slug: "belessence",
     category: "Commerce & booking",
     serviceType: "ecommerce",
-    title: "Maribiri Studio",
-    shortDesc: "Belle Essence · Boutique perfumery, salon booking and administration in one platform.",
+    title: "Mari Beauty Studio",
+    shortDesc: "Online salon booking and a shared admin for the salon and boutique.",
     tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Asaas"],
-    previewImage: "/portfolio/maribiri-studio.webp",
-    previewImageAlt: "Cream and pink perfume catalog on a tablet beside a glass bottle",
+    previewImage: "/portfolio/mari-beauty-editorial.webp",
+    publicUrl: "https://belessence.vercel.app/",
+    previewImageAlt: "The Mari Beauty salon homepage on a graphite laptop set on pale stone",
+    walkthrough: {
+      title: "From service to appointment",
+      description: "Clients choose a service and an available time, then review the date, location and price before confirming. The booking goes into the salon’s calendar, where staff can manage appointments.",
+      imageAlt: "A tablet shows a haircut selected, a calendar of available times and the booking summary.",
+      articleSlug: "how-i-prevented-overlapping-bookings",
+    },
+    walkthroughImage: "/portfolio/mari-beauty-booking-editorial.webp",
     context: "Belle Essence combines a boutique perfumery and a beauty salon. The business needed a storefront, online booking and a single place to manage both.",
     problem: "Let visitors shop and book online while giving the owner control over when each part of the business is available.",
     constraints: "Booking works without an account. The server verifies prices, stock and discounts, and prevents conflicting appointments.",
@@ -72,8 +95,14 @@ export const projects: Project[] = [
     outcome: "One platform supports the storefront and the salon. The owner can operate the two modules together or independently.",
     pt: {
       category: "Comércio e agenda",
-      shortDesc: "Belle Essence · Perfumaria boutique, agendamento de salão e administração na mesma plataforma.",
-      previewImageAlt: "Catálogo de perfumes em creme e rosa em um tablet, ao lado de um frasco de vidro",
+      shortDesc: "Agendamento online e gestão do salão e da perfumaria no mesmo painel.",
+      previewImageAlt: "Página inicial do salão Mari Beauty em um notebook grafite sobre pedra clara",
+      walkthrough: {
+        title: "Da escolha do serviço à reserva",
+        description: "A cliente escolhe o serviço e um horário livre, depois confere data, local e preço antes de confirmar. A reserva entra na agenda do salão, onde a equipe gerencia os atendimentos.",
+        imageAlt: "Tablet com o corte selecionado, o calendário de horários disponíveis e o resumo do agendamento.",
+        articleSlug: "como-evitei-reservas-sobrepostas",
+      },
       context: "A Belle Essence reúne uma perfumaria boutique e um salão de beleza. O negócio precisava de vitrine, agendamento online e um painel para gerenciar as duas operações.",
       problem: "Permitir compras e reservas online com controle sobre a disponibilidade de cada frente do negócio.",
       constraints: "O agendamento funciona sem conta. O servidor valida preços, estoque e descontos e evita reservas sobrepostas.",
@@ -92,10 +121,18 @@ export const projects: Project[] = [
     category: "Productivity PWA",
     serviceType: "sistema",
     title: "BipDay",
+    metric: "Personal use · alerts under validation",
     shortDesc: "Installable routine planner with transition reminders, daily views and a focus timer.",
     tech: ["Next.js", "TypeScript", "Prisma", "Serwist", "Web Push"],
-    previewImage: "/portfolio/bipday.webp",
-    previewImageAlt: "Phone with a green routine timeline and a focus countdown",
+    previewImage: "/portfolio/bipday-landing-editorial.webp",
+    publicUrl: "https://rotina-app-seven.vercel.app/",
+    previewImageAlt: "BipDay landing page on a graphite laptop in a green studio",
+    gallery: [{
+      src: "/portfolio/bipday-alert-editorial.webp",
+      width: 6536,
+      height: 4357,
+      caption: { en: "BipDay's introduction to transition alerts", pt: "Como o BipDay apresenta os alertas de transição" },
+    }],
     context: "BipDay is a personal product for organizing a routine around time blocks. It focuses on the moment when someone needs to switch activities.",
     problem: "A task list tells you what is due. It does little to remind you that the next activity is about to start.",
     constraints: "The planner should feel useful on a phone and avoid punitive feedback when a streak breaks.",
@@ -109,8 +146,9 @@ export const projects: Project[] = [
     outcome: "The app is in personal use while delivery of transition alerts is validated on devices.",
     pt: {
       category: "PWA de produtividade",
+      metric: "Uso próprio · alertas em validação",
       shortDesc: "Planejador de rotina instalável, com alertas de transição, visão do dia e timer de foco.",
-      previewImageAlt: "Celular com uma linha do tempo verde e uma contagem regressiva de foco",
+      previewImageAlt: "Página inicial do BipDay em um notebook grafite num cenário verde",
       context: "O BipDay é um produto próprio para organizar a rotina em blocos de tempo. O foco é o momento em que a pessoa precisa mudar de atividade.",
       problem: "Uma lista registra o que precisa ser feito, mas pouco ajuda a perceber que o próximo bloco está prestes a começar.",
       constraints: "O planejamento precisa funcionar bem no celular, e perder uma sequência não deve gerar punição.",
@@ -126,14 +164,29 @@ export const projects: Project[] = [
   },
   {
     slug: "wedding-platform",
-    category: "Full Stack",
+    category: "Event platform",
     serviceType: "sistema",
     title: "Wedding Website",
     shortDesc: "RSVP • Payments via Mercado Pago • Collaborative gallery • E2E tests in CI",
     tech: ["Next.js 16", "Prisma", "Neon", "Mercado Pago", "Playwright"],
-    metric: "Shipped to production — 07/09",
-    previewImage: "/portfolio/wedding-cover.webp",
-    previewImageAlt: "Laptop displaying the wedding website on a warm stone bench",
+    metric: "Launched for the event · September 7, 2026",
+    previewImage: "/portfolio/wedding-hero-editorial.webp",
+    previewImageAlt: "Wedding homepage with a photo of the couple and the RSVP button on a phone",
+    gallery: [
+      {
+        src: "/portfolio/wedding-timeline-editorial.webp",
+        width: 6536,
+        height: 4357,
+        caption: { en: "The couple's story and its path on desktop", pt: "A trilha de Nossa História no desktop" },
+      },
+      {
+        src: "/portfolio/wedding-attendance-editorial.webp",
+        width: 6536,
+        height: 4357,
+        caption: { en: "Mobile guest list with sample entries", pt: "Lista de presença no celular com convidados fictícios" },
+      },
+    ],
+    publicUrl: "https://wedding-new-ruddy.vercel.app/casamento",
     context:
       "I needed to manage a wedding with ~200 guests: RSVPs, payments, and a collaborative photo gallery open to all attendees. No off-the-shelf tool combined full customization with native integration to a Brazilian payment gateway. The project started as a personal need and became the most intensive engineering lab I've had.",
     problem:
@@ -155,12 +208,13 @@ export const projects: Project[] = [
       "Early deploy with confidence — production environment running with real data a week before, rollback documented and tested",
     ],
     outcome:
-      "The platform ran without incidents throughout the entire event. RSVPs, payments and the gallery operated at 100% uptime. The most complete project in the portfolio — a real product, shipped on a fixed deadline, used by real people.",
+      "The platform was delivered before the event and supported RSVPs, payments and photo uploads for guests.",
     pt: {
       title: "Site do meu casamento",
-      previewImageAlt: "Notebook com o site de casamento sobre um banco de pedra",
-      metric: "Entregue em produção — 07/09",
-      shortDesc: "RSVP • Pagamentos via Mercado Pago • Galeria colaborativa • Testes E2E em CI",
+      category: "Plataforma para evento",
+      previewImageAlt: "Página do casamento no celular com foto do casal e botão para confirmar presença",
+      metric: "Publicado para o evento · 7 de setembro de 2026",
+      shortDesc: "Confirmação de presença, pagamentos e galeria colaborativa para um casamento de cerca de 200 convidados.",
       context:
         "Precisei gerenciar um casamento com ~200 convidados: confirmações de presença, pagamentos e uma galeria colaborativa aberta para todos os participantes. Nenhuma ferramenta pronta combinava personalização total com integração nativa a um gateway de pagamento brasileiro. O projeto começou como necessidade pessoal e se tornou o laboratório de engenharia mais intenso que já tive.",
       problem:
@@ -182,7 +236,7 @@ export const projects: Project[] = [
         "Deploy antecipado com confiança — ambiente de produção rodando com dados reais uma semana antes, rollback documentado e testado",
       ],
       outcome:
-        "A plataforma rodou sem incidentes durante todo o evento. RSVPs, pagamentos e galeria operaram com 100% de uptime. O projeto mais completo do portfólio — um produto real, entregue em prazo fixo, usado por pessoas reais.",
+        "A plataforma foi entregue antes do evento e reuniu confirmação de presença, pagamentos e envio de fotos pelos convidados.",
     },
   },
   {
@@ -192,8 +246,14 @@ export const projects: Project[] = [
     title: "Dr. Gabriel Cavalcanti",
     shortDesc: "Public website and operations hub for a dental clinic with two locations.",
     tech: ["Next.js", "TypeScript", "Drizzle", "PostgreSQL", "FullCalendar"],
-    previewImage: "/portfolio/dr-gabriel-cavalcante-web.webp",
-    previewImageAlt: "Dental clinic website on a phone beside a weekly appointment calendar",
+    previewImage: "/portfolio/gabriel-hero-editorial.webp",
+    previewImageAlt: "Dr. Gabriel Cavalcanti's homepage on a laptop set on pale stone",
+    gallery: [{
+      src: "/portfolio/gabriel-units-editorial.webp",
+      width: 6536,
+      height: 4357,
+      caption: { en: "Clinic locations and appointment contact links", pt: "Unidades da clínica e opções de contato para agendamento" },
+    }],
     context: "A dental clinic with two locations needed a public site for patients and a hub for its staff.",
     problem: "Make treatment and location information easy to find while supporting the clinic's scheduling, patient history and content updates.",
     constraints: "Patients use the public site on mobile. Internal records and management tools require authenticated access.",
@@ -208,7 +268,7 @@ export const projects: Project[] = [
     pt: {
       category: "Site e hub de gestão",
       shortDesc: "Site público e hub de gestão para uma clínica odontológica com duas unidades.",
-      previewImageAlt: "Site da clínica odontológica no celular, ao lado de uma agenda semanal",
+      previewImageAlt: "Página inicial do Dr. Gabriel Cavalcanti em um notebook sobre pedra clara",
       context: "Uma clínica odontológica com duas unidades precisava de um site para os pacientes e um hub para a equipe.",
       problem: "Facilitar a busca por tratamentos e unidades e dar à clínica controle da agenda, do histórico de pacientes e do conteúdo público.",
       constraints: "O paciente costuma chegar pelo celular. Prontuários e ferramentas internas exigem autenticação.",

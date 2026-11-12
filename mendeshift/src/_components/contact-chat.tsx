@@ -1,17 +1,13 @@
 "use client";
 
-import { FormEvent, KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
+import { FormEvent, KeyboardEvent, type MouseEvent, type PointerEvent, useEffect, useMemo, useRef, useState } from "react";
+import { ChevronDown, Terminal } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
-import gsap from "gsap";
-import { ChevronDown, Linkedin, MessageCircle } from "lucide-react";
-
-import { prefersReducedMotion } from "@/lib/motion";
 
 import { BitmapChevron } from "@/_components/bitmap-chevron";
-import { ScrambleTextOnHover } from "@/_components/scramble-text";
-import { Button } from "@/_components/ui/button";
 import { Card } from "@/_components/ui/card";
-import { FileText } from "lucide-react";
+import { QuestionAccordion } from "@/_components/ui/question-accordion";
+import { TerminalGhost } from "./terminal-ghost";
 
 interface Message {
   id: string;
@@ -22,6 +18,8 @@ interface Message {
 
 type QuickPrompt = { label: string; prompt: string; answer: string };
 
+const ghostExitMs = 440;
+
 export function ContactChat() {
   const t = useTranslations("contact");
   const quickPrompts = t.raw("quick_prompts") as QuickPrompt[];
@@ -31,9 +29,36 @@ export function ContactChat() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
-  const chatRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const disclosureRef = useRef<HTMLDetailsElement>(null);
+  const closeTimerRef = useRef<number | undefined>(undefined);
+
+  useEffect(() => () => window.clearTimeout(closeTimerRef.current), []);
+
+  function handleDisclosureClick(event: MouseEvent<HTMLElement>) {
+    const disclosure = disclosureRef.current;
+    if (!disclosure?.open || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    event.preventDefault();
+    if (closeTimerRef.current !== undefined) return;
+    disclosure.dataset.closing = "";
+    closeTimerRef.current = window.setTimeout(() => {
+      disclosure.open = false;
+      delete disclosure.dataset.closing;
+      closeTimerRef.current = undefined;
+    }, ghostExitMs);
+  }
+
+  function followPointer(event: PointerEvent<HTMLDivElement>) {
+    if (event.pointerType !== "mouse") return;
+    const panel = event.currentTarget;
+    const bounds = panel.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - .5;
+    const y = (event.clientY - bounds.top) / bounds.height - .5;
+    panel.style.setProperty("--ghost-x", `${x * 22}px`);
+    panel.style.setProperty("--ghost-y", `${y * 14}px`);
+  }
   // Contador monotônico de ids: derivar o id de messages.length colidia em
   // envios rápidos e após o ramo 429 (duas mensagens com o mesmo length+1),
   // gerando keys React duplicadas. "1" é o id da mensagem inicial.
@@ -43,54 +68,16 @@ export function ContactChat() {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [openQuestion, setOpenQuestion] = useState<string | null>(null);
-  const [scrambleTokens, setScrambleTokens] = useState({
-    whatsapp: 0,
-    linkedin: 0,
-  });
-
-  const triggerScramble = (key: "whatsapp" | "linkedin") => {
-    setScrambleTokens((current) => ({
-      ...current,
-      [key]: current[key] + 1,
-    }));
-  };
-
-  const scrollToBottom = () => {
-    // Rola SÓ o container interno de mensagens. scrollIntoView rolava
-    // também a janela — toda montagem da home arrastava a página inteira
-    // até o chat (o bug do "caio no chatbot ao voltar").
+  const [bootRun, setBootRun] = useState(0);
+  const [hasFocusedComposer, setHasFocusedComposer] = useState(false);
+  useEffect(() => {
+    // Rola apenas a conversa e preserva a posição da página.
+    if (messages.length === 1) return;
     const container = messagesContainerRef.current;
     if (!container) return;
-    container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  useEffect(() => {
-    if (!chatRef.current) return;
-    if (prefersReducedMotion()) return;
-
-    const ctx = gsap.context(() => {
-      if (chatRef.current) {
-        gsap.from(chatRef.current, {
-          y: 40,
-          opacity: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: chatRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
-    }, chatRef);
-
-    return () => ctx.revert();
-  }, []);
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    container.scrollTo({ top: container.scrollHeight, behavior: reduceMotion ? "instant" : "smooth" });
+  }, [messages, isTyping]);
 
   const simulateResponse = async (userMessage: string, currentMessages: Message[]) => {
     setIsTyping(true);
@@ -153,7 +140,7 @@ export function ContactChat() {
 
   const handleSendMessage = (content: string) => {
     const trimmed = content.trim();
-    if (!trimmed) return;
+    if (!trimmed || isTyping) return;
 
     const userMsg: Message = {
       id: nextId(),
@@ -173,273 +160,163 @@ export function ContactChat() {
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
       e.preventDefault();
       handleSendMessage(inputValue);
     }
   };
 
   return (
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,22rem)] lg:items-start lg:gap-8">
-      {/* Chatbot Principal - Left Side */}
-      <div ref={chatRef}>
-        <Card className="flex flex-col overflow-hidden sm:h-125 lg:h-192.5">
-          {/* Chat Header */}
-          <div className="flex items-center gap-3 border-b border-border/50 px-4 py-4 sm:px-5">
-            <div className="relative">
-              <div className="flex h-10 w-10 items-center justify-center bg-accent/10 font-mono text-sm text-accent">
-                JL
-              </div>
-              <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-card bg-emerald-500" />
-            </div>
-            <div>
-              <p className="font-mono text-sm font-medium text-foreground">
-                {t("virtual_assistant")}
-              </p>
-              <p className="font-mono text-xs text-muted-foreground">
-                {t("online")}
-              </p>
-            </div>
-          </div>
-
-          {/* Messages Area */}
-          <div
-            ref={messagesContainerRef}
-            data-lenis-prevent
-            role="log"
-            aria-live="polite"
-            aria-atomic="false"
-            aria-label={t("virtual_assistant")}
-            className="no-scrollbar flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-5"
+    <details
+      ref={disclosureRef}
+      className="group/assistant mt-6"
+      onToggle={(event) => {
+        if (!event.currentTarget.open) return;
+        setHasFocusedComposer(false);
+        setBootRun((run) => run + 1);
+      }}
+    >
+      <summary onClick={handleDisclosureClick} className="flex w-fit max-w-full cursor-pointer list-none items-center gap-3 border border-accent/45 bg-accent/10 px-4 py-3 text-sm font-medium text-foreground transition-colors interaction-motion hover:border-accent hover:bg-accent/20 focus-visible:outline-2 focus-visible:outline-accent [&::-webkit-details-marker]:hidden">
+        <Terminal aria-hidden="true" className="size-4 shrink-0 text-accent" />
+        <span className="grid">
+          <span className="col-start-1 row-start-1 group-open/assistant:invisible">{t("assistant_details")}</span>
+          <span className="invisible col-start-1 row-start-1 group-open/assistant:visible">{t("assistant_close")}</span>
+        </span>
+        <ChevronDown aria-hidden="true" className="size-4 shrink-0 text-accent transition-transform interaction-motion group-open/assistant:rotate-180" />
+      </summary>
+      <div className="mt-5 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,22rem)]">
+        {/* Chatbot Principal - Left Side */}
+        <div className="min-w-0 lg:relative lg:min-h-[29rem]">
+          <Card
+            className="contact-chat-panel flex h-[min(33rem,80svh)] min-h-[24rem] flex-col overflow-hidden lg:absolute lg:inset-0 lg:h-auto"
+            onPointerMove={followPointer}
+            onPointerLeave={(event) => {
+              event.currentTarget.style.removeProperty("--ghost-x");
+              event.currentTarget.style.removeProperty("--ghost-y");
+            }}
           >
-            <div className="flex flex-col gap-4">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-                >
+            <div className="terminal-titlebar">
+              <span className="terminal-window-lights" aria-hidden="true"><i /><i /><i /></span>
+              <p className="min-w-0 font-mono text-xs font-medium text-foreground">{t("virtual_assistant")}</p>
+            </div>
+
+            <div key={bootRun} className="terminal-boot">
+              <div className="min-w-0">
+                <p className="terminal-command" data-caret-transferred={hasFocusedComposer ? "" : undefined} aria-hidden="true">
+                  <span className="text-accent">$</span> install mendeshift
+                </p>
+                <p className="terminal-ready"><span aria-hidden="true">✓ </span>{t("terminal_ready")}</p>
+              </div>
+              <TerminalGhost label={t("terminal_mascot")} />
+            </div>
+
+            {/* Messages Area */}
+            <div
+              ref={messagesContainerRef}
+              data-lenis-prevent
+              className="no-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-4 py-4 sm:px-5"
+            >
+              {messages.length === 1 && (
+                <p className="terminal-intro text-sm leading-relaxed text-foreground/90">{t("initial_message")}</p>
+              )}
+              <div role="log" aria-label={t("virtual_assistant")} className="flex flex-col gap-3">
+                {messages.slice(1).map((message) => (
                   <div
-                    className={`max-w-[90%] px-4 py-3 font-mono text-sm leading-relaxed sm:max-w-[85%] ${message.role === "user"
-                      ? "bg-accent text-accent-foreground"
-                      : "bg-muted text-foreground"
-                      }`}
+                    key={message.id}
+                    className={`contact-chat-message terminal-message ${message.role === "user" ? "terminal-message-user" : ""}`}
                   >
-                    {message.content}
+                    <span aria-hidden="true">{message.role === "user" ? "$" : "↳"}</span>
+                    <p className="wrap-anywhere whitespace-pre-wrap">
+                      <span className="sr-only">{t(message.role === "user" ? "message_from_you" : "virtual_assistant")}. </span>
+                      {message.content}
+                    </p>
                   </div>
-                </div>
-              ))}
-              {isTyping && (
-                <div className="flex justify-start" role="status">
-                  <span className="sr-only">{t("typing")}</span>
-                  <div className="flex items-center gap-1.5 bg-muted px-4 py-3">
-                    <span aria-hidden="true" className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground" />
-                    <span aria-hidden="true" className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground [animation-delay:150ms]" />
-                    <span aria-hidden="true" className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground [animation-delay:300ms]" />
+                ))}
+                {isTyping && (
+                  <div className="contact-chat-message flex justify-start" role="status">
+                    <span className="font-mono text-xs text-muted-foreground">
+                      <span aria-hidden="true" className="mr-2 text-accent">↳</span>{t("typing")}
+                    </span>
                   </div>
+                )}
+              </div>
+              {messages.length === 1 && !isTyping && (
+                <div className="contact-chat-start mt-4 flex shrink-0 flex-wrap gap-2">
+                  {quickPrompts.slice(0, 3).map((item) => (
+                    <button
+                      key={item.label}
+                      type="button"
+                      data-selected={inputValue === item.prompt ? "" : undefined}
+                      className="min-h-11 border border-border bg-background/80 px-3 py-2 text-left text-xs text-foreground transition-colors interaction-motion hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-accent data-selected:border-accent/60 data-selected:bg-accent/10 data-selected:text-accent"
+                      onClick={() => {
+                        setInputValue(item.prompt);
+                        inputRef.current?.focus({ preventScroll: true });
+                      }}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
-          </div>
 
-          {/* Input Area */}
-          <form
-            onSubmit={handleSubmit}
-            className="flex items-end gap-3 border-t border-border/50 px-4 py-4 sm:px-5"
-          >
-            <textarea
-              ref={inputRef}
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder={t("placeholder")}
-              rows={1}
-              data-lenis-prevent
-              className="no-scrollbar max-h-32 min-h-11 flex-1 resize-none overscroll-contain border border-border/50 bg-muted/50 px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
-            />
-            <button
-              type="submit"
-              disabled={!inputValue.trim() || isTyping}
-              aria-label={t("send_message")}
-              className="flex h-11 w-11 shrink-0 items-center justify-center bg-accent text-accent-foreground transition-[background-color,opacity,scale] interaction-motion hover:scale-[1.02] hover:bg-accent/90 disabled:opacity-50 disabled:hover:scale-100"
+            {/* Input Area */}
+            <form
+              onSubmit={handleSubmit}
+              data-draft={inputValue.trim() ? "" : undefined}
+              className="contact-chat-composer relative flex shrink-0 items-center gap-2 border-t border-border/50 px-4 py-3 sm:gap-3 sm:px-5"
             >
-              <svg
-                aria-hidden="true"
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                />
-              </svg>
-            </button>
-          </form>
-        </Card>
-      </div>
-
-      {/* Coluna lateral: Perguntas rápidas + Contato direto */}
-      <div className="flex w-full flex-col gap-6 sm:gap-8 lg:justify-self-end">
-        {/* Quick Actions */}
-        <section className="flex flex-col gap-3">
-          <div className="flex items-center justify-between">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-              {t("quick_label")}
-            </p>
-            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground">
-              {quickPrompts.length} tópicos
-            </p>
-          </div>
-          <div className="space-y-2">
-            {quickPrompts.map((item) => {
-              const isOpen = openQuestion === item.label;
-
-              return (
-                <div
-                  key={item.label}
-                  className={`overflow-hidden border transition-all interaction-motion ${isOpen
-                    ? "border-accent/50 bg-card/60"
-                    : "border-border/50 bg-card/30 hover:border-accent/35 hover:bg-card/50"
-                    }`}
-                >
-                  <button
-                    type="button"
-                    onClick={() => setOpenQuestion(isOpen ? null : item.label)}
-                    className="flex w-full items-start justify-between gap-3 px-4 py-3.5 text-left"
-                  >
-                    <div className="flex min-w-0 flex-col gap-1">
-                      <span
-                        className={`font-mono text-xs font-medium transition-colors interaction-motion ${isOpen ? "text-accent" : "text-foreground"
-                          }`}
-                      >
-                        {item.label}
-                      </span>
-                      {/* Preview truncado — affordance de conteúdo escondido */}
-                      <span
-                        className={`font-mono text-[10px] leading-relaxed text-muted-foreground transition-all interaction-motion ${isOpen ? "max-h-0 overflow-hidden opacity-0" : "max-h-8 opacity-100"
-                          }`}
-                      >
-                        {item.answer.slice(0, 62)}…
-                      </span>
-                    </div>
-                    <ChevronDown
-                      className={`mt-0.5 h-4 w-4 shrink-0 transition-all interaction-motion ${isOpen
-                          ? "rotate-180 text-accent/70"
-                          : "text-muted-foreground/40"
-                        }`}
-                    />
-                  </button>
-
-                  {/* Animated expand — CSS grid trick */}
-                  <div
-                    className="grid transition-all interaction-motion"
-                    style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
-                  >
-                    <div className="overflow-hidden">
-                      <div className="space-y-2.5 border-t border-border/40 px-4 py-3.5">
-                        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                          Pergunta
-                        </p>
-                        <p className="font-mono text-[11px] leading-relaxed text-muted-foreground/80">
-                          {item.prompt}
-                        </p>
-                        {item.answer && (
-                          <>
-                            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                              Resposta
-                            </p>
-                            <p className="font-mono text-xs leading-relaxed text-foreground/90">
-                              {item.answer}
-                            </p>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Contact Links */}
-        <section className="flex w-full flex-col gap-4 self-start border border-border/60 bg-card/60 p-4 sm:p-5">
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            {t("direct_label")}
-          </p>
-          <div className="flex flex-col gap-2.5">
-            <Button
-              href="https://wa.me/5527996300333"
-              variant="ghost"
-              className="group h-14 w-full justify-between border border-border/60 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-foreground transition-all interaction-motion hover:border-accent/70 hover:bg-accent/5 hover:text-accent"
-              onMouseEnter={() => triggerScramble("whatsapp")}
-              onFocus={() => triggerScramble("whatsapp")}
-            >
-              <span className="flex items-center gap-3">
-                <span className="flex h-9 w-9 items-center justify-center border border-border/60 bg-card/80 text-muted-foreground transition-colors interaction-motion group-hover:border-accent/70 group-hover:text-accent">
-                  <MessageCircle className="h-4 w-4" />
-                </span>
-                <ScrambleTextOnHover
-                  text="WhatsApp"
-                  as="span"
-                  duration={0.7}
-                  className="text-[11px] transition-colors interaction-motion"
-                  triggerToken={scrambleTokens.whatsapp}
-                />
-              </span>
-              <BitmapChevron className="w-4 h-5 transition-transform interaction-motion group-hover:rotate-45" />
-            </Button>
-            <Button
-              href="https://www.linkedin.com/in/josé-luiz-dos-santos-azeredo-mendes/"
-              variant="ghost"
-              className="group h-14 w-full justify-between border border-border/60 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-foreground transition-all interaction-motion hover:border-accent/70 hover:bg-accent/5 hover:text-accent"
-              onMouseEnter={() => triggerScramble("linkedin")}
-              onFocus={() => triggerScramble("linkedin")}
-            >
-              <span className="flex items-center gap-3">
-                <span className="flex h-9 w-9 items-center justify-center border border-border/60 bg-card/80 text-muted-foreground transition-colors interaction-motion group-hover:border-accent/70 group-hover:text-accent">
-                  <Linkedin className="h-4 w-4" />
-                </span>
-                <ScrambleTextOnHover
-                  text="LinkedIn"
-                  as="span"
-                  duration={0.7}
-                  className="text-[11px] transition-colors interaction-motion"
-                  triggerToken={scrambleTokens.linkedin}
-                />
-              </span>
-              <BitmapChevron className="w-4 transition-transform interaction-motion group-hover:rotate-45" />
-            </Button>
-          </div>
-        </section>
-
-        {/* Briefing CTA — caminho principal de conversão */}
-        <section className="flex w-full flex-col gap-3 border border-accent/40 bg-accent/5 p-4 sm:p-5">
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            {t("briefing_label")}
-          </p>
-          <Button
-            href="/contato"
-            className="group h-14 w-full justify-between border border-accent/50 bg-background/35 px-3 text-[11px] tracking-[0.22em] text-accent transition-all interaction-motion hover:border-accent hover:bg-accent/10"
-          >
-            <span className="flex items-center gap-3 whitespace-break-spaces">
-              <span className="flex h-9 w-9 items-center justify-center border border-accent/50 bg-card/80 text-accent">
-                <FileText className="h-4 w-4" />
-              </span>
-              <ScrambleTextOnHover
-                text={t("briefing_cta")}
-                as="span"
-                duration={0.7}
-                className="text-[11px] transition-colors interaction-motion"
+              <span aria-hidden="true" className="font-mono text-accent">$</span>
+              <textarea
+                ref={inputRef}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onFocus={() => setHasFocusedComposer(true)}
+                onKeyDown={handleKeyDown}
+                placeholder={t("placeholder")} aria-label={t("placeholder")}
+                rows={1}
+                data-lenis-prevent
+                className="no-scrollbar field-sizing-content max-h-28 min-h-11 min-w-0 flex-1 resize-none overscroll-contain border border-border/50 bg-muted/50 px-3 py-2.5 font-mono text-base text-foreground transition-colors interaction-motion placeholder:text-muted-foreground focus:border-accent focus:outline-none sm:px-4 sm:text-sm"
               />
-            </span>
-            <BitmapChevron className="w-4 transition-transform interaction-motion group-hover:rotate-45" />
-          </Button>
-        </section>
+              <button
+                type="submit"
+                disabled={!inputValue.trim() || isTyping}
+                aria-label={t("send_message")}
+                className="contact-chat-send group flex h-11 w-11 shrink-0 items-center justify-center bg-accent text-accent-foreground transition-[background-color,opacity] interaction-motion enabled:hover:bg-accent/90 focus-visible:outline-2 focus-visible:outline-accent disabled:opacity-50"
+              >
+                <span aria-hidden="true">
+                  <BitmapChevron className="-rotate-45 transition-transform interaction-motion motion-safe:group-hover:rotate-0 motion-safe:group-focus-visible:rotate-0" />
+                </span>
+              </button>
+            </form>
+          </Card>
+        </div>
+
+        {/* Coluna lateral: Perguntas rápidas + Contato direto */}
+        <div className="flex w-full flex-col lg:min-h-[29rem]">
+          {/* Quick Actions */}
+          <section className="flex flex-1 flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                {t("quick_label")}
+              </p>
+            </div>
+            <QuestionAccordion
+              className="flex-1 justify-between"
+              items={quickPrompts.map(({ label, prompt, answer }) => ({
+                question: label,
+                answer,
+                content: (
+                  <>
+                    <p className="text-[11px] text-muted-foreground">{prompt}</p>
+                    <p>{answer}</p>
+                  </>
+                ),
+              }))}
+            />
+          </section>
+        </div>
       </div>
-    </div>
+    </details>
   );
 }

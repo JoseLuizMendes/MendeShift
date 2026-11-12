@@ -10,10 +10,9 @@ export function SideNav() {
 
   const navItems = [
     { id: "hero", label: t("home") },
+    { id: "work", label: t("projects") },
     { id: "about", label: t("profile") },
     { id: "services", label: t("services") },
-    { id: "work", label: t("projects") },
-    { id: "principles", label: t("principles") },
     { id: "process", label: t("process") },
     { id: "contact", label: t("contact") },
   ];
@@ -48,7 +47,7 @@ export function SideNav() {
   };
 
   return (
-    <nav className="fixed left-0 top-0 z-50 hidden h-screen w-14 flex-col justify-center border-r border-border/30 bg-background/80 backdrop-blur-sm md:flex md:w-16">
+    <nav aria-label={t("home")} className="fixed left-0 top-0 z-50 hidden h-screen w-14 flex-col justify-center border-r border-border/30 bg-background/80 backdrop-blur-sm md:flex md:w-16">
       <div className="flex flex-col gap-6 px-4">
         {navItems.map(({ id, label }) => {
           const active = activeSection === id;
@@ -72,7 +71,7 @@ export function SideNav() {
               <span
                 className={cn(
                   "absolute left-5 whitespace-nowrap font-mono text-[10px] uppercase tracking-widest opacity-0 transition-all duration-200",
-                  "group-hover:left-7 group-hover:opacity-100",
+                  "group-hover:left-7 group-hover:opacity-100 group-focus-visible:left-7 group-focus-visible:opacity-100",
                   active ? "text-accent" : "text-muted-foreground",
                 )}
               >

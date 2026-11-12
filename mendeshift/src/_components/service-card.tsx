@@ -36,7 +36,7 @@ export function ServiceCard({
   return (
     <article id={service.slug} className="scroll-mt-24">
       <GlareHover>
-      <Card className="border-border/50 bg-card/60 p-6 sm:p-8 md:p-10">
+      <Card className="border-border/50 bg-card/60 p-4 sm:p-8 md:p-10">
         <div className="mb-6 flex items-baseline justify-between sm:mb-8">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
             {service.no}
@@ -46,7 +46,7 @@ export function ServiceCard({
           </span>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-12">
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-12">
           <div>
             <h2 className="font-display text-4xl tracking-tight sm:text-5xl md:text-6xl">
               {service.title}
@@ -75,9 +75,9 @@ export function ServiceCard({
               </div>
             </dl>
 
-            <Button href="/contato" variant="primary" className="mt-8">
-              {labels.cta}
-            </Button>
+            <div className="mt-8">
+              <Button href="/contato" variant="primary" className="min-h-11 w-full sm:w-auto">{labels.cta}</Button>
+            </div>
           </div>
 
           <div>

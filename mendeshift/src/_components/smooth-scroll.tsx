@@ -148,6 +148,22 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
+  useEffect(() => {
+    if (!HOME_RE.test(pathname) || prefersReducedMotion()) return;
+
+    const sections = document.querySelectorAll("#work, #about, #services, #process, #contact, #writing");
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.setAttribute("data-section-enter", "");
+        observer.unobserve(entry.target);
+      }
+    }, { rootMargin: "0px 0px -10% 0px" });
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [pathname]);
+
   useIsomorphicLayoutEffect(() => {
     const prev = prevPathnameRef.current;
     prevPathnameRef.current = pathname;
@@ -174,6 +190,12 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     const wasPopState = isPopState.current;
     isPopState.current = false;
 
+    if (!wasPopState && !prefersReducedMotion()) {
+      document.querySelector("#main-content main")?.animate(
+        [{ opacity: 0.78 }, { opacity: 1 }],
+        { duration: 320, easing: "cubic-bezier(.33, 0, .2, 1)" },
+      );
+    }
 
     // Back/forward do navegador: restaura a posição exata da rota destino.
     // Push para a home vindo de subpágina (fallback do BackToHomeLink):

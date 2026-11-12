@@ -25,9 +25,9 @@ export async function ProcessSection({ locale }: { locale: string }) {
   const t = messages.process as ProcessMessages;
 
   return (
-    <Section id="process" className="relative">
+    <Section id="process" className="relative py-12 md:py-18 xl:py-20">
       <Container className="md:px-30">
-        <div className="mb-12 md:mb-16">
+        <div className="mb-8 md:mb-10">
           <Eyebrow>{t.eyebrow}</Eyebrow>
           <SectionTitle>{t.title}</SectionTitle>
           <SectionLead>{t.lead}</SectionLead>
@@ -46,7 +46,7 @@ export async function ProcessSection({ locale }: { locale: string }) {
                 <h3 className="font-display text-2xl tracking-tight transition-colors interaction-motion group-hover:text-accent sm:text-3xl">
                   {step.title}
                 </h3>
-                <p className="font-mono text-xs leading-relaxed text-muted-foreground">
+                <p className="text-sm leading-relaxed text-muted-foreground">
                   {step.desc}
                 </p>
               </div>

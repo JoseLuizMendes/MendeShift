@@ -51,6 +51,7 @@ export function PortfolioArchive({
                   aria-hidden={project.slug !== active.slug}
                   data-visible={project.slug === active.slug ? "" : undefined}
                   sizes="(max-width: 760px) 100vw, 28vw"
+                  quality={90}
                   fill
                 />
               ))}

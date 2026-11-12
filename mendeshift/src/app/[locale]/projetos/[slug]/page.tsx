@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { getServerTranslations, loadMessages } from "@/i18n/server";
 import { SITE_URL, pageMetadata } from "@/lib/metadata";
 import { localeHref } from "@/lib/navigation";
 import { getProjectBySlug, getProjectsByLocale, serviceAnchors } from "@/lib/projects";
 import { ColophonSection } from "@/_components/colophon-section";
+import { Button } from "@/_components/ui/button";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -39,6 +41,7 @@ export default async function ProjectPage({ params }: Props) {
   const serviceAnchor = serviceAnchors[project.serviceType];
   const services = (messages.services_page as { items: { slug: string; title: string }[] }).items;
   const serviceTitle = services.find((service) => service.slug === serviceAnchor)?.title;
+  const gallery = project.gallery;
   const projects = getProjectsByLocale(locale);
   const index = projects.findIndex((item) => item.slug === slug);
   const previous = projects[index - 1];
@@ -61,7 +64,9 @@ export default async function ProjectPage({ params }: Props) {
       <div className="portfolio-frame">
         <div className="portfolio-case">
           <header className="portfolio-case-intro">
-            <Link className="portfolio-text-link" href={href("/projetos")}>{t("all_projects")}</Link>
+            <Button href="/projetos" variant="secondary" className="size-11 border-foreground/40 bg-muted p-0 hover:bg-accent/10" aria-label={t("all_projects")}>
+              <ArrowLeft aria-hidden="true" className="size-5" />
+            </Button>
             <div>
               <p className="portfolio-mono text-accent">CASE {number} / {project.category}</p>
               <h1 className="portfolio-display">{project.title}<span className="text-accent">.</span></h1>
@@ -71,10 +76,21 @@ export default async function ProjectPage({ params }: Props) {
               {project.metric && <div><dt>{ui("case_status")}</dt><dd>{project.metric}</dd></div>}
               <div><dt>Stack</dt><dd>{project.tech.join(" / ")}</dd></div>
             </dl>
+            {project.publicUrl && (
+              <Button href={project.publicUrl} variant="primary" className="min-h-11">
+                {ui("visit_project")}
+                <ArrowUpRight aria-hidden="true" className="size-4" />
+              </Button>
+            )}
             {serviceTitle && (
-              <Link className="portfolio-text-link" href={`/${locale}/servicos#${serviceAnchor}`}>
+              <Button
+                href={`/servicos#${serviceAnchor}`}
+                variant="secondary"
+                className="min-h-11 max-w-full whitespace-normal border-foreground/40 bg-muted text-left hover:border-foreground/60 hover:bg-muted/70 hover:text-foreground"
+              >
                 {t("service_cta", { service: serviceTitle })}
-              </Link>
+                <ArrowRight aria-hidden="true" className="size-4 shrink-0" />
+              </Button>
             )}
           </header>
 
@@ -85,16 +101,71 @@ export default async function ProjectPage({ params }: Props) {
                   src={project.previewImage}
                   alt={project.previewImageAlt ?? ""}
                   sizes="(max-width: 760px) 100vw, 62vw"
+                  quality={90}
                   fill
                   preload
                 />
               </div>
-              <figcaption className="portfolio-mono"><span>FIG. {number}</span><span>{ui("artwork")}</span></figcaption>
+              <figcaption className="portfolio-mono">
+                {t("editorial_mockup")}
+              </figcaption>
             </figure>
           )}
         </div>
 
+        {project.walkthrough && project.walkthroughImage && (
+          <section className="portfolio-case-walkthrough">
+            <div className="portfolio-case-walkthrough-copy">
+              <h2 className="portfolio-display">{project.walkthrough.title}</h2>
+              <p className="portfolio-lead">{project.walkthrough.description}</p>
+              <Link className="portfolio-text-link" href={href(`/blog/${project.walkthrough.articleSlug}`)}>{t("booking_article")}</Link>
+            </div>
+            <figure className="min-w-0">
+              <Image
+                src={project.walkthroughImage}
+                alt={project.walkthrough.imageAlt}
+                width={1536}
+                height={1024}
+                sizes="(max-width: 760px) 94vw, 64vw"
+                quality={90}
+                className="h-auto w-full border border-border"
+              />
+              <figcaption className="portfolio-mono mt-2 text-muted-foreground">
+                {t("editorial_mockup")}
+              </figcaption>
+            </figure>
+          </section>
+        )}
+
+        {gallery && (
+          <section className="portfolio-case-gallery" aria-labelledby="case-gallery">
+            <h2 id="case-gallery" className="portfolio-display">{t("gallery_title")}</h2>
+            <div className="portfolio-case-gallery-grid">
+              {gallery.map(({ src, width, height, caption }) => {
+                const label = caption[locale === "pt" ? "pt" : "en"];
+                return (
+                  <figure key={src}>
+                    <Image
+                      src={src}
+                      alt={label}
+                      width={width}
+                      height={height}
+                      sizes={gallery.length > 1 ? "(max-width: 760px) 94vw, 47vw" : "(max-width: 760px) 94vw, 80vw"}
+                      quality={90}
+                      className="h-auto w-full border border-border"
+                    />
+                    <figcaption className="portfolio-mono mt-2 text-muted-foreground">
+                      {label}
+                    </figcaption>
+                  </figure>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
         <div className="portfolio-case-body">
+          <CaseSection label={t("outcome")}><p>{project.outcome}</p></CaseSection>
           <CaseSection label={t("context")}><p>{project.context}</p></CaseSection>
           <CaseSection label={t("problem")}><p>{project.problem}</p></CaseSection>
           <CaseSection label={t("constraints")}><p>{project.constraints}</p></CaseSection>
@@ -105,7 +176,6 @@ export default async function ProjectPage({ params }: Props) {
           <CaseSection label={t("challenges")}>
             <ul>{project.challenges.map((challenge) => <li key={challenge}>{challenge}</li>)}</ul>
           </CaseSection>
-          <CaseSection label={t("outcome")}><p>{project.outcome}</p></CaseSection>
         </div>
 
         <nav className="portfolio-case-pagination portfolio-mono" aria-label={ui("case_navigation")}>

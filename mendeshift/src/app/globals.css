@@ -75,6 +75,7 @@
 /* Preferência do sistema (fallback). */
 @media (prefers-color-scheme: dark) {
   :root {
+    color-scheme: dark;
     --background: #0b0c0f;
     --foreground: #f4f6f8;
     --card: color-mix(in oklab, var(--background) 92%, white);
@@ -88,6 +89,7 @@
 
 /* Dark mode por classe (para layout consistente). */
 .dark {
+  color-scheme: dark;
   --background: #0b0c0f;
   --foreground: #f4f6f8;
   --card: color-mix(in oklab, var(--background) 92%, white);
@@ -117,6 +119,17 @@ body {
 ::selection {
   background: color-mix(in oklab, var(--accent) 35%, transparent);
   color: var(--foreground);
+}
+
+@layer base {
+  :where(a[href], button, input, textarea, select, summary):focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  :where(input, textarea) {
+    caret-color: var(--accent);
+  }
 }
 
 .noise-overlay {
@@ -158,7 +171,7 @@ body {
   overflow-x: auto;
   margin: 1.5rem 0;
   padding: 1.1rem 1.25rem;
-  border-radius: var(--radius);
+  scrollbar-color: var(--muted-foreground) var(--card);
   border: 1px solid color-mix(in oklab, var(--foreground) 12%, transparent);
   font-size: 0.82rem;
   line-height: 1.7;
@@ -354,15 +367,6 @@ body {
   .logo-loop-track { animation: none; }
 }
 
-@keyframes signals-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 @keyframes projects-column-up {
   from {
     transform: translateY(0);
@@ -381,13 +385,6 @@ body {
   }
 }
 
-.signals-marquee-track {
-  display: flex;
-  width: max-content;
-  animation: signals-marquee 28s linear infinite;
-  will-change: transform;
-}
-
 .projects-column {
   --project-gap: 1.5rem;
   display: flex;
@@ -402,10 +399,6 @@ body {
 
 .projects-column-down {
   animation: projects-column-down 34s linear infinite;
-}
-
-.signals-marquee-track:hover {
-  animation-play-state: paused;
 }
 
 .projects-column:hover {
@@ -429,10 +422,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .signals-marquee-track {
-    animation: none;
-  }
-
   .projects-column {
     animation: none;
   }
