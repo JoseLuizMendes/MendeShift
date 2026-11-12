@@ -106,6 +106,12 @@ via [Resend](https://resend.com).
   `NEXT_PUBLIC_SITE_URL`, então migrar é só setar essa env na Vercel (sem commit). Ver
   [docs/go-live-dominio-seo.md](docs/go-live-dominio-seo.md).
 
+## AI Exploration
+
+A rota `/pt/ai-exploration` reúne cinco estudos visuais criados no ImageGen. A galeria oferece navegação por miniaturas, setas e gesto de deslizar, com o prompt de cada imagem disponível para copiar. O ruído visual é aplicado em CSS sobre a imagem.
+
+Os títulos, textos alternativos em português e inglês e prompts ficam em [`src/lib/lab-studies.ts`](src/lib/lab-studies.ts). Os arquivos de alta resolução ficam em [`public/portfolio/lab/`](public/portfolio/lab/), em WebP de 6.536 × 4.357 px. O navegador recebe uma versão dimensionada para a tela.
+
 ## Blog
 
 Blog nativo, MDX versionado no repo — sem CMS, sem banco, tudo estático (SSG).

@@ -3,9 +3,9 @@
 <p align="center"><img src="assets/art-mendeshift.jpg" width="100%" alt="MendeShift em desktop e mobile — site, chatbot e cases"/></p>
 <p align="center"><img src="assets/p-mendeshift.png" width="60%" alt="MendeShift — Next.js 16, React Compiler, GSAP, next-intl — RES 99/100"/></p>
 
-Site agência-portfólio pessoal: vitrine dos meus projetos, captação de lead (formulário de briefing + chatbot com IA) e terreno onde testo decisões de performance e arquitetura.
+Portfólio e estúdio digital de José Luiz Mendes. O site reúne estudos de caso, artigos técnicos e experimentos de imagem e interação no navegador.
 
-**[mende-shift.vercel.app](https://mende-shift.vercel.app)** — Real Experience Score de 99/100 no Vercel Speed Insights, medido com usuários reais: 8 ms de interação até a próxima pintura, zero layout shift cumulativo, TTFB de 0,03 s.
+[Ver o MendeShift em produção](https://mende-shift.vercel.app/pt)
 
 ## Stack
 
@@ -13,7 +13,7 @@ Site agência-portfólio pessoal: vitrine dos meus projetos, captação de lead 
 | --- | --- |
 | Framework | Next.js 16 (App Router) · React 19 · TypeScript |
 | Estilo | Tailwind CSS 4 |
-| Animação | GSAP + Lenis — sem lib de scroll pronta, pra manter o bundle pequeno |
+| Animação | GSAP + Lenis · shaders WebGL |
 | i18n | next-intl (PT/EN) |
 | Formulários | React Hook Form + Zod |
 | E-mail / leads | Resend |
@@ -23,9 +23,12 @@ Site agência-portfólio pessoal: vitrine dos meus projetos, captação de lead 
 
 ## O que tem
 
-- **Chatbot de contato** com Gemini — rate limit por IP, teto diário global, e captação automática de lead direto da conversa.
+- **Cases** com composições editoriais de interfaces reais, contexto de projeto e decisões de engenharia. [Abrir Cases](https://mende-shift.vercel.app/pt/projetos)
+- **AI Exploration** com cinco estudos visuais gerados no ImageGen, imagens WebP responsivas, granulação aplicada na galeria e prompts disponíveis para copiar. [Abrir AI Exploration](https://mende-shift.vercel.app/pt/ai-exploration)
+- **O Estúdio e Processo** com retrato interativo em WebGL e um quebra-cabeça 3D cuja montagem acompanha a rolagem.
+- **Blog bilíngue** com artigos em MDX versionados no repositório. [Abrir o blog](https://mende-shift.vercel.app/pt/blog)
+- **Chatbot de contato** com visual de terminal, Gemini, rate limit por IP, teto diário global e captação de leads pela conversa.
 - **Formulário de briefing** com honeypot anti-spam, rate limit próprio e fallback por WhatsApp se a API cair.
-- Coordenação entre componentes por eventos de DOM, sem contexto global — uma das decisões por trás do Real Experience Score.
 
 ## Rodando
 
@@ -37,7 +40,7 @@ pnpm install
 pnpm dev
 ```
 
-Variáveis de ambiente (Gemini, Resend, Upstash) e detalhes de cada feature: ver [`mendeshift/README.md`](mendeshift/README.md).
+Consulte o [README do app](mendeshift/README.md) para configurar Gemini, Resend e Upstash e localizar os arquivos de cada recurso.
 
 ## Licença
 
