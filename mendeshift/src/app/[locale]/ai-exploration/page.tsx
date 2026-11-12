@@ -5,6 +5,8 @@ import { pageMetadata } from "@/lib/metadata";
 import { localeHref } from "@/lib/navigation";
 import { ColophonSection } from "@/_components/colophon-section";
 import { ShaderImage } from "@/_components/shader-image";
+import { LabGallery } from "@/_components/lab-gallery";
+import { labStudies } from "@/lib/lab-studies";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -22,6 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function AiExplorationPage({ params }: Props) {
   const { locale } = await params;
   const t = await getServerTranslations(locale, "portfolio");
+  const language = locale === "pt" ? "pt" : "en";
+  const studies = labStudies.map(({ id, prompt, ...copy }) => ({ id, prompt, ...copy[language] }));
 
   return (
     <main className="app-shell min-h-screen">
@@ -33,6 +37,16 @@ export default async function AiExplorationPage({ params }: Props) {
           </div>
           <p className="portfolio-lead">{t("lab_intro")}</p>
         </header>
+
+        <LabGallery studies={studies} labels={{
+          title: t("lab_gallery"),
+          previous: t("lab_previous_image"),
+          next: t("lab_next_image"),
+          prompt: t("lab_prompt"),
+          copy: t("lab_copy_prompt"),
+          copied: t("lab_prompt_copied"),
+          copyError: t("lab_prompt_copy_error"),
+        }} />
 
         <nav className="portfolio-lab-tabs portfolio-mono" aria-label={t("lab_nav")}>
           <a href="#graphite">01 / {t("hero_study")} ↓</a>
