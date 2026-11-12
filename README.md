@@ -1,7 +1,6 @@
 # MendeShift
 
-<p align="center"><img src="assets/art-mendeshift.jpg" width="100%" alt="MendeShift em desktop e mobile — site, chatbot e cases"/></p>
-<p align="center"><img src="assets/p-mendeshift.png" width="60%" alt="MendeShift — Next.js 16, React Compiler, GSAP, next-intl — RES 99/100"/></p>
+<p align="center"><img src="assets/art-mendeshift.jpg" width="100%" alt="MendeShift com a galeria AI Exploration no desktop e a página inicial no celular"/></p>
 
 Portfólio e estúdio digital de José Luiz Mendes. O site reúne estudos de caso, artigos técnicos e experimentos de imagem e interação no navegador.
 
