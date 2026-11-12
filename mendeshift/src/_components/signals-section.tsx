@@ -41,7 +41,7 @@ export async function SignalsSection({ locale }: { locale: string }) {
           </div>
         </div>
         <div className="mt-8 flex justify-center sm:mt-10">
-          <Button href="/servicos" className="group min-h-11 border-accent/40">
+          <Button href="/servicos" className="group min-h-11 max-w-full whitespace-normal border-accent/40">
             {t.link}
             <BitmapChevron className="transition-transform interaction-motion group-hover:rotate-45" />
           </Button>

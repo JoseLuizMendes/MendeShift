@@ -60,14 +60,14 @@ export default async function AiExplorationPage({ params }: Props) {
             <p className="portfolio-lead mt-3">{t("lab_signal_note")}</p>
           </div>
         </section>
-        <section id="wardrobe" className="my-8 grid gap-4 border-t border-border/60 py-8 sm:grid-cols-[1fr_1.3fr]">
-          <div>
+        <section id="wardrobe" className="my-8 grid gap-7 border-t border-border/60 px-3 py-9 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:gap-10 sm:px-6 lg:gap-16 lg:px-10 lg:py-12">
+          <div className="grid content-start gap-4">
             <p className="portfolio-mono text-accent">03 / WEBGL</p>
             <h2 className="portfolio-display text-4xl sm:text-5xl">{t("lab_wardrobe")}</h2>
           </div>
-          <div>
+          <div className="grid content-start justify-items-start gap-6">
             <p className="portfolio-lead">{t("lab_wardrobe_note")}</p>
-            <Link className="portfolio-text-link mt-4" href={localeHref("/#about", locale)}>{t("lab_open_studio")} ↗</Link>
+            <Link className="portfolio-text-link" href={localeHref("/#about", locale)}>{t("lab_open_studio")} ↗</Link>
           </div>
         </section>
       </div>

@@ -9,19 +9,19 @@ export async function AboutSection({ locale }: { locale: string }) {
   const t = await getServerTranslations(locale, "studio_editorial");
 
   return (
-    <Section id="about" className="studio-section">
+    <Section id="about" className="studio-section pt-12 pb-0 md:py-20">
       <ShaderImage
         className="studio-backdrop"
         src="/portfolio/studio-developer.webp"
         wardrobeSrc="/portfolio/studio-founder.webp"
         alt=""
-        sizes="(max-width: 320px) 445px, (max-width: 760px) 150vw, (max-width: 1100px) 100vw, 92vw"
+        sizes="(max-width: 345px) 487px, (max-width: 760px) 150vw, (max-width: 1100px) 100vw, 92vw"
         loading="eager"
         position={0.76}
         trackParent
       />
 
-      <Container className="studio-content relative z-10 md:px-20">
+      <Container className="studio-content relative z-10">
         <div className="studio-copy">
           <Eyebrow>{t("eyebrow")}</Eyebrow>
           <SectionTitle>{t("title")}</SectionTitle>

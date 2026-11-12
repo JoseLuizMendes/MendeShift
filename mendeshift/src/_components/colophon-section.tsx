@@ -22,7 +22,7 @@ const contacts = [
   { label: "TikTok", href: "https://www.tiktok.com/@mendeshift" },
 ] as const;
 
-export function ColophonSection() {
+export function ColophonSection({ showProjectCta = true }: { showProjectCta?: boolean }) {
   const t = useTranslations("colophon");
   const nav = useTranslations("nav");
   const locale = useLocale();
@@ -30,13 +30,13 @@ export function ColophonSection() {
 
   return (
     <footer id="colophon" className="border-t border-border/40">
-      <Container className="md:px-20">
+      <Container>
         <div className="grid grid-cols-2 gap-6 py-10 md:grid-cols-[minmax(0,1.4fr)_1fr_1fr] md:py-14">
           <div className="col-span-2 flex flex-col items-start gap-4 md:col-span-1">
             <Link href={localeHref("/", locale)} className="font-display text-5xl leading-none tracking-tight">
               MendeShift<span className="text-accent">.</span>
             </Link>
-            <PortfolioCta href="/contato" label={t("cta_project")} />
+            {showProjectCta && <PortfolioCta href="/contato" label={t("cta_project")} />}
           </div>
           <nav aria-label={t("pages_label")} className="portfolio-mono">
             <p className="mb-2 text-muted-foreground">{t("pages_label")}</p>

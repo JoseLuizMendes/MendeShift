@@ -37,12 +37,9 @@ export default async function HomePage({ params }: Props) {
         <RecentWritingSection
           posts={recentPosts}
           locale={locale as Locale}
-          labels={{
-            title: tb("recent_title"),
-            cta: tb("recent_cta"),
-          }}
+          title={tb("recent_title")}
         />
-        <ColophonSection />
+        <ColophonSection showProjectCta={false} />
       </main>
     </>
   );

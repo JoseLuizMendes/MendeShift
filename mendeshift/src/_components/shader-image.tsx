@@ -292,7 +292,11 @@ function mountShader(
     delete surface.dataset.shaderTouchActive;
   };
 
-  const resize = new ResizeObserver(schedule);
+  const resize = new ResizeObserver(() => {
+    const anchorPercent = Number.parseFloat(getComputedStyle(image).objectPosition);
+    gl.uniform1f(anchor, Number.isFinite(anchorPercent) ? anchorPercent / 100 : position);
+    schedule();
+  });
   resize.observe(surface);
   pointerTarget.addEventListener("pointermove", move, { passive: true });
   pointerTarget.addEventListener("pointerleave", leave);
@@ -347,7 +351,7 @@ export function ShaderImage({
   const surfaceRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
-  const imagePosition = { objectPosition: `${position * 100}% center` };
+  const imagePosition = { objectPosition: `var(--shader-position, ${position * 100}%) center` };
 
   useEffect(() => {
     const surface = surfaceRef.current;

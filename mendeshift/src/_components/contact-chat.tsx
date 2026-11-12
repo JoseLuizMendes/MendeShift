@@ -169,14 +169,14 @@ export function ContactChat() {
   return (
     <details
       ref={disclosureRef}
-      className="group/assistant mt-6"
+      className="group/assistant mt-4"
       onToggle={(event) => {
         if (!event.currentTarget.open) return;
         setHasFocusedComposer(false);
         setBootRun((run) => run + 1);
       }}
     >
-      <summary onClick={handleDisclosureClick} className="flex w-fit max-w-full cursor-pointer list-none items-center gap-3 border border-accent/45 bg-accent/10 px-4 py-3 text-sm font-medium text-foreground transition-colors interaction-motion hover:border-accent hover:bg-accent/20 focus-visible:outline-2 focus-visible:outline-accent [&::-webkit-details-marker]:hidden">
+      <summary onClick={handleDisclosureClick} className="flex min-h-11 w-fit max-w-full cursor-pointer list-none items-center gap-3 border border-foreground/20 bg-muted px-4 py-2 text-sm font-medium text-foreground transition-colors interaction-motion hover:border-foreground/50 focus-visible:outline-2 focus-visible:outline-accent [&::-webkit-details-marker]:hidden">
         <Terminal aria-hidden="true" className="size-4 shrink-0 text-accent" />
         <span className="grid">
           <span className="col-start-1 row-start-1 group-open/assistant:invisible">{t("assistant_details")}</span>
