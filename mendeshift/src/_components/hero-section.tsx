@@ -58,6 +58,7 @@ export function HeroSection() {
         position={0.72}
         trackParent
         priority
+        quality={75}
       />
       <AnimatedNoise opacity={0.03} />
 
@@ -89,9 +90,9 @@ export function HeroSection() {
                   </p>
 
                   <div className="mt-6 flex flex-col items-stretch gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-4">
-                    <PortfolioCta href="#work" label={t("cta_primary")} className="min-h-11 w-full sm:w-auto" />
+                    <PortfolioCta href="/contato" label={t("cta_primary")} className="min-h-11 w-full sm:w-auto" />
                     <Button
-                      href="#services"
+                      href="#work"
                       variant="secondary"
                       specular
                       className="min-h-11 w-full justify-center sm:w-auto"

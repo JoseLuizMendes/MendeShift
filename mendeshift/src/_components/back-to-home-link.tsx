@@ -1,6 +1,3 @@
-"use client";
-
-import { useLocale } from "@/i18n/context";
 import { Button } from "@/_components/ui/button";
 
 type Props = Omit<
@@ -18,10 +15,8 @@ type Props = Omit<
  * a posição por rota e restaura também em navegações push para a home.
  */
 export function BackToHomeLink({ children, ...props }: Props) {
-  const locale = useLocale();
-
   return (
-    <Button href={`/${locale}`} {...props}>
+    <Button href="/" {...props}>
       {children}
     </Button>
   );

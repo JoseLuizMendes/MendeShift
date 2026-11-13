@@ -1,21 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { MessageCircle } from "lucide-react";
 import { track } from "@vercel/analytics";
 
 import { useLocale, useTranslations } from "@/i18n/context";
+import { localeHref } from "@/lib/navigation";
+import { readUtm } from "@/lib/utm";
+// lead-options, não leads: leads.ts carrega o zod, que só o servidor precisa.
 import {
   budgetRanges,
   leadToWhatsAppText,
   serviceTypes,
   timelines,
   whatsAppLink,
-  type Lead,
-} from "@/lib/leads";
+} from "@/lib/lead-options";
 import { Button } from "@/_components/ui/button";
 import { Card } from "@/_components/ui/card";
 import { Input } from "@/_components/ui/input";
@@ -37,6 +38,9 @@ type FormValues = {
   website?: string;
 };
 
+/** Mesmo critério prático do servidor: algo@algo.algo, sem espaços. */
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 type Status = "idle" | "sending" | "success" | "error" | "rate_limited";
 
 export function BriefingForm() {
@@ -50,47 +54,27 @@ export function BriefingForm() {
   const budgetOptions = form.budget_options as Option[];
   const timelineOptions = form.timeline_options as Option[];
 
-  // Validação client-side com mensagens localizadas; o schema canônico
-  // (src/lib/leads.ts) revalida no servidor. Sem useMemo: o React
-  // Compiler não conseguia provar a imutabilidade de `validation` e
-  // pulava a otimização do componente inteiro — deixá-lo memoizar
-  // sozinho resolve, e montar o schema é barato.
-  const formSchema = z.object({
-    name: z.string().trim().min(1, validation.name_required),
-    email: z.string().trim().email(validation.email_invalid),
-    phone: z.string().trim().max(30).optional(),
-    company: z.string().trim().max(120).optional(),
-    serviceType: z.enum(serviceTypes, { message: validation.service_required }),
-    budgetRange: z.enum(budgetRanges),
-    timeline: z.enum(timelines),
-    message: z.string().trim().min(10, validation.message_required),
-    website: z.string().optional(),
-  });
-
+  // Validação client-side com as regras nativas do react-hook-form e
+  // mensagens localizadas — espelha o schema canônico (src/lib/leads.ts),
+  // que revalida tudo no servidor.
   const {
     register,
     handleSubmit,
     getValues,
     formState: { errors },
   } = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
     defaultValues: { budgetRange: "nao-sei", timeline: "sem-prazo" },
   });
 
   const [status, setStatus] = useState<Status>("idle");
 
   const whatsAppFallback = () =>
-    whatsAppLink(leadToWhatsAppText(getValues() as Partial<Lead>));
+    whatsAppLink(leadToWhatsAppText(getValues()));
 
   const onSubmit = async (values: FormValues) => {
     setStatus("sending");
     try {
-      const utmParams = new URLSearchParams(window.location.search);
-      const utm = {
-        source: utmParams.get("utm_source") ?? undefined,
-        medium: utmParams.get("utm_medium") ?? undefined,
-        campaign: utmParams.get("utm_campaign") ?? undefined,
-      };
+      const utm = readUtm();
 
       const response = await fetch("/api/lead", {
         method: "POST",
@@ -99,7 +83,7 @@ export function BriefingForm() {
           ...values,
           locale,
           source: "form",
-          utm: utm.source || utm.medium || utm.campaign ? utm : undefined,
+          utm,
         }),
       });
 
@@ -170,7 +154,10 @@ export function BriefingForm() {
             placeholder={label("name_placeholder")}
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? "err-name" : undefined}
-            {...register("name")}
+            maxLength={120}
+            {...register("name", {
+              validate: (value) => value.trim().length > 0 || validation.name_required,
+            })}
           />
           {errors.name && (
             <p id="err-name" role="alert" className="font-mono text-[10px] text-accent">{errors.name.message}</p>
@@ -187,7 +174,10 @@ export function BriefingForm() {
             placeholder={label("email_placeholder")}
             aria-invalid={!!errors.email}
             aria-describedby={errors.email ? "err-email" : undefined}
-            {...register("email")}
+            maxLength={200}
+            {...register("email", {
+              validate: (value) => EMAIL_RE.test(value.trim()) || validation.email_invalid,
+            })}
           />
           {errors.email && (
             <p id="err-email" role="alert" className="font-mono text-[10px] text-accent">{errors.email.message}</p>
@@ -196,7 +186,7 @@ export function BriefingForm() {
 
         <div className="flex flex-col gap-2">
           <Label htmlFor="lead-phone">{label("phone_label")}</Label>
-          <Input id="lead-phone" type="tel" autoComplete="tel" placeholder={label("phone_placeholder")} {...register("phone")} />
+          <Input id="lead-phone" type="tel" autoComplete="tel" placeholder={label("phone_placeholder")} maxLength={30} {...register("phone")} />
         </div>
 
         <div className="flex flex-col gap-2">
@@ -205,6 +195,7 @@ export function BriefingForm() {
             id="lead-company"
             autoComplete="organization"
             placeholder={label("company_placeholder")}
+            maxLength={120}
             {...register("company")}
           />
         </div>
@@ -217,7 +208,7 @@ export function BriefingForm() {
             aria-invalid={!!errors.serviceType}
             aria-describedby={errors.serviceType ? "err-service" : undefined}
             defaultValue=""
-            {...register("serviceType")}
+            {...register("serviceType", { required: validation.service_required })}
           >
             <option value="" disabled>
               {label("service_placeholder")}
@@ -263,7 +254,10 @@ export function BriefingForm() {
             placeholder={label("message_placeholder")}
             aria-invalid={!!errors.message}
             aria-describedby={errors.message ? "err-message" : undefined}
-            {...register("message")}
+            maxLength={5000}
+            {...register("message", {
+              validate: (value) => value.trim().length >= 10 || validation.message_required,
+            })}
           />
           {errors.message && (
             <p id="err-message" role="alert" className="font-mono text-[10px] text-accent">{errors.message.message}</p>
@@ -286,6 +280,17 @@ export function BriefingForm() {
             </Button>
           </div>
         )}
+
+        <p className="font-mono text-[11px] leading-relaxed text-muted-foreground sm:col-span-2">
+          {label("privacy_note")}{" "}
+          <Link
+            href={localeHref("/privacidade", locale)}
+            className="text-foreground underline decoration-accent underline-offset-4 transition-colors interaction-motion hover:text-accent"
+          >
+            {label("privacy_link")}
+          </Link>
+          .
+        </p>
 
         <div className="sm:col-span-2">
           <Button

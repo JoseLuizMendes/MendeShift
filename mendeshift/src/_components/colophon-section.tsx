@@ -55,9 +55,10 @@ export function ColophonSection({ showProjectCta = true }: { showProjectCta?: bo
             </ul>
           </nav>
         </div>
-        <p className="border-t border-border/40 py-5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-          {t("copyright", { year: new Date().getFullYear() })}
-        </p>
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-border/40 py-3 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+          <p>{t("copyright", { year: new Date().getFullYear() })}</p>
+          <Link href={localeHref("/privacidade", locale)} className={linkClass}>{t("privacy")}</Link>
+        </div>
       </Container>
     </footer>
   );

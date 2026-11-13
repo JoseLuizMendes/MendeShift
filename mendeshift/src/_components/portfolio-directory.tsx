@@ -10,11 +10,14 @@ export function PortfolioDirectory({
   locale,
   activeSlug,
   onPreview,
+  nameAs: Name = "h3",
 }: {
   projects: DirectoryProject[];
   locale: string;
   activeSlug?: string;
   onPreview: (slug: string) => void;
+  /** Nível do heading de cada projeto: um abaixo do título da seção. */
+  nameAs?: "h2" | "h3";
 }) {
   return (
     <ul className="portfolio-directory">
@@ -33,7 +36,7 @@ export function PortfolioDirectory({
               <span aria-hidden="true" className="directory-number portfolio-mono">{String(index + 1).padStart(2, "0")}</span>
               <FolderGlyph />
             </span>
-            <span className="directory-name portfolio-mono">{project.title}</span>
+            <Name className="directory-name portfolio-mono">{project.title}</Name>
             <span className="directory-category portfolio-mono">{project.category}</span>
             <span className="directory-description">{project.shortDesc}</span>
           </Link>

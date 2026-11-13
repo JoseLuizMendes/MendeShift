@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { getServerTranslations } from "@/i18n/server";
-import { SITE_URL, pageMetadata } from "@/lib/metadata";
+import { localizedUrl, pageMetadata } from "@/lib/metadata";
 import { getBlogPosts, getBlogTags, type Locale } from "@/lib/blog";
 import { BackToHomeLink } from "@/_components/back-to-home-link";
 import { ColophonSection } from "@/_components/colophon-section";
@@ -28,10 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("blog_title"),
     description: t("blog_desc"),
   });
-  const feedUrl =
-    locale === "pt"
-      ? `${SITE_URL}/pt/blog/feed.xml`
-      : `${SITE_URL}/blog/feed.xml`;
+  const feedUrl = localizedUrl(locale, "/blog/feed.xml");
   base.alternates = {
     ...base.alternates,
     types: { "application/rss+xml": feedUrl },

@@ -17,9 +17,9 @@ export function PostCard({
     <article className="glare group relative flex flex-col overflow-hidden border border-border/40 bg-card/70 p-6 transition-all interaction-motion hover:-translate-y-1 hover:border-accent/60 active:-translate-y-0.5 active:border-accent/60">
       <span className="glare__streak" aria-hidden="true" />
       <PostMeta date={post.date} tags={post.tags} locale={locale} />
-      <h3 className="mt-4 font-display text-2xl tracking-tight sm:text-3xl">
+      <h2 className="mt-4 font-display text-2xl tracking-tight sm:text-3xl">
         {post.title}
-      </h3>
+      </h2>
       <p className="mt-3 flex-1 font-mono text-xs leading-relaxed text-muted-foreground">
         {post.description}
       </p>

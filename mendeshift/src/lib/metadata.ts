@@ -1,16 +1,37 @@
 import type { Metadata } from "next";
 
+import { DEFAULT_LOCALE, localePrefix } from "@/lib/navigation";
+
 /**
  * URL pública do site. Alimenta sitemap, robots, canonicals, og:url e JSON-LD.
  *
- * Definida por `NEXT_PUBLIC_SITE_URL` (setada na Vercel), com fallback para o
- * domínio atual. Quando o domínio próprio for registrado, basta atualizar a
- * env var na Vercel e redeployar — nenhum commit é necessário.
- * Como é `NEXT_PUBLIC_*`, o valor é inlined no build (SSG) e vale também no client.
+ * Ordem de resolução:
+ *  1. `NEXT_PUBLIC_SITE_URL` — setada na Vercel quando houver domínio próprio.
+ *  2. `VERCEL_PROJECT_PRODUCTION_URL` — variável de sistema da Vercel com o
+ *     domínio de produção do projeto (vale também em previews, então o
+ *     canonical de um preview continua apontando para produção).
+ *  3. Fallback fixo para build local.
+ *
+ * Um endereço errado aqui faz canonical/sitemap/og:image apontarem para um
+ * site que não existe — por isso o fallback não é mais digitado à mão.
+ * Só é lida no servidor (metadata, sitemap, feeds, OG).
  */
+const vercelProductionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://mendeshift.vercel.app"
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (vercelProductionHost
+    ? `https://${vercelProductionHost}`
+    : "https://mende-shift.vercel.app")
 ).replace(/\/$/, "");
+
+/** Host sem protocolo, para exibir nas imagens OG. */
+export const SITE_HOST = new URL(SITE_URL).host;
+
+/** URL absoluta de um caminho (sem locale, ex.: "/servicos") num locale. */
+export function localizedUrl(locale: string, path = ""): string {
+  return `${SITE_URL}${localePrefix(locale)}${path}`;
+}
 
 type PageMetadataInput = {
   locale: string;
@@ -26,7 +47,7 @@ type PageMetadataInput = {
  * Sem isto, as subpáginas herdam `alternates`/`openGraph` do layout e
  * declaram a home como canonical — o que anula o SEO delas. Cada página
  * deve apontar canonical/og:url para o próprio endereço, seguindo a
- * convenção localePrefix "as-needed": EN na raiz, PT sob /pt.
+ * convenção localePrefix "as-needed": PT na raiz, EN sob /en.
  *
  * og:image não é definida aqui — vem do opengraph-image.tsx file-based
  * do segmento, que tem precedência.
@@ -37,22 +58,24 @@ export function pageMetadata({
   title,
   description,
 }: PageMetadataInput): Metadata {
-  const localizedUrl = `${SITE_URL}${locale === "pt" ? `/pt${path}` : path}`;
+  const url = localizedUrl(locale, path);
 
   return {
     title,
     description,
     alternates: {
-      canonical: localizedUrl,
+      canonical: url,
       languages: {
-        en: `${SITE_URL}${path}`,
-        pt: `${SITE_URL}/pt${path}`,
+        pt: localizedUrl("pt", path),
+        en: localizedUrl("en", path),
+        // Quem não casa com nenhum idioma recebe o locale padrão.
+        "x-default": localizedUrl(DEFAULT_LOCALE, path),
       },
     },
     openGraph: {
       title,
       description,
-      url: localizedUrl,
+      url,
       siteName: "MendeShift",
       locale: locale === "pt" ? "pt_BR" : "en_US",
       type: "website",

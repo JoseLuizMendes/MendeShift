@@ -61,7 +61,7 @@ export function PortfolioArchive({
       </header>
       <section className="portfolio-archive-files" aria-label={title}>
         <TargetCorners />
-        <PortfolioDirectory projects={projects} locale={locale} activeSlug={active?.slug} onPreview={setActiveSlug} />
+        <PortfolioDirectory projects={projects} locale={locale} activeSlug={active?.slug} onPreview={setActiveSlug} nameAs={archiveLink ? "h3" : "h2"} />
         <div className="portfolio-archive-bar portfolio-mono">
           <span>~/mendeshift/works</span>
           <span>{count}</span>

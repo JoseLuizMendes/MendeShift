@@ -32,12 +32,12 @@
     "tagline": "Digital Studio / Vitória, Brazil",
     "headline": "Websites and systems, directly with the person who builds them.",
     "sub": "I'm José Luiz Mendes. At MendeShift, you work directly with me from first sketch to launch. I design and build websites, stores and web applications.",
-    "cta_primary": "View cases",
-    "cta_secondary": "View services"
+    "cta_primary": "Request a proposal",
+    "cta_secondary": "View cases"
   },
   "services": {
     "eyebrow": "02 / Services",
-    "title": "What we deliver",
+    "title": "What I do",
     "lead": "Four fronts of work — from institutional websites to complete digital products.",
     "link": "See deliverables, timelines and process",
     "items": [
@@ -81,7 +81,7 @@
   },
   "principles": {
     "eyebrow": "04 / Method",
-    "title": "How we work",
+    "title": "How I work",
     "items": [
       {
         "number": "01",
@@ -118,7 +118,7 @@
     "title": "A digital studio with engineering at its core",
     "p1": "MendeShift is a digital product studio founded by José Luiz Mendes, software engineer. Here, design and code are not separate stages: the person who designs the solution is the one who builds it — no intermediaries, no loss of context.",
     "p2": "Every project starts from the business's real problem: what needs to generate results before any technology decision. That product mindset is what separates a pretty website from a website that sells.",
-    "p3": "We work without shortcuts because the cost of technical debt always surfaces — in maintenance, in growth, in the next feature. What we deliver keeps working long after launch.",
+    "p3": "I work without shortcuts because the cost of technical debt always surfaces — in maintenance, in growth, in the next feature. What I deliver keeps working long after launch.",
     "cta": "Meet the founder's background",
     "operating_base": "Operating base",
     "profile_label": "Profile",
@@ -145,7 +145,7 @@
     ],
     "profile_cards": [
       {
-        "eyebrow": "How we work",
+        "eyebrow": "How I work",
         "title": "Product end-to-end, no intermediaries",
         "description": "Design, development and delivery as a single responsibility. You talk directly to whoever makes the technical decisions — and knows the reason behind each one."
       },
@@ -155,14 +155,14 @@
         "description": "Clear scope, written schedule and verifiable quality. The solution needs to work under pressure, not just look good in a presentation."
       },
       {
-        "eyebrow": "What sets us apart",
+        "eyebrow": "What sets me apart",
         "title": "Real engineering behind the design",
         "description": "Founded by a software engineer with production projects for the public and private sectors. The website you're looking at is proof of the standard."
       }
     ]
   },
   "process": {
-    "eyebrow": "04 / Process",
+    "eyebrow": "03 / Process",
     "title": "From briefing to launch",
     "lead": "See what you receive and approve at each step.",
     "steps": [
@@ -309,7 +309,7 @@
   },
   "contact_page": {
     "eyebrow": "Contact / Briefing",
-    "title": "Tell us about your project",
+    "title": "Tell me about your project",
     "lead": "Fill in the briefing below and get a proposal within 24 business hours. Prefer to talk? Reach out directly on WhatsApp.",
     "back": "← Back to home",
     "form": {
@@ -383,28 +383,31 @@
           "label": "No set deadline"
         }
       ],
-      "message_label": "Tell us about the project",
+      "message_label": "Tell me about the project",
       "message_placeholder": "What do you want to build? What's the goal? Any websites you like as references?",
       "submit": "Send briefing",
       "sending": "Sending...",
       "success_title": "Briefing received!",
       "success_text": "Thank you! You'll get a proposal within 24 business hours at the email provided. Want to speed things up?",
       "success_whatsapp": "Continue on WhatsApp",
-      "error_text": "We couldn't send it right now. You can try again or send the briefing directly via WhatsApp:",
+      "error_text": "It couldn't be sent right now. You can try again or send the briefing directly via WhatsApp:",
       "error_whatsapp": "Send via WhatsApp",
       "rate_limited": "Too many submissions in a short time. Please wait a bit or reach out directly on WhatsApp.",
+      "privacy_note": "By submitting, you agree to the",
+      "privacy_link": "Privacy Policy",
       "validation": {
         "name_required": "Please enter your name",
         "email_invalid": "Please enter a valid email",
         "service_required": "Please select the project type",
-        "message_required": "Tell us a bit about the project (at least 10 characters)"
+        "message_required": "Tell me a bit about the project (at least 10 characters)"
       }
     },
     "direct_label": "Direct contact",
-    "direct_text": "Prefer to skip the form? Talk to the studio now:"
+    "direct_text": "Prefer to skip the form? Talk to the studio now:",
+    "cta_fill": "Fill out the brief"
   },
   "contact": {
-    "eyebrow": "05 / Contact",
+    "eyebrow": "04 / Contact",
     "headline_1": "Let's build",
     "headline_2": "something together.",
     "availability": "Tell me what you need to build. Send a project brief or reach me directly on WhatsApp.",
@@ -445,7 +448,8 @@
       }
     ],
     "assistant_details": "Open assistant and quick questions",
-    "assistant_close": "Close assistant"
+    "assistant_close": "Close assistant",
+    "ai_notice": "Replies are generated by AI (Google Gemini). Do not send sensitive data."
   },
   "colophon": {
     "eyebrow": "07 / Brand",
@@ -482,7 +486,7 @@
   "experience_section": {
     "eyebrow_experience": "01 / Experience",
     "title_experience": "Professional work",
-    "lead_experience": "Software engineering in production, on strategic projects for the Espírito Santo State Government.",
+    "lead_experience": "Software engineering in production: integrations at TOTVS and strategic projects for the Espírito Santo State Government.",
     "eyebrow_stack": "02 / Tech Stack",
     "title_stack": "Technologies and tools",
     "eyebrow_education": "03 / Education"
@@ -505,7 +509,7 @@
     "service_cta": "Related service: {service}"
   },
   "blog": {
-    "eyebrow": "05 / Writing",
+    "eyebrow": "Blog / Writing",
     "title": "Writing",
     "lead": "Notes on architecture, engineering and the things I'm learning — in public.",
     "read_more": "Read",

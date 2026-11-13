@@ -33,6 +33,7 @@ type ContactPageMessages = {
   back: string;
   direct_label: string;
   direct_text: string;
+  cta_fill: string;
 };
 
 const directLinks = [
@@ -75,7 +76,7 @@ export default async function ContactPage({ params }: Props) {
               </div>
 
               <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
-                <Button href="#briefing" variant="primary">{locale === "pt" ? "Preencher briefing" : "Fill out the brief"}</Button>
+                <Button href="#briefing" variant="primary">{t.cta_fill}</Button>
                 <Button href={whatsAppLink()} variant="secondary">WhatsApp</Button>
               </div>
             </div>

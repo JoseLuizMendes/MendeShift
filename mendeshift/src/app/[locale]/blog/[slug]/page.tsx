@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { getServerTranslations } from "@/i18n/server";
-import { SITE_URL, pageMetadata } from "@/lib/metadata";
+import { SITE_URL, localizedUrl, pageMetadata } from "@/lib/metadata";
 import {
   getAlternateBlogSlug,
   getBlogPost,
@@ -53,8 +53,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   base.alternates = {
     ...base.alternates,
     languages: {
-      en: `${SITE_URL}/blog/${enSlug}`,
-      pt: `${SITE_URL}/pt/blog/${ptSlug}`,
+      pt: localizedUrl("pt", `/blog/${ptSlug}`),
+      en: localizedUrl("en", `/blog/${enSlug}`),
+      "x-default": localizedUrl("pt", `/blog/${ptSlug}`),
     },
   };
   return base;
@@ -77,9 +78,11 @@ export default async function BlogPostPage({ params }: Props) {
     datePublished: post.frontmatter.date,
     inLanguage: post.locale,
     keywords: post.frontmatter.tags.join(", "),
-    url: `${SITE_URL}${locale === "pt" ? "/pt" : ""}/blog/${slug}`,
-    author: { "@type": "Person", name: "José Luiz Mendes" },
-    publisher: { "@type": "Organization", name: "MendeShift" },
+    url: localizedUrl(locale, `/blog/${slug}`),
+    mainEntityOfPage: localizedUrl(locale, `/blog/${slug}`),
+    image: `${SITE_URL}/${locale}/blog/${slug}/opengraph-image`,
+    author: { "@id": `${SITE_URL}/#founder` },
+    publisher: { "@id": `${SITE_URL}/#studio` },
   };
 
   return (
@@ -92,8 +95,8 @@ export default async function BlogPostPage({ params }: Props) {
       <div
         id="lang-alternate"
         hidden
-        data-en={`/blog/${enSlug}`}
-        data-pt={`/pt/blog/${ptSlug}`}
+        data-en={`/en/blog/${enSlug}`}
+        data-pt={`/blog/${ptSlug}`}
       />
       <div className="noise-overlay" aria-hidden="true" />
       <main id="post-top" className="app-shell relative min-h-screen">

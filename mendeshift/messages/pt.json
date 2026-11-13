@@ -13,7 +13,7 @@
     "contact_title": "Contato & Briefing | MendeShift",
     "contact_desc": "Conte seu projeto para o MendeShift: preencha o briefing e receba uma proposta em até 24h úteis — ou chame direto no WhatsApp.",
     "blog_title": "Blog | MendeShift — Notas sobre arquitetura & engenharia",
-    "blog_desc": "Notas sobre arquitetura de software, decisões de engenharia e o que estou aprendendo — do fundador da MendeShift."
+    "blog_desc": "Notas sobre arquitetura de software, decisões de engenharia e o que estou aprendendo — do fundador do MendeShift."
   },
   "nav": {
     "home": "Início",
@@ -32,12 +32,12 @@
     "tagline": "Estúdio Digital / Vitória, ES",
     "headline": "Sites e sistemas com quem desenha e constrói.",
     "sub": "Sou José Luiz Mendes. No MendeShift, você fala direto comigo, do primeiro esboço ao lançamento. Faço sites, lojas e sistemas web sob medida.",
-    "cta_primary": "Ver cases",
-    "cta_secondary": "Ver serviços"
+    "cta_primary": "Pedir proposta",
+    "cta_secondary": "Ver cases"
   },
   "services": {
     "eyebrow": "02 / Serviços",
-    "title": "O que entregamos",
+    "title": "O que eu faço",
     "lead": "Quatro frentes de atuação — do site institucional ao produto digital completo.",
     "link": "Ver entregáveis, prazos e processo",
     "items": [
@@ -81,7 +81,7 @@
   },
   "principles": {
     "eyebrow": "04 / Método",
-    "title": "Como trabalhamos",
+    "title": "Como eu trabalho",
     "items": [
       {
         "number": "01",
@@ -118,7 +118,7 @@
     "title": "Um estúdio digital com engenharia no centro",
     "p1": "O MendeShift é um estúdio de produtos digitais fundado por José Luiz Mendes, engenheiro de software. Aqui, design e código não são etapas separadas: quem desenha a solução é quem constrói — sem intermediários, sem perda de contexto.",
     "p2": "Cada projeto começa pelo problema real do negócio: o que precisa gerar resultado antes de qualquer decisão de tecnologia. É essa leitura de produto que separa um site bonito de um site que vende.",
-    "p3": "Trabalhamos sem atalhos porque o custo da dívida técnica sempre aparece — na manutenção, no crescimento, na próxima feature. O que entregamos continua funcionando muito depois do lançamento.",
+    "p3": "Trabalho sem atalhos porque o custo da dívida técnica sempre aparece — na manutenção, no crescimento, na próxima feature. O que entrego continua funcionando muito depois do lançamento.",
     "cta": "Conhecer a trajetória do fundador",
     "operating_base": "Base operacional",
     "profile_label": "Perfil",
@@ -145,7 +145,7 @@
     ],
     "profile_cards": [
       {
-        "eyebrow": "Como trabalhamos",
+        "eyebrow": "Como eu trabalho",
         "title": "Produto de ponta a ponta, sem intermediários",
         "description": "Design, desenvolvimento e entrega numa só responsabilidade. Você fala direto com quem toma as decisões técnicas — e sabe o porquê de cada uma."
       },
@@ -162,7 +162,7 @@
     ]
   },
   "process": {
-    "eyebrow": "04 / Processo",
+    "eyebrow": "03 / Processo",
     "title": "Do briefing ao lançamento",
     "lead": "Veja o que você recebe e aprova em cada etapa.",
     "steps": [
@@ -294,7 +294,7 @@
         "a": "Normalmente 50% na aprovação da proposta e 50% na entrega, via PIX ou transferência. Para projetos maiores, dá para parcelar por etapa entregue."
       },
       {
-        "q": "Vocês usam template pronto?",
+        "q": "Você usa template pronto?",
         "a": "Não. Todo projeto tem design exclusivo, desenhado a partir do seu negócio e aprovado por você antes do desenvolvimento. É isso que diferencia um site que representa sua marca de um site igual aos outros."
       },
       {
@@ -302,7 +302,7 @@
         "a": "Todo projeto inclui um período de suporte pós-lançamento para ajustes. Depois disso, você pode contratar manutenção contínua ou evoluir o projeto por demanda — o código é seu."
       },
       {
-        "q": "Atendem fora de Vitória?",
+        "q": "Você atende fora de Vitória?",
         "a": "Sim. O estúdio fica em Vitória, ES, mas o atendimento é 100% remoto para todo o Brasil — briefing, aprovações e reuniões acontecem online."
       }
     ]
@@ -393,6 +393,8 @@
       "error_text": "Não foi possível enviar agora. Você pode tentar de novo ou mandar o briefing direto pelo WhatsApp:",
       "error_whatsapp": "Enviar pelo WhatsApp",
       "rate_limited": "Muitos envios em pouco tempo. Aguarde um pouco ou chame direto no WhatsApp.",
+      "privacy_note": "Ao enviar, você concorda com a",
+      "privacy_link": "Política de Privacidade",
       "validation": {
         "name_required": "Informe seu nome",
         "email_invalid": "Informe um e-mail válido",
@@ -401,10 +403,11 @@
       }
     },
     "direct_label": "Contato direto",
-    "direct_text": "Prefere pular o formulário? Fale agora com o estúdio:"
+    "direct_text": "Prefere pular o formulário? Fale agora com o estúdio:",
+    "cta_fill": "Preencher briefing"
   },
   "contact": {
-    "eyebrow": "05 / Contato",
+    "eyebrow": "04 / Contato",
     "headline_1": "Vamos construir",
     "headline_2": "algo juntos.",
     "availability": "Conte o que precisa construir. Você pode mandar um briefing ou falar direto comigo pelo WhatsApp.",
@@ -434,8 +437,8 @@
         "answer": "Landing pages e sites: 1 a 3 semanas. Sistemas web e e-commerce: 4 a 8 semanas. O cronograma é definido por escrito antes de começar."
       },
       {
-        "label": "Fazem e-commerce?",
-        "prompt": "Vocês desenvolvem lojas virtuais com pagamento por PIX e cartão?",
+        "label": "Faz e-commerce?",
+        "prompt": "Você desenvolve lojas virtuais com pagamento por PIX e cartão?",
         "answer": "Sim — lojas completas com checkout otimizado, PIX, cartão e boleto via gateways como Mercado Pago, além de painel de gestão de produtos e pedidos."
       },
       {
@@ -445,7 +448,8 @@
       }
     ],
     "assistant_details": "Abrir assistente e perguntas rápidas",
-    "assistant_close": "Fechar assistente"
+    "assistant_close": "Fechar assistente",
+    "ai_notice": "As respostas são geradas por IA (Google Gemini). Não envie dados sensíveis."
   },
   "colophon": {
     "eyebrow": "07 / Marca",
@@ -458,7 +462,7 @@
     "follow_label": "Seguir",
     "stack_label": "Stack do estúdio",
     "founder_role": "Fundador",
-    "portrait_alt": "José Luiz Mendes, fundador da MendeShift",
+    "portrait_alt": "José Luiz Mendes, fundador do MendeShift",
     "cta_project": "Iniciar projeto",
     "privacy": "Privacidade",
     "terms": "Termos",
@@ -482,7 +486,7 @@
   "experience_section": {
     "eyebrow_experience": "01 / Experiência",
     "title_experience": "Trabalho profissional",
-    "lead_experience": "Engenharia de software em produção, em projetos estratégicos para o Governo do Estado do Espírito Santo.",
+    "lead_experience": "Engenharia de software em produção: integrações na TOTVS e projetos estratégicos para o Governo do Estado do Espírito Santo.",
     "eyebrow_stack": "02 / Stack Tecnológico",
     "title_stack": "Tecnologias e ferramentas",
     "eyebrow_education": "03 / Formação"
@@ -505,7 +509,7 @@
     "service_cta": "Serviço relacionado: {service}"
   },
   "blog": {
-    "eyebrow": "05 / Escritos",
+    "eyebrow": "Blog / Escritos",
     "title": "Escritos",
     "lead": "Notas sobre arquitetura, engenharia e o que estou aprendendo — em público.",
     "read_more": "Ler",

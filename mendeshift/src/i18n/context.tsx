@@ -37,6 +37,11 @@ type TFunction = {
 
 export function useTranslations(namespace: string): TFunction {
   const { messages } = useContext(IntlContext);
+  if (process.env.NODE_ENV !== "production" && !(namespace in messages)) {
+    console.warn(
+      `[i18n] namespace "${namespace}" não está no payload do cliente — inclua em src/i18n/client-namespaces.ts`,
+    );
+  }
   const ns = (messages[namespace] ?? {}) as Record<string, unknown>;
 
   // Object.assign numa expressão só: mutar `t` depois de criado viola a

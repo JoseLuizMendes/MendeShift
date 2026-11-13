@@ -54,7 +54,9 @@ export default async function ProjectPage({ params }: Props) {
     name: project.title,
     description: project.shortDesc,
     url: `${SITE_URL}${href(`/projetos/${slug}`)}`,
-    creator: { "@type": "Organization", name: "MendeShift" },
+    inLanguage: locale === "pt" ? "pt-BR" : "en",
+    keywords: project.tech.join(", "),
+    creator: { "@id": `${SITE_URL}/#studio` },
     ...(project.previewImage && { image: `${SITE_URL}${project.previewImage}` }),
   };
 

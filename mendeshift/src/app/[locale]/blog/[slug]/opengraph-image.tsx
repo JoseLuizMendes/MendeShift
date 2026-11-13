@@ -2,6 +2,8 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
+import { SITE_HOST } from "@/lib/metadata";
+
 import { getBlogPost, type Locale } from "@/lib/blog";
 
 /** OG image por post — identidade do estúdio (dark + #ff4d4f) via next/og. */
@@ -107,7 +109,7 @@ export default async function PostOpenGraphImage({
             {tagline}
           </span>
           <span style={{ fontSize: 20, letterSpacing: "0.2em", color: MUTED }}>
-            mendeshift.vercel.app
+            {SITE_HOST}
           </span>
         </div>
       </div>
