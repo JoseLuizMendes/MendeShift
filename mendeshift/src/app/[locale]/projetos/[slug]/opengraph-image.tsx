@@ -2,6 +2,8 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
+import { SITE_HOST } from "@/lib/metadata";
+
 import { getProjectBySlug, serviceAnchors } from "@/lib/projects";
 
 /**
@@ -142,7 +144,7 @@ export default async function CaseOpenGraphImage({
             {project?.metric ?? ""}
           </span>
           <span style={{ fontSize: 20, letterSpacing: "0.2em", color: MUTED }}>
-            mendeshift.vercel.app
+            {SITE_HOST}
           </span>
         </div>
       </div>

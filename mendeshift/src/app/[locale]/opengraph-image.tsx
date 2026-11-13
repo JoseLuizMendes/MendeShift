@@ -2,6 +2,8 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
+import { SITE_HOST } from "@/lib/metadata";
+
 /**
  * OG image da agência (dark + accent #ff4d4f), gerada com next/og.
  * Substitui o card pessoal da era portfólio. A mesma infraestrutura
@@ -19,12 +21,12 @@ const MUTED = "#8a8a93";
 const taglines: Record<string, { studio: string; line: string; location: string }> = {
   pt: {
     studio: "Estúdio Digital",
-    line: "Sites, sistemas e e-commerces que transformam presença digital em resultado.",
+    line: "Sites e sistemas com quem desenha e constrói.",
     location: "Vitória, ES — Brasil",
   },
   en: {
     studio: "Digital Studio",
-    line: "Websites, systems and e-commerce that turn digital presence into results.",
+    line: "Websites and systems, directly with the person who builds them.",
     location: "Vitória, Brazil",
   },
 };
@@ -79,7 +81,7 @@ export default async function OpenGraphImage({
             </span>
           </div>
           <span style={{ fontSize: 20, letterSpacing: "0.2em", color: MUTED }}>
-            mendeshift.vercel.app
+            {SITE_HOST}
           </span>
         </div>
 

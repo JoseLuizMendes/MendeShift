@@ -55,6 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     languages: {
       en: `${SITE_URL}/blog/${enSlug}`,
       pt: `${SITE_URL}/pt/blog/${ptSlug}`,
+      "x-default": `${SITE_URL}/blog/${enSlug}`,
     },
   };
   return base;
@@ -78,8 +79,10 @@ export default async function BlogPostPage({ params }: Props) {
     inLanguage: post.locale,
     keywords: post.frontmatter.tags.join(", "),
     url: `${SITE_URL}${locale === "pt" ? "/pt" : ""}/blog/${slug}`,
-    author: { "@type": "Person", name: "José Luiz Mendes" },
-    publisher: { "@type": "Organization", name: "MendeShift" },
+    mainEntityOfPage: `${SITE_URL}${locale === "pt" ? "/pt" : ""}/blog/${slug}`,
+    image: `${SITE_URL}${locale === "pt" ? "/pt" : ""}/blog/${slug}/opengraph-image`,
+    author: { "@id": `${SITE_URL}/#founder` },
+    publisher: { "@id": `${SITE_URL}/#studio` },
   };
 
   return (

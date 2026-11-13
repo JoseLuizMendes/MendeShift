@@ -1,40 +1,61 @@
 import { NextResponse } from "next/server";
+import { z } from "zod";
 
 import { extractChatLead, notifyChatLead } from "@/lib/chat-lead";
 import { CHAT_SYSTEM_PROMPT } from "@/lib/chat-prompt";
 import {
   MAX_HISTORY_MESSAGES,
+  MAX_ASSISTANT_CHARS,
   MAX_INPUT_CHARS,
+  MAX_REQUEST_MESSAGES,
   globalLimiter,
   ipLimiter,
   safeLimit,
 } from "@/lib/rate-limit";
 
-interface ChatMessage {
-  role: string;
-  content: string;
-}
+/**
+ * Contrato do corpo da request. O histórico vem do cliente, então é
+ * validado por inteiro: só os papéis que o chat realmente produz, cada
+ * mensagem com teto de tamanho e um limite de mensagens — sem isso dava
+ * para mandar históricos gigantes (custo de tokens) ou papéis arbitrários.
+ */
+const chatRequestSchema = z.object({
+  messages: z
+    .array(
+      z
+        .object({
+          role: z.enum(["user", "assistant"]),
+          // Respostas do assistente podem passar do teto do usuário
+          // (maxOutputTokens: 1000), então têm um limite próprio, mais folgado.
+          content: z.string().trim().min(1).max(MAX_ASSISTANT_CHARS),
+        })
+        .refine(
+          (message) =>
+            message.role !== "user" || message.content.length <= MAX_INPUT_CHARS,
+        ),
+    )
+    .min(1)
+    .max(MAX_REQUEST_MESSAGES),
+});
 
 export async function POST(request: Request) {
   try {
-    const { messages } = (await request.json()) as { messages?: ChatMessage[] };
-
-    if (!messages || !Array.isArray(messages)) {
-      return NextResponse.json({ error: "Invalid messages format" }, { status: 400 });
+    let body: unknown;
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json({ error: "invalid_json" }, { status: 400 });
     }
 
-    // --- Barreira de conteúdo: rejeita inputs gigantes ---
-    const lastUserMessage = [...messages]
-      .reverse()
-      .find((msg) => msg?.role === "user");
-    if (
-      typeof lastUserMessage?.content === "string" &&
-      lastUserMessage.content.length > MAX_INPUT_CHARS
-    ) {
-      return NextResponse.json(
-        { error: `Message too long (max ${MAX_INPUT_CHARS} characters)` },
-        { status: 400 }
-      );
+    const parsed = chatRequestSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "invalid_messages" }, { status: 400 });
+    }
+    const { messages } = parsed.data;
+
+    // A conversa precisa terminar numa mensagem do usuário.
+    if (messages[messages.length - 1].role !== "user") {
+      return NextResponse.json({ error: "invalid_messages" }, { status: 400 });
     }
 
     // --- Rate limit por IP: barra o usuário abusivo ---

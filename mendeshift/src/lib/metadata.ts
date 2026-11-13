@@ -3,14 +3,28 @@ import type { Metadata } from "next";
 /**
  * URL pública do site. Alimenta sitemap, robots, canonicals, og:url e JSON-LD.
  *
- * Definida por `NEXT_PUBLIC_SITE_URL` (setada na Vercel), com fallback para o
- * domínio atual. Quando o domínio próprio for registrado, basta atualizar a
- * env var na Vercel e redeployar — nenhum commit é necessário.
- * Como é `NEXT_PUBLIC_*`, o valor é inlined no build (SSG) e vale também no client.
+ * Ordem de resolução:
+ *  1. `NEXT_PUBLIC_SITE_URL` — setada na Vercel quando houver domínio próprio.
+ *  2. `VERCEL_PROJECT_PRODUCTION_URL` — variável de sistema da Vercel com o
+ *     domínio de produção do projeto (vale também em previews, então o
+ *     canonical de um preview continua apontando para produção).
+ *  3. Fallback fixo para build local.
+ *
+ * Um endereço errado aqui faz canonical/sitemap/og:image apontarem para um
+ * site que não existe — por isso o fallback não é mais digitado à mão.
+ * Só é lida no servidor (metadata, sitemap, feeds, OG).
  */
+const vercelProductionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://mendeshift.vercel.app"
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (vercelProductionHost
+    ? `https://${vercelProductionHost}`
+    : "https://mende-shift.vercel.app")
 ).replace(/\/$/, "");
+
+/** Host sem protocolo, para exibir nas imagens OG. */
+export const SITE_HOST = new URL(SITE_URL).host;
 
 type PageMetadataInput = {
   locale: string;
@@ -47,6 +61,8 @@ export function pageMetadata({
       languages: {
         en: `${SITE_URL}${path}`,
         pt: `${SITE_URL}/pt${path}`,
+        // Idioma padrão do roteamento (EN na raiz) para quem não casa com nenhum.
+        "x-default": `${SITE_URL}${path}`,
       },
     },
     openGraph: {

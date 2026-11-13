@@ -57,6 +57,15 @@ export const leadLimiter = redis
 /** Tamanho máximo (em caracteres) de uma mensagem de usuário. */
 export const MAX_INPUT_CHARS = 2000;
 
+/** Teto de uma mensagem do assistente reenviada no histórico. */
+export const MAX_ASSISTANT_CHARS = 8000;
+
+/**
+ * Máximo de mensagens aceitas por request. Folga sobre uma conversa real
+ * (o limite por IP é de 5 envios/hora); acima disso é abuso.
+ */
+export const MAX_REQUEST_MESSAGES = 40;
+
 /** Quantas mensagens do histórico são enviadas ao Gemini por turno. */
 export const MAX_HISTORY_MESSAGES = 10;
 
