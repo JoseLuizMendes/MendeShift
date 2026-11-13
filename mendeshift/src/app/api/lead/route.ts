@@ -7,7 +7,7 @@ import {
   serviceTypeLabels,
   timelineLabels,
 } from "@/lib/leads";
-import { leadLimiter } from "@/lib/rate-limit";
+import { leadLimiter, safeLimit } from "@/lib/rate-limit";
 
 /**
  * Captação de leads do formulário de briefing.
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     if (leadLimiter) {
       const ip =
         request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "anon";
-      const { success, reset } = await leadLimiter.limit(ip);
+      const { success, reset } = await safeLimit(leadLimiter, ip, "allow");
       if (!success) {
         const retryAfter = Math.max(1, Math.ceil((reset - Date.now()) / 1000));
         return NextResponse.json(

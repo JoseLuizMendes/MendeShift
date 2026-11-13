@@ -18,7 +18,9 @@ import { Redis } from "@upstash/redis";
 const url = process.env.UPSTASH_REDIS_REST_URL;
 const token = process.env.UPSTASH_REDIS_REST_TOKEN;
 
-const redis = url && token ? new Redis({ url, token }) : null;
+// Uma tentativa extra só: o padrão do cliente (5 retries com backoff) segura a
+// request por ~4,5 s quando o Redis está fora antes de finalmente falhar.
+const redis = url && token ? new Redis({ url, token, retry: { retries: 1 } }) : null;
 
 export const ipLimiter = redis
   ? new Ratelimit({
@@ -57,3 +59,29 @@ export const MAX_INPUT_CHARS = 2000;
 
 /** Quantas mensagens do histórico são enviadas ao Gemini por turno. */
 export const MAX_HISTORY_MESSAGES = 10;
+
+/**
+ * Consulta o limiter sem deixar uma falha do Redis (banco fora do ar, token
+ * sem permissão de escrita, timeout) derrubar a route.
+ *
+ * `onError` define o que fazer quando o Redis não responde:
+ *  - "allow": deixa passar — usado no formulário de briefing, onde perder um
+ *    lead custa mais do que ficar um tempo sem rate limit (honeypot e zod
+ *    continuam valendo).
+ *  - "deny": bloqueia — usado no chat, que gasta cota paga do Gemini; o
+ *    cliente mostra a resposta de fallback apontando para briefing/WhatsApp.
+ */
+export async function safeLimit(
+  limiter: Ratelimit | null,
+  key: string,
+  onError: "allow" | "deny",
+): Promise<{ success: boolean; reset: number }> {
+  if (!limiter) return { success: true, reset: 0 };
+  try {
+    const { success, reset } = await limiter.limit(key);
+    return { success, reset };
+  } catch (error) {
+    console.error("Rate limiter unavailable:", error);
+    return { success: onError === "allow", reset: 0 };
+  }
+}
