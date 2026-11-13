@@ -4,7 +4,7 @@
 
 Portfólio e estúdio digital de José Luiz Mendes. O site reúne estudos de caso, artigos técnicos e experimentos de imagem e interação no navegador.
 
-[Ver o MendeShift em produção](https://mende-shift.vercel.app/pt)
+[Ver o MendeShift em produção](https://mende-shift.vercel.app/)
 
 ## Stack
 
@@ -22,10 +22,10 @@ Portfólio e estúdio digital de José Luiz Mendes. O site reúne estudos de cas
 
 ## O que tem
 
-- **Cases** com composições editoriais de interfaces reais, contexto de projeto e decisões de engenharia. [Abrir Cases](https://mende-shift.vercel.app/pt/projetos)
-- **AI Exploration** com cinco estudos visuais gerados no ImageGen, imagens WebP responsivas, granulação aplicada na galeria e prompts disponíveis para copiar. [Abrir AI Exploration](https://mende-shift.vercel.app/pt/ai-exploration)
+- **Cases** com composições editoriais de interfaces reais, contexto de projeto e decisões de engenharia. [Abrir Cases](https://mende-shift.vercel.app/projetos)
+- **AI Exploration** com cinco estudos visuais gerados no ImageGen, imagens WebP responsivas, granulação aplicada na galeria e prompts disponíveis para copiar. [Abrir AI Exploration](https://mende-shift.vercel.app/ai-exploration)
 - **O Estúdio e Processo** com retrato interativo em WebGL e um quebra-cabeça 3D cuja montagem acompanha a rolagem.
-- **Blog bilíngue** com artigos em MDX versionados no repositório. [Abrir o blog](https://mende-shift.vercel.app/pt/blog)
+- **Blog bilíngue** com artigos em MDX versionados no repositório. [Abrir o blog](https://mende-shift.vercel.app/blog)
 - **Chatbot de contato** com visual de terminal, Gemini, rate limit por IP, teto diário global e captação de leads pela conversa.
 - **Formulário de briefing** com honeypot anti-spam, rate limit próprio e fallback por WhatsApp se a API cair.
 

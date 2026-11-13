@@ -1,9 +1,9 @@
 import { getBlogPosts, type Locale } from "@/lib/blog";
-import { SITE_URL } from "@/lib/metadata";
+import { localizedUrl } from "@/lib/metadata";
 
 /**
  * Gera o XML do feed RSS 2.0 de um locale. Compartilhado pelas rotas
- * top-level `/blog/feed.xml` (en) e `/pt/blog/feed.xml` (pt).
+ * top-level `/blog/feed.xml` (pt, locale padrão) e `/en/blog/feed.xml` (en).
  *
  * Fica FORA de [locale] de propósito: o middleware do next-intl ignora
  * paths com ponto (`.xml`), então a URL sem prefixo não seria reescrita —
@@ -21,7 +21,7 @@ function escapeXml(value: string): string {
 
 export function buildBlogFeed(locale: Locale): string {
   const posts = getBlogPosts(locale);
-  const base = locale === "pt" ? `${SITE_URL}/pt` : SITE_URL;
+  const base = localizedUrl(locale);
   const title = "MendeShift — Blog";
   const description =
     locale === "pt"

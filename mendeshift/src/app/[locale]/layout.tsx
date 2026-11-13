@@ -6,7 +6,7 @@ import { pickClientMessages } from "@/i18n/client-namespaces";
 import { TranslationsProvider } from "@/i18n/context";
 import { notFound } from "next/navigation";
 import { getServerTranslations, loadMessages } from "@/i18n/server";
-import { SITE_URL, pageMetadata } from "@/lib/metadata";
+import { SITE_URL, localizedUrl, pageMetadata } from "@/lib/metadata";
 
 import { AnalyticsEvents } from "@/_components/analytics-events";
 import { PortfolioHeader } from "@/_components/portfolio-shell";
@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: t("home_title"),
       description: t("og_desc"),
-      url: locale === "pt" ? `${SITE_URL}/pt` : SITE_URL,
+      url: localizedUrl(locale),
       siteName: "MendeShift",
       locale: locale === "pt" ? "pt_BR" : "en_US",
       type: "website",
@@ -83,7 +83,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
  * makesOffer espelha os 4 serviços de messages/{pt,en}.json (services.items).
  */
 function siteJsonLd(locale: string, description: string, services: string[]) {
-  const home = locale === "pt" ? `${SITE_URL}/pt` : SITE_URL;
+  const home = localizedUrl(locale);
   const founderId = `${SITE_URL}/#founder`;
   const studioId = `${SITE_URL}/#studio`;
 
@@ -97,7 +97,8 @@ function siteJsonLd(locale: string, description: string, services: string[]) {
         description,
         url: home,
         logo: `${SITE_URL}/icon.svg`,
-        image: `${home}/opengraph-image`,
+        // Com o locale explícito: é a rota real da imagem, sem redirect.
+        image: `${SITE_URL}/${locale}/opengraph-image`,
         telephone: "+55 27 99630-0333",
         email: "josemendess004@gmail.com",
         address: {

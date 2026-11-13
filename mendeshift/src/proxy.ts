@@ -5,7 +5,10 @@ export default createMiddleware(routing);
 
 export const config = {
   matcher: [
-    // Match all pathnames except for internal Next.js paths, api routes, and static files
-    "/((?!api|_next|_vercel|.*\\..*).*)",
+    // Tudo, menos caminhos internos do Next, rotas de API, arquivos estáticos
+    // e as imagens OG. O Next anuncia a og:image com o locale explícito
+    // (/pt/opengraph-image); passando pelo middleware, a do locale padrão
+    // levaria um redirect — e nem todo crawler de preview segue redirect.
+    "/((?!api|_next|_vercel|.*\\..*|.*opengraph-image.*).*)",
   ],
 };

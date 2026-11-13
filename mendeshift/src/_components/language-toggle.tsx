@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "@/i18n/context";
+import { localeHref } from "@/lib/navigation";
 
 export function LanguageToggle() {
   const locale = useLocale();
@@ -14,7 +15,9 @@ export function LanguageToggle() {
     document.cookie = `NEXT_LOCALE=${targetLocale}; path=/; max-age=31536000; SameSite=Lax${secure}`;
 
     const override = document.getElementById("lang-alternate")?.dataset[targetLocale];
-    const path = locale === "pt" ? pathname.replace(/^\/pt(?=\/|$)/, "") || "/" : `/pt${pathname}`;
+    // Caminho sem prefixo de idioma, reprefixado para o idioma de destino.
+    const bare = pathname.replace(/^\/(pt|en)(?=\/|$)/, "") || "/";
+    const path = localeHref(bare, targetLocale);
     window.location.href = override ?? `${path}${window.location.hash}`;
   }
 

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { DEFAULT_LOCALE, localePrefix } from "@/lib/navigation";
+
 /**
  * URL pública do site. Alimenta sitemap, robots, canonicals, og:url e JSON-LD.
  *
@@ -26,6 +28,11 @@ export const SITE_URL = (
 /** Host sem protocolo, para exibir nas imagens OG. */
 export const SITE_HOST = new URL(SITE_URL).host;
 
+/** URL absoluta de um caminho (sem locale, ex.: "/servicos") num locale. */
+export function localizedUrl(locale: string, path = ""): string {
+  return `${SITE_URL}${localePrefix(locale)}${path}`;
+}
+
 type PageMetadataInput = {
   locale: string;
   /** Caminho sem locale, começando com "/" (home = ""). Ex.: "/servicos". */
@@ -40,7 +47,7 @@ type PageMetadataInput = {
  * Sem isto, as subpáginas herdam `alternates`/`openGraph` do layout e
  * declaram a home como canonical — o que anula o SEO delas. Cada página
  * deve apontar canonical/og:url para o próprio endereço, seguindo a
- * convenção localePrefix "as-needed": EN na raiz, PT sob /pt.
+ * convenção localePrefix "as-needed": PT na raiz, EN sob /en.
  *
  * og:image não é definida aqui — vem do opengraph-image.tsx file-based
  * do segmento, que tem precedência.
@@ -51,24 +58,24 @@ export function pageMetadata({
   title,
   description,
 }: PageMetadataInput): Metadata {
-  const localizedUrl = `${SITE_URL}${locale === "pt" ? `/pt${path}` : path}`;
+  const url = localizedUrl(locale, path);
 
   return {
     title,
     description,
     alternates: {
-      canonical: localizedUrl,
+      canonical: url,
       languages: {
-        en: `${SITE_URL}${path}`,
-        pt: `${SITE_URL}/pt${path}`,
-        // Idioma padrão do roteamento (EN na raiz) para quem não casa com nenhum.
-        "x-default": `${SITE_URL}${path}`,
+        pt: localizedUrl("pt", path),
+        en: localizedUrl("en", path),
+        // Quem não casa com nenhum idioma recebe o locale padrão.
+        "x-default": localizedUrl(DEFAULT_LOCALE, path),
       },
     },
     openGraph: {
       title,
       description,
-      url: localizedUrl,
+      url,
       siteName: "MendeShift",
       locale: locale === "pt" ? "pt_BR" : "en_US",
       type: "website",

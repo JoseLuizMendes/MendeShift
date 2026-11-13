@@ -70,13 +70,19 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     const retiredCases = ["barber-saas", "agendamento-api", "spring-rest-api"];
-    return ["", "/pt"].flatMap((prefix) =>
-      retiredCases.map((slug) => ({
-        source: prefix + "/projetos/" + slug,
-        destination: prefix + "/projetos",
-        permanent: true,
-      })),
-    );
+    return [
+      // O feed em PT morava em /pt/blog/feed.xml quando o EN era o padrão.
+      // Caminhos com ponto não passam pelo middleware, então o redirect
+      // de /pt/... para a raiz precisa ser declarado aqui.
+      { source: "/pt/blog/feed.xml", destination: "/blog/feed.xml", permanent: true },
+      ...["", "/en"].flatMap((prefix) =>
+        retiredCases.map((slug) => ({
+          source: prefix + "/projetos/" + slug,
+          destination: prefix + "/projetos",
+          permanent: true,
+        })),
+      ),
+    ];
   },
 };
 

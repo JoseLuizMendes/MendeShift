@@ -1,6 +1,6 @@
 import { getBlogPosts } from "@/lib/blog";
 import { loadMessages } from "@/i18n/server";
-import { SITE_URL } from "@/lib/metadata";
+import { localizedUrl } from "@/lib/metadata";
 import { getProjectsByLocale } from "@/lib/projects";
 
 /**
@@ -21,7 +21,8 @@ export async function GET() {
   const meta = messages.meta as { home_desc: string };
   const services = (messages.services_page as { items: ServiceItem[] }).items;
   const faq = (messages.faq as { items: FaqItem[] }).items;
-  const pt = `${SITE_URL}/pt`;
+  const pt = localizedUrl("pt");
+  const en = localizedUrl("en");
 
   const lines = [
     "# MendeShift",
@@ -62,10 +63,10 @@ export async function GET() {
     "",
     "## English",
     "",
-    `- [Home](${SITE_URL}/): the same content in English.`,
-    `- [Services](${SITE_URL}/servicos)`,
-    `- [Cases](${SITE_URL}/projetos)`,
-    `- [Blog](${SITE_URL}/blog)`,
+    `- [Home](${en}): the same content in English.`,
+    `- [Services](${en}/servicos)`,
+    `- [Cases](${en}/projetos)`,
+    `- [Blog](${en}/blog)`,
     "",
   ];
 
