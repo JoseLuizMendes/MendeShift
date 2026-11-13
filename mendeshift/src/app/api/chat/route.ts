@@ -7,6 +7,7 @@ import {
   MAX_INPUT_CHARS,
   globalLimiter,
   ipLimiter,
+  safeLimit,
 } from "@/lib/rate-limit";
 
 interface ChatMessage {
@@ -40,7 +41,7 @@ export async function POST(request: Request) {
     if (ipLimiter) {
       const ip =
         request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "anon";
-      const { success, reset } = await ipLimiter.limit(ip);
+      const { success, reset } = await safeLimit(ipLimiter, ip, "deny");
       if (!success) {
         const retryAfter = Math.max(1, Math.ceil((reset - Date.now()) / 1000));
         return NextResponse.json(
@@ -52,7 +53,7 @@ export async function POST(request: Request) {
 
     // --- Teto global diário: seguro contra ataque distribuído ---
     if (globalLimiter) {
-      const { success } = await globalLimiter.limit("global");
+      const { success } = await safeLimit(globalLimiter, "global", "deny");
       if (!success) {
         return NextResponse.json({ error: "rate_limited" }, { status: 429 });
       }
@@ -168,8 +169,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ content: cleanReply });
   } catch (error) {
+    // Detalhe só no log: a mensagem crua pode expor infraestrutura
+    // (ex.: erros do Redis/Gemini) a quem chama a API.
     console.error("Chat route error:", error);
-    const message = error instanceof Error ? error.message : "Internal Server Error";
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json({ error: "internal_error" }, { status: 500 });
   }
 }
