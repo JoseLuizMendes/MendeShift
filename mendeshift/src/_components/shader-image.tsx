@@ -333,6 +333,7 @@ export function ShaderImage({
   sizes,
   priority,
   loading,
+  quality = 90,
   className,
   position = 0.5,
   trackParent = false,
@@ -343,6 +344,8 @@ export function ShaderImage({
   sizes: string;
   priority?: boolean;
   loading?: "eager" | "lazy";
+  /** Precisa estar em `images.qualities` do next.config.ts. */
+  quality?: 75 | 90;
   className?: string;
   position?: number;
   trackParent?: boolean;
@@ -405,7 +408,7 @@ export function ShaderImage({
 
   return (
     <div className={className ? "shader-image " + className : "shader-image"} ref={surfaceRef}>
-      <Image key={src} ref={imageRef} src={src} alt={alt} sizes={sizes} quality={90} fill preload={priority} loading={loading} style={imagePosition} />
+      <Image key={src} ref={imageRef} src={src} alt={alt} sizes={sizes} quality={quality} fill preload={priority} fetchPriority={priority ? "high" : undefined} loading={loading} style={imagePosition} />
       <canvas ref={canvasRef} aria-hidden="true" />
     </div>
   );

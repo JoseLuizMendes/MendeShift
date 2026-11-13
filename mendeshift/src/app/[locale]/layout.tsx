@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Bebas_Neue, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { pickClientMessages } from "@/i18n/client-namespaces";
 import { TranslationsProvider } from "@/i18n/context";
 import { notFound } from "next/navigation";
 import { getServerTranslations, loadMessages } from "@/i18n/server";
 import { SITE_URL, pageMetadata } from "@/lib/metadata";
 
+import { AnalyticsEvents } from "@/_components/analytics-events";
 import { PortfolioHeader } from "@/_components/portfolio-shell";
 import { SkipLink } from "@/_components/skip-link";
 import { SmoothScroll } from "@/_components/smooth-scroll";
@@ -173,7 +175,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <TranslationsProvider locale={locale} messages={messages}>
+        <TranslationsProvider locale={locale} messages={pickClientMessages(messages)}>
           <div className="portfolio-grain" aria-hidden="true" />
           <SkipLink />
           <SmoothScroll>
@@ -181,6 +183,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             <div id="main-content" tabIndex={-1} className="outline-none">
               {children}
             </div>
+            <AnalyticsEvents />
             <Analytics/>
             <SpeedInsights/>
           </SmoothScroll>

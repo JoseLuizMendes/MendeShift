@@ -2,7 +2,10 @@
 
 import { FormEvent, KeyboardEvent, type MouseEvent, type PointerEvent, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDown, Terminal } from "lucide-react";
-import { useTranslations } from "@/i18n/context";
+import Link from "next/link";
+import { track } from "@vercel/analytics";
+import { useLocale, useTranslations } from "@/i18n/context";
+import { localeHref } from "@/lib/navigation";
 
 import { BitmapChevron } from "@/_components/bitmap-chevron";
 import { Card } from "@/_components/ui/card";
@@ -22,6 +25,8 @@ const ghostExitMs = 440;
 
 export function ContactChat() {
   const t = useTranslations("contact");
+  const colophon = useTranslations("colophon");
+  const locale = useLocale();
   const quickPrompts = t.raw("quick_prompts") as QuickPrompt[];
 
   const initialMessages: Message[] = useMemo(
@@ -151,6 +156,7 @@ export function ContactChat() {
 
     setMessages((prev) => [...prev, userMsg]);
     setInputValue("");
+    track("chat_message_sent", { locale });
     simulateResponse(trimmed, messages);
   };
 
@@ -172,6 +178,7 @@ export function ContactChat() {
       className="group/assistant mt-4"
       onToggle={(event) => {
         if (!event.currentTarget.open) return;
+        track("chat_opened", { locale });
         setHasFocusedComposer(false);
         setBootRun((run) => run + 1);
       }}
@@ -315,6 +322,15 @@ export function ContactChat() {
               }))}
             />
           </section>
+          <p className="mt-4 font-mono text-[11px] leading-relaxed text-muted-foreground">
+            {t("ai_notice")}{" "}
+            <Link
+              href={localeHref("/privacidade", locale)}
+              className="text-foreground underline decoration-accent underline-offset-4 transition-colors interaction-motion hover:text-accent"
+            >
+              {colophon("privacy")}
+            </Link>
+          </p>
         </div>
       </div>
     </details>

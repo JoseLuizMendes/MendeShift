@@ -288,8 +288,10 @@
   to { transform: translateX(-50%); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .signals-marquee { overflow-x: auto; scroll-snap-type: x proximity; }
+/* Sem hover (toque) não há como pausar a esteira e os cards passavam
+   cortados no meio do texto: vira uma fileira que a pessoa arrasta. */
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .signals-marquee { overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; }
   .signals-marquee .signals-marquee-track { animation: none; }
   .signals-marquee-group { padding-inline-end: 0; }
   .signals-marquee-group[aria-hidden="true"] { display: none; }
