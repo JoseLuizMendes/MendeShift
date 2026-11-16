@@ -14,6 +14,7 @@ export type AddonDetail = {
   case_note: string;
   deliverables: string[];
   cta_site: string;
+  cta_case: string;
 };
 
 /**
@@ -61,6 +62,9 @@ export function AddonCard({
                 className="min-h-11 w-full sm:w-auto"
               >
                 {addon.cta_site} <span aria-hidden="true">↗</span>
+              </Button>
+              <Button href="/projetos/mendebot" className="min-h-11 w-full justify-center sm:w-auto">
+                {addon.cta_case}
               </Button>
               <Button href="/contato" className="min-h-11 w-full justify-center sm:w-auto">
                 {labels.cta}

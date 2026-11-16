@@ -38,9 +38,15 @@ export default async function ProjectPage({ params }: Props) {
     getServerTranslations(locale, "portfolio"),
     loadMessages(locale),
   ]);
-  const serviceAnchor = serviceAnchors[project.serviceType];
-  const services = (messages.services_page as { items: { slug: string; title: string }[] }).items;
-  const serviceTitle = services.find((service) => service.slug === serviceAnchor)?.title;
+  // Um case de serviço adicional aponta para o bloco do adicional em /servicos.
+  const servicesPage = messages.services_page as {
+    items: { slug: string; title: string }[];
+    addon: { slug: string; title: string };
+  };
+  const serviceAnchor = project.addon ? servicesPage.addon.slug : serviceAnchors[project.serviceType];
+  const serviceTitle = project.addon
+    ? servicesPage.addon.title
+    : servicesPage.items.find((service) => service.slug === serviceAnchor)?.title;
   const gallery = project.gallery;
   const projects = getProjectsByLocale(locale);
   const index = projects.findIndex((item) => item.slug === slug);
@@ -109,7 +115,7 @@ export default async function ProjectPage({ params }: Props) {
                 />
               </div>
               <figcaption className="portfolio-mono">
-                {t("editorial_mockup")}
+                {t(project.previewKind === "screenshot" ? "screen_capture" : "editorial_mockup")}
               </figcaption>
             </figure>
           )}

@@ -226,7 +226,8 @@
         "Connection to the systems you choose",
         "Production rollout and guidance to monitor, pause and resume"
       ],
-      "cta_site": "Visit MendeBot"
+      "cta_site": "Visit MendeBot",
+      "cta_case": "Read the case"
     },
     "items": [
       {
@@ -514,6 +515,7 @@
   "project_detail": {
     "gallery_title": "Project screens",
     "editorial_mockup": "Editorial mockup",
+    "screen_capture": "Screenshot",
     "booking_article": "How I prevented overlapping bookings ↗",
     "all_projects": "Back to all cases",
     "home": "Home",
