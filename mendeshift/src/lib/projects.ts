@@ -1,4 +1,5 @@
 import type { Lead } from "@/lib/leads";
+import { MENDEBOT_URL } from "@/lib/mendebot";
 
 /** Mesmo union do lead — liga cada case a um dos 4 serviços vendidos. */
 export type ServiceType = Lead["serviceType"];
@@ -16,12 +17,16 @@ export type Project = {
   category: string;
   /** Serviço do estúdio que este case demonstra (badge/link no case). */
   serviceType: ServiceType;
+  /** Case do serviço adicional (MendeBot): o link de serviço aponta para o bloco do adicional. */
+  addon?: boolean;
   title: string;
   shortDesc: string;
   tech: string[];
   metric?: string;
   previewImage?: string;
   previewImageAlt?: string;
+  /** "screenshot" troca a legenda "Composição editorial" por "Captura de tela". */
+  previewKind?: "screenshot";
   gallery?: {
     src: string;
     width: number;
@@ -280,6 +285,72 @@ export const projects: Project[] = [
       ],
       challenges: ["Fazer a agenda semanal funcionar bem no desktop e manter o site público legível no celular."],
       outcome: "A equipe pode editar o conteúdo do site e administrar a agenda no mesmo sistema.",
+    },
+  },
+  {
+    slug: "mendebot",
+    category: "Automation & bots",
+    serviceType: "sistema",
+    addon: true,
+    title: "MendeBot",
+    metric: "In production on Google Cloud Run",
+    shortDesc: "The studio's custom-bot service and its first bot: a Telegram deals publisher with a queue, a schedule and a web panel.",
+    tech: ["Next.js", "Three.js", "GSAP", "Python", "PostgreSQL", "Cloud Run"],
+    previewImage: "/portfolio/mendebot-hero.webp",
+    previewImageAlt: "MendeBot homepage with a 3D robot head over a light grid",
+    previewKind: "screenshot",
+    publicUrl: MENDEBOT_URL,
+    gallery: [
+      {
+        src: "/portfolio/mendebot-chapter.webp",
+        width: 2880,
+        height: 1920,
+        caption: { en: "The opening: the robot changes pose with each chapter of the scroll", pt: "A abertura: o robô muda de pose a cada capítulo da rolagem" },
+      },
+      {
+        src: "/portfolio/mendebot-chat.webp",
+        width: 2880,
+        height: 1920,
+        caption: { en: "The bot's replies in the private chat and the offer published in the channel", pt: "As respostas do bot no chat privado e a oferta publicada no canal" },
+      },
+    ],
+    context: "MendeBot is the studio's custom-bot service. It has its own site and a first bot in production: a Telegram bot that queues Amazon Brazil affiliate offers and publishes one per time slot.",
+    problem: "Posting offers to a channel by hand means registering each product, checking the affiliate link and being online at the right time. The service also needed a site that shows what a custom bot does before anyone asks for a quote.",
+    constraints: "The bot runs under a monthly spending cap. Only the owner can change the queue, and a send with an uncertain result must be checked before it is repeated.",
+    solution: "Built the bot in Python with a PostgreSQL queue on Neon, an HTTPS service on Cloud Run and Cloud Scheduler for the time slots. Built the site in Next.js, with a Three.js robot head driven by the scroll and a private web panel for the queue.",
+    engineeringDecisions: [
+      "Cloud Scheduler triggers each publication, and the bot only accepts the call with the scheduler account's OIDC token.",
+      "The Telegram webhook validates a secret. Admin commands only work in a private chat, from authorized user IDs.",
+      "The product's ASIN identifies duplicates, so the same offer cannot enter the queue twice.",
+      "A send with an uncertain result is flagged for the owner to verify instead of being retried automatically.",
+      "The 3D scene stays still under reduced motion and falls back to a static shape without WebGL.",
+    ],
+    challenges: [
+      "Keep the service inside a monthly spending cap, with Cloud Run scaling to zero between calls.",
+      "Pace a scroll-driven 3D opening so each chapter gets its own pose and the content is never far away.",
+    ],
+    outcome: "The bot is in production on Cloud Run, and the site presents the service with that bot as its live case.",
+    pt: {
+      category: "Automação e bots",
+      metric: "Em produção no Google Cloud Run",
+      shortDesc: "O serviço de bots sob medida do estúdio e seu primeiro bot: um publicador de ofertas no Telegram com fila, agendamento e painel web.",
+      previewImageAlt: "Página inicial do MendeBot com uma cabeça de robô 3D sobre uma grade clara",
+      context: "O MendeBot é o serviço de bots sob medida do estúdio. Tem site próprio e um primeiro bot em produção: um bot de Telegram que enfileira ofertas de associado da Amazon Brasil e publica uma por horário.",
+      problem: "Publicar ofertas em um canal à mão exige cadastrar cada produto, conferir o link de associado e estar online na hora certa. O serviço também precisava de um site que mostrasse o que um bot sob medida faz antes de alguém pedir orçamento.",
+      constraints: "O bot roda sob um teto de gastos mensal. Só o dono altera a fila, e um envio de resultado incerto precisa ser conferido antes de ser repetido.",
+      solution: "Desenvolvi o bot em Python, com a fila em PostgreSQL no Neon, um serviço HTTPS no Cloud Run e o Cloud Scheduler para os horários. O site é em Next.js, com uma cabeça de robô em Three.js conduzida pela rolagem e um painel web privado para a fila.",
+      engineeringDecisions: [
+        "O Cloud Scheduler dispara cada publicação, e o bot só aceita a chamada com o token OIDC da conta do agendador.",
+        "O webhook do Telegram valida um segredo. Os comandos de administração só funcionam no chat privado, para IDs de usuário autorizados.",
+        "O ASIN do produto identifica duplicatas, então a mesma oferta não entra duas vezes na fila.",
+        "Um envio de resultado incerto fica marcado para o dono conferir, em vez de ser repetido automaticamente.",
+        "A cena 3D fica parada com movimento reduzido e vira uma forma estática quando não há WebGL.",
+      ],
+      challenges: [
+        "Manter o serviço dentro de um teto de gastos mensal, com o Cloud Run voltando a zero instâncias entre as chamadas.",
+        "Dar ritmo a uma abertura 3D conduzida pela rolagem, com uma pose por capítulo e o conteúdo sempre por perto.",
+      ],
+      outcome: "O bot está em produção no Cloud Run, e o site apresenta o serviço com esse bot como caso em operação.",
     },
   },
 ];

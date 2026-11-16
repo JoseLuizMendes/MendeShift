@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getServerTranslations, loadMessages } from "@/i18n/server";
 import { pageMetadata } from "@/lib/metadata";
 
+import { AddonCard, type AddonDetail } from "@/_components/addon-card";
 import { ColophonSection } from "@/_components/colophon-section";
 import { FaqSection, type FaqItem } from "@/_components/faq-section";
 import { ProcessSection } from "@/_components/process-section";
@@ -36,6 +37,7 @@ type ServicesPageMessages = {
   timeline_label: string;
   price_label: string;
   faq_title: string;
+  addon: AddonDetail;
   items: ServiceDetail[];
 };
 
@@ -106,6 +108,10 @@ export default async function ServicesPage({ params }: Props) {
                   }}
                 />
               ))}
+              <AddonCard
+                addon={t.addon}
+                labels={{ deliverables: t.deliverables_label, cta: t.cta_briefing }}
+              />
             </div>
           </Container>
         </section>

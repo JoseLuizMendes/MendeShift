@@ -1,6 +1,7 @@
 import { getBlogPosts } from "@/lib/blog";
 import { loadMessages } from "@/i18n/server";
 import { localizedUrl } from "@/lib/metadata";
+import { MENDEBOT_URL } from "@/lib/mendebot";
 import { getProjectsByLocale } from "@/lib/projects";
 
 /**
@@ -19,7 +20,12 @@ type FaqItem = { q: string; a: string };
 export async function GET() {
   const messages = await loadMessages("pt");
   const meta = messages.meta as { home_desc: string };
-  const services = (messages.services_page as { items: ServiceItem[] }).items;
+  const servicesPage = messages.services_page as {
+    items: ServiceItem[];
+    addon: { title: string; desc: string; case_note: string };
+  };
+  const services = servicesPage.items;
+  const addon = servicesPage.addon;
   const faq = (messages.faq as { items: FaqItem[] }).items;
   const pt = localizedUrl("pt");
   const en = localizedUrl("en");
@@ -36,6 +42,10 @@ export async function GET() {
     ...services.map(
       (item) => `- [${item.title}](${pt}/servicos#${item.slug}): ${item.desc} Prazo típico: ${item.timeline}.`,
     ),
+    "",
+    "## Adicional",
+    "",
+    `- [${addon.title}](${MENDEBOT_URL}): ${addon.desc} ${addon.case_note}`,
     "",
     "## Cases",
     "",

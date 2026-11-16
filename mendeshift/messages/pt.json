@@ -40,6 +40,11 @@
     "title": "O que eu faço",
     "lead": "Quatro frentes de atuação — do site institucional ao produto digital completo.",
     "link": "Ver entregáveis, prazos e processo",
+    "addon": {
+      "label": "Adicional",
+      "text": "MendeBot: bots sob medida para as tarefas que se repetem no seu negócio.",
+      "link": "Conhecer o MendeBot"
+    },
     "items": [
       {
         "no": "No. 01",
@@ -208,6 +213,22 @@
     "timeline_label": "Prazo típico",
     "price_label": "Investimento",
     "faq_title": "Perguntas frequentes",
+    "addon": {
+      "slug": "mendebot",
+      "label": "Adicional",
+      "category": "Automação",
+      "title": "MendeBot",
+      "desc": "Bots sob medida para as tarefas que se repetem no seu negócio. Você descreve a rotina, eu mapeio as regras, programo o bot e coloco para rodar no canal que você já usa. Entra no escopo de um site ou sistema do estúdio, ou é contratado à parte.",
+      "case_note": "Caso em operação: um bot de ofertas no Telegram que recebe o cadastro por comando, organiza a fila e publica uma oferta por horário, com painel web.",
+      "deliverables": [
+        "Mapeamento da tarefa, das regras e das exceções",
+        "Bot programado e testado com você antes de ligar",
+        "Conexão com os sistemas que você escolher",
+        "Operação em produção e orientação para acompanhar, pausar e retomar"
+      ],
+      "cta_site": "Conhecer o MendeBot",
+      "cta_case": "Ver o case"
+    },
     "items": [
       {
         "slug": "sites-e-landing-pages",
@@ -494,6 +515,7 @@
   "project_detail": {
     "gallery_title": "Telas do projeto",
     "editorial_mockup": "Composição editorial",
+    "screen_capture": "Captura de tela",
     "booking_article": "Como evitei reservas sobrepostas ↗",
     "all_projects": "Voltar para todos os cases",
     "home": "Início",
