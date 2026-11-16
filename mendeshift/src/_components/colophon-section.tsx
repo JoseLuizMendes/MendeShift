@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLocale, useTranslations } from "@/i18n/context";
+import { MENDEBOT_HREF } from "@/lib/mendebot";
 import { localeHref } from "@/lib/navigation";
 import { PortfolioCta } from "./portfolio-cta";
 import { Container } from "./ui/container";
@@ -44,6 +45,7 @@ export function ColophonSection({ showProjectCta = true }: { showProjectCta?: bo
               {pages.map(({ label, href }) => (
                 <li key={href}><Link href={localeHref(href, locale)} className={linkClass}>{nav(label)}</Link></li>
               ))}
+              <li><a href={MENDEBOT_HREF} target="_blank" rel="noopener" className={linkClass}>MendeBot ↗</a></li>
             </ul>
           </nav>
           <nav aria-label={t("follow_label")} className="portfolio-mono">

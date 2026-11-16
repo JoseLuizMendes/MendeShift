@@ -40,6 +40,11 @@
     "title": "What I do",
     "lead": "Four fronts of work — from institutional websites to complete digital products.",
     "link": "See deliverables, timelines and process",
+    "addon": {
+      "label": "Add-on",
+      "text": "MendeBot: custom bots for the tasks your business repeats.",
+      "link": "Visit MendeBot"
+    },
     "items": [
       {
         "no": "No. 01",
@@ -208,6 +213,21 @@
     "timeline_label": "Typical timeline",
     "price_label": "Investment",
     "faq_title": "Frequently asked questions",
+    "addon": {
+      "slug": "mendebot",
+      "label": "Add-on",
+      "category": "Automation",
+      "title": "MendeBot",
+      "desc": "Custom bots for the tasks your business repeats. You describe the routine, I map the rules, build the bot and run it on the channel you already use. It can be part of a studio website or system project, or hired on its own.",
+      "case_note": "Live case: a Telegram deals bot that takes new offers by command, manages the queue and publishes one offer per time slot, with a web panel.",
+      "deliverables": [
+        "Mapping of the task, its rules and exceptions",
+        "Bot built and tested with you before going live",
+        "Connection to the systems you choose",
+        "Production rollout and guidance to monitor, pause and resume"
+      ],
+      "cta_site": "Visit MendeBot"
+    },
     "items": [
       {
         "slug": "sites-e-landing-pages",

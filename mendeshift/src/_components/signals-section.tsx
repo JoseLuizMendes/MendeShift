@@ -1,4 +1,5 @@
 import { loadMessages } from "@/i18n/server";
+import { MENDEBOT_HREF } from "@/lib/mendebot";
 import { BitmapChevron } from "./bitmap-chevron";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
@@ -9,7 +10,7 @@ type ServiceItem = { no: string; category: string; title: string; desc: string }
 
 export async function SignalsSection({ locale }: { locale: string }) {
   const messages = await loadMessages(locale);
-  const t = messages.services as { eyebrow: string; title: string; lead: string; link: string; items: ServiceItem[] };
+  const t = messages.services as { eyebrow: string; title: string; lead: string; link: string; addon: { label: string; text: string; link: string }; items: ServiceItem[] };
 
   return (
     <Section id="services" className="border-t border-border/30">
@@ -46,6 +47,18 @@ export async function SignalsSection({ locale }: { locale: string }) {
             <BitmapChevron className="transition-transform interaction-motion group-hover:rotate-45" />
           </Button>
         </div>
+        <p className="mt-8 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 border-t border-border/30 pt-6 text-center text-sm text-muted-foreground">
+          <span className="portfolio-mono text-accent">{t.addon.label}</span>
+          <span>{t.addon.text}</span>
+          <a
+            href={MENDEBOT_HREF}
+            target="_blank"
+            rel="noopener"
+            className="inline-flex min-h-11 items-center text-foreground underline underline-offset-4 transition-colors interaction-motion hover:text-accent focus-visible:text-accent sm:min-h-8"
+          >
+            {t.addon.link} <span aria-hidden="true">↗</span>
+          </a>
+        </p>
       </Container>
     </Section>
   );
