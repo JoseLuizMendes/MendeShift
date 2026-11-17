@@ -66,7 +66,7 @@ export function AddonCard({
               <Button href="/projetos/mendebot" className="min-h-11 w-full justify-center sm:w-auto">
                 {addon.cta_case}
               </Button>
-              <Button href="/contato" className="min-h-11 w-full justify-center sm:w-auto">
+              <Button href="/contato?servico=bot" className="min-h-11 w-full justify-center sm:w-auto">
                 {labels.cta}
               </Button>
             </div>

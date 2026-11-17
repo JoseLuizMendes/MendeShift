@@ -24,6 +24,7 @@ const serviceLabels: Record<string, { pt: string; en: string }> = {
   "sistemas-web": { pt: "Sistemas Web & SaaS", en: "Web Systems & SaaS" },
   ecommerce: { pt: "E-commerce", en: "E-commerce" },
   "design-e-branding": { pt: "Design & Identidade Visual", en: "Design & Branding" },
+  mendebot: { pt: "MendeBot", en: "MendeBot" },
 };
 
 export default async function CaseOpenGraphImage({

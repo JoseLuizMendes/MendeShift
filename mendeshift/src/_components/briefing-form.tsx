@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { MessageCircle } from "lucide-react";
@@ -61,10 +61,19 @@ export function BriefingForm() {
     register,
     handleSubmit,
     getValues,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: { budgetRange: "nao-sei", timeline: "sem-prazo" },
   });
+
+  // Links como /contato?servico=bot (vindos do MendeBot ou de /servicos)
+  // já chegam com o serviço escolhido.
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get("servico");
+    const match = serviceTypes.find((type) => type === requested);
+    if (match) setValue("serviceType", match);
+  }, [setValue]);
 
   const [status, setStatus] = useState<Status>("idle");
 
