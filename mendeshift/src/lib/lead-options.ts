@@ -6,7 +6,7 @@
  * navegador. O servidor continua validando com o schema canônico.
  */
 
-export const serviceTypes = ["site", "sistema", "ecommerce", "design"] as const;
+export const serviceTypes = ["site", "sistema", "ecommerce", "design", "bot"] as const;
 
 export const budgetRanges = [
   "ate-5k",
@@ -38,6 +38,7 @@ export const serviceTypeLabels: Record<(typeof serviceTypes)[number], string> = 
   sistema: "Sistema web / SaaS",
   ecommerce: "Loja virtual / e-commerce",
   design: "Design / identidade visual",
+  bot: "Bot / automação (MendeBot)",
 };
 
 export const budgetRangeLabels: Record<(typeof budgetRanges)[number], string> = {

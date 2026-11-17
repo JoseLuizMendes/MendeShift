@@ -1,7 +1,7 @@
 import type { Lead } from "@/lib/leads";
 import { MENDEBOT_URL } from "@/lib/mendebot";
 
-/** Mesmo union do lead — liga cada case a um dos 4 serviços vendidos. */
+/** Mesmo union do lead — liga cada case a um dos 4 serviços vendidos ou ao adicional ("bot"). */
 export type ServiceType = Lead["serviceType"];
 
 /** Âncoras da página /servicos correspondentes a cada tipo de serviço. */
@@ -10,6 +10,8 @@ export const serviceAnchors: Record<ServiceType, string> = {
   sistema: "sistemas-web",
   ecommerce: "ecommerce",
   design: "design-e-branding",
+  // Adicional: o bloco do MendeBot em /servicos, fora da lista dos quatro serviços.
+  bot: "mendebot",
 };
 
 export type Project = {
@@ -17,8 +19,6 @@ export type Project = {
   category: string;
   /** Serviço do estúdio que este case demonstra (badge/link no case). */
   serviceType: ServiceType;
-  /** Case do serviço adicional (MendeBot): o link de serviço aponta para o bloco do adicional. */
-  addon?: boolean;
   title: string;
   shortDesc: string;
   tech: string[];
@@ -290,8 +290,7 @@ export const projects: Project[] = [
   {
     slug: "mendebot",
     category: "Automation & bots",
-    serviceType: "sistema",
-    addon: true,
+    serviceType: "bot",
     title: "MendeBot",
     metric: "In production on Google Cloud Run",
     shortDesc: "The studio's custom-bot service and its first bot: a Telegram deals publisher with a queue, a schedule and a web panel.",

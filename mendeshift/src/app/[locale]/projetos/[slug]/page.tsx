@@ -43,8 +43,9 @@ export default async function ProjectPage({ params }: Props) {
     items: { slug: string; title: string }[];
     addon: { slug: string; title: string };
   };
-  const serviceAnchor = project.addon ? servicesPage.addon.slug : serviceAnchors[project.serviceType];
-  const serviceTitle = project.addon
+  const isAddon = project.serviceType === "bot";
+  const serviceAnchor = serviceAnchors[project.serviceType];
+  const serviceTitle = isAddon
     ? servicesPage.addon.title
     : servicesPage.items.find((service) => service.slug === serviceAnchor)?.title;
   const gallery = project.gallery;

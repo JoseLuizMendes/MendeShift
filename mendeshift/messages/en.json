@@ -360,6 +360,10 @@
         {
           "value": "design",
           "label": "Design / brand identity"
+        },
+        {
+          "value": "bot",
+          "label": "Bot / automation (MendeBot)"
         }
       ],
       "budget_label": "Investment range",
